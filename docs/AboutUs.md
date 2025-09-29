@@ -50,10 +50,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Gordon Tay
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gordontzx.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/gordontzx)]
+[[portfolio](http://github.com/gordontzx)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: in charge of general code logic
