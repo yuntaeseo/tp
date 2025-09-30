@@ -11,13 +11,14 @@ You can reach us at the email `cs2103t.t16.1@gmail.com`
 
 ### Nguyen Quang Minh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/minhmxc.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/minhmxc)]
+[[portfolio](https://minhmxc.github.io)]
 
-* Role: Project Advisor
+* Role: Integration
+* Responsibilities: In charge of versioning of the code, maintaining the code repository, 
+integrating various parts of the software to create a whole
 
 ### Leu Tho Anh Duy
 
