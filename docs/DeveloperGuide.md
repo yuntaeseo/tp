@@ -275,16 +275,24 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                    | I want to …​                              | So that I can…​                                                        |
+|----------|--------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions                    | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new person                          |                                                                        |
+| `* * *`  | user                                       | delete a person                           | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a person by name                     | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | hide private contact details              | minimize chance of someone else seeing them by accident                |
+| `*`      | user with many persons in the address book | sort persons by name                      | locate a person easily                                                 |
+| `* * *`  | regular user                               | List all available tag groups             | be reminded of what categories exist                                   |
+| `* * *`  | experienced user                           | view all tags associated with a contact   | understand their profile at a glance                                   |
+| `* * *`  | user                                       | create a tag                              | group people according to tags                                         |
+| `* * *`  | beginner user                              | filter contacts by a single tag           | see everyone in that category                                          |
+| `* *`    | experienced user                           | delete tags (not the users)               | keep the tag system tidy                                               |
+| `* *`    | tegular user                               | remove outdated tags from a contact       | ensure the information remains current                                 |
+| `* *`    | experienced user                           | bulk-filter by multiple tags              | narrow down groups (e.g., Company A + Exco)                            |
+| `* *`    | regular user                               | assign multiple tags to a contact at once | capture all relevant categories                                        |
+| `*`      | beginner user                              | edit a tag name                           | make old tag names clearer or less verbose                             |
+| `*`      | regular user who has not used tags         | edit tags of existing contacts            | trial-and-error this feature to get started                            |
 
 ### Use cases
 
