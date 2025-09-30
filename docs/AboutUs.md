@@ -27,17 +27,18 @@ integrating various parts of the software to create a whole
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+- Role: Team Lead
+- Responsibilities: UI
 
 ### Mai Xiong Kai
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Developer
+- Responsibilities: Documentation; Responsible for the quality of various project documents.
 
 ### Seo Yuntae
 
@@ -58,3 +59,4 @@ integrating various parts of the software to create a whole
 
 * Role: Developer
 * Responsibilities: in charge of general code logic
+
