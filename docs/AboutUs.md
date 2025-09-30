@@ -5,19 +5,20 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `cs2103t.t16.1@gmail.com`
 
 ## Project team
 
 ### Nguyen Quang Minh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/minhmxc.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/minhmxc)]
+[[portfolio](https://minhmxc.github.io)]
 
-* Role: Project Advisor
+* Role: Integration
+* Responsibilities: In charge of versioning of the code, maintaining the code repository, 
+integrating various parts of the software to create a whole
 
 ### Leu Tho Anh Duy
 
@@ -33,27 +34,29 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Developer
+- Responsibilities: Documentation; Responsible for the quality of various project documents.
 
 ### Seo Yuntae
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yuntaeseo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yuntaeseo)]
+[[portfolio](http://github.com/yuntaeseo)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Code quality 
+* Responsibilities: Looks after code quality, ensures adherence to coding standards
 
 ### Gordon Tay
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gordontzx.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/gordontzx)]
+[[portfolio](http://github.com/gordontzx)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: in charge of general code logic
+
