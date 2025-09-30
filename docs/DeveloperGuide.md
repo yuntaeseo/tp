@@ -289,27 +289,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | beginner user                              | filter contacts by a single tag                                                   | see everyone in that category                                               |
 | `* *`    | experienced user                           | delete tags (not the users)                                                       | keep the tag system tidy                                                    |
 | `* *`    | tegular user                               | remove outdated tags from a contact                                               | ensure the information remains current                                      |
-| `* *`    | experienced user                           | bulk-filter by multiple tags                                                      | narrow down groups (e.g., Company A + Exco)                                 |
-| `* *`    | regular user                               | assign multiple tags to a contact at once                                         | capture all relevant categories                                             |
-| `*`      | beginner user                              | edit a tag name                                                                   | make old tag names clearer or less verbose                                  |
-| `*`      | regular user who has not used tags         | edit tags of existing contacts                                                    | trial-and-error this feature to get started                                 |
-| `*`      | beginning user                             | insert multiple data in one network                                               | avoid inserting every relationship individually from a single person        |
-| `*`      | user with many friends and acquaintances   | click through the gui graphs to explore relationships                             | explore the relationships of myself and others                              |
-| `*`      | thorough user who wants clarity            | read a simple tag on the relationship entry                                       | readily search through the network and understand the relationship clearly  |
-| `*`      | user trying to chat with a new face        | search through the relationships of my friend                                     | check whether the person is in it or not                                    |
-| `*`      | user investigating suspicious connections  | trace through relationships of each one                                           | capture if there could be some connections                                  |
-| `*`      | user looking for career opportunities      | search through people with good careers (even acquaintances)                      | find someone who might be able to support me                                |
-| `*`      | user introducing a girl/boy to a friend    | search for a best fit person whom i know but my friend’s relationships don’t know | keep the introduction confidential                                          |
-| `*`      | user                                       | read, create, update, and delete relationship information between people          | keep track of relationships between people                                  |
-| `*`      | good friend                                | set birthday reminders for my contacts                                            | wish them on time                                                           |
-| `*`      | social butterfly                           | create customised reminders (follow-up, event, reconnect)                         | maintain my relationships meaningfully                                      |
+| `* *`    | experienced user                           | bulk-filtconnect)                         | maintain my relationships meaningfully                                      |
 | `*`      | person who cares about my networks         | be reminded of personal notes i’ve made about a contact                           | recall meaningful details when i talk to them                               |
 | `*`      | person who is always prepared              | view all upcoming reminders                                                       | plan my future schedule                                                     |
 | `*`      | person who doesn’t have a lot of time      | edit a reminder                                                                   | correct errors from quick input                                             |
 | `*`      | person who cannot manage a large network   | delete reminders for people i no longer wish to maintain                          | keep my reminder system tidy                                                |
 | `* * *`  | user                                       | export my contacts into an external drive                                         | transfer them to another device                                             |
 | `* * *`  | person with many connections               | import my contacts                                                                | avoid re-entering all the contact information                               |
-| `* * *`  | user                                       | choose the contacts i want to export                                              | control which data gets transferred                                         |
+| `* *`    | user                                       | choose the contacts i want to export                                              | control which data gets transferred                                         |
 
 ### Use cases
 
@@ -320,7 +307,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  AddressBook shows aer by multiple tags                                                      | narrow down groups (e.g., Company A + Exco)                                 |
+    | `* *`    | regular user                               | assign multiple tags to a contact at once                                         | capture all relevant categories                                             |
+    | `*`      | beginner user                              | edit a tag name                                                                   | make old tag names clearer or less verbose                                  |
+    | `*`      | regular user who has not used tags         | edit tags of existing contacts                                                    | trial-and-error this feature to get started                                 |
+    | `*`      | beginning user                             | insert multiple data in one network                                               | avoid inserting every relationship individually from a single person        |
+    | `*`      | user with many friends and acquaintances   | click through the gui graphs to explore relationships                             | explore the relationships of myself and others                              |
+    | `*`      | thorough user who wants clarity            | read a simple tag on the relationship entry                                       | readily search through the network and understand the relationship clearly  |
+    | `*`      | user trying to chat with a new face        | search through the relationships of my friend                                     | check whether the person is in it or not                                    |
+    | `*`      | user investigating suspicious connections  | trace through relationships of each one                                           | capture if there could be some connections                                  |
+    | `*`      | user looking for career opportunities      | search through people with good careers (even acquaintances)                      | find someone who might be able to support me                                |
+    | `*`      | user introducing a girl/boy to a friend    | search for a best fit person whom i know but my friend’s relationships don’t know | keep the introduction confidential                                          |
+    | `*`      | user                                       | read, create, update, and delete relationship information between people          | keep track of relationships between people                                  |
+    | `*`      | good friend                                | set birthday reminders for my contacts                                            | wish them on time                                                           |
+    | `*`      | social butterfly                           | create customised reminders (follow-up, event, re list of persons
 3.  User requests to delete a specific person in the list
 4.  AddressBook deletes the person
 
