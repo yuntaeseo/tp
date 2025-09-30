@@ -16,9 +16,9 @@ You can reach us at the email `cs2103t.t16.1@gmail.com`
 [[github](https://github.com/minhmxc)]
 [[portfolio](https://minhmxc.github.io)]
 
-* Role: Integration
-* Responsibilities: In charge of versioning of the code, maintaining the code repository, 
-integrating various parts of the software to create a whole
+- Role: Integration
+- Responsibilities: In charge of versioning of the code, maintaining the code repository,
+  integrating various parts of the software to create a whole
 
 ### Leu Tho Anh Duy
 
@@ -27,15 +27,15 @@ integrating various parts of the software to create a whole
 [[github](http://github.com/duyLeu)]
 [[portfolio](team/duyLeu.md)]
 
-* Role: Developer
-* Responsibilities: Develop features for the application
+- Role: Developer
+- Responsibilities: Develop features for the application
 
 ### Mai Xiong Kai
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/xkmai.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/xkmai)]
+[[portfolio](http://github.com/xkmai)]
 
 - Role: Developer
 - Responsibilities: Documentation; Responsible for the quality of various project documents.
@@ -47,8 +47,8 @@ integrating various parts of the software to create a whole
 [[github](http://github.com/yuntaeseo)]
 [[portfolio](http://github.com/yuntaeseo)]
 
-* Role: Code quality 
-* Responsibilities: Looks after code quality, ensures adherence to coding standards
+- Role: Code quality
+- Responsibilities: Looks after code quality, ensures adherence to coding standards
 
 ### Gordon Tay
 
@@ -57,6 +57,5 @@ integrating various parts of the software to create a whole
 [[github](http://github.com/gordontzx)]
 [[portfolio](http://github.com/gordontzx)]
 
-* Role: Developer
-* Responsibilities: in charge of general code logic
-
+- Role: Developer
+- Responsibilities: in charge of general code logic
