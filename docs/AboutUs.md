@@ -21,13 +21,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Leu Tho Anh Duy
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/duyleu.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/duyLeu)]
+[[portfolio](team/duyLeu.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Develop features for the application
 
 ### Mai Xiong Kai
 
