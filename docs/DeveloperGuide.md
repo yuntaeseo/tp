@@ -290,7 +290,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `NetWise` and the **Actor** is the `user`, unless specified otherwise)
 
+[comment]: RELATIONSHIP
 
+#### UC30 - Search Through Relationships of the Contacts
+
+**MSS**
+1. **User** inputs the contact whose relationships are to be searched.
+2. **System** outputs contacts related to the search contact.
+
+**Extensions**
+* **1a. System detects that the contact does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+#### UC31 - Add Relationships Between Contacts
+
+**MSS**
+1. **User** inputs the contacts for which to add a relationship.
+2. **System** informs that the relationship has been added.
+
+Use case ends.
+
+**Extensions**
+* **1a. System detects that one or more contacts does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+* **1b. System detects that the command format is wrong.**
+    * **1b1.** **System** informs the user about the correct format for the use case.
+
+      Use case ends.
+
+#### UC32 - Delete Relationships Between Contacts
+
+**MSS**
+1. **User** inputs the command to delete the relationship between two contacts.
+2. **System** informs that the relationship has been deleted.
+
+Use case ends.
+
+**Extensions**
+* **1a. System detects that one or more contacts does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+* **1b. System detects that there is no relationship between those two contacts.**
+    * **1b1.** **System** informs the user that the relationship does not exist.
+
+      Use case ends.
+
+* **1c. System detects that the command format is wrong.**
+    * **1c1.** **System** informs the user about the correct format for the use case.
+
+      Use case ends.
 
 [comment]: REMINDER
 
@@ -396,16 +451,49 @@ Use case ends.
 
         Use case ends.
 
+[comment]: SAVE&LOAD
 
+#### UC50 - Export Contacts
+
+**MSS**
+1. **User** chooses to export contacts.
+2. **System** creates a copy of the contacts in the system and names the file with an appropriate timestamp.
+
+Use case ends.
+
+#### UC51 - Import Contacts
+
+**MSS**
+1. **User** chooses to import contacts.
+2. **System** lets the user select a file to import.
+3. **User** navigates and selects the file.
+4. **System** adds the contacts in the file into the system.
+
+Use case ends.
+
+**Extensions**
+* **3a. User selects a file type that System does not recognize or can’t process.**
+    * **3a1.** **System** flags it as an error, informs the user, and does not execute any command.
+
+      Use case ends.
+* **4a. System detects duplicate contacts.**
+    * **4a1.** **System** only imports the non-duplicate contacts.
+
+      Use case ends.
 
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
+3. Everything should be accessible in the command line interface.
+4. Most if not all features should be accessible using buttons if more convenient as well.
+5. User with above average typing speed for regular English text (i.e. not code, not system admin commands) should
+   be able to accomplish most of the tasks faster using commands than using the mouse.
+6. Not too big in terms of file size, 50MB maximum excluding all the data stored.
+7. Every user interaction should have <100ms response time.
+8. Data should be kept locally and accessed only by the user.
+9. Data stored should remain consistent unless the file is edited directly by the user.
 
 ### Glossary
 
