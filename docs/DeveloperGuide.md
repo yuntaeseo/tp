@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -262,14 +262,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* has a very big network of friends, co-workers and acquaintances for professional and work-related reasons.
+* want to keep track of the intricate relationships between him and his networks and amongst his networks.
+* prefer desktop apps over other types.
+* can type fast.
+* prefers typing to mouse interactions.
+* is reasonably comfortable using CLI apps.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: manages these connections' information faster than Linkedin.
 
 ### User stories
 
@@ -315,58 +315,312 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `NetWise` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+[comment]: RELATIONSHIP
+
+#### UC30 - Search Through Relationships of the Contacts
+
+**MSS**
+1. **User** inputs the contact whose relationships are to be searched.
+2. **System** outputs contacts related to the search contact.
+
+**Extensions**
+* **1a. System detects that the contact does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+#### UC31 - Add Relationships Between Contacts
+
+**MSS**
+1. **User** inputs the contacts for which to add a relationship.
+2. **System** informs that the relationship has been added.
+
+Use case ends.
+
+**Extensions**
+* **1a. System detects that one or more contacts does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+* **1b. System detects that the command format is wrong.**
+    * **1b1.** **System** informs the user about the correct format for the use case.
+
+      Use case ends.
+
+#### UC32 - Delete Relationships Between Contacts
+
+**MSS**
+1. **User** inputs the command to delete the relationship between two contacts.
+2. **System** informs that the relationship has been deleted.
+
+Use case ends.
+
+**Extensions**
+* **1a. System detects that one or more contacts does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+* **1b. System detects that there is no relationship between those two contacts.**
+    * **1b1.** **System** informs the user that the relationship does not exist.
+
+      Use case ends.
+
+* **1c. System detects that the command format is wrong.**
+    * **1c1.** **System** informs the user about the correct format for the use case.
+
+      Use case ends.
+
+[comment]: CONTACT
+
+#### UC10 - List Contacts
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows aer by multiple tags                                                      | narrow down groups (e.g., Company A + Exco)                                 |
-    | `* *`    | regular user                               | assign multiple tags to a contact at once                                         | capture all relevant categories                                             |
-    | `*`      | beginner user                              | edit a tag name                                                                   | make old tag names clearer or less verbose                                  |
-    | `*`      | regular user who has not used tags         | edit tags of existing contacts                                                    | trial-and-error this feature to get started                                 |
-    | `*`      | beginning user                             | insert multiple data in one network                                               | avoid inserting every relationship individually from a single person        |
-    | `*`      | user with many friends and acquaintances   | click through the gui graphs to explore relationships                             | explore the relationships of myself and others                              |
-    | `*`      | thorough user who wants clarity            | read a simple tag on the relationship entry                                       | readily search through the network and understand the relationship clearly  |
-    | `*`      | user trying to chat with a new face        | search through the relationships of my friend                                     | check whether the person is in it or not                                    |
-    | `*`      | user investigating suspicious connections  | trace through relationships of each one                                           | capture if there could be some connections                                  |
-    | `*`      | user looking for career opportunities      | search through people with good careers (even acquaintances)                      | find someone who might be able to support me                                |
-    | `*`      | user introducing a girl/boy to a friend    | search for a best fit person whom i know but my friend’s relationships don’t know | keep the introduction confidential                                          |
-    | `*`      | user                                       | read, create, update, and delete relationship information between people          | keep track of relationships between people                                  |
-    | `*`      | good friend                                | set birthday reminders for my contacts                                            | wish them on time                                                           |
-    | `*`      | social butterfly                           | create customised reminders (follow-up, event, re list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. **User** issues the command to list contacts.
+2. **System** validates the command.
+3. **System** reads the contact storage/data.
+4. If contacts exist, **System** displays each contact in order of ID.
+5. If no contacts exist, **System** informs the user that the contact list is empty.
 
 **Extensions**
 
-* 2a. The list is empty.
+- **4a. System detects an error while retrieving contacts.**
+  - **4a1.** **System** displays an error message and offers options: retry or cancel.
+  - **4a2.** **User** chooses to retry.
+  - **4a3.** **System** attempts to retrieve contacts again.
 
-  Use case ends.
+    Steps 4a1–4a3 repeat until retrieval succeeds or user cancels.
+    If retrieval succeeds, use case resumes at step 4.
+    If user cancels, use case ends.
 
-* 3a. The given index is invalid.
+#### UC11 - Add Contact
 
-    * 3a1. AddressBook shows an error message.
+MSS
 
-      Use case resumes at step 2.
+1. **User** selects the text input.
+2. **User** inputs the command and details to add a new contact.
+3. **System** informs the user that the contact has been added and its details.
 
-*{More to be added}*
+Use case ends.
+
+**Extensions**
+
+- **2a. System detects an error in the entered command.**
+  - 2a1. **System** informs the user of the correct way to add a reminder.
+    Use case ends.
+
+- **2b. System detects a very similar contact has already existed.**
+  - **2b1.** **System** warns the user about the potential duplicate.
+  - **2b2.** **User** presses Enter again to ignore the warning.
+    Use can continues to step 3.
+
+#### UC12 - Edit Contact
+
+MSS
+
+1. **User** selects the text input.
+2. **User** inputs the command and details to edit an existing contact.
+3. **System** informs the user that the contact has been edited and its updated details.
+
+Use case ends.
+
+**Extensions**
+
+- **2a. System detects an error in the entered command.**
+  - **2a1.** **System** informs the user of the correct way to edit a contact.
+    Use case ends.
+
+- **2b. System detects a very similar reminder has already existed.**
+  - **2b1.** **System** warns the user about the potential duplicate.
+  - **2b2.** **User** presses Enter again to ignore the warning.
+    Use case ends.
+
+- **2c. The provided ID does not correspond to any existing contacts.**
+  - **2c1.** **System** informs the user about the error.
+    Use case ends.
+
+#### UC13 - Delete Contact
+
+MSS
+
+1. **User** issues the command and ID to delete a contact.
+2. **System** validates the command and provided ID.
+3. **System** looks up the contact by the provided ID.
+4. **System** requests confirmation to delete the contact and displays the contact details.
+5. **User** confirms the deletion.
+6. **System** deletes the contact from storage and returns a success message.
+
+Use case ends.
+
+**Extensions**
+
+- **2a. User enters an incorrect or unsupported command format.**
+  - **2a1.** **System** informs the user the command is invalid and shows the correct command format.
+
+    Use case ends.
+
+- **3a. The provided ID does not correspond to any existing contact.**
+  - **3a1.** **System** informs the user about the error.
+
+    Use case ends.
+
+
+
+[comment]: REMINDER
+
+#### UC40 - Remind
+
+**MSS**
+1. **User** enters the application.
+2. **System** informs the user about upcoming reminders, e.g., birthdays, key events.
+
+Use case ends.
+
+**Extensions**
+* **2a. There are no upcoming reminders.**
+    * **2a1.** **System** chooses a random personal note of a contact.
+    * **2a2.** **System** presents the note to the user.
+
+        Use case ends.
+
+#### UC41 - View Reminders
+
+**MSS**
+1. **User** selects the text input.
+2. **User** inputs the command to view reminders.
+3. **System** informs the user about all reminders.
+
+Use case ends.
+
+**Extensions**
+* **2a. System detects an error in the entered command.**
+    * **2a1.** **System** informs the user of the wrong command.
+    
+        Use case ends.
+
+#### UC42 - Add Reminder
+
+**MSS**
+1. **User** selects the text input.
+2. **User** inputs the command and details to add a reminder.
+3. **System** informs the user that the reminder has been added and its details.
+
+Use case ends.
+
+**Extensions**
+* **2a. System detects an error in the entered command.**
+    * **2a1.** **System** informs the user of the correct way to add a reminder.
+
+        Use case ends.
+
+* **2b. System detects a very similar reminder has already existed.**
+    * **2b1.** **System** warns the user about the potential duplicate.
+    * **2b2.** **User** presses Enter again to ignore the warning.
+        
+        Use case ends.
+
+#### UC43 - Edit Reminder
+
+**MSS**
+1. **User** selects the text input.
+2. **User** inputs the command and details to edit an existing reminder.
+3. **System** informs the user that the reminder has been edited and its updated details.
+
+Use case ends.
+
+**Extensions**
+* **2a. System detects an error in the entered command.**
+    * **2a1.** **System** informs the user of the correct way to edit a reminder.
+
+        Use case ends.
+
+* **2b. System detects a very similar reminder has already existed.**
+    * **2b1.** **System** warns the user about the potential duplicate.
+    * **2b2.** **User** presses Enter again to ignore the warning.
+
+        Use case ends.
+
+* **2c. Inputted ID for update is invalid.**
+    * **2c1.** **System** informs the user about the invalid ID.
+
+        Use case ends.
+
+#### UC44 - Delete Reminder
+
+**MSS**
+1. **User** selects the text input.
+2. **User** inputs the command to delete a reminder.
+3. **System** informs the user that the reminder has been deleted.
+
+Use case ends.
+
+**Extensions**
+* **2a. System detects an error in the entered command.**
+    * **2a1.** **System** informs the user of the correct way to delete a reminder.
+
+        Use case ends.
+
+* **2b. System offers to undo the deletion.**
+    * **2b1.** **System** shows a button or a command to undo the deletion.
+
+        Use case ends.
+
+* **2c. Inputted ID for deletion is invalid.**
+    * **2c1.** **System** informs the user about the invalid ID.
+
+        Use case ends.
+
+[comment]: SAVE&LOAD
+
+#### UC50 - Export Contacts
+
+**MSS**
+1. **User** chooses to export contacts.
+2. **System** creates a copy of the contacts in the system and names the file with an appropriate timestamp.
+
+Use case ends.
+
+#### UC51 - Import Contacts
+
+**MSS**
+1. **User** chooses to import contacts.
+2. **System** lets the user select a file to import.
+3. **User** navigates and selects the file.
+4. **System** adds the contacts in the file into the system.
+
+Use case ends.
+
+**Extensions**
+* **3a. User selects a file type that System does not recognize or can’t process.**
+    * **3a1.** **System** flags it as an error, informs the user, and does not execute any command.
+
+      Use case ends.
+* **4a. System detects duplicate contacts.**
+    * **4a1.** **System** only imports the non-duplicate contacts.
+
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
+3. Everything should be accessible in the command line interface.
+4. Most if not all features should be accessible using buttons if more convenient as well.
+5. User with above average typing speed for regular English text (i.e. not code, not system admin commands) should
+   be able to accomplish most of the tasks faster using commands than using the mouse.
+6. Not too big in terms of file size, 50MB maximum excluding all the data stored.
+7. Every user interaction should have <100ms response time.
+8. Data should be kept locally and accessed only by the user.
+9. Data stored should remain consistent unless the file is edited directly by the user.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
