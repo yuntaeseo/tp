@@ -445,6 +445,125 @@ Use case ends.
 
 
 
+[comment]: TAGS
+
+#### UC21 - List Tags (System: System)
+
+**Goal:** view all tag groups
+
+**Preconditions:** none
+
+**Postconditions:** none (read-only)
+
+**MSS**
+1. **User** enters the command to list tags.
+2. **System** retrieves all tags.
+3. **System** displays tags in a list format (ID and Name per line).
+
+Use case ends.
+
+**Extensions**
+* **2a. the tag list is empty.**
+    * **2a1.** **System** shows an empty-state message.
+
+      Use case ends.
+
+#### UC22 - Create Tag (Global) (System: System)
+
+**Goal:** create a new tag group
+
+**Preconditions:** none
+
+**Postconditions:** a new tag exists with the specified/derived attributes
+
+**MSS**
+1. **User** enters the command to add a new tag, including a name and optional description and color.
+2. **System** validates command format and required fields (Name).
+3. **System** checks for a duplicate tag name.
+4. **System** creates the tag, applying defaults where optional attributes are omitted.
+5. **System** returns a success message including the new tag’s ID, name, and description.
+
+Use case ends.
+
+**Extensions**
+* **1a. User omits optional attributes.**
+    * **1a1.** **System** applies defaults.
+
+      Use case resumes at step 2.
+* **2a. Command format invalid or required Name is missing.**
+    * **2a1.** **System** returns the correct command format.
+
+      Use case ends.
+* **3a. A tag with the same name already exists.**
+    * **3a1.** **System** informs the user about the error.
+
+      Use case ends.
+
+#### UC23 - Update Tag (Global) (System: System)
+
+**Goal:** update an existing tag’s attributes
+
+**Preconditions:** target tag ID exists (unless error path)
+
+**Postconditions:** the tag is updated as requested
+
+**MSS**
+1. **User** enters the command to edit a tag, providing the tag ID and attributes to change (Name, Description, and/or Color).
+2. **System** validates command format and presence of the tag ID.
+3. **System** looks up the tag by ID.
+4. **System** applies the provided changes (only attributes present are updated).
+5. **System** returns the updated tag's information.
+
+Use case ends.
+
+**Extensions**
+* **2a. Command format invalid (e.g., wrong attributes, missing ID).**
+    * **2a1.** **System** returns the correct command format.
+
+      Use case ends.
+* **3a. Tag ID does not exist.**
+    * **3a1.** **System** informs the user about the invalid ID.
+
+      Use case ends.
+* **4a. No updatable fields are provided (only ID).**
+    * **4a1.** **System** informs the user that no updatable fields were provided.
+
+      Use case ends.
+
+#### UC24 - Delete Tag (Global) (System: System)
+
+**Goal:** delete an existing tag group
+
+**Preconditions:** target tag ID exists (unless error path)
+
+**Postconditions:** the tag is removed; associated contacts retain their data
+
+**MSS**
+1. **User** enters the command and ID to delete a tag.
+2. **System** validates command format and presence of the tag ID.
+3. **System** looks up the tag by ID.
+4. **System** deletes the tag.
+5. **System** confirms deletion.
+
+Use case ends.
+
+**Extensions**
+* **2a. User does not specify ID or uses an invalid command.**
+    * **2a1.** **System** returns the correct usage.
+
+      Use case ends.
+* **3a. Tag ID is invalid / not found.**
+    * **3a1.** **System** informs the user about the invalid ID.
+
+      Use case ends.
+* **4a. (Optional) System offers an undo option after deletion.**
+    * **4a1.** **User** selects "undo".
+    * **4a2.** **System** restores the deleted tag if possible.
+
+      Use case ends.
+
+
+
 [comment]: REMINDER
 
 #### UC40 - Remind
