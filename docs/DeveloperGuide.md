@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -262,14 +262,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* has a very big network of friends, co-workers and acquaintances for professional and work-related reasons.
+* want to keep track of the intricate relationships between him and his networks and amongst his networks.
+* prefer desktop apps over other types.
+* can type fast.
+* prefers typing to mouse interactions.
+* is reasonably comfortable using CLI apps.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: manages these connections' information faster than Linkedin.
 
 ### User stories
 
@@ -288,32 +288,116 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `NetWise` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+
+
+[comment]: REMINDER
+
+#### UC40 - Remind
 
 **MSS**
+1. **User** enters the application.
+2. **System** informs the user about upcoming reminders, e.g., birthdays, key events.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+Use case ends.
 
 **Extensions**
+* **2a. There are no upcoming reminders.**
+    * **2a1.** **System** chooses a random personal note of a contact.
+    * **2a2.** **System** presents the note to the user.
 
-* 2a. The list is empty.
+        Use case ends.
 
-  Use case ends.
+#### UC41 - View Reminders
 
-* 3a. The given index is invalid.
+**MSS**
+1. **User** selects the text input.
+2. **User** inputs the command to view reminders.
+3. **System** informs the user about all reminders.
 
-    * 3a1. AddressBook shows an error message.
+Use case ends.
 
-      Use case resumes at step 2.
+**Extensions**
+* **2a. System detects an error in the entered command.**
+    * **2a1.** **System** informs the user of the wrong command.
+    
+        Use case ends.
 
-*{More to be added}*
+#### UC42 - Add Reminder
+
+**MSS**
+1. **User** selects the text input.
+2. **User** inputs the command and details to add a reminder.
+3. **System** informs the user that the reminder has been added and its details.
+
+Use case ends.
+
+**Extensions**
+* **2a. System detects an error in the entered command.**
+    * **2a1.** **System** informs the user of the correct way to add a reminder.
+
+        Use case ends.
+
+* **2b. System detects a very similar reminder has already existed.**
+    * **2b1.** **System** warns the user about the potential duplicate.
+    * **2b2.** **User** presses Enter again to ignore the warning.
+        
+        Use case ends.
+
+#### UC43 - Edit Reminder
+
+**MSS**
+1. **User** selects the text input.
+2. **User** inputs the command and details to edit an existing reminder.
+3. **System** informs the user that the reminder has been edited and its updated details.
+
+Use case ends.
+
+**Extensions**
+* **2a. System detects an error in the entered command.**
+    * **2a1.** **System** informs the user of the correct way to edit a reminder.
+
+        Use case ends.
+
+* **2b. System detects a very similar reminder has already existed.**
+    * **2b1.** **System** warns the user about the potential duplicate.
+    * **2b2.** **User** presses Enter again to ignore the warning.
+
+        Use case ends.
+
+* **2c. Inputted ID for update is invalid.**
+    * **2c1.** **System** informs the user about the invalid ID.
+
+        Use case ends.
+
+#### UC44 - Delete Reminder
+
+**MSS**
+1. **User** selects the text input.
+2. **User** inputs the command to delete a reminder.
+3. **System** informs the user that the reminder has been deleted.
+
+Use case ends.
+
+**Extensions**
+* **2a. System detects an error in the entered command.**
+    * **2a1.** **System** informs the user of the correct way to delete a reminder.
+
+        Use case ends.
+
+* **2b. System offers to undo the deletion.**
+    * **2b1.** **System** shows a button or a command to undo the deletion.
+
+        Use case ends.
+
+* **2c. Inputted ID for deletion is invalid.**
+    * **2c1.** **System** informs the user about the invalid ID.
+
+        Use case ends.
+
+
+
 
 ### Non-Functional Requirements
 
@@ -326,7 +410,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
