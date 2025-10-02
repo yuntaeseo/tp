@@ -292,6 +292,104 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
+[comment]: CONTACT
+
+#### UC10 - List Contacts
+
+**MSS**
+
+1. **User** issues the command to list contacts.
+2. **System** validates the command.
+3. **System** reads the contact storage/data.
+4. If contacts exist, **System** displays each contact in order of ID.
+5. If no contacts exist, **System** informs the user that the contact list is empty.
+
+Use case ends.
+
+**Extensions**
+
+- **4a. System detects an error while retrieving contacts.**
+  - **4a1.** **System** displays an error message and offers options: retry or cancel.
+  - **4a2.** **User** chooses to retry.
+  - **4a3.** **System** attempts to retrieve contacts again.
+
+    Steps 4a1–4a3 repeat until retrieval succeeds or user cancels.
+    If retrieval succeeds, use case resumes at step 4.
+    If user cancels, use case ends.
+
+#### UC11 - Add Contact
+
+MSS
+
+1. **User** selects the text input.
+2. **User** inputs the command and details to add a new contact.
+3. **System** informs the user that the contact has been added and its details.
+
+Use case ends.
+
+**Extensions**
+
+- **2a. System detects an error in the entered command.**
+  - 2a1. **System** informs the user of the correct way to add a reminder.
+    Use case ends.
+
+- **2b. System detects a very similar contact has already existed.**
+  - **2b1.** **System** warns the user about the potential duplicate.
+  - **2b2.** **User** presses Enter again to ignore the warning.
+    Use can continues to step 3.
+
+#### UC12 - Edit Contact
+
+MSS
+
+1. **User** selects the text input.
+2. **User** inputs the command and details to edit an existing contact.
+3. **System** informs the user that the contact has been edited and its updated details.
+
+Use case ends.
+
+**Extensions**
+
+- **2a. System detects an error in the entered command.**
+  - **2a1.** **System** informs the user of the correct way to edit a contact.
+    Use case ends.
+
+- **2b. System detects a very similar reminder has already existed.**
+  - **2b1.** **System** warns the user about the potential duplicate.
+  - **2b2.** **User** presses Enter again to ignore the warning.
+    Use case ends.
+
+- **2c. The provided ID does not correspond to any existing contacts.**
+  - **2c1.** **System** informs the user about the error.
+    Use case ends.
+
+#### UC13 - Delete Contact
+
+MSS
+
+1. **User** issues the command and ID to delete a contact.
+2. **System** validates the command and provided ID.
+3. **System** looks up the contact by the provided ID.
+4. **System** requests confirmation to delete the contact and displays the contact details.
+5. **User** confirms the deletion.
+6. **System** deletes the contact from storage and returns a success message.
+
+Use case ends.
+
+**Extensions**
+
+- **2a. User enters an incorrect or unsupported command format.**
+  - **2a1.** **System** informs the user the command is invalid and shows the correct command format.
+
+    Use case ends.
+
+- **3a. The provided ID does not correspond to any existing contact.**
+  - **3a1.** **System** informs the user about the error.
+
+    Use case ends.
+
+
+
 [comment]: REMINDER
 
 #### UC40 - Remind
