@@ -34,6 +34,7 @@ public class TagCard extends UiPart<Region> {
         Label label = new Label(tagName.toString());
         label.getStyleClass().add("tag");
         label.getStyleClass().add("cell_small_label");
+        label.setStyle(String.format("-fx-background-color: #%s;", tag.getColor().value));
         tags.getChildren().setAll(label);
     }
 }
