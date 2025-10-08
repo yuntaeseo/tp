@@ -42,7 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private MenuItem helpMenuItem;
 
-    // NOTE: original panel used for both person and tag list, fxml reused.
+    // NOTE: original panelPlaceHolder used for both person and tag list, MainWindow fxml not modified.
     @FXML
     private StackPane personListPanelPlaceholder;
 
