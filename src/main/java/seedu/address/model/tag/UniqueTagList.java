@@ -91,7 +91,7 @@ public class UniqueTagList implements Iterable<Tag> {
     public void setTags(List<Tag> tags) {
         requireAllNonNull(tags);
         if (!tagsAreUnique(tags)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateTagException();
         }
 
         internalList.setAll(tags);
