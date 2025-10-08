@@ -1,13 +1,14 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -44,7 +45,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person person, ObservableList<Tag> tagList, int displayedIndex) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -52,8 +53,14 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getTags().stream().forEach(id -> {
+            FilteredList<Tag> list = tagList.filtered(tag -> tag.getId() == id);
+            if (list.size() == 0) {
+                return;
+            }
+            Label label = new Label(list.get(0).getName().value);
+            label.setStyle(String.format("-fx-background-color: #%s;", list.get(0).getColor().value));
+            tags.getChildren().add(label);
+        });
     }
 }
