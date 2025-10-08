@@ -111,6 +111,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a tag with the same identity as {@code tag} exists in the address book.
+     */
+    public boolean hasTag(Tag tag) {
+        requireNonNull(tag);
+        return tags.contains(tag);
+    }
+
+    /**
      * Replaces the contents of the tag list with {@code tags}.
      * {@code tags} must not contain duplicate tags.
      */
