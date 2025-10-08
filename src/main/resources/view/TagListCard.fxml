@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      spacing="6.0" alignment="CENTER_LEFT">
+    <children>
+        <Label fx:id="id" styleClass="cell_small_label"/>
+        <FlowPane fx:id="tags" hgap="4.0" vgap="4.0"/>
+    </children>
+    <padding>
+        <Insets top="3" right="6" bottom="3" left="6"/>
+    </padding>
+</HBox>

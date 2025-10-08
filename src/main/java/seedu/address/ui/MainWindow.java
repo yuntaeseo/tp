@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private TagListPanel tagListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -41,6 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private MenuItem helpMenuItem;
 
+    // NOTE: original panelPlaceHolder used for both person and tag list, MainWindow fxml not modified.
     @FXML
     private StackPane personListPanelPlaceholder;
 
@@ -113,6 +115,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getTagList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        tagListPanel = new TagListPanel(logic.getFilteredTagList());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -121,6 +125,14 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    public void showPersonList() {
+        personListPanelPlaceholder.getChildren().setAll(personListPanel.getRoot());
+    }
+
+    public void showTagList() {
+        personListPanelPlaceholder.getChildren().setAll(tagListPanel.getRoot());
     }
 
     /**
@@ -184,6 +196,16 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowPersonList()) {
+                // Switch to list person
+                showPersonList();
+            }
+
+            if (commandResult.isShowTagList()) {
+                // Switch to list tag
+                showTagList();
             }
 
             return commandResult;
