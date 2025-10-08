@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Tag> filteredTags;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTags = new FilteredList<>(this.addressBook.getTagList());
     }
 
     public ModelManager() {
@@ -124,6 +126,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Tag> getFilteredTagList() {
+        return filteredTags;
+    }
+
+    @Override
     public ObservableList<Tag> getTagList() {
         return addressBook.getTagList();
     }
@@ -132,6 +139,12 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredTagList(Predicate<Tag> predicate) {
+        requireNonNull(predicate);
+        filteredTags.setPredicate(predicate);
     }
 
     @Override
@@ -148,7 +161,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredTags.equals(otherModelManager.filteredTags);
     }
 
 }
