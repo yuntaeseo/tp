@@ -48,6 +48,19 @@ public class CommandResult {
         return exit;
     }
 
+    /**
+     * Returns true if the command result is to show the person list.
+     */
+    public boolean isShowPersonList() {
+        return feedbackToUser.equals("Listed all persons");
+    }
+    /**
+     * Returns true if the command result is to show the tag list.
+     */
+    public boolean isShowTagList() {
+        return feedbackToUser.equals("Listed all tags");
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -78,5 +91,6 @@ public class CommandResult {
                 .add("exit", exit)
                 .toString();
     }
+
 
 }
