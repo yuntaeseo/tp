@@ -21,7 +21,7 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSameTag(Tag)
+ * @see Tag#isSameTag(Tag)
  */
 public class UniqueTagList implements Iterable<Tag> {
     private final ObservableList<Tag> internalList = FXCollections.observableArrayList();
