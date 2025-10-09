@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label note;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -62,5 +64,6 @@ public class PersonCard extends UiPart<Region> {
             label.setStyle(String.format("-fx-background-color: #%s;", list.get(0).getColor().value));
             tags.getChildren().add(label);
         });
+        note.setText(person.getNote().value);
     }
 }
