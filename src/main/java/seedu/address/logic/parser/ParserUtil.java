@@ -1,9 +1,8 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Collection;
 import java.util.HashSet;
+import static java.util.Objects.requireNonNull;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -15,6 +14,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagColor;
+import seedu.address.model.tag.TagDesc;
+import seedu.address.model.tag.TagName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -133,5 +135,33 @@ public class ParserUtil {
 
         // All notes are valid since they are just strings
         return new Note(trimmedNote);
+    // ===== TAG PARSERS =====
+
+/**
+ * Parses a {@code String name} into a {@code TagName}.
+ */
+public static TagName parseTagName(String name) throws ParseException {
+    requireNonNull(name);
+    String trimmedName = name.trim();
+    if (trimmedName.isEmpty()) {
+        throw new ParseException("Tag name cannot be empty.");
+    }
+    return new TagName(trimmedName);
+}
+
+    /**
+     * Parses a {@code String desc} into a {@code TagDesc}.
+     */
+    public static TagDesc parseTagDesc(String desc) throws ParseException {
+        requireNonNull(desc);
+        return new TagDesc(desc.trim());
+    }
+
+    /**
+     * Parses a {@code String color} into a {@code TagColor}.
+     */
+    public static TagColor parseTagColor(String color) throws ParseException {
+        requireNonNull(color);
+        return new TagColor(color.trim());
     }
 }
