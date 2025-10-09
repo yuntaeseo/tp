@@ -1,8 +1,7 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -124,6 +123,23 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setTags(List<Tag> tags) {
         this.tags.setTags(tags);
+    }
+
+    /**
+     * Replaces the given tag {@code target} in the list with {@code editedTag}.
+     * {@code target} must exist in the address book.
+     * The tag identity of {@code editedTag} must not be the same as another existing tag in the address book.
+     */
+    public void setTag(Tag target, Tag editedTag) {
+        tags.setTag(target, editedTag);
+    }
+
+    /**
+     * Removes {@code tag} from this {@code AddressBook}.
+     * {@code tag} must exist in the address book.
+     */
+    public void removeTag(Tag tag) {
+        tags.remove(tag);
     }
 
     //// util methods
