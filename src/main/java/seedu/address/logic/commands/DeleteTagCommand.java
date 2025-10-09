@@ -7,7 +7,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
-
+/**
+ * Deletes a Tag identified by its id.
+ */
 public class DeleteTagCommand extends Command {
     public static final String COMMAND_WORD = "deletetag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the tag identified by its ID.\n"

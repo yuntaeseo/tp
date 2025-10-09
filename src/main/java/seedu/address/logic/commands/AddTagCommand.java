@@ -6,6 +6,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Adds a tag to the address book.
+ */
 public class AddTagCommand extends Command {
     public static final String COMMAND_WORD = "addtag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the address book. "
@@ -17,6 +20,9 @@ public class AddTagCommand extends Command {
 
     private final Tag toAdd;
 
+    /**
+     * Creates AddTagCommand to add the specified {@code Tag}
+     */
     public AddTagCommand(Tag tag) {
         requireNonNull(tag);
         toAdd = tag;
