@@ -83,6 +83,17 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Tag> getFilteredTagList();
 
+    /** Returns true if a tag with the same identity as {@code tag} exists in the address book. */
+    boolean hasTag(Tag tag);
+
+    /** Adds a Tag */
+    void addTag(Tag tag);
+
+    /** Deletes a Tag */
+    void deleteTag(Tag tag);
+
+    /** Updates a Tag */
+    void setTag(Tag target, Tag editedTag);
 
     ObservableList<Tag> getTagList();
 
