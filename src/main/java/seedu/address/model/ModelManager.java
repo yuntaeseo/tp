@@ -1,9 +1,7 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.nio.file.Path;
+import static java.util.Objects.requireNonNull;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -129,6 +128,31 @@ public class ModelManager implements Model {
     public ObservableList<Tag> getFilteredTagList() {
         return filteredTags;
     }
+
+    // =========== TAG METHODS ======================================================================================
+
+    @Override
+    public boolean hasTag(Tag tag) {
+        requireNonNull(tag);
+        return addressBook.hasTag(tag);
+    }
+
+    @Override
+    public void addTag(Tag tag) {
+        addressBook.addTag(tag);
+        updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
+    }
+
+    @Override
+    public void deleteTag(Tag tag) {
+        addressBook.removeTag(tag);
+    }
+
+    @Override
+    public void setTag(Tag target, Tag editedTag) {
+        addressBook.setTag(target, editedTag);
+    }
+
 
     @Override
     public ObservableList<Tag> getTagList() {
