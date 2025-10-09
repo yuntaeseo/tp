@@ -1,17 +1,14 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import static java.util.Objects.requireNonNull;
 import java.util.function.Predicate;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -24,7 +21,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import static seedu.address.testutil.Assert.assertThrows;
 import seedu.address.testutil.PersonBuilder;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 public class AddCommandTest {
 
@@ -171,6 +170,26 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredTagList(Predicate<Tag> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTag(Tag target, Tag editedTag) {
             throw new AssertionError("This method should not be called.");
         }
     }
