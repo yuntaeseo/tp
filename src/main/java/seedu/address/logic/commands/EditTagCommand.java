@@ -9,6 +9,9 @@ import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
 
+/**
+ * Edits the details of an existing tag in the address book.
+ */
 public class EditTagCommand extends Command {
     public static final String COMMAND_WORD = "edittag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a tag identified by its ID.\n"
@@ -20,6 +23,12 @@ public class EditTagCommand extends Command {
     private final TagDesc newDesc;
     private final TagColor newColor;
 
+    /**
+     * @param id of the tag to edit.
+     * @param name of the edited tag.
+     * @param desc of the edited tag.
+     * @param color of the edited tag.
+     */
     public EditTagCommand(int id, TagName name, TagDesc desc, TagColor color) {
         this.idToEdit = id;
         this.newName = name;

@@ -1,8 +1,9 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Collection;
 import java.util.HashSet;
-import static java.util.Objects.requireNonNull;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -135,19 +136,21 @@ public class ParserUtil {
 
         // All notes are valid since they are just strings
         return new Note(trimmedNote);
+    }
+
     // ===== TAG PARSERS =====
 
-/**
- * Parses a {@code String name} into a {@code TagName}.
- */
-public static TagName parseTagName(String name) throws ParseException {
-    requireNonNull(name);
-    String trimmedName = name.trim();
-    if (trimmedName.isEmpty()) {
-        throw new ParseException("Tag name cannot be empty.");
+    /**
+     * Parses a {@code String name} into a {@code TagName}.
+     */
+    public static TagName parseTagName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (trimmedName.isEmpty()) {
+            throw new ParseException("Tag name cannot be empty.");
+        }
+        return new TagName(trimmedName);
     }
-    return new TagName(trimmedName);
-}
 
     /**
      * Parses a {@code String desc} into a {@code TagDesc}.

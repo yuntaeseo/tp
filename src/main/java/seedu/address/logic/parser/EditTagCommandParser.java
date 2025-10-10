@@ -1,10 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import seedu.address.logic.commands.EditTagCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COLOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
+import seedu.address.logic.commands.EditTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
