@@ -45,7 +45,7 @@ public class PersonCard extends UiPart<Region> {
     private Label note;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCode} with the given {@code person}, {@code tagList} and index to display.
      */
     public PersonCard(Person person, ObservableList<Tag> tagList, int displayedIndex) {
         super(FXML);

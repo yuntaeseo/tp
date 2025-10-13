@@ -8,6 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class TagColor {
     public static final String MESSAGE_CONSTRAINTS = "Tags colors should be in HEX format: RRGGBB";
+
+    /**
+     * Regex for enforcing the HEX format (without the '#' at the beginning).
+     */
     public static final String VALIDATION_REGEX = "^(?:[0-9a-fA-F]{3}){1,2}$";
 
     public final String value;

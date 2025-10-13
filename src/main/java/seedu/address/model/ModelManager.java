@@ -130,7 +130,7 @@ public class ModelManager implements Model {
         return filteredTags;
     }
 
-    // =========== TAG METHODS ======================================================================================
+    // =========== TAG METHODS ===============================================================================
 
     @Override
     public boolean hasTag(Tag tag) {
@@ -153,7 +153,6 @@ public class ModelManager implements Model {
     public void setTag(Tag target, Tag editedTag) {
         addressBook.setTag(target, editedTag);
     }
-
 
     @Override
     public ObservableList<Tag> getTagList() {

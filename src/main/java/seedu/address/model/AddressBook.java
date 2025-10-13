@@ -55,8 +55,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //  NOTE: PERSON
 
-    //// list overwrite operations
-
     /**
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
@@ -64,9 +62,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
     }
-
-
-    //// person-level operations
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -95,9 +90,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
-
-    //  NOTE: TAGS
-
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
@@ -106,8 +98,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    public void addTag(Tag tag) {
-        tags.add(tag);
+
+
+    //  NOTE: TAGS
+
+    /**
+     * Replaces the contents of the tag list with {@code tags}.
+     * {@code tags} must not contain duplicate tags.
+     */
+    public void setTags(List<Tag> tags) {
+        this.tags.setTags(tags);
     }
 
     /**
@@ -119,11 +119,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the tag list with {@code tags}.
-     * {@code tags} must not contain duplicate tags.
+     * Adds a tag into the address book.
+     * The tag must be already exist in the address book.
      */
-    public void setTags(List<Tag> tags) {
-        this.tags.setTags(tags);
+    public void addTag(Tag tag) {
+        tags.add(tag);
     }
 
     /**
@@ -143,7 +143,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.remove(tag);
     }
 
-    //// util methods
+
+    //  NOTE: UTILS
 
     @Override
     public String toString() {

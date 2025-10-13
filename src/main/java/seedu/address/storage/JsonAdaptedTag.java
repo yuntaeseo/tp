@@ -22,7 +22,7 @@ class JsonAdaptedTag {
     private final String color;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedTag} with the given tag details.
      */
     @JsonCreator
     public JsonAdaptedTag(@JsonProperty("id") String id, @JsonProperty("name") String name,

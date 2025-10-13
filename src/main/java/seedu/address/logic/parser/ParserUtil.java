@@ -100,7 +100,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String tag} into an {@code Integer}, the ID of the tag.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
@@ -115,7 +115,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> tags} into a {@code Set<Integer>}, a set of tag IDs.
      */
     public static Set<Integer> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);

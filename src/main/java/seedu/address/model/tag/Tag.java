@@ -14,7 +14,7 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags ids must be positive integers";
 
-    /** Keep track of the increment Id */
+    /** Keep track of the largest tag ID in the application. */
     private static int largestId = 0;
 
     private final int id;
@@ -25,7 +25,7 @@ public class Tag {
     /**
      * Constructs a {@code Tag}.
      *
-     * @param tagName A valid tag name.
+     * Every fields must be present and not null.
      */
     public Tag(int id, TagName name, TagDesc desc, TagColor color) {
         requireAllNonNull(id, name, desc, color);
@@ -36,6 +36,10 @@ public class Tag {
         this.color = color;
     }
 
+    /**
+     * Constructs a {@code Tag}, without needing to provide an ID. 
+     * The ID will automatically be deduced from {@code largestId}.
+     */
     public Tag(TagName name, TagDesc desc, TagColor color) {
         this(largestId + 1, name, desc, color);
     }
