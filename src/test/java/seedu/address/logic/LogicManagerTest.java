@@ -88,6 +88,11 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getFilteredTagList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTagList().remove(0));
+    }
+
+    @Test
     public void getTagList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getTagList().remove(0));
     }
