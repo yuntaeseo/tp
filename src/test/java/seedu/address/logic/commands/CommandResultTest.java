@@ -8,6 +8,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class CommandResultTest {
+
+    @Test
+    public void isShowTagList() {
+        // CommandResult is list tag -> returns false
+        CommandResult tagListResult = new CommandResult("Listed all tags");
+        assertFalse(tagListResult.isShowPersonList());
+
+        // CommandResult is list person -> returns false
+        CommandResult personListResult = new CommandResult("Listed all persons");
+        assertFalse(personListResult.isShowTagList());
+
+        // CommandResult is different -> returns false
+        CommandResult otherResult = new CommandResult("feedback");
+        assertFalse(otherResult.isShowTagList());
+    }
+
+
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
