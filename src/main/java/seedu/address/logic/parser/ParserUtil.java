@@ -100,7 +100,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String tag} into an {@code Integer}, the ID of the tag.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
@@ -109,13 +109,13 @@ public class ParserUtil {
         requireNonNull(tagId);
         String trimmedTag = tagId.trim();
         if (!Tag.isValidTagId(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Tag.ID_MESSAGE_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedTag);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> tags} into a {@code Set<Integer>}, a set of tag IDs.
      */
     public static Set<Integer> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);

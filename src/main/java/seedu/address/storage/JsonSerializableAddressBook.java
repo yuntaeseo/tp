@@ -26,7 +26,7 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons and tags.
      */
     @JsonCreator
     public JsonSerializableAddressBook(

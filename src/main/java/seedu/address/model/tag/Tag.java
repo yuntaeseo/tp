@@ -12,9 +12,9 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags ids must be positive integers";
+    public static final String ID_MESSAGE_CONSTRAINTS = "Tags ids must be positive integers";
 
-    /** Keep track of the increment Id */
+    /** Keep track of the largest tag ID in the application. */
     private static int largestId = 0;
 
     private final int id;
@@ -25,7 +25,7 @@ public class Tag {
     /**
      * Constructs a {@code Tag}.
      *
-     * @param tagName A valid tag name.
+     * Every fields must be present and not null.
      */
     public Tag(int id, TagName name, TagDesc desc, TagColor color) {
         requireAllNonNull(id, name, desc, color);
@@ -36,6 +36,10 @@ public class Tag {
         this.color = color;
     }
 
+    /**
+     * Constructs a {@code Tag}, without needing to provide an ID.
+     * The ID will automatically be deduced from {@code largestId}.
+     */
     public Tag(TagName name, TagDesc desc, TagColor color) {
         this(largestId + 1, name, desc, color);
     }
@@ -57,6 +61,18 @@ public class Tag {
     }
 
     /**
+     * Returns true if a given string is a valid tag ID.
+     */
+    public static boolean isValidTagId(String test) {
+        try {
+            Integer i = Integer.parseInt(test);
+            return i > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
      * Returns true if both tags have the same name.
      * This defines a weaker notion of equality between two tags.
      */
@@ -66,18 +82,6 @@ public class Tag {
         }
 
         return otherTag != null && otherTag.getName().equals(getName());
-    }
-
-    /**
-     * Returns true if a given string is a valid tag ID.
-     */
-    public static boolean isValidTagId(String test) {
-        try {
-            Integer.parseInt(test);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 
     @Override

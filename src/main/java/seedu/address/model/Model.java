@@ -80,7 +80,7 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered tag list */
     ObservableList<Tag> getFilteredTagList();
 
     /** Returns true if a tag with the same identity as {@code tag} exists in the address book. */
@@ -95,6 +95,7 @@ public interface Model {
     /** Updates a Tag */
     void setTag(Tag target, Tag editedTag);
 
+    /** Returns an unmodifiable view of the entire tag list. */
     ObservableList<Tag> getTagList();
 
     /**

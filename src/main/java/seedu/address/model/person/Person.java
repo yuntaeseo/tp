@@ -55,7 +55,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable set of tag IDs, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Integer> getTags() {

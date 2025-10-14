@@ -1,0 +1,14 @@
+{
+  "persons": [],
+  "tags": [{
+    "id": 1,
+    "name": "friends",
+    "desc": "desc1",
+    "color": "AABBCC"
+  }, {
+    "id": 2,
+    "name": "friends",
+    "desc": "desc2",
+    "color": "BBCCDD"
+  }]
+}

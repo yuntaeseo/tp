@@ -22,7 +22,7 @@ class JsonAdaptedTag {
     private final String color;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedTag} with the given tag details.
      */
     @JsonCreator
     public JsonAdaptedTag(@JsonProperty("id") String id, @JsonProperty("name") String name,
@@ -53,7 +53,7 @@ class JsonAdaptedTag {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "id"));
         }
         if (!id.matches("^[0-9]+$")) {
-            throw new IllegalValueException("Id must be a number");
+            throw new IllegalValueException(Tag.ID_MESSAGE_CONSTRAINTS);
         }
         final int modelId = Integer.parseInt(id);
 
@@ -78,7 +78,7 @@ class JsonAdaptedTag {
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, TagColor.class.getSimpleName()));
         }
         if (!TagColor.isValidTagColor(color)) {
-            throw new IllegalValueException(TagColor.MESSAGE_CONSTRAINTS + ": " + color);
+            throw new IllegalValueException(TagColor.MESSAGE_CONSTRAINTS);
         }
         final TagColor modelColor = new TagColor(color);
 

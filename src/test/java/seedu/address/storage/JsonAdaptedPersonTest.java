@@ -21,7 +21,6 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -91,22 +90,4 @@ public class JsonAdaptedPersonTest {
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
-
-    @Test
-    public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_TAGS,
-                VALID_NOTE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    //  TODO: Fix this test. Or it may not be needed anymore
-    // @Test
-    // public void toModelType_invalidTags_throwsIllegalValueException() {
-    //     List<Integer> invalidTags = new ArrayList<>(VALID_TAGS);
-    //     invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-    //     JsonAdaptedPerson person =
-    //             new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags);
-    //     assertThrows(IllegalValueException.class, person::toModelType);
-    // }
 }

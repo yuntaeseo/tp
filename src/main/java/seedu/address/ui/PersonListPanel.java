@@ -22,7 +22,7 @@ public class PersonListPanel extends UiPart<Region> {
     private ListView<Person> personListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code PersonListPanel} with the given {@code personList} and {@code tagList}.
      */
     public PersonListPanel(ObservableList<Person> personList, ObservableList<Tag> tagList) {
         super(FXML);
