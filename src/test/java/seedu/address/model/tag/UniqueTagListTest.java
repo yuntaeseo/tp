@@ -22,7 +22,7 @@ public class UniqueTagListTest {
     private final UniqueTagList uniqueTagList = new UniqueTagList();
 
     @Test
-    public void contains_nullTag_throwsNullPoiinterException() {
+    public void contains_nullTag_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueTagList.contains(null));
     }
 
