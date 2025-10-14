@@ -10,9 +10,10 @@ public class TagName {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     
     /**
-     * Tag name must consist of only alphanumeric character.
+     * Tag name must consist of only alphanumeric character and that the first character
+     * must be a non-space character.
      */
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String value;
 

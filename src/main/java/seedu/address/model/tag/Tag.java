@@ -12,7 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags ids must be positive integers";
+    public static final String ID_MESSAGE_CONSTRAINTS = "Tags ids must be positive integers";
 
     /** Keep track of the largest tag ID in the application. */
     private static int largestId = 0;
@@ -61,6 +61,18 @@ public class Tag {
     }
 
     /**
+     * Returns true if a given string is a valid tag ID.
+     */
+    public static boolean isValidTagId(String test) {
+        try {
+            Integer i = Integer.parseInt(test);
+            return i > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
      * Returns true if both tags have the same name.
      * This defines a weaker notion of equality between two tags.
      */
@@ -70,18 +82,6 @@ public class Tag {
         }
 
         return otherTag != null && otherTag.getName().equals(getName());
-    }
-
-    /**
-     * Returns true if a given string is a valid tag ID.
-     */
-    public static boolean isValidTagId(String test) {
-        try {
-            Integer.parseInt(test);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 
     @Override

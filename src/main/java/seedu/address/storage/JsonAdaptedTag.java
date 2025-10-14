@@ -53,7 +53,7 @@ class JsonAdaptedTag {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "id"));
         }
         if (!id.matches("^[0-9]+$")) {
-            throw new IllegalValueException("Id must be a number");
+            throw new IllegalValueException(Tag.ID_MESSAGE_CONSTRAINTS);
         }
         final int modelId = Integer.parseInt(id);
 
