@@ -120,7 +120,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds a tag into the address book.
-     * The tag must be already exist in the address book.
+     * The tag must not already exist in the address book.
      */
     public void addTag(Tag tag) {
         tags.add(tag);
