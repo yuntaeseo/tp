@@ -40,7 +40,7 @@ public class SampleDataUtil {
                 getTagSet(5), new Note("Chill guy")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet(2), new Note("I forget his last name all the time"))
+                getTagSet(2), new Note("Roy: A Life Well Lived"))
         };
     }
 
