@@ -30,6 +30,7 @@ public class TagTest {
         assertFalse(() -> Tag.isValidTagId(null));
         assertFalse(() -> Tag.isValidTagId("bruh"));
         assertFalse(() -> Tag.isValidTagId("1o"));
+        assertFalse(() -> Tag.isValidTagId("-1"));
 
         // valid ID
         assertTrue(() -> Tag.isValidTagId("12"));
