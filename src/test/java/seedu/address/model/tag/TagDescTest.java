@@ -30,6 +30,6 @@ public class TagDescTest {
         assertFalse(desc.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(desc.equals(new TagName("Other Valid Desc")));
+        assertFalse(desc.equals(new TagDesc("Other Valid Desc")));
     }
 }
