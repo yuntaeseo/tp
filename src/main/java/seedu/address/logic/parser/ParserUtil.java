@@ -109,7 +109,7 @@ public class ParserUtil {
         requireNonNull(tagId);
         String trimmedTag = tagId.trim();
         if (!Tag.isValidTagId(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Tag.ID_MESSAGE_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedTag);
     }

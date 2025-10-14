@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalTags.FRIENDS;
 import static seedu.address.testutil.TypicalTags.EX_GIRLFRIEND;
+import static seedu.address.testutil.TypicalTags.FRIENDS;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +34,7 @@ public class TagTest {
         // valid ID
         assertTrue(() -> Tag.isValidTagId("12"));
         assertTrue(() -> Tag.isValidTagId("34"));
-        assertTrue(() -> Tag.isValidTagId("000"));
+        assertTrue(() -> Tag.isValidTagId("0001"));
     }
 
     @Test
@@ -97,7 +97,7 @@ public class TagTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Tag.class.getCanonicalName() + "{id=" + FRIENDS.getId() + ", name=" + FRIENDS.getName() 
+        String expected = Tag.class.getCanonicalName() + "{id=" + FRIENDS.getId() + ", name=" + FRIENDS.getName()
                 + ", description=" + FRIENDS.getDesc() + ", color=" + FRIENDS.getColor() + "}";
         assertEquals(expected, FRIENDS.toString());
     }

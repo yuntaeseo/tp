@@ -1,0 +1,9 @@
+{
+  "persons": [],
+  "tags": [{
+    "id": 1,
+    "name": "friends",
+    "desc": "desc1",
+    "color": "AABBGG"
+  }]
+}

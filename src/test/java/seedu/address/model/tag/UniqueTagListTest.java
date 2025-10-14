@@ -139,7 +139,7 @@ public class UniqueTagListTest {
     public void setTags_nullList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueTagList.setTags((List<Tag>) null));
     }
-    
+
     @Test
     public void setTags_list_replacesOwnListWithProvidedList() {
         uniqueTagList.add(FRIENDS);
@@ -179,7 +179,7 @@ public class UniqueTagListTest {
 
     @Test
     public void equals_differentType() {
-        assertTrue(uniqueTagList.equals(0.5f));
+        assertFalse(uniqueTagList.equals(0.5f));
     }
 
     @Test

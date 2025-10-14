@@ -43,5 +43,30 @@
     "address" : "4th street",
     "tags" : [ ]
   } ],
-    "tags": []
+    "tags": [{
+      "id": 1,
+      "name": "friends",
+      "desc": "Not so close friends",
+      "color": "33FE54"
+    }, {
+      "id": 2,
+      "name": "colleagues",
+      "desc": "Enemies",
+      "color": "FFFE32"
+    }, {
+      "id": 3,
+      "name": "neighbours",
+      "desc": "Good people",
+      "color": "33FEDC"
+    }, {
+      "id": 4,
+      "name": "family",
+      "desc": "Love",
+      "color": "FF32FE"
+    }, {
+      "id": 5,
+      "name": "ex girlfriend",
+      "desc": "Still have chance",
+      "color": "FF3333"
+    }]
 }

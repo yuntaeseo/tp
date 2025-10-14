@@ -78,7 +78,7 @@ class JsonAdaptedTag {
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, TagColor.class.getSimpleName()));
         }
         if (!TagColor.isValidTagColor(color)) {
-            throw new IllegalValueException(TagColor.MESSAGE_CONSTRAINTS + ": " + color);
+            throw new IllegalValueException(TagColor.MESSAGE_CONSTRAINTS);
         }
         final TagColor modelColor = new TagColor(color);
 

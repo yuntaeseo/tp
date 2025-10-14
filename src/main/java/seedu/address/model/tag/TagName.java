@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class TagName {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    
+
     /**
      * Tag name must consist of only alphanumeric character and that the first character
      * must be a non-space character.

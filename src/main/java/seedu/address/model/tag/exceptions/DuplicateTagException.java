@@ -1,7 +1,7 @@
 package seedu.address.model.tag.exceptions;
 
 /**
- * Signals that the operation will result in duplicate Tag 
+ * Signals that the operation will result in duplicate Tag
  * (Tag are considered duplicates if they have the same name).
  */
 public class DuplicateTagException extends RuntimeException {

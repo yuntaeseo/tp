@@ -37,7 +37,7 @@ public class Tag {
     }
 
     /**
-     * Constructs a {@code Tag}, without needing to provide an ID. 
+     * Constructs a {@code Tag}, without needing to provide an ID.
      * The ID will automatically be deduced from {@code largestId}.
      */
     public Tag(TagName name, TagDesc desc, TagColor color) {
