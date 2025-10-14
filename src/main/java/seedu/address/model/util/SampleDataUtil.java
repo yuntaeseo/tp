@@ -31,7 +31,7 @@ public class SampleDataUtil {
                 getTagSet(2, 1), new Note("I am Yu")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet(3), new Note("Definitely not Singaporean")),
+                getTagSet(3), new Note("From North Carolina")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getTagSet(4), new Note("Daveeeee")),
