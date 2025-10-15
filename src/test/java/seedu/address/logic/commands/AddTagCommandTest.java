@@ -1,14 +1,16 @@
 package seedu.address.logic.commands;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
 import static java.util.Objects.requireNonNull;
-import java.util.function.Predicate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -23,7 +25,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
-import static seedu.address.testutil.Assert.assertThrows;
 
 public class AddTagCommandTest {
 
@@ -50,8 +51,8 @@ public class AddTagCommandTest {
         AddTagCommand addTagCommand = new AddTagCommand(validTag);
         ModelStub modelStub = new ModelStubWithTag(validTag);
 
-        assertThrows(CommandException.class, "This tag already exists in the address book",
-                () -> addTagCommand.execute(modelStub));
+        assertThrows(CommandException.class, "This tag already exists in the address book", () ->
+                addTagCommand.execute(modelStub));
     }
 
     @Test
