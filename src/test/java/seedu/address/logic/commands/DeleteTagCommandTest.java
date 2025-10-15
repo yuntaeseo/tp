@@ -1,17 +1,18 @@
 package seedu.address.logic.commands;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.tag.Tag;
@@ -55,9 +56,9 @@ public class DeleteTagCommandTest {
 
         java.util.List<Tag> before = List.copyOf(modelStub.getFilteredTagList());
 
-        seedu.address.logic.commands.exceptions.CommandException ex
-                = assertThrows(seedu.address.logic.commands.exceptions.CommandException.class,
-                        () -> deleteTagCommand.execute(modelStub));
+        seedu.address.logic.commands.exceptions.CommandException ex =
+                assertThrows(seedu.address.logic.commands.exceptions.CommandException.class, () ->
+                        deleteTagCommand.execute(modelStub));
         assertEquals(DeleteTagCommand.MESSAGE_TAG_NOT_FOUND, ex.getMessage());
 
         assertEquals(before, modelStub.getFilteredTagList());
@@ -196,7 +197,8 @@ public class DeleteTagCommandTest {
         }
 
         @Override
-        public void setPerson(seedu.address.model.person.Person target, seedu.address.model.person.Person editedPerson) {
+        public void setPerson(seedu.address.model.person.Person target,
+                seedu.address.model.person.Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -206,7 +208,8 @@ public class DeleteTagCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(java.util.function.Predicate<seedu.address.model.person.Person> predicate) {
+        public void updateFilteredPersonList(java.util.function.Predicate<seedu.address.model.person.Person>
+                predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
