@@ -27,7 +27,7 @@ public class Tag {
      * Every fields must be present and not null.
      */
     public Tag(int id, TagName name, TagDesc desc, TagColor color) {
-        requireAllNonNull(name, desc, color);
+        requireAllNonNull(id, name, desc, color);
         largestId = Math.max(largestId, id);
         this.id = id;   
         this.name = name;
