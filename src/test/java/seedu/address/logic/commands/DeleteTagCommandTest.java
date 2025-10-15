@@ -55,14 +55,14 @@ public class DeleteTagCommandTest {
 
         java.util.List<Tag> before = List.copyOf(modelStub.getFilteredTagList());
 
-        seedu.address.logic.commands.exceptions.CommandException ex =
-                assertThrows(seedu.address.logic.commands.exceptions.CommandException.class,
+        seedu.address.logic.commands.exceptions.CommandException ex
+                = assertThrows(seedu.address.logic.commands.exceptions.CommandException.class,
                         () -> deleteTagCommand.execute(modelStub));
         assertEquals(DeleteTagCommand.MESSAGE_TAG_NOT_FOUND, ex.getMessage());
 
         assertEquals(before, modelStub.getFilteredTagList());
     }
-    
+
     @Test
     public void equals() {
         DeleteTagCommand deleteFirstCommand = new DeleteTagCommand(1);

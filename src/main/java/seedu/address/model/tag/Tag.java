@@ -29,7 +29,7 @@ public class Tag {
     public Tag(int id, TagName name, TagDesc desc, TagColor color) {
         requireAllNonNull(id, name, desc, color);
         largestId = Math.max(largestId, id);
-        this.id = id;   
+        this.id = id;
         this.name = name;
         this.desc = desc;
         this.color = color;
