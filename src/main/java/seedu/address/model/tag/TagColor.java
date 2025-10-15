@@ -23,6 +23,9 @@ public class TagColor {
      */
     public TagColor(String tagColor) {
         requireNonNull(tagColor);
+        if (!isValidTagColor(tagColor)) {
+            System.err.println("Invalid color string: " + tagColor);
+        }
         checkArgument(isValidTagColor(tagColor), MESSAGE_CONSTRAINTS);
         value = tagColor;
     }
@@ -36,7 +39,7 @@ public class TagColor {
 
     @Override
     public String toString() {
-        return value;
+        return value.toUpperCase();
     }
 
     @Override
