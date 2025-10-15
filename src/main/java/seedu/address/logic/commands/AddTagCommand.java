@@ -13,8 +13,8 @@ public class AddTagCommand extends Command {
     public static final String COMMAND_WORD = "addtag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the address book. "
             + "Parameters: "
-            + "n/NAME d/DESCRIPTION c/COLOR\n"
-            + "Example: " + COMMAND_WORD + " n/Friends d/Schoolmates c/RRGGBB";
+            + "n/NAME d/DESCRIPTION c/RGB_COLOR\n"
+            + "Example: " + COMMAND_WORD + " n/Friends d/Schoolmates c/DF3C5F";
 
     public static final String MESSAGE_SUCCESS = "New tag added: %1$s";
 

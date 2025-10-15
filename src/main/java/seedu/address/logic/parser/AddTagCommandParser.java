@@ -32,7 +32,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
 
         TagName name = ParserUtil.parseTagName(argMultimap.getValue(PREFIX_NAME).get());
         TagDesc desc = ParserUtil.parseTagDesc(argMultimap.getValue(PREFIX_DESC).orElse("No description"));
-        TagColor color = ParserUtil.parseTagColor(argMultimap.getValue(PREFIX_COLOR).orElse("grey"));
+        TagColor color = ParserUtil.parseTagColor(argMultimap.getValue(PREFIX_COLOR).orElse("808080"));
 
         Tag tag = new Tag(name, desc, color);
         return new AddTagCommand(tag);

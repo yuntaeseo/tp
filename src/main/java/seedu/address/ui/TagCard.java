@@ -28,7 +28,8 @@ public class TagCard extends UiPart<Region> {
         super(FXML);
         this.tag = tag;
 
-        id.setText(displayedIndex + ". ");
+        /* The number shown will be the Tags ID */
+        id.setText(tag.getId() + ". ");
 
         TagName tagName = (TagName) tag.getName();
         Label label = new Label(tagName.toString());
