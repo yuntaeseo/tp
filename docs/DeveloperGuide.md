@@ -841,27 +841,227 @@ testers are expected to do more *exploratory* testing.
     2. Use the operating system shortcut to close the window (for example, `Alt + F4` on Windows, `Command + Q` on macOS, `Control + Q` on some Linux desktops).  
        **Expected:** Same as a menu-based exit: the application shuts down cleanly and window preferences are saved.
 
-### Deleting a person
+---
 
-1. Deleting a person while all persons are being shown
+### Viewing help : `help`
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. **Test case:** `help`  
+   **Expected:** A help window or panel appears describing how to access the full help page. Status message indicates help is shown.
 
-   2. Test case: `delete 1`<br>
-      **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+2. **Test case:** `help 123`  
+   **Expected:** Same as above. Extraneous parameters are ignored.
 
-   3. Test case: `delete -1`<br>
-      **Expected**: No person is deleted. Error details shown in the status message. Status bar remains the same.
+3. **Other test cases to try:** `help     ` (extra spaces), `   help` (leading spaces)  
+   **Expected:** Same as above.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      **Expected**: Similar to previous.
+---
 
+### Adding a person : `add`
 
+1. **Prerequisite:** Ensure the application is launched. You may start from a clean state using `clear`.
 
-### Saving data
+2. **Test case:**  
+   `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`  
+   **Expected:** New person card appears at the end of the list. Status message shows that the person was added with the supplied details. Data is saved to disk automatically.
 
-1. Dealing with missing/corrupted data files
+3. **Test case (with multiple tags and note):**  
+   `add n/Betsy Crowe p/12345678 e/betsycrowe@example.com a/Newgate Prison t/1 t/2 r/She owed me lunch`  
+   **Expected:** Person is added with tag identifiers 1 and 2, and the given note. Status message confirms addition.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+4. **Test case (missing required field):**  
+   `add p/98765432 e/jane@example.com a/Somewhere`  
+   **Expected:** No person is added. Error message indicates that `n/NAME` is required and shows correct usage.
 
-1. _{ more test cases …​ }_
+5. **Other test cases to try:** invalid email (`e/notanemail`), invalid phone (non-digits), extremely long address, duplicate person details (if duplicate detection is implemented later).  
+   **Expected:** Appropriate validation errors or acceptance per your product decision.
+
+---
+
+### Listing all persons : `list`
+
+1. **Test case:** `list`  
+   **Expected:** Full person list is shown. Indices refresh to match the currently displayed list.
+
+2. **Test case after a `find` result:**  
+   Run `find John` then `list`.  
+   **Expected:** List switches from the filtered results back to all persons.
+
+3. **Other test cases to try:** `list 123` (extraneous parameters).  
+   **Expected:** Same as `list`. Extraneous parameters are ignored.
+
+---
+
+### Editing a person : `edit`
+
+1. **Prerequisite:** Ensure there are at least two persons in the current displayed list. Use `add` if necessary.
+
+2. **Test case (edit multiple fields):**  
+   `edit 1 p/91234567 e/johndoe@example.com`  
+   **Expected:** The first person’s phone and email fields are updated. Status message shows the updated fields.
+
+3. **Test case (clear all tags):**  
+   `edit 2 t/`  
+   **Expected:** The second person’s tags are removed. Status message confirms tags are cleared.
+
+4. **Test case (no updatable fields provided):**  
+   `edit 1`  
+   **Expected:** No change. Error message states that at least one editable field must be provided.
+
+5. **Other test cases to try:** index out of range (`edit 999 ...`), invalid email or phone formats, editing a person while viewing a filtered list (indices refer to the filtered list).  
+   **Expected:** Proper error handling and correct index interpretation against the currently displayed list.
+
+---
+
+### Locating persons by name : `find`
+
+1. **Prerequisite:** Ensure the list has multiple persons with varied names.
+
+2. **Test case (single keyword):**  
+   `find John`  
+   **Expected:** Shows persons whose names contain the word “John” (case-insensitive). Indices refer to this filtered list.
+
+3. **Test case (multiple keywords, order irrelevant):**  
+   `find alex david`  
+   **Expected:** Shows persons whose names contain “alex” or “david” (case-insensitive, full word match). Matches “Alex Yeoh” and “David Li”.
+
+4. **Test case (no match):**  
+   `find Zyxwv`  
+   **Expected:** Empty list with a message indicating zero persons found.
+
+5. **Other test cases to try:** mixed casing (`find hAnS`), partial word (`find Han` should not match “Hans”), leading or trailing spaces.  
+   **Expected:** Behaves per specification (case-insensitive, full-word, name-only search).
+
+---
+
+### Clearing all person entries : `clear`
+
+1. **Test case:** `clear`  
+   **Expected:** All persons are removed. Status message confirms that the address book is cleared. The data file on disk reflects an empty person list after the automatic save.
+
+2. **Test case with extraneous parameters:** `clear now`  
+   **Expected:** Same as `clear`. Extraneous parameters are ignored.
+
+3. **Other test cases to try:** run `clear` when the list is already empty.  
+   **Expected:** No error; confirmation message indicates there are no persons (or that clearing was successful with no entries).
+
+---
+
+### Adding a tag : `addtag`
+
+1. **Prerequisite:** Ensure the application is launched. You may use `listtag` first to see existing tags.
+
+2. **Test case (name only):**  
+   `addtag n/JC`  
+   **Expected:** New tag is created with default description “No Description” and default gray color. Status message shows the new tag’s unique identifier and details.
+
+3. **Test case (name with description and color):**  
+   `addtag n/coworkers d/Office teammates c/23f1cd`  
+   **Expected:** New tag is created with the given description and the color with hexadecimal digits `23f1cd`. Status message confirms.
+
+4. **Test case (invalid color format):**  
+   `addtag n/friends c/#123456` or `addtag n/friends c/12345G`  
+   **Expected:** No tag is created. Error message states that the color must be six hexadecimal digits without the hash symbol.
+
+5. **Other test cases to try:** duplicate tag name (if disallowed, expect a duplicate-name error), very long names or descriptions.  
+   **Expected:** Appropriate validation or acceptance per product decision.
+
+---
+
+### Listing all tags : `listtag`
+
+1. **Test case:** `listtag`  
+   **Expected:** Displays all tags with each tag’s unique identifier and name. Order is not guaranteed.
+
+2. **Test case when there are no tags:**  
+   If tags have been cleared or none exist, run `listtag`.  
+   **Expected:** Shows an empty-state message.
+
+3. **Other test cases to try:** `listtag extra` (extraneous parameters).  
+   **Expected:** Same as `listtag`. Extraneous parameters are ignored.
+
+---
+
+### Editing a tag : `edittag`
+
+1. **Prerequisite:** Ensure at least one tag exists (create with `addtag` and confirm with `listtag` to obtain the tag identifier).
+
+2. **Test case (change description and color):**  
+   `edittag 1 d/my extended family c/099fca`  
+   **Expected:** Tag with identifier 1 is updated. Status message shows new description and color.
+
+3. **Test case (rename and reset description and color to defaults):**  
+   `edittag 2 n/Prof d/ c/`  
+   **Expected:** Tag with identifier 2 is renamed to “Prof”; description and color are reset to their default values. Status message confirms.
+
+4. **Test case (missing identifier):**  
+   `edittag n/NewName`  
+   **Expected:** No change. Error message indicates that an identifier is required and shows the correct command format.
+
+5. **Other test cases to try:** invalid identifier (`edittag 999 ...`), no updatable fields provided (`edittag 1`), invalid color format.  
+   **Expected:** Proper error messages; no changes applied.
+
+---
+
+### Deleting a tag : `deletetag`
+
+1. **Prerequisite:** Ensure the target tag exists and note its identifier using `listtag`.
+
+2. **Test case:**  
+   `deletetag 2`  
+   **Expected:** Tag with identifier 2 is removed from the tag list. Persons that previously referenced this tag now no longer show that tag. Status message confirms deletion.
+
+3. **Test case (invalid identifier):**  
+   `deletetag 999`  
+   **Expected:** No tag is deleted. Error message indicates the identifier is invalid.
+
+4. **Other test cases to try:** `deletetag` (missing identifier), deleting a tag that is currently shown in the user interface, deleting tags used by many persons to confirm performance and correctness.  
+   **Expected:** Appropriate error handling or success confirmation.
+
+---
+
+### Exiting the program : `exit`
+
+1. **Test case:** `exit`  
+   **Expected:** Application closes gracefully. The most recent window size and position are saved. Any pending saves are flushed to disk.
+
+2. **Test case with extraneous parameters:** `exit now`  
+   **Expected:** Same as `exit`. Extraneous parameters are ignored.
+
+3. **Other test cases to try:** exit immediately after adding or editing to confirm that automatic saving occurs before shutdown.  
+   **Expected:** On next launch, the latest changes are present.
+
+---
+
+### Saving the data
+
+1. **Prerequisite:** Ensure the application is launched with a writable data directory.
+
+2. **Test case (automatic save on mutation):**  
+   Run an adding command, for example:  
+   `add n/Save Test p/80000000 e/savetest@example.com a/Somewhere`  
+   Then close and re-open the application.  
+   **Expected:** The newly added person persists across launches; the data file on disk has been updated.
+
+3. **Test case (non-mutating commands do not trigger changes):**  
+   Run `list`, `help`, and `find Zzz` and then exit.  
+   **Expected:** No unintended changes in the data file contents.
+
+4. **Other test cases to try:** perform multiple edits in succession, then force-quit versus graceful exit to compare persistence behavior as per your product’s save policy.  
+   **Expected:** Data persists according to the documented policy.
+
+---
+
+### Editing the data file
+
+1. **Prerequisite:** Locate the data file at `[JAR file location]/data/addressbook.json`. Make a backup copy.
+
+2. **Test case (manual, valid edit):**  
+   Open the file in a text editor and change a non-critical field (for example, update a person’s address to a new string without breaking the JavaScript Object Notation structure). Save and relaunch the application.  
+   **Expected:** The changed value appears in the application. No errors shown.
+
+3. **Test case (manual, invalid edit):**  
+   Corrupt the JavaScript Object Notation (for example, remove a comma or a closing brace). Save and relaunch the application.  
+   **Expected:** The application does not crash. It shows an error indicating the data file is invalid and falls back to a safe state (empty data or sample data per your product decision). Subsequent valid operations will recreate a valid file.
+
+4. **Other test cases to try:** set the data file to read-only and attempt a mutating command; edit tag objects directly and confirm that identifiers and references remain consistent.  
+   **Expected:** Appropriate warnings or non-persistence when writes are blocked; consistent behavior for tag references.
