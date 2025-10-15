@@ -58,7 +58,7 @@ public class DeleteTagCommandTest {
 
         seedu.address.logic.commands.exceptions.CommandException ex =
                 assertThrows(seedu.address.logic.commands.exceptions.CommandException.class, () ->
-                        deleteTagCommand.execute(modelStub));
+                deleteTagCommand.execute(modelStub));
         assertEquals(DeleteTagCommand.MESSAGE_TAG_NOT_FOUND, ex.getMessage());
 
         assertEquals(before, modelStub.getFilteredTagList());
@@ -198,7 +198,7 @@ public class DeleteTagCommandTest {
 
         @Override
         public void setPerson(seedu.address.model.person.Person target,
-                seedu.address.model.person.Person editedPerson) {
+                              seedu.address.model.person.Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -208,8 +208,8 @@ public class DeleteTagCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(java.util.function.Predicate<seedu.address.model.person.Person>
-                predicate) {
+        public void updateFilteredPersonList(
+                java.util.function.Predicate<seedu.address.model.person.Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -248,5 +248,4 @@ public class DeleteTagCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
-
 }
