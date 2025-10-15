@@ -3,11 +3,13 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
 /**
  * Represents a Tag's color in HEX format.
  */
 public class TagColor {
-    public static final String MESSAGE_CONSTRAINTS = "Tags colors should be in HEX format: RRGGBB";
+    public static final String MESSAGE_CONSTRAINTS = "Tags colors should be in HEX format (without the '#'): RRGGBB";
 
     /**
      * Regex for enforcing the HEX format (without the '#' at the beginning).

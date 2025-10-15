@@ -165,6 +165,9 @@ public class ParserUtil {
      */
     public static TagColor parseTagColor(String color) throws ParseException {
         requireNonNull(color);
+        if (!TagColor.isValidTagColor(color)) {
+            throw new ParseException(TagColor.MESSAGE_CONSTRAINTS);
+        }
         return new TagColor(color.trim());
     }
 }
