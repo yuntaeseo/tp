@@ -21,6 +21,9 @@ public class TagCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    /**
+     * Creates a {@code TagCard} with the given {@code Tag} and index to display.
+     */
     public TagCard(Tag tag, int displayedIndex) {
         super(FXML);
         this.tag = tag;
