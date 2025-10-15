@@ -36,6 +36,7 @@ public class Tag {
         this.color = color;
     }
 
+
     /**
      * Constructs a {@code Tag}, without needing to provide an ID.
      * The ID will automatically be deduced from {@code largestId}.
