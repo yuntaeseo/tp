@@ -277,23 +277,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a…                                                     | I want to…                                                                                 | So that I can…                                                                        |
 |:--------:|:----------------------------------------------------------|:-------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------|
-| `* * *`  | user                                                      | to add a contact with their name, phone number, address etc                                | track my networks                                                                     |
-| `* * *`  | user                                                      | edit and update an existing contact                                                        | update incorrect information I have about my connection                               |
-| `* * *`  | user                                                      | to list out all my contacts                                                                | view all of my network                                                                |
+| `* * *`  | user                                                      | to add a person with their name, phone number, address etc                                 | track my networks                                                                     |
+| `* * *`  | user                                                      | edit and update an existing person                                                         | update incorrect information I have about my connection                               |
+| `* * *`  | user                                                      | to list out all my persons                                                                 | view all of my network                                                                |
 | `* * *`  | user                                                      | to search for a specific contact using a specific field such as their name or phone number | filter my connections                                                                 |
-| `* * *`  | user                                                      | to delete a contact off my contact list                                                    | remove connections I do not wish to maintain                                          |
-| `* * *`  | user                                                      | to add multiple addresses and phone numbers for a single contact                           | have multiple ways to contact a connection                                            |
-| `* * *`  | user                                                      | to add notes for a contact                                                                 | keep a personal note that I have for a connection (their favourite gift, movies, ...) |
+| `* * *`  | user                                                      | to delete a person off my contact list                                                     | remove connections I do not wish to maintain                                          |
+| `* * *`  | user                                                      | to add multiple addresses and phone numbers for a single person                            | have multiple ways to contact a connection                                            |
+| `* * *`  | user                                                      | to add notes for a person                                                                  | keep a personal note that I have for a connection (their favourite gift, movies, ...) |
 | `* * *`  | regular user                                              | list all available tag groups                                                              | be reminded of what categories exist                                                  |
 | `* * *`  | user                                                      | create a tag                                                                               | group people according to tags                                                        |
 | `* * *`  | beginner user                                             | edit a tag name                                                                            | make old tag names clearer or less verbose                                            |
 | `* * *`  | experienced user                                          | delete tags (not the users)                                                                | keep the tag system tidy                                                              |
-| `* * *`  | regular user                                              | remove outdated tags from a contact                                                        | ensure the information remains current                                                |
+| `* * *`  | experienced user                                          | view all tags associated with a person                                                     | understand their profile at a glance                                                  |
+| `* * *`  | regular user who has not used tags                        | edit tags of existing contacts                                                             | trial-and-error this feature to get started                                           |
+| `* * *`  | regular user                                              | assign multiple tags to a contact at once                                                  | capture all relevant categories                                                       |
 |   `*`    | experienced user                                          | bulk-filter by multiple tags                                                               | narrow down groups (e.g., Company A + Exco)                                           |
 |  `* *`   | beginner user                                             | filter contacts by a single tag                                                            | see everyone in that category                                                         |
-| `* * *`  | experienced user                                          | view all tags associated with a contact                                                    | understand their profile at a glance                                                  |
-| `* * *`  | regular user                                              | assign multiple tags to a contact at once                                                  | capture all relevant categories                                                       |
-| `* * *`  | regular user who has not used tags                        | edit tags of existing contacts                                                             | trial-and-error this feature to get started                                           |
 |   `*`    | beginner user                                             | insert multiple data in one network                                                        | avoid inserting every relationship individually from a single person                  |
 |  `* *`   | user who has many friends and acquaintances               | click through the GUI graphs                                                               | explore the relationships of myself and others                                        |
 |   `*`    | forgetful user                                            | read a simple tag on the relationship entry                                                | readily search through the network and understand the relationships clearly           |
@@ -471,7 +470,7 @@ Use case ends.
 
       Use case ends.
 
-#### UC22 - Create Tag (Global)
+#### UC22 - Create Tag
 
 **Goal:** create a new tag group
 
@@ -552,23 +551,79 @@ Use case ends.
 
 **Extensions**
 * **2a. User does not specify ID or uses an invalid command.**
-    * **2a1.** **System** returns the correct usage.
+    * **2a1.** **System** informs the user about the correct usage.
 
       Use case ends.
 * **3a. Tag ID is invalid / not found.**
     * **3a1.** **System** informs the user about the invalid ID.
 
       Use case ends.
-* **4a. (Optional) System offers an undo option after deletion.**
+* **\[PROPOSED\] 4a. System offers an undo option after deletion.**
     * **4a1.** **User** selects "undo".
     * **4a2.** **System** restores the deleted tag if possible.
 
       Use case ends.
 
-    
+[comment]: RELATIONSHIP
+
+#### \[PROPOSED\] UC30 - Search Through Relationships of the Contacts
+
+**MSS**
+1. **User** inputs the contact whose relationships are to be searched.
+2. **System** outputs contacts related to the search contact.
+
+**Extensions**
+* **1a. System detects that the contact does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+#### \[PROPOSED\] UC31 - Add Relationships Between Contacts
+
+**MSS**
+1. **User** inputs the contacts for which to add a relationship.
+2. **System** informs that the relationship has been added.
+
+Use case ends.
+
+**Extensions**
+* **1a. System detects that one or more contacts does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+* **1b. System detects that the command format is wrong.**
+    * **1b1.** **System** informs the user about the correct format for the use case.
+
+      Use case ends.
+
+#### \[PROPOSED\] UC32 - Delete Relationships Between Contacts
+
+**MSS**
+1. **User** inputs the command to delete the relationship between two contacts.
+2. **System** informs that the relationship has been deleted.
+
+Use case ends.
+
+**Extensions**
+* **1a. System detects that one or more contacts does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+* **1b. System detects that there is no relationship between those two contacts.**
+    * **1b1.** **System** informs the user that the relationship does not exist.
+
+      Use case ends.
+
+* **1c. System detects that the command format is wrong.**
+    * **1c1.** **System** informs the user about the correct format for the use case.
+
+      Use case ends.
+
 [comment]: REMINDER
 
-#### \[PROPOSED\] UC30 - Remind
+#### \[PROPOSED\] UC40 - Remind
 
 **MSS**
 1. **User** enters the application.
@@ -583,7 +638,7 @@ Use case ends.
 
         Use case ends.
 
-#### \[PROPOSED\] UC31 - View Reminders
+#### \[PROPOSED\] UC41 - View Reminders
 
 **MSS**
 1. **User** selects the text input.
@@ -598,7 +653,7 @@ Use case ends.
     
         Use case ends.
 
-#### \[PROPOSED\] UC32 - Add Reminder
+#### \[PROPOSED\] UC42 - Add Reminder
 
 **MSS**
 1. **User** selects the text input.
@@ -619,7 +674,7 @@ Use case ends.
         
         Use case ends.
 
-#### \[PROPOSED\] UC33 - Edit Reminder
+#### \[PROPOSED\] UC43 - Edit Reminder
 
 **MSS**
 1. **User** selects the text input.
@@ -645,7 +700,7 @@ Use case ends.
 
         Use case ends.
 
-#### \[PROPOSED\] UC34 - Delete Reminder
+#### \[PROPOSED\] UC44 - Delete Reminder
 
 **MSS**
 1. **User** selects the text input.
@@ -669,63 +724,6 @@ Use case ends.
     * **2c1.** **System** informs the user about the invalid ID.
 
         Use case ends.
-
-[comment]: RELATIONSHIP
-
-#### \[PROPOSED\] UC40 - Search Through Relationships of the Contacts
-
-**MSS**
-1. **User** inputs the contact whose relationships are to be searched.
-2. **System** outputs contacts related to the search contact.
-
-**Extensions**
-* **1a. System detects that the contact does not exist.**
-    * **1a1.** **System** informs the user that the contact does not exist.
-
-      Use case ends.
-
-#### \[PROPOSED\] UC41 - Add Relationships Between Contacts
-
-**MSS**
-1. **User** inputs the contacts for which to add a relationship.
-2. **System** informs that the relationship has been added.
-
-Use case ends.
-
-**Extensions**
-* **1a. System detects that one or more contacts does not exist.**
-    * **1a1.** **System** informs the user that the contact does not exist.
-
-      Use case ends.
-
-* **1b. System detects that the command format is wrong.**
-    * **1b1.** **System** informs the user about the correct format for the use case.
-
-      Use case ends.
-
-#### \[PROPOSED\] UC42 - Delete Relationships Between Contacts
-
-**MSS**
-1. **User** inputs the command to delete the relationship between two contacts.
-2. **System** informs that the relationship has been deleted.
-
-Use case ends.
-
-**Extensions**
-* **1a. System detects that one or more contacts does not exist.**
-    * **1a1.** **System** informs the user that the contact does not exist.
-
-      Use case ends.
-
-* **1b. System detects that there is no relationship between those two contacts.**
-    * **1b1.** **System** informs the user that the relationship does not exist.
-
-      Use case ends.
-
-* **1c. System detects that the command format is wrong.**
-    * **1c1.** **System** informs the user about the correct format for the use case.
-
-      Use case ends.
 
 [comment]: SAVE&LOAD
 
@@ -764,16 +762,15 @@ Use case ends.
 2. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3. Everything should be accessible in the command line interface.
 4. Most if not all features should be accessible using buttons if more convenient as well.
-5. User with above average typing speed for regular English text (i.e. not code, not system admin commands) should
-   be able to accomplish most of the tasks faster using commands than using the mouse.
-6. Not too big in terms of file size, 50MB maximum excluding all the data stored.
-7. Every user interaction should have <100ms response time.
-8. Data should be kept locally and accessed only by the user.
-9. Data stored should remain consistent unless the file is edited directly by the user.
+5. Not too big in terms of file size, 50MB maximum excluding all the data stored.
+6. Every user interaction should have <100ms response time.
+7. Data should be kept locally and accessed only by the user.
+8. Data stored should remain consistent unless the file is edited directly by the user.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Relationship**: Refers to a connection between two persons in the contacts list. From one person you can see all the other people in the contact that they are connected to.
 
 --------------------------------------------------------------------------------------------------------------------
 
