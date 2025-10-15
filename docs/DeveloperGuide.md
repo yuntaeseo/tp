@@ -785,37 +785,78 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. **Initial launch**
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the Java Archive file and copy it into an empty folder.
+    2. Double-click the Java Archive file.  
+       **Expected:** The application shows the Graphical User Interface with a set of sample contacts. The window size may not be optimal.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+2. **Saving window preferences**
 
-1. Saving window preferences
+    1. Resize the window to an optimal size. Move the window to a different location. Close the window.
+    2. Re-launch the application by double-clicking the Java Archive file.  
+       **Expected:** The most recent window size and location are retained.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+3. **Launch from command line (alternative to double-click)**
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+    1. Open a terminal (Command Prompt on Windows, Terminal on macOS or Linux).
+    2. Navigate to the folder containing the Java Archive file.
+    3. Run `java -jar <YourAppName>.jar`.  
+       **Expected:** The application launches and shows the same Graphical User Interface as a normal double-click launch.
 
-1. _{ more test cases …​ }_
+4. **First launch with an existing data file**
+
+    1. Place a valid data file (for example, `addressbook.json`) with a few known contacts in the same folder as the Java Archive file (or at the documented default data location, if different).
+    2. Launch the application.  
+       **Expected:** The application loads and displays the contacts from the existing data file. Window size and position follow the current preferences.
+
+5. **Launch with a missing data file**
+
+    1. Ensure there is **no** data file in the expected location (delete or rename it temporarily).
+    2. Launch the application.  
+       **Expected:** The application starts with an empty contact list (or sample data, depending on your product decision). A new data file is created at the expected location upon exit.
+
+6. **Launch with a corrupted data file**
+
+    1. Open the data file in a text editor and deliberately corrupt it (for example, delete a closing brace or insert random text).
+    2. Launch the application.  
+       **Expected:** The application does **not** crash. It shows an error message indicating the data file is invalid and starts with an empty contact list (or a safe fallback such as sample data). The user can continue using the application normally. A valid file will be written on the next successful save or exit.
+
+7. **Launch with a read-only data file**
+
+    1. Make the data file read-only using your operating system’s file permissions.
+    2. Launch the application, then attempt any action that would save data (for example, adding a contact), and exit.
+    3. Re-launch the application.  
+       **Expected:** On the first run, the application either warns that it cannot write the file or continues without persisting the change. After re-launch, the change made earlier is **not** present (because the data file was read-only).
+
+8. **Graceful shutdown via menu**
+
+    1. Launch the application.
+    2. Use the application’s menu (for example, `File → Exit`) to close it.  
+       **Expected:** The window closes cleanly. Window size and position are saved. Any valid in-memory changes since the last save are persisted according to the product’s save policy.
+
+9. **Graceful shutdown via keyboard shortcut**
+
+    1. Launch the application.
+    2. Use the operating system shortcut to close the window (for example, `Alt + F4` on Windows, `Command + Q` on macOS, `Control + Q` on some Linux desktops).  
+       **Expected:** Same as a menu-based exit: the application shuts down cleanly and window preferences are saved.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+2Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      **Expected**: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      **Expected**: Similar to previous.
 
-1. _{ more test cases …​ }_
+
 
 ### Saving data
 
