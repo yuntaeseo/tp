@@ -45,7 +45,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
-        this.note = note == null ? "" : note;
+        this.note = note;
     }
 
     /**
@@ -101,6 +101,9 @@ class JsonAdaptedPerson {
 
         final Set<Integer> modelTags = new HashSet<>(tags);
 
+        if (note == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+        }
         final Note modelNote = new Note(note);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelNote);
