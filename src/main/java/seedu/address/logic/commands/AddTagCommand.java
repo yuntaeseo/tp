@@ -39,16 +39,4 @@ public class AddTagCommand extends Command {
         model.addTag(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // same object
-                || (other instanceof AddTagCommand // same type
-                && toAdd.equals(((AddTagCommand) other).toAdd));
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getCanonicalName() + "{toAdd=" + toAdd + "}";
-    }
 }
