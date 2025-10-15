@@ -1,9 +1,8 @@
 package seedu.address.model.tag;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Objects;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -28,13 +27,14 @@ public class Tag {
      * Every fields must be present and not null.
      */
     public Tag(int id, TagName name, TagDesc desc, TagColor color) {
-        requireAllNonNull(id, name, desc, color);
+        requireAllNonNull(name, desc, color);
         largestId = Math.max(largestId, id);
-        this.id = id;
+        this.id = id;   
         this.name = name;
         this.desc = desc;
         this.color = color;
     }
+
 
     /**
      * Constructs a {@code Tag}, without needing to provide an ID.
