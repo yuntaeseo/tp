@@ -241,7 +241,7 @@ _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+COMING SOON
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -310,121 +310,82 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |  `* *`   | person who does not have a lot of time                    | edit a reminder                                                                            | to correct mistakes                                                                   |
 |  `* *`   | person who cannot manage a large network                  | delete reminders for people                                                                | forget about them                                                                     |
 |  `* *`   | user                                                      | export my contacts to an external drive                                                    | transfer them to another device                                                       |
-| `* * *`  | person with connections                                   | import my contacts                                                                         | avoid re-entering the contact information again                                       |
+|  `* *`   | person with connections                                   | import my contacts                                                                         | avoid re-entering the contact information again                                       |
 |   `*`    | user                                                      | choose the contacts I want to export                                                       | avoid exporting irrelevant/outdated contacts                                          |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `NetWise` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `NetWise` and the **Actor** is the `user`, unless specified otherwise)
 
-[comment]: RELATIONSHIP
+[comment]: PERSONS
 
-#### UC30 - Search Through Relationships of the Contacts
+#### UC10 - Add Person
 
-**MSS**
-1. **User** inputs the contact whose relationships are to be searched.
-2. **System** outputs contacts related to the search contact.
+**Goal:** Add a person
 
-**Extensions**
-* **1a. System detects that the contact does not exist.**
-    * **1a1.** **System** informs the user that the contact does not exist.
+**Preconditions:** None
 
-      Use case ends.
-
-#### UC31 - Add Relationships Between Contacts
-
-**MSS**
-1. **User** inputs the contacts for which to add a relationship.
-2. **System** informs that the relationship has been added.
-
-Use case ends.
-
-**Extensions**
-* **1a. System detects that one or more contacts does not exist.**
-    * **1a1.** **System** informs the user that the contact does not exist.
-
-      Use case ends.
-
-* **1b. System detects that the command format is wrong.**
-    * **1b1.** **System** informs the user about the correct format for the use case.
-
-      Use case ends.
-
-#### UC32 - Delete Relationships Between Contacts
-
-**MSS**
-1. **User** inputs the command to delete the relationship between two contacts.
-2. **System** informs that the relationship has been deleted.
-
-Use case ends.
-
-**Extensions**
-* **1a. System detects that one or more contacts does not exist.**
-    * **1a1.** **System** informs the user that the contact does not exist.
-
-      Use case ends.
-
-* **1b. System detects that there is no relationship between those two contacts.**
-    * **1b1.** **System** informs the user that the relationship does not exist.
-
-      Use case ends.
-
-* **1c. System detects that the command format is wrong.**
-    * **1c1.** **System** informs the user about the correct format for the use case.
-
-      Use case ends.
-
-[comment]: CONTACT
-
-#### UC10 - List Contacts
-
-**MSS**
-
-1. **User** issues the command to list contacts.
-2. **System** validates the command.
-3. **System** reads the contact storage/data.
-4. If contacts exist, **System** displays each contact in order of ID.
-5. If no contacts exist, **System** informs the user that the contact list is empty.
-
-**Extensions**
-
-- **4a. System detects an error while retrieving contacts.**
-  - **4a1.** **System** displays an error message and offers options: retry or cancel.
-  - **4a2.** **User** chooses to retry.
-  - **4a3.** **System** attempts to retrieve contacts again.
-
-    Steps 4a1–4a3 repeat until retrieval succeeds or user cancels.
-    If retrieval succeeds, use case resumes at step 4.
-    If user cancels, use case ends.
-
-#### UC11 - Add Contact
+**Postconditions:** If success, a person is added into the list.
 
 MSS
 
 1. **User** selects the text input.
-2. **User** inputs the command and details to add a new contact.
-3. **System** informs the user that the contact has been added and its details.
+2. **User** inputs the command and details to add a new person.
+3. **System** validates the command.
+4. **System** informs the user that the person has been added and its details.
 
 Use case ends.
 
 **Extensions**
 
 - **2a. System detects an error in the entered command.**
-  - 2a1. **System** informs the user of the correct way to add a reminder.
+  - 2a1. **System** informs the user of the correct way to add the necessary fields.
     Use case ends.
 
-- **2b. System detects a very similar contact has already existed.**
+- **2b. (TO BE IMPLEMENTED) System detects a very similar contact has already existed.**
   - **2b1.** **System** warns the user about the potential duplicate.
-  - **2b2.** **User** presses Enter again to ignore the warning.
-    Use can continues to step 3.
+  - **2b2.** **User** presses Enter again to ignore the warning. User can continue to step 3.
 
-#### UC12 - Edit Contact
+#### UC11 - List Persons
+
+**Goal:** View all persons in the list.
+
+**Preconditions:** None.
+
+**Postconditions:** None (read-only).
+
+**MSS**
+
+1. **User** issues the command to list contacts.
+2. **System** reads the contact storage/data.
+3. If contacts exist, **System** displays each contact along with their index.
+4. If no contacts exist, **System** informs the user that the contact list is empty.
+
+**Extensions**
+
+- **4a. System detects an error while retrieving contacts.**
+    - **4a1.** **System** displays an error message and offers options: retry or cancel.
+    - **4a2.** **User** chooses to retry.
+    - **4a3.** **System** attempts to retrieve contacts again.
+
+      Steps **4a1–4a3** repeat until retrieval succeeds or user cancels.
+      If retrieval succeeds, use case resumes at step 4.
+      If user cancels, use case ends.
+
+#### UC12 - Edit Person
+
+**Goal:** Edit a person's info in the list.
+
+**Preconditions:** There exists one or more persons in the list.
+
+**Postconditions:** If success, the fields of the person edited will be updated correctly and accordingly.
 
 MSS
 
 1. **User** selects the text input.
-2. **User** inputs the command and details to edit an existing contact.
-3. **System** informs the user that the contact has been edited and its updated details.
+2. **User** inputs the command and details to edit an existing person.
+3. **System** validates the command.
+4. **System** informs the user that the person has been edited and its updated details.
 
 Use case ends.
 
@@ -434,25 +395,28 @@ Use case ends.
   - **2a1.** **System** informs the user of the correct way to edit a contact.
     Use case ends.
 
-- **2b. System detects a very similar reminder has already existed.**
-  - **2b1.** **System** warns the user about the potential duplicate.
-  - **2b2.** **User** presses Enter again to ignore the warning.
-    Use case ends.
+- **2b. No updatable fields are provided (only index).**
+  - **2b1.** **System** informs the user that no updatable fields were provided.
 
-- **2c. The provided ID does not correspond to any existing contacts.**
+- **2c. The provided index does not correspond to any existing contacts.**
   - **2c1.** **System** informs the user about the error.
     Use case ends.
 
 #### UC13 - Delete Contact
 
+**Goal:** Delete a person from the list.
+
+**Preconditions:** There exists one or more persons in the list.
+
+**Postconditions:** If success, the person can no longer be found in the list, and everybody with index below them will be pushed up by 1.
+
 MSS
 
-1. **User** issues the command and ID to delete a contact.
-2. **System** validates the command and provided ID.
-3. **System** looks up the contact by the provided ID.
-4. **System** requests confirmation to delete the contact and displays the contact details.
-5. **User** confirms the deletion.
-6. **System** deletes the contact from storage and returns a success message.
+1. **User** selects the text input.
+2. **User** inputs the command and index to delete a contact.
+3. **System** validates the command and provided index.
+4. **System** looks up the person by the provided index.
+5. **System** deletes the person from storage and returns a success message.
 
 Use case ends.
 
@@ -468,11 +432,25 @@ Use case ends.
 
     Use case ends.
 
+#### UC14 - Clear Person List
 
+**Goal:** Clear the person list.
+
+**Preconditions:** None. (You can clear an empty list)
+
+**Postconditions:** If success, there should be no person left in the list.
+
+1. **User** selects the text input.
+2. **System** deletes all the people in the list and returns a success message
+
+- **2a. User enters an incorrect or unsupported command format.**
+    - **2a1.** **System** informs the user the command is invalid and shows the correct command format.
+
+      Use case ends.
 
 [comment]: TAGS
 
-#### UC21 - List Tags (System: System)
+#### UC21 - List Tags
 
 **Goal:** view all tag groups
 
@@ -493,7 +471,7 @@ Use case ends.
 
       Use case ends.
 
-#### UC22 - Create Tag (Global) (System: System)
+#### UC22 - Create Tag (Global)
 
 **Goal:** create a new tag group
 
@@ -516,15 +494,15 @@ Use case ends.
 
       Use case resumes at step 2.
 * **2a. Command format invalid or required Name is missing.**
-    * **2a1.** **System** returns the correct command format.
+    * **2a1.** **System** informs the user of the correct command format.
 
       Use case ends.
-* **3a. A tag with the same name already exists.**
+* **\[PROPOSED\] 3a. A tag with the same name already exists.**
     * **3a1.** **System** informs the user about the error.
 
       Use case ends.
 
-#### UC23 - Update Tag (Global) (System: System)
+#### UC23 - Update Tag (Global)
 
 **Goal:** update an existing tag’s attributes
 
@@ -555,7 +533,7 @@ Use case ends.
 
       Use case ends.
 
-#### UC24 - Delete Tag (Global) (System: System)
+#### UC24 - Delete Tag (Global)
 
 **Goal:** delete an existing tag group
 
@@ -587,11 +565,10 @@ Use case ends.
 
       Use case ends.
 
-
-
+    
 [comment]: REMINDER
 
-#### UC40 - Remind
+#### \[PROPOSED\] UC30 - Remind
 
 **MSS**
 1. **User** enters the application.
@@ -606,7 +583,7 @@ Use case ends.
 
         Use case ends.
 
-#### UC41 - View Reminders
+#### \[PROPOSED\] UC31 - View Reminders
 
 **MSS**
 1. **User** selects the text input.
@@ -621,7 +598,7 @@ Use case ends.
     
         Use case ends.
 
-#### UC42 - Add Reminder
+#### \[PROPOSED\] UC32 - Add Reminder
 
 **MSS**
 1. **User** selects the text input.
@@ -642,7 +619,7 @@ Use case ends.
         
         Use case ends.
 
-#### UC43 - Edit Reminder
+#### \[PROPOSED\] UC33 - Edit Reminder
 
 **MSS**
 1. **User** selects the text input.
@@ -668,7 +645,7 @@ Use case ends.
 
         Use case ends.
 
-#### UC44 - Delete Reminder
+#### \[PROPOSED\] UC34 - Delete Reminder
 
 **MSS**
 1. **User** selects the text input.
@@ -693,9 +670,66 @@ Use case ends.
 
         Use case ends.
 
+[comment]: RELATIONSHIP
+
+#### \[PROPOSED\] UC40 - Search Through Relationships of the Contacts
+
+**MSS**
+1. **User** inputs the contact whose relationships are to be searched.
+2. **System** outputs contacts related to the search contact.
+
+**Extensions**
+* **1a. System detects that the contact does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+#### \[PROPOSED\] UC41 - Add Relationships Between Contacts
+
+**MSS**
+1. **User** inputs the contacts for which to add a relationship.
+2. **System** informs that the relationship has been added.
+
+Use case ends.
+
+**Extensions**
+* **1a. System detects that one or more contacts does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+* **1b. System detects that the command format is wrong.**
+    * **1b1.** **System** informs the user about the correct format for the use case.
+
+      Use case ends.
+
+#### \[PROPOSED\] UC42 - Delete Relationships Between Contacts
+
+**MSS**
+1. **User** inputs the command to delete the relationship between two contacts.
+2. **System** informs that the relationship has been deleted.
+
+Use case ends.
+
+**Extensions**
+* **1a. System detects that one or more contacts does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+* **1b. System detects that there is no relationship between those two contacts.**
+    * **1b1.** **System** informs the user that the relationship does not exist.
+
+      Use case ends.
+
+* **1c. System detects that the command format is wrong.**
+    * **1c1.** **System** informs the user about the correct format for the use case.
+
+      Use case ends.
+
 [comment]: SAVE&LOAD
 
-#### UC50 - Export Contacts
+#### \[PROPOSED\] UC50 - Export Contacts
 
 **MSS**
 1. **User** chooses to export contacts.
@@ -703,7 +737,7 @@ Use case ends.
 
 Use case ends.
 
-#### UC51 - Import Contacts
+#### \[PROPOSED\] UC51 - Import Contacts
 
 **MSS**
 1. **User** chooses to import contacts.
