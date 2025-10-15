@@ -27,9 +27,7 @@ public class TagCard extends UiPart<Region> {
     public TagCard(Tag tag, int displayedIndex) {
         super(FXML);
         this.tag = tag;
-
         id.setText(displayedIndex + ". ");
-
         TagName tagName = (TagName) tag.getName();
         Label label = new Label(tagName.toString());
         label.getStyleClass().add("tag");
