@@ -83,11 +83,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG_ID]…​ [r/NOTE]`
 A person can have any number of tags (including 0)
 </div>
 
-* `TAG_ID` refers ti *must* be 
+* `TAG_ID` refers to the **unique ID** of each tag, can be seen by using the [`listtag`](#listing-all-tags-listtag) command. The tag ID **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/1 r/She owed me lunch`, supposed tag 1 is `criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/1 r/She owed me lunch`, supposed tag with ID 1 is `criminal`
 
 ### Listing all persons : `list`
 
@@ -99,12 +99,12 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ r/NOTE`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed, i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -144,11 +144,65 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+### Clearing all person entries : `clear`
 
-Clears all entries from the address book.
+Clears all person entries from the address book.
 
 Format: `clear`
+
+### Adding a tag : `addtag`
+
+Adds a tag to the address book.
+
+Format: `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]`
+
+* The `RGB_COLOR` describe the colour you want to set for the tag. 
+* `RGB_COLOR` field *must* be a HEX string of length 6, case-insensitive, ***without*** the hash ('#'). I.e. 123456, 0F2AAB, abf1cd, …​
+* The default `DESCRIPTION` field is "No Description"
+* The default `RGB_COLOR` is gray (#808080)
+* The created tag will be assigned a **fixed** unique ID
+
+Examples:
+* `addtag n/JC d/JC friends c/23f1cd`
+* `addtag n/coworkers`
+
+### Listing all tags : `listtag`
+
+Shows a list of all tags in the address book.
+
+Format: `listtag`
+
+* Unlike the person list, the tag list does not show tags in any particular order. It shows the tag name along with the associated **unique ID** given when the tag is created.
+### Editing a tag: `edittag`
+
+Edits a tag in the address book.
+
+Format: `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]`
+
+* Edits the tag at the specified `ID`.
+* The ID refers to the **unique ID** each tag is given when created, can be seen when [`listtag`](#listing-all-tags--listtag).
+* The ID **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* You can change the description or colour back to the default option by typing `d/` or `c/` without
+  specifying any additional information after it.
+
+Examples:
+* `edittag 1 d/my extended family c/099fca` changes the description of tag 1 to "my extended family", and set its color to the color with hex code #099fca.
+* `edittag 2 n/Prof d/ c/` changes the name of tag 1 to "Prof", and set both description and color to default value mentioned [above](#adding-a-tag--addtag).
+
+### Deleting a tag: `deletetag`
+
+Deletes a tag from the address book.
+
+Format: `deletetag ID`
+
+* Deletes the tag at the specified `ID`.
+* The ID refers to the **unique ID** each tag is given when created, can be seen when [`listtag`](#listing-all-tags--listtag).
+* The ID **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `delete 2` to delete the tag with ID 2
 
 ### Exiting the program : `exit`
 
@@ -169,10 +223,6 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -186,17 +236,23 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. For `add` and `edit` person commands, **when you use tag ID that does not exist**, the tag ID is still recorded. However, no tag is shown attached to the user until, and no error message is shown. Furthermore, if in the future a tag is created with that ID, it will then show up on the person who originally has that tag ID. This issue will be fixed in a later version.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action                | Format, Examples                                                                                                                                                                               |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add person**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [r/NOTE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague r/owes me lunch` |
+| **Clear person list** | `clear`                                                                                                                                                                                        |
+| **Delete person**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                            |
+| **Edit person**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                           |
+| **Find person**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                     |
+| **List person**       | `list`                                                                                                                                                                                         |
+| **Add tag**           | `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `addtag n/JC d/JC friends c/23f1cd`                                                                                                    |
+| **Delete tag**        | `deletetag ID` <br> e.g. `deletetag 2`                                                                                                                                                         |
+| **Edit tag**          | `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `edittag 1 d/my extended family c/099fca`                                                                                        |
+| **List tag**          | `listtag`                                                                                                                                                                                      |
+| **Exit program**      | `exit`                                                                                                                                                                                         |
+| **Help**              | `help`                                                                                                                                                                                         |
