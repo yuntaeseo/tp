@@ -21,6 +21,7 @@ public class EditTagCommand extends Command {
 
     public static final String MESSAGE_EDIT_SUCCESS = "Edited Tag: %1$s";
     public static final String MESSAGE_TAG_NOT_FOUND = "No tag found with the specified ID.";
+    public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the address book.";
 
     private final int idToEdit;
     private final TagName newName;
@@ -57,6 +58,10 @@ public class EditTagCommand extends Command {
                 newName != null ? newName : target.getName(),
                 newDesc != null ? newDesc : target.getDesc(),
                 newColor != null ? newColor : target.getColor());
+
+        if (!target.isSameTag(edited) && model.hasTag(edited)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TAG);
+        }
 
         model.setTag(target, edited);
 
