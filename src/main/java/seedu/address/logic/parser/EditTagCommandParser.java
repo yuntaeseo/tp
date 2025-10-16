@@ -33,6 +33,8 @@ public class EditTagCommandParser implements Parser<EditTagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DESC, PREFIX_COLOR);
+
         TagName name = null;
         TagDesc desc = null;
         TagColor color = null;

@@ -19,6 +19,9 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.TagColor;
+import seedu.address.model.tag.TagDesc;
+import seedu.address.model.tag.TagName;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -26,6 +29,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG_NAME = "*";
+    private static final String INVALID_TAG_COLOR = "AABBGG";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -34,6 +39,9 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "123";
     private static final String VALID_TAG_2 = "456";
     private static final String VALID_NOTE = "some famous person";
+    private static final String VALID_TAG_NAME = "friends";
+    private static final String VALID_TAG_DESC = "close people";
+    private static final String VALID_TAG_COLOR = "123456";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -212,5 +220,71 @@ public class ParserUtilTest {
         String noteWithWhitespace = WHITESPACE + VALID_NOTE + WHITESPACE;
         Note expectedNote = new Note(VALID_NOTE);
         assertEquals(expectedNote, ParserUtil.parseNote(noteWithWhitespace));
+    }
+
+    //  NOTE: TAG
+
+    @Test
+    public void parseTagName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTagName((String) null));
+    }
+
+    @Test
+    public void parseTagName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTagName(INVALID_TAG_NAME));
+    }
+
+    @Test
+    public void parseTagName_validValueWithoutWhitespace_returnsTagName() throws Exception {
+        TagName expectedName = new TagName(VALID_TAG_NAME);
+        assertEquals(expectedName, ParserUtil.parseTagName(VALID_TAG_NAME));
+    }
+
+    @Test
+    public void parseTagName_validValueWithWhitespace_returnsTrimmedTagName() throws Exception {
+        String nameWithWhitespace = WHITESPACE + VALID_TAG_NAME + WHITESPACE;
+        TagName expectedName = new TagName(VALID_TAG_NAME);
+        assertEquals(expectedName, ParserUtil.parseTagName(nameWithWhitespace));
+    }
+
+    @Test
+    public void parseTagDesc_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTagDesc((String) null));
+    }
+
+    @Test
+    public void parseTagDesc_validValueWithoutWhitespace_returnsTagDesc() throws Exception {
+        TagDesc expectedDesc = new TagDesc(VALID_TAG_DESC);
+        assertEquals(expectedDesc, ParserUtil.parseTagDesc(VALID_TAG_DESC));
+    }
+
+    @Test
+    public void parseTagDesc_validValueWithWhitespace_returnsTrimmedTagDesc() throws Exception {
+        String descWithWhitespace = WHITESPACE + VALID_TAG_DESC + WHITESPACE;
+        TagDesc expectedDesc = new TagDesc(VALID_TAG_DESC);
+        assertEquals(expectedDesc, ParserUtil.parseTagDesc(descWithWhitespace));
+    }
+
+    @Test
+    public void parseTagColor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTagColor((String) null));
+    }
+
+    @Test
+    public void parseTagColor_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTagColor(INVALID_TAG_COLOR));
+    }
+
+    @Test
+    public void parseTagColor_validValueWithoutWhitespace_returnsTagColor() throws Exception {
+        TagColor expectedColor = new TagColor(VALID_TAG_COLOR);
+        assertEquals(expectedColor, ParserUtil.parseTagColor(VALID_TAG_COLOR));
+    }
+
+    @Test
+    public void parseTagColor_validValueWithWhitespace_returnsTrimmedTagColor() throws Exception {
+        String colorWithWhitespace = WHITESPACE + VALID_TAG_COLOR + WHITESPACE;
+        TagColor expectedColor = new TagColor(VALID_TAG_COLOR);
+        assertEquals(expectedColor, ParserUtil.parseTagColor(colorWithWhitespace));
     }
 }

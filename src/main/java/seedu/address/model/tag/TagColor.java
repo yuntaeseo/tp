@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Tag's color in HEX format.
  */
 public class TagColor {
-    public static final String MESSAGE_CONSTRAINTS = "Tags colors should be in HEX format: RRGGBB";
+    public static final String MESSAGE_CONSTRAINTS = "Tags colors should be in HEX format (without the '#'): RRGGBB";
 
     /**
      * Regex for enforcing the HEX format (without the '#' at the beginning).
@@ -36,7 +36,7 @@ public class TagColor {
 
     @Override
     public String toString() {
-        return value;
+        return value.toUpperCase();
     }
 
     @Override

@@ -142,29 +142,43 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String name} into a {@code TagName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
      */
     public static TagName parseTagName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (trimmedName.isEmpty()) {
-            throw new ParseException("Tag name cannot be empty.");
+        if (!TagName.isValidTagName(trimmedName)) {
+            throw new ParseException(TagName.MESSAGE_CONSTRAINTS);
         }
         return new TagName(trimmedName);
     }
 
     /**
      * Parses a {@code String desc} into a {@code TagDesc}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code desc} is invalid.
      */
     public static TagDesc parseTagDesc(String desc) throws ParseException {
         requireNonNull(desc);
-        return new TagDesc(desc.trim());
+        String trimmedDesc = desc.trim();
+        return new TagDesc(trimmedDesc);
     }
 
     /**
      * Parses a {@code String color} into a {@code TagColor}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code color} is invalid.
      */
     public static TagColor parseTagColor(String color) throws ParseException {
         requireNonNull(color);
-        return new TagColor(color.trim());
+        String trimmedColor = color.trim();
+        if (!TagColor.isValidTagColor(trimmedColor)) {
+            throw new ParseException(TagColor.MESSAGE_CONSTRAINTS);
+        }
+        return new TagColor(trimmedColor);
     }
 }
