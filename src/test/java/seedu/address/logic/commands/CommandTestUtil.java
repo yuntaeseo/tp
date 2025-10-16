@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COLOR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -26,6 +28,8 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
+
+    //  NOTE: PERSON
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -59,6 +63,27 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     // there are no invalid notes
+
+    //  NOTE: TAG
+
+    public static final String VALID_TAG_NAME_FRIENDS = "friends";
+    public static final String VALID_TAG_DESC_FRIENDS = "close people";
+    public static final String VALID_TAG_COLOR_FRIENDS = "AABBCC";
+    public static final String VALID_TAG_NAME_COWORKERS = "coworkers";
+    public static final String VALID_TAG_DESC_COWORKERS = "definitely not close people";
+    public static final String VALID_TAG_COLOR_COWORKERS = "CCDDEE";
+
+    public static final String TAG_NAME_DESC_FRIENDS = " " + PREFIX_NAME + VALID_TAG_NAME_FRIENDS;
+    public static final String TAG_DESC_DESC_FRIENDS = " " + PREFIX_DESC + VALID_TAG_DESC_FRIENDS;
+    public static final String TAG_COLOR_DESC_FRIENDS = " " + PREFIX_COLOR + VALID_TAG_COLOR_FRIENDS;
+    public static final String TAG_NAME_DESC_COWORKERS = " " + PREFIX_NAME + VALID_TAG_NAME_COWORKERS;
+    public static final String TAG_DESC_DESC_COWORKERS = " " + PREFIX_DESC + VALID_TAG_DESC_COWORKERS;
+    public static final String TAG_COLOR_DESC_COWORKERS = " " + PREFIX_COLOR + VALID_TAG_COLOR_COWORKERS;
+
+    public static final String INVALID_TAG_NAME_DESC = " " + PREFIX_NAME + "****";
+    // No invalid TAG_DESC
+    public static final String INVALID_TAG_COLOR_DESC = " " + PREFIX_COLOR + "AABBGG";
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

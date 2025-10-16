@@ -36,7 +36,7 @@ public class TagColor {
 
     @Override
     public String toString() {
-        return value;
+        return value.toUpperCase();
     }
 
     @Override
