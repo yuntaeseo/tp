@@ -97,6 +97,21 @@ public class EditTagCommandTest {
     }
 
     @Test
+    public void execute_duplicateTag_throwsCommandException() {
+        EditTagCommand editCommand = new EditTagCommand(1, new TagName(tag2.getName().value), null, null);
+
+        java.util.List<Tag> before = List.copyOf(modelStub.getFilteredTagList());
+
+        seedu.address.logic.commands.exceptions.CommandException ex =
+                assertThrows(seedu.address.logic.commands.exceptions.CommandException.class, () ->
+                        editCommand.execute(modelStub));
+        System.out.println(ex.getMessage());
+        assertEquals(EditTagCommand.MESSAGE_DUPLICATE_TAG, ex.getMessage());
+
+        assertEquals(before, modelStub.getFilteredTagList());
+    }
+
+    @Test
     public void equals() {
         TagName name = new TagName("BestFriends");
         TagDesc desc = new TagDesc("High school buddies");
@@ -152,7 +167,7 @@ public class EditTagCommandTest {
 
         @Override
         public boolean hasTag(seedu.address.model.tag.Tag tag) {
-            return tags.contains(tag);
+            return tags.stream().anyMatch(tag::isSameTag);
         }
 
         @Override
