@@ -16,23 +16,36 @@ public class DeleteTagCommand extends Command {
             + "Parameters: ID\n"
             + "Example: " + COMMAND_WORD + " 2";
 
+    public static final String MESSAGE_DELETE_SUCCESS = "Deleted Tag: %1$s";
+    public static final String MESSAGE_TAG_NOT_FOUND = "No tag found with the specified ID.";
+
     private final int idToDelete;
 
     public DeleteTagCommand(int id) {
         this.idToDelete = id;
     }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         ObservableList<Tag> tags = model.getFilteredTagList();
         Tag target = tags.stream()
                 .filter(tag -> tag.getId() == idToDelete)
                 .findFirst()
-                .orElseThrow(() -> new CommandException("No tag found with ID: " + idToDelete));
+                .orElseThrow(() -> new CommandException(MESSAGE_TAG_NOT_FOUND));
 
         model.deleteTag(target);
-        return new CommandResult(String.format("Deleted Tag: %s", target));
+        return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS, target));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof DeleteTagCommand
+                && idToDelete == ((DeleteTagCommand) other).idToDelete);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getCanonicalName() + "{idToDelete=" + idToDelete + "}";
     }
 }
