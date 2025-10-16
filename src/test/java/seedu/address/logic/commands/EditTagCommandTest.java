@@ -151,6 +151,11 @@ public class EditTagCommandTest {
         }
 
         @Override
+        public boolean hasTag(seedu.address.model.tag.Tag tag) {
+            return tags.contains(tag);
+        }
+
+        @Override
         public void deleteTag(Tag tag) {
             tags.remove(tag);
         }
