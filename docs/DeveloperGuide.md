@@ -241,7 +241,7 @@ _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+COMING SOON
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -277,23 +277,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a…                                                     | I want to…                                                                                 | So that I can…                                                                        |
 |:--------:|:----------------------------------------------------------|:-------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------|
-| `* * *`  | user                                                      | to add a contact with their name, phone number, address etc                                | track my networks                                                                     |
-| `* * *`  | user                                                      | edit and update an existing contact                                                        | update incorrect information I have about my connection                               |
-| `* * *`  | user                                                      | to list out all my contacts                                                                | view all of my network                                                                |
+| `* * *`  | user                                                      | to add a person with their name, phone number, address etc                                 | track my networks                                                                     |
+| `* * *`  | user                                                      | edit and update an existing person                                                         | update incorrect information I have about my connection                               |
+| `* * *`  | user                                                      | to list out all my persons                                                                 | view all of my network                                                                |
 | `* * *`  | user                                                      | to search for a specific contact using a specific field such as their name or phone number | filter my connections                                                                 |
-| `* * *`  | user                                                      | to delete a contact off my contact list                                                    | remove connections I do not wish to maintain                                          |
-| `* * *`  | user                                                      | to add multiple addresses and phone numbers for a single contact                           | have multiple ways to contact a connection                                            |
-| `* * *`  | user                                                      | to add notes for a contact                                                                 | keep a personal note that I have for a connection (their favourite gift, movies, ...) |
+| `* * *`  | user                                                      | to delete a person off my contact list                                                     | remove connections I do not wish to maintain                                          |
+| `* * *`  | user                                                      | to add multiple addresses and phone numbers for a single person                            | have multiple ways to contact a connection                                            |
+| `* * *`  | user                                                      | to add notes for a person                                                                  | keep a personal note that I have for a connection (their favourite gift, movies, ...) |
 | `* * *`  | regular user                                              | list all available tag groups                                                              | be reminded of what categories exist                                                  |
 | `* * *`  | user                                                      | create a tag                                                                               | group people according to tags                                                        |
 | `* * *`  | beginner user                                             | edit a tag name                                                                            | make old tag names clearer or less verbose                                            |
 | `* * *`  | experienced user                                          | delete tags (not the users)                                                                | keep the tag system tidy                                                              |
-| `* * *`  | regular user                                              | remove outdated tags from a contact                                                        | ensure the information remains current                                                |
+| `* * *`  | experienced user                                          | view all tags associated with a person                                                     | understand their profile at a glance                                                  |
+| `* * *`  | regular user who has not used tags                        | edit tags of existing contacts                                                             | trial-and-error this feature to get started                                           |
+| `* * *`  | regular user                                              | assign multiple tags to a contact at once                                                  | capture all relevant categories                                                       |
 |   `*`    | experienced user                                          | bulk-filter by multiple tags                                                               | narrow down groups (e.g., Company A + Exco)                                           |
 |  `* *`   | beginner user                                             | filter contacts by a single tag                                                            | see everyone in that category                                                         |
-| `* * *`  | experienced user                                          | view all tags associated with a contact                                                    | understand their profile at a glance                                                  |
-| `* * *`  | regular user                                              | assign multiple tags to a contact at once                                                  | capture all relevant categories                                                       |
-| `* * *`  | regular user who has not used tags                        | edit tags of existing contacts                                                             | trial-and-error this feature to get started                                           |
 |   `*`    | beginner user                                             | insert multiple data in one network                                                        | avoid inserting every relationship individually from a single person                  |
 |  `* *`   | user who has many friends and acquaintances               | click through the GUI graphs                                                               | explore the relationships of myself and others                                        |
 |   `*`    | forgetful user                                            | read a simple tag on the relationship entry                                                | readily search through the network and understand the relationships clearly           |
@@ -310,121 +309,82 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |  `* *`   | person who does not have a lot of time                    | edit a reminder                                                                            | to correct mistakes                                                                   |
 |  `* *`   | person who cannot manage a large network                  | delete reminders for people                                                                | forget about them                                                                     |
 |  `* *`   | user                                                      | export my contacts to an external drive                                                    | transfer them to another device                                                       |
-| `* * *`  | person with connections                                   | import my contacts                                                                         | avoid re-entering the contact information again                                       |
+|  `* *`   | person with connections                                   | import my contacts                                                                         | avoid re-entering the contact information again                                       |
 |   `*`    | user                                                      | choose the contacts I want to export                                                       | avoid exporting irrelevant/outdated contacts                                          |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `NetWise` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `NetWise` and the **Actor** is the `user`, unless specified otherwise)
 
-[comment]: RELATIONSHIP
+[comment]: PERSONS
 
-#### UC30 - Search Through Relationships of the Contacts
+#### UC10 - Add Person
 
-**MSS**
-1. **User** inputs the contact whose relationships are to be searched.
-2. **System** outputs contacts related to the search contact.
+**Goal:** Add a person
 
-**Extensions**
-* **1a. System detects that the contact does not exist.**
-    * **1a1.** **System** informs the user that the contact does not exist.
+**Preconditions:** None
 
-      Use case ends.
-
-#### UC31 - Add Relationships Between Contacts
-
-**MSS**
-1. **User** inputs the contacts for which to add a relationship.
-2. **System** informs that the relationship has been added.
-
-Use case ends.
-
-**Extensions**
-* **1a. System detects that one or more contacts does not exist.**
-    * **1a1.** **System** informs the user that the contact does not exist.
-
-      Use case ends.
-
-* **1b. System detects that the command format is wrong.**
-    * **1b1.** **System** informs the user about the correct format for the use case.
-
-      Use case ends.
-
-#### UC32 - Delete Relationships Between Contacts
-
-**MSS**
-1. **User** inputs the command to delete the relationship between two contacts.
-2. **System** informs that the relationship has been deleted.
-
-Use case ends.
-
-**Extensions**
-* **1a. System detects that one or more contacts does not exist.**
-    * **1a1.** **System** informs the user that the contact does not exist.
-
-      Use case ends.
-
-* **1b. System detects that there is no relationship between those two contacts.**
-    * **1b1.** **System** informs the user that the relationship does not exist.
-
-      Use case ends.
-
-* **1c. System detects that the command format is wrong.**
-    * **1c1.** **System** informs the user about the correct format for the use case.
-
-      Use case ends.
-
-[comment]: CONTACT
-
-#### UC10 - List Contacts
-
-**MSS**
-
-1. **User** issues the command to list contacts.
-2. **System** validates the command.
-3. **System** reads the contact storage/data.
-4. If contacts exist, **System** displays each contact in order of ID.
-5. If no contacts exist, **System** informs the user that the contact list is empty.
-
-**Extensions**
-
-- **4a. System detects an error while retrieving contacts.**
-  - **4a1.** **System** displays an error message and offers options: retry or cancel.
-  - **4a2.** **User** chooses to retry.
-  - **4a3.** **System** attempts to retrieve contacts again.
-
-    Steps 4a1–4a3 repeat until retrieval succeeds or user cancels.
-    If retrieval succeeds, use case resumes at step 4.
-    If user cancels, use case ends.
-
-#### UC11 - Add Contact
+**Postconditions:** If success, a person is added into the list.
 
 MSS
 
 1. **User** selects the text input.
-2. **User** inputs the command and details to add a new contact.
-3. **System** informs the user that the contact has been added and its details.
+2. **User** inputs the command and details to add a new person.
+3. **System** validates the command.
+4. **System** informs the user that the person has been added and its details.
 
 Use case ends.
 
 **Extensions**
 
 - **2a. System detects an error in the entered command.**
-  - 2a1. **System** informs the user of the correct way to add a reminder.
+  - 2a1. **System** informs the user of the correct way to add the necessary fields.
     Use case ends.
 
-- **2b. System detects a very similar contact has already existed.**
+- **2b. (TO BE IMPLEMENTED) System detects a very similar contact has already existed.**
   - **2b1.** **System** warns the user about the potential duplicate.
-  - **2b2.** **User** presses Enter again to ignore the warning.
-    Use can continues to step 3.
+  - **2b2.** **User** presses Enter again to ignore the warning. User can continue to step 3.
 
-#### UC12 - Edit Contact
+#### UC11 - List Persons
+
+**Goal:** View all persons in the list.
+
+**Preconditions:** None.
+
+**Postconditions:** None (read-only).
+
+**MSS**
+
+1. **User** issues the command to list contacts.
+2. **System** reads the contact storage/data.
+3. If contacts exist, **System** displays each contact along with their index.
+4. If no contacts exist, **System** informs the user that the contact list is empty.
+
+**Extensions**
+
+- **4a. System detects an error while retrieving contacts.**
+    - **4a1.** **System** displays an error message and offers options: retry or cancel.
+    - **4a2.** **User** chooses to retry.
+    - **4a3.** **System** attempts to retrieve contacts again.
+
+      Steps **4a1–4a3** repeat until retrieval succeeds or user cancels.
+      If retrieval succeeds, use case resumes at step 4.
+      If user cancels, use case ends.
+
+#### UC12 - Edit Person
+
+**Goal:** Edit a person's info in the list.
+
+**Preconditions:** There exists one or more persons in the list.
+
+**Postconditions:** If success, the fields of the person edited will be updated correctly and accordingly.
 
 MSS
 
 1. **User** selects the text input.
-2. **User** inputs the command and details to edit an existing contact.
-3. **System** informs the user that the contact has been edited and its updated details.
+2. **User** inputs the command and details to edit an existing person.
+3. **System** validates the command.
+4. **System** informs the user that the person has been edited and its updated details.
 
 Use case ends.
 
@@ -434,25 +394,28 @@ Use case ends.
   - **2a1.** **System** informs the user of the correct way to edit a contact.
     Use case ends.
 
-- **2b. System detects a very similar reminder has already existed.**
-  - **2b1.** **System** warns the user about the potential duplicate.
-  - **2b2.** **User** presses Enter again to ignore the warning.
-    Use case ends.
+- **2b. No updatable fields are provided (only index).**
+  - **2b1.** **System** informs the user that no updatable fields were provided.
 
-- **2c. The provided ID does not correspond to any existing contacts.**
+- **2c. The provided index does not correspond to any existing contacts.**
   - **2c1.** **System** informs the user about the error.
     Use case ends.
 
 #### UC13 - Delete Contact
 
+**Goal:** Delete a person from the list.
+
+**Preconditions:** There exists one or more persons in the list.
+
+**Postconditions:** If success, the person can no longer be found in the list, and everybody with index below them will be pushed up by 1.
+
 MSS
 
-1. **User** issues the command and ID to delete a contact.
-2. **System** validates the command and provided ID.
-3. **System** looks up the contact by the provided ID.
-4. **System** requests confirmation to delete the contact and displays the contact details.
-5. **User** confirms the deletion.
-6. **System** deletes the contact from storage and returns a success message.
+1. **User** selects the text input.
+2. **User** inputs the command and index to delete a contact.
+3. **System** validates the command and provided index.
+4. **System** looks up the person by the provided index.
+5. **System** deletes the person from storage and returns a success message.
 
 Use case ends.
 
@@ -468,11 +431,25 @@ Use case ends.
 
     Use case ends.
 
+#### UC14 - Clear Person List
 
+**Goal:** Clear the person list.
+
+**Preconditions:** None. (You can clear an empty list)
+
+**Postconditions:** If success, there should be no person left in the list.
+
+1. **User** selects the text input.
+2. **System** deletes all the people in the list and returns a success message
+
+- **2a. User enters an incorrect or unsupported command format.**
+    - **2a1.** **System** informs the user the command is invalid and shows the correct command format.
+
+      Use case ends.
 
 [comment]: TAGS
 
-#### UC21 - List Tags (System: System)
+#### UC21 - List Tags
 
 **Goal:** view all tag groups
 
@@ -493,7 +470,7 @@ Use case ends.
 
       Use case ends.
 
-#### UC22 - Create Tag (Global) (System: System)
+#### UC22 - Create Tag
 
 **Goal:** create a new tag group
 
@@ -516,15 +493,15 @@ Use case ends.
 
       Use case resumes at step 2.
 * **2a. Command format invalid or required Name is missing.**
-    * **2a1.** **System** returns the correct command format.
+    * **2a1.** **System** informs the user of the correct command format.
 
       Use case ends.
-* **3a. A tag with the same name already exists.**
+* **\[PROPOSED\] 3a. A tag with the same name already exists.**
     * **3a1.** **System** informs the user about the error.
 
       Use case ends.
 
-#### UC23 - Update Tag (Global) (System: System)
+#### UC23 - Update Tag (Global)
 
 **Goal:** update an existing tag’s attributes
 
@@ -555,7 +532,7 @@ Use case ends.
 
       Use case ends.
 
-#### UC24 - Delete Tag (Global) (System: System)
+#### UC24 - Delete Tag (Global)
 
 **Goal:** delete an existing tag group
 
@@ -574,24 +551,79 @@ Use case ends.
 
 **Extensions**
 * **2a. User does not specify ID or uses an invalid command.**
-    * **2a1.** **System** returns the correct usage.
+    * **2a1.** **System** informs the user about the correct usage.
 
       Use case ends.
 * **3a. Tag ID is invalid / not found.**
     * **3a1.** **System** informs the user about the invalid ID.
 
       Use case ends.
-* **4a. (Optional) System offers an undo option after deletion.**
+* **\[PROPOSED\] 4a. System offers an undo option after deletion.**
     * **4a1.** **User** selects "undo".
     * **4a2.** **System** restores the deleted tag if possible.
 
       Use case ends.
 
+[comment]: RELATIONSHIP
 
+#### \[PROPOSED\] UC30 - Search Through Relationships of the Contacts
+
+**MSS**
+1. **User** inputs the contact whose relationships are to be searched.
+2. **System** outputs contacts related to the search contact.
+
+**Extensions**
+* **1a. System detects that the contact does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+#### \[PROPOSED\] UC31 - Add Relationships Between Contacts
+
+**MSS**
+1. **User** inputs the contacts for which to add a relationship.
+2. **System** informs that the relationship has been added.
+
+Use case ends.
+
+**Extensions**
+* **1a. System detects that one or more contacts does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+* **1b. System detects that the command format is wrong.**
+    * **1b1.** **System** informs the user about the correct format for the use case.
+
+      Use case ends.
+
+#### \[PROPOSED\] UC32 - Delete Relationships Between Contacts
+
+**MSS**
+1. **User** inputs the command to delete the relationship between two contacts.
+2. **System** informs that the relationship has been deleted.
+
+Use case ends.
+
+**Extensions**
+* **1a. System detects that one or more contacts does not exist.**
+    * **1a1.** **System** informs the user that the contact does not exist.
+
+      Use case ends.
+
+* **1b. System detects that there is no relationship between those two contacts.**
+    * **1b1.** **System** informs the user that the relationship does not exist.
+
+      Use case ends.
+
+* **1c. System detects that the command format is wrong.**
+    * **1c1.** **System** informs the user about the correct format for the use case.
+
+      Use case ends.
 
 [comment]: REMINDER
 
-#### UC40 - Remind
+#### \[PROPOSED\] UC40 - Remind
 
 **MSS**
 1. **User** enters the application.
@@ -606,7 +638,7 @@ Use case ends.
 
         Use case ends.
 
-#### UC41 - View Reminders
+#### \[PROPOSED\] UC41 - View Reminders
 
 **MSS**
 1. **User** selects the text input.
@@ -621,7 +653,7 @@ Use case ends.
     
         Use case ends.
 
-#### UC42 - Add Reminder
+#### \[PROPOSED\] UC42 - Add Reminder
 
 **MSS**
 1. **User** selects the text input.
@@ -642,7 +674,7 @@ Use case ends.
         
         Use case ends.
 
-#### UC43 - Edit Reminder
+#### \[PROPOSED\] UC43 - Edit Reminder
 
 **MSS**
 1. **User** selects the text input.
@@ -668,7 +700,7 @@ Use case ends.
 
         Use case ends.
 
-#### UC44 - Delete Reminder
+#### \[PROPOSED\] UC44 - Delete Reminder
 
 **MSS**
 1. **User** selects the text input.
@@ -695,7 +727,7 @@ Use case ends.
 
 [comment]: SAVE&LOAD
 
-#### UC50 - Export Contacts
+#### \[PROPOSED\] UC50 - Export Contacts
 
 **MSS**
 1. **User** chooses to export contacts.
@@ -703,7 +735,7 @@ Use case ends.
 
 Use case ends.
 
-#### UC51 - Import Contacts
+#### \[PROPOSED\] UC51 - Import Contacts
 
 **MSS**
 1. **User** chooses to import contacts.
@@ -730,16 +762,15 @@ Use case ends.
 2. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3. Everything should be accessible in the command line interface.
 4. Most if not all features should be accessible using buttons if more convenient as well.
-5. User with above average typing speed for regular English text (i.e. not code, not system admin commands) should
-   be able to accomplish most of the tasks faster using commands than using the mouse.
-6. Not too big in terms of file size, 50MB maximum excluding all the data stored.
-7. Every user interaction should have <100ms response time.
-8. Data should be kept locally and accessed only by the user.
-9. Data stored should remain consistent unless the file is edited directly by the user.
+5. Not too big in terms of file size, 50MB maximum excluding all the data stored.
+6. Every user interaction should have <100ms response time.
+7. Data should be kept locally and accessed only by the user.
+8. Data stored should remain consistent unless the file is edited directly by the user.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Relationship**: Refers to a connection between two persons in the contacts list. From one person you can see all the other people in the contact that they are connected to.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -754,42 +785,283 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. **Initial launch**
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the Java Archive file and copy it into an empty folder.
+    2. Double-click the Java Archive file.  
+       **Expected:** The application shows the Graphical User Interface with a set of sample contacts. The window size may not be optimal.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+2. **Saving window preferences**
 
-1. Saving window preferences
+    1. Resize the window to an optimal size. Move the window to a different location. Close the window.
+    2. Re-launch the application by double-clicking the Java Archive file.  
+       **Expected:** The most recent window size and location are retained.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+3. **Launch from command line (alternative to double-click)**
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+    1. Open a terminal (Command Prompt on Windows, Terminal on macOS or Linux).
+    2. Navigate to the folder containing the Java Archive file.
+    3. Run `java -jar <YourAppName>.jar`.  
+       **Expected:** The application launches and shows the same Graphical User Interface as a normal double-click launch.
 
-1. _{ more test cases …​ }_
+4. **First launch with an existing data file**
 
-### Deleting a person
+    1. Place a valid data file (for example, `addressbook.json`) with a few known contacts in the same folder as the Java Archive file (or at the documented default data location, if different).
+    2. Launch the application.  
+       **Expected:** The application loads and displays the contacts from the existing data file. Window size and position follow the current preferences.
 
-1. Deleting a person while all persons are being shown
+5. **Launch with a missing data file**
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Ensure there is **no** data file in the expected location (delete or rename it temporarily).
+    2. Launch the application.  
+       **Expected:** The application starts with an empty contact list (or sample data, depending on your product decision). A new data file is created at the expected location upon exit.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+6. **Launch with a corrupted data file**
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Open the data file in a text editor and deliberately corrupt it (for example, delete a closing brace or insert random text).
+    2. Launch the application.  
+       **Expected:** The application does **not** crash. It shows an error message indicating the data file is invalid and starts with an empty contact list (or a safe fallback such as sample data). The user can continue using the application normally. A valid file will be written on the next successful save or exit.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+7. **Launch with a read-only data file**
 
-1. _{ more test cases …​ }_
+    1. Make the data file read-only using your operating system’s file permissions.
+    2. Launch the application, then attempt any action that would save data (for example, adding a contact), and exit.
+    3. Re-launch the application.  
+       **Expected:** On the first run, the application either warns that it cannot write the file or continues without persisting the change. After re-launch, the change made earlier is **not** present (because the data file was read-only).
 
-### Saving data
+8. **Graceful shutdown via menu**
 
-1. Dealing with missing/corrupted data files
+    1. Launch the application.
+    2. Use the application’s menu (for example, `File → Exit`) to close it.  
+       **Expected:** The window closes cleanly. Window size and position are saved. Any valid in-memory changes since the last save are persisted according to the product’s save policy.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+9. **Graceful shutdown via keyboard shortcut**
 
-1. _{ more test cases …​ }_
+    1. Launch the application.
+    2. Use the operating system shortcut to close the window (for example, `Alt + F4` on Windows, `Command + Q` on macOS, `Control + Q` on some Linux desktops).  
+       **Expected:** Same as a menu-based exit: the application shuts down cleanly and window preferences are saved.
+
+---
+
+### Viewing help : `help`
+
+1. **Test case:** `help`  
+   **Expected:** A help window or panel appears describing how to access the full help page. Status message indicates help is shown.
+
+2. **Test case:** `help 123`  
+   **Expected:** Same as above. Extraneous parameters are ignored.
+
+3. **Other test cases to try:** `help     ` (extra spaces), `   help` (leading spaces)  
+   **Expected:** Same as above.
+
+---
+
+### Adding a person : `add`
+
+1. **Prerequisite:** Ensure the application is launched. You may start from a clean state using `clear`.
+
+2. **Test case:**  
+   `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`  
+   **Expected:** New person card appears at the end of the list. Status message shows that the person was added with the supplied details. Data is saved to disk automatically.
+
+3. **Test case (with multiple tags and note):**  
+   `add n/Betsy Crowe p/12345678 e/betsycrowe@example.com a/Newgate Prison t/1 t/2 r/She owed me lunch`  
+   **Expected:** Person is added with tag identifiers 1 and 2, and the given note. Status message confirms addition.
+
+4. **Test case (missing required field):**  
+   `add p/98765432 e/jane@example.com a/Somewhere`  
+   **Expected:** No person is added. Error message indicates that `n/NAME` is required and shows correct usage.
+
+5. **Other test cases to try:** invalid email (`e/notanemail`), invalid phone (non-digits), extremely long address, duplicate person details (if duplicate detection is implemented later).  
+   **Expected:** Appropriate validation errors or acceptance per your product decision.
+
+---
+
+### Listing all persons : `list`
+
+1. **Test case:** `list`  
+   **Expected:** Full person list is shown. Indices refresh to match the currently displayed list.
+
+2. **Test case after a `find` result:**  
+   Run `find John` then `list`.  
+   **Expected:** List switches from the filtered results back to all persons.
+
+3. **Other test cases to try:** `list 123` (extraneous parameters).  
+   **Expected:** Same as `list`. Extraneous parameters are ignored.
+
+---
+
+### Editing a person : `edit`
+
+1. **Prerequisite:** Ensure there are at least two persons in the current displayed list. Use `add` if necessary.
+
+2. **Test case (edit multiple fields):**  
+   `edit 1 p/91234567 e/johndoe@example.com`  
+   **Expected:** The first person’s phone and email fields are updated. Status message shows the updated fields.
+
+3. **Test case (clear all tags):**  
+   `edit 2 t/`  
+   **Expected:** The second person’s tags are removed. Status message confirms tags are cleared.
+
+4. **Test case (no updatable fields provided):**  
+   `edit 1`  
+   **Expected:** No change. Error message states that at least one editable field must be provided.
+
+5. **Other test cases to try:** index out of range (`edit 999 ...`), invalid email or phone formats, editing a person while viewing a filtered list (indices refer to the filtered list).  
+   **Expected:** Proper error handling and correct index interpretation against the currently displayed list.
+
+---
+
+### Locating persons by name : `find`
+
+1. **Prerequisite:** Ensure the list has multiple persons with varied names.
+
+2. **Test case (single keyword):**  
+   `find John`  
+   **Expected:** Shows persons whose names contain the word “John” (case-insensitive). Indices refer to this filtered list.
+
+3. **Test case (multiple keywords, order irrelevant):**  
+   `find alex david`  
+   **Expected:** Shows persons whose names contain “alex” or “david” (case-insensitive, full word match). Matches “Alex Yeoh” and “David Li”.
+
+4. **Test case (no match):**  
+   `find Zyxwv`  
+   **Expected:** Empty list with a message indicating zero persons found.
+
+5. **Other test cases to try:** mixed casing (`find hAnS`), partial word (`find Han` should not match “Hans”), leading or trailing spaces.  
+   **Expected:** Behaves per specification (case-insensitive, full-word, name-only search).
+
+---
+
+### Clearing all person entries : `clear`
+
+1. **Test case:** `clear`  
+   **Expected:** All persons are removed. Status message confirms that the address book is cleared. The data file on disk reflects an empty person list after the automatic save.
+
+2. **Test case with extraneous parameters:** `clear now`  
+   **Expected:** Same as `clear`. Extraneous parameters are ignored.
+
+3. **Other test cases to try:** run `clear` when the list is already empty.  
+   **Expected:** No error; confirmation message indicates there are no persons (or that clearing was successful with no entries).
+
+---
+
+### Adding a tag : `addtag`
+
+1. **Prerequisite:** Ensure the application is launched. You may use `listtag` first to see existing tags.
+
+2. **Test case (name only):**  
+   `addtag n/JC`  
+   **Expected:** New tag is created with default description “No Description” and default gray color. Status message shows the new tag’s unique identifier and details.
+
+3. **Test case (name with description and color):**  
+   `addtag n/coworkers d/Office teammates c/23f1cd`  
+   **Expected:** New tag is created with the given description and the color with hexadecimal digits `23f1cd`. Status message confirms.
+
+4. **Test case (invalid color format):**  
+   `addtag n/friends c/#123456` or `addtag n/friends c/12345G`  
+   **Expected:** No tag is created. Error message states that the color must be six hexadecimal digits without the hash symbol.
+
+5. **Other test cases to try:** duplicate tag name (if disallowed, expect a duplicate-name error), very long names or descriptions.  
+   **Expected:** Appropriate validation or acceptance per product decision.
+
+---
+
+### Listing all tags : `listtag`
+
+1. **Test case:** `listtag`  
+   **Expected:** Displays all tags with each tag’s unique identifier and name. Order is not guaranteed.
+
+2. **Test case when there are no tags:**  
+   If tags have been cleared or none exist, run `listtag`.  
+   **Expected:** Shows an empty-state message.
+
+3. **Other test cases to try:** `listtag extra` (extraneous parameters).  
+   **Expected:** Same as `listtag`. Extraneous parameters are ignored.
+
+---
+
+### Editing a tag : `edittag`
+
+1. **Prerequisite:** Ensure at least one tag exists (create with `addtag` and confirm with `listtag` to obtain the tag identifier).
+
+2. **Test case (change description and color):**  
+   `edittag 1 d/my extended family c/099fca`  
+   **Expected:** Tag with identifier 1 is updated. Status message shows new description and color.
+
+3. **Test case (rename and reset description and color to defaults):**  
+   `edittag 2 n/Prof d/ c/`  
+   **Expected:** Tag with identifier 2 is renamed to “Prof”; description and color are reset to their default values. Status message confirms.
+
+4. **Test case (missing identifier):**  
+   `edittag n/NewName`  
+   **Expected:** No change. Error message indicates that an identifier is required and shows the correct command format.
+
+5. **Other test cases to try:** invalid identifier (`edittag 999 ...`), no updatable fields provided (`edittag 1`), invalid color format.  
+   **Expected:** Proper error messages; no changes applied.
+
+---
+
+### Deleting a tag : `deletetag`
+
+1. **Prerequisite:** Ensure the target tag exists and note its identifier using `listtag`.
+
+2. **Test case:**  
+   `deletetag 2`  
+   **Expected:** Tag with identifier 2 is removed from the tag list. Persons that previously referenced this tag now no longer show that tag. Status message confirms deletion.
+
+3. **Test case (invalid identifier):**  
+   `deletetag 999`  
+   **Expected:** No tag is deleted. Error message indicates the identifier is invalid.
+
+4. **Other test cases to try:** `deletetag` (missing identifier), deleting a tag that is currently shown in the user interface, deleting tags used by many persons to confirm performance and correctness.  
+   **Expected:** Appropriate error handling or success confirmation.
+
+---
+
+### Exiting the program : `exit`
+
+1. **Test case:** `exit`  
+   **Expected:** Application closes gracefully. The most recent window size and position are saved. Any pending saves are flushed to disk.
+
+2. **Test case with extraneous parameters:** `exit now`  
+   **Expected:** Same as `exit`. Extraneous parameters are ignored.
+
+3. **Other test cases to try:** exit immediately after adding or editing to confirm that automatic saving occurs before shutdown.  
+   **Expected:** On next launch, the latest changes are present.
+
+---
+
+### Saving the data
+
+1. **Prerequisite:** Ensure the application is launched with a writable data directory.
+
+2. **Test case (automatic save on mutation):**  
+   Run an adding command, for example:  
+   `add n/Save Test p/80000000 e/savetest@example.com a/Somewhere`  
+   Then close and re-open the application.  
+   **Expected:** The newly added person persists across launches; the data file on disk has been updated.
+
+3. **Test case (non-mutating commands do not trigger changes):**  
+   Run `list`, `help`, and `find Zzz` and then exit.  
+   **Expected:** No unintended changes in the data file contents.
+
+4. **Other test cases to try:** perform multiple edits in succession, then force-quit versus graceful exit to compare persistence behavior as per your product’s save policy.  
+   **Expected:** Data persists according to the documented policy.
+
+---
+
+### Editing the data file
+
+1. **Prerequisite:** Locate the data file at `[JAR file location]/data/addressbook.json`. Make a backup copy.
+
+2. **Test case (manual, valid edit):**  
+   Open the file in a text editor and change a non-critical field (for example, update a person’s address to a new string without breaking the JavaScript Object Notation structure). Save and relaunch the application.  
+   **Expected:** The changed value appears in the application. No errors shown.
+
+3. **Test case (manual, invalid edit):**  
+   Corrupt the JavaScript Object Notation (for example, remove a comma or a closing brace). Save and relaunch the application.  
+   **Expected:** The application does not crash. It shows an error indicating the data file is invalid and falls back to a safe state (empty data or sample data per your product decision). Subsequent valid operations will recreate a valid file.
+
+4. **Other test cases to try:** set the data file to read-only and attempt a mutating command; edit tag objects directly and confirm that identifiers and references remain consistent.  
+   **Expected:** Appropriate warnings or non-persistence when writes are blocked; consistent behavior for tag references.
