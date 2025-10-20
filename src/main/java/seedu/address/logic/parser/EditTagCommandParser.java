@@ -28,7 +28,7 @@ public class EditTagCommandParser implements Parser<EditTagCommand> {
 
         int id;
         try {
-            id = Integer.parseInt(preamble);
+            id = ParserUtil.parseId(preamble);
         } catch (NumberFormatException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE));
         }
