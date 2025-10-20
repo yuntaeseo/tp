@@ -87,6 +87,18 @@ public class Person {
     }
 
     /**
+     * Returns true if a given string is a valid Person ID.
+     */
+    public static boolean isValidPersonId(String test) {
+        try {
+            int i = Integer.parseInt(test);
+            return i > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -115,8 +127,7 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return id == otherPerson.id
-                && name.equals(otherPerson.name)
+        return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
