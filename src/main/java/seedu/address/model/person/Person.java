@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.id.Id;
 
 /**
  * Represents a Person in the address book.
@@ -22,13 +23,13 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Integer> tags = new HashSet<>();
+    private final Set<Id> tags = new HashSet<>();
     private final Note note;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Integer> tags, Note note) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Id> tags, Note note) {
         requireAllNonNull(name, phone, email, address, tags, note);
         this.name = name;
         this.phone = phone;
@@ -58,7 +59,7 @@ public class Person {
      * Returns an immutable set of tag IDs, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Integer> getTags() {
+    public Set<Id> getTags() {
         return Collections.unmodifiableSet(tags);
     }
 

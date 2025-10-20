@@ -12,15 +12,15 @@ import seedu.address.model.tag.Tag;
  */
 public class TypicalTags {
     public static final Tag FRIENDS = new TagBuilder()
-            .withId(0).withName("friends").withDesc("close people").withColor("AABBCC").build();
+            .withId(1).withName("friends").withDesc("close people").withColor("AABBCC").build();
     public static final Tag ACQUAINTANCES = new TagBuilder()
-            .withId(1).withName("acquaintances").withDesc("not close people").withColor("BBCCDD").build();
+            .withId(2).withName("acquaintances").withDesc("not close people").withColor("BBCCDD").build();
     public static final Tag COWORKERS = new TagBuilder()
-            .withId(2).withName("coworkers").withDesc("definitely not close people").withColor("CCDDEE").build();
+            .withId(3).withName("coworkers").withDesc("definitely not close people").withColor("CCDDEE").build();
     public static final Tag CLASSMATES = new TagBuilder()
-            .withId(3).withName("classmates").withDesc("close close people").withColor("DDEEFF").build();
+            .withId(4).withName("classmates").withDesc("close close people").withColor("DDEEFF").build();
     public static final Tag EX_GIRLFRIEND = new TagBuilder()
-            .withId(4).withName("ex girlfriends").withDesc("not getting back").withColor("112233").build();
+            .withId(5).withName("ex girlfriends").withDesc("not getting back").withColor("112233").build();
 
     private TypicalTags() {} // prevents instantiation
 

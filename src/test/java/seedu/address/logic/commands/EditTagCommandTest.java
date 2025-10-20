@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.id.Id;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
@@ -34,9 +35,9 @@ public class EditTagCommandTest {
 
     @BeforeEach
     public void setup() {
-        tag1 = new Tag(1, new TagName("Friends"), new TagDesc("Schoolmates"), new TagColor("0000FF"));
-        tag2 = new Tag(2, new TagName("Work"), new TagDesc("Office mates"), new TagColor("0000FF"));
-        tag3 = new Tag(3, new TagName("Family"), new TagDesc("Close relatives"), new TagColor("0000FF"));
+        tag1 = new Tag(new Id(1), new TagName("Friends"), new TagDesc("Schoolmates"), new TagColor("0000FF"));
+        tag2 = new Tag(new Id(2), new TagName("Work"), new TagDesc("Office mates"), new TagColor("0000FF"));
+        tag3 = new Tag(new Id(3), new TagName("Family"), new TagDesc("Close relatives"), new TagColor("0000FF"));
         modelStub = new ModelStubWithTags(List.of(tag1, tag2, tag3));
     }
 
@@ -47,7 +48,7 @@ public class EditTagCommandTest {
         TagColor newColor = new TagColor("00FF00");
 
         EditTagCommand editCommand = new EditTagCommand(1, newName, newDesc, newColor);
-        Tag expectedEdited = new Tag(1, newName, newDesc, newColor);
+        Tag expectedEdited = new Tag(new Id(1), newName, newDesc, newColor);
 
         String expectedMessage = String.format("Edited Tag: %s", expectedEdited);
 
@@ -60,7 +61,7 @@ public class EditTagCommandTest {
         TagDesc newDesc = new TagDesc("Gaming friends only");
 
         EditTagCommand editCommand = new EditTagCommand(1, null, newDesc, null);
-        Tag expectedEdited = new Tag(1, tag1.getName(), newDesc, tag1.getColor());
+        Tag expectedEdited = new Tag(new Id(1), tag1.getName(), newDesc, tag1.getColor());
 
         String expectedMessage = String.format(EditTagCommand.MESSAGE_EDIT_SUCCESS, expectedEdited);
 

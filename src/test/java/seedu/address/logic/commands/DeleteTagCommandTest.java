@@ -15,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.id.Id;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
@@ -34,9 +35,9 @@ public class DeleteTagCommandTest {
 
     @BeforeEach
     public void setup() {
-        tag1 = new Tag(1, new TagName("Friends"), new TagDesc("Schoolmates"), new TagColor("0000FF"));
-        tag2 = new Tag(2, new TagName("Work"), new TagDesc("Office mates"), new TagColor("0000FF"));
-        tag3 = new Tag(3, new TagName("Family"), new TagDesc("Close relatives"), new TagColor("0000FF"));
+        tag1 = new Tag(new Id(1), new TagName("Friends"), new TagDesc("Schoolmates"), new TagColor("0000FF"));
+        tag2 = new Tag(new Id(2), new TagName("Work"), new TagDesc("Office mates"), new TagColor("0000FF"));
+        tag3 = new Tag(new Id(3), new TagName("Family"), new TagDesc("Close relatives"), new TagColor("0000FF"));
         modelStub = new ModelStubWithTags(List.of(tag1, tag2, tag3));
     }
 

@@ -5,19 +5,17 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.id.Id;
+import seedu.address.model.id.IdManager;
 
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
+    private static final IdManager idManager = new IdManager();
 
-    public static final String ID_MESSAGE_CONSTRAINTS = "Tags ids must be positive integers";
-
-    /** Keep track of the largest tag ID in the application. */
-    private static int largestId = 0;
-
-    private final int id;
+    private final Id id;
     private final TagName name;
     private final TagDesc desc;
     private final TagColor color;
@@ -26,10 +24,11 @@ public class Tag {
      * Constructs a {@code Tag}.
      *
      * Every fields must be present and not null.
+     * Only use this constructor when Id is guaranteed to be unique.
      */
-    public Tag(int id, TagName name, TagDesc desc, TagColor color) {
+    public Tag(Id id, TagName name, TagDesc desc, TagColor color) {
         requireAllNonNull(id, name, desc, color);
-        largestId = Math.max(largestId, id);
+        idManager.setLargest(id);
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -37,14 +36,14 @@ public class Tag {
     }
 
     /**
-     * Constructs a {@code Tag}, without needing to provide an ID.
-     * The ID will automatically be deduced from {@code largestId}.
+     * Constructs a {@code Tag}, without needing to provide an id.
+     * The id will automatically be deduced from {@code largestId}.
      */
     public Tag(TagName name, TagDesc desc, TagColor color) {
-        this(largestId + 1, name, desc, color);
+        this(idManager.getNewId(), name, desc, color);
     }
 
-    public int getId() {
+    public Id getId() {
         return id;
     }
 
@@ -58,18 +57,6 @@ public class Tag {
 
     public TagColor getColor() {
         return color;
-    }
-
-    /**
-     * Returns true if a given string is a valid tag ID.
-     */
-    public static boolean isValidTagId(String test) {
-        try {
-            Integer i = Integer.parseInt(test);
-            return i > 0;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 
     /**
