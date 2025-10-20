@@ -24,7 +24,7 @@ public class TagCard extends UiPart<Region> {
     /**
      * Creates a {@code TagCard} with the given {@code Tag} and index to display.
      */
-    public TagCard(Tag tag, int displayedIndex) {
+    public TagCard(Tag tag) {
         super(FXML);
         this.tag = tag;
 
