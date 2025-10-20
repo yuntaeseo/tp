@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_1;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.testutil.TestUtil.getFirstPersonId;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -136,7 +137,7 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(invalidId, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_ID);
+        assertCommandFailure(editCommand, model, MESSAGE_PERSON_NOT_FOUND);
     }
 
     /**
@@ -154,7 +155,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(idOutOfBoundsPerson,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_ID);
+        assertCommandFailure(editCommand, model, MESSAGE_PERSON_NOT_FOUND);
     }
 
     @Test

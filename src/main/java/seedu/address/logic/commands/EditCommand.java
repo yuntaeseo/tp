@@ -76,7 +76,7 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.stream()
                 .filter(person -> person.getId() == idToEdit)
                 .findFirst()
-                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_ID));
+                .orElseThrow(() -> new CommandException(MESSAGE_PERSON_NOT_FOUND));
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
