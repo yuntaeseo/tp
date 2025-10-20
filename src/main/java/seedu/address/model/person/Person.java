@@ -15,7 +15,13 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Person {
 
+    public static final String ID_MESSAGE_CONSTRAINTS = "Person ids must be positive integers";
+
+    /** Keeps track of the largest Person ID in the application. */
+    private static int largestId = 0;
+
     // Identity fields
+    private final int id;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -28,14 +34,28 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Integer> tags, Note note) {
-        requireAllNonNull(name, phone, email, address, tags, note);
+    public Person(int id, Name name, Phone phone, Email email, Address address, Set<Integer> tags, Note note) {
+        requireAllNonNull(id, name, phone, email, address, tags, note);
+        largestId = Math.max(largestId, id);
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.note = note;
+    }
+
+    /**
+     * Constructs a {@code Person}, without needing to provide an ID.
+     * The ID will automatically be deduced from {@code largestId}.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Integer> tags, Note note) {
+        this(largestId + 1, name, phone, email, address, tags, note);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Name getName() {
@@ -95,7 +115,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
+        return id == otherPerson.id
+                && name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
@@ -106,12 +127,13 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, note);
+        return Objects.hash(id, name, phone, email, address, tags, note);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("id", id)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
