@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.testutil.TestUtil.getFirstPersonId;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -49,7 +50,7 @@ public class DeleteCommandTest {
                 .reduce(getFirstPersonId(model), (maxId, p) -> Math.max(maxId, p.getId()), Math::max) + 1;
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundId);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_ID);
+        assertCommandFailure(deleteCommand, model, MESSAGE_PERSON_NOT_FOUND);
     }
 
     @Test
@@ -80,7 +81,7 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(idOutOfBoundPerson);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_ID);
+        assertCommandFailure(deleteCommand, model, MESSAGE_PERSON_NOT_FOUND);
     }
 
     @Test

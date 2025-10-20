@@ -23,6 +23,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "No person found with the specified ID.";
 
     private final int idToDelete;
 
@@ -38,7 +39,7 @@ public class DeleteCommand extends Command {
         Person personToDelete = lastShownList.stream()
                 .filter(p -> p.getId() == idToDelete)
                 .findFirst()
-                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_ID));
+                .orElseThrow(() -> new CommandException(MESSAGE_PERSON_NOT_FOUND));
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
