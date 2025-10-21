@@ -88,7 +88,7 @@ public class UniqueRelationshipListTest {
     }
 
     @Test
-    public void setRelationship_editedRelationshipHasNonUniquieIdentity_throwsDuplicateRelationshipException() {
+    public void setRelationship_editedRelationshipHasNonUniqueIdentity_throwsDuplicateRelationshipException() {
         uniqueRelationshipList.add(ONE_TWO);
         uniqueRelationshipList.add(TWO_THREE);
         assertThrows(DuplicateRelationshipException.class, () ->
@@ -120,7 +120,7 @@ public class UniqueRelationshipListTest {
     }
 
     @Test
-    public void setRelationships_uniqueRelationshipList_replacesownListWithProvidedUniqueRelationshipList() {
+    public void setRelationships_uniqueRelationshipList_replacesOwnListWithProvidedUniqueRelationshipList() {
         uniqueRelationshipList.add(ONE_TWO);
         UniqueRelationshipList expectedList = new UniqueRelationshipList();
         expectedList.add(TWO_THREE);

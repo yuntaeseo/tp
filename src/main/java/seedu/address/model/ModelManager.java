@@ -202,7 +202,7 @@ public class ModelManager implements Model {
     @Override
     public void addRelationship(Relationship relationship) {
         addressBook.addRelationship(relationship);
-        updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
+        updateFilteredRelationshipList(PREDICATE_SHOW_ALL_RELATIONSHIPS);
     }
 
     @Override

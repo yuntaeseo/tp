@@ -9,7 +9,7 @@ import seedu.address.model.description.Description;
 import seedu.address.model.id.Id;
 
 /**
- * Represent a 1-to-1 relationship between two Person in the address book.
+ * Represents a 1-to-1 relationship between two Person in the address book.
  */
 public class Relationship {
     /** First participant */

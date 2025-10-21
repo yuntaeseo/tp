@@ -36,8 +36,8 @@ public class JsonAdaptedRelationshipTest {
     @Test
     public void toModelType_nullPart1_throwsIllegalValueException() {
         JsonAdaptedRelationship rel = new JsonAdaptedRelationship(null, VALID_PART2, VALID_DESC);
-        String expectedMesage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMesage, rel::toModelType);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, rel::toModelType);
     }
 
     @Test
@@ -50,8 +50,8 @@ public class JsonAdaptedRelationshipTest {
     @Test
     public void toModelType_nullPart2_throwsIllegalValueException() {
         JsonAdaptedRelationship rel = new JsonAdaptedRelationship(VALID_PART1, null, VALID_DESC);
-        String expectedMesage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMesage, rel::toModelType);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, rel::toModelType);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class JsonAdaptedRelationshipTest {
     @Test
     public void toModelType_nullDesc_throwsIllegalValueException() {
         JsonAdaptedRelationship rel = new JsonAdaptedRelationship(VALID_PART1, VALID_PART2, null);
-        String expectedMesage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMesage, rel::toModelType);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, rel::toModelType);
     }
 }

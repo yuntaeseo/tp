@@ -14,7 +14,7 @@ public class Id {
     public final Integer value;
 
     /**
-     * Constructs a {@Code Id}
+     * Constructs a {@code Id}
      *
      * @param id A valid id.
      */
@@ -25,7 +25,7 @@ public class Id {
     }
 
     /**
-     * Constructs a {@Code Id}
+     * Constructs a {@code Id}
      *
      * @param id A valid id.
      */

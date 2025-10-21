@@ -37,7 +37,7 @@ public class Tag {
 
     /**
      * Constructs a {@code Tag}, without needing to provide an id.
-     * The id will automatically be deduced from {@code largestId}.
+     * The unique Id will be automatically generated using {@code IdManager}.
      */
     public Tag(TagName name, TagDesc desc, TagColor color) {
         this(idManager.getNewId(), name, desc, color);

@@ -19,7 +19,7 @@ class JsonAdaptedRelationship {
     private final String desc;
 
     /**
-     * Consturcts a {@code JsonAdaptedRelationship} with the given details.
+     * Constructs a {@code JsonAdaptedRelationship} with the given details.
      */
     @JsonCreator
     public JsonAdaptedRelationship(@JsonProperty("part1") Integer part1, @JsonProperty("part2") Integer part2,
@@ -41,7 +41,7 @@ class JsonAdaptedRelationship {
     /**
      * Converts this Jackson-friendly adapted relationship object into the model's {@code Relationship} object.
      *
-     * @throw IllegalValueException if there were any data constraints violated in the adapted relationship.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted relationship.
      */
     public Relationship toModelType() throws IllegalValueException {
         if (part1 == null) {
