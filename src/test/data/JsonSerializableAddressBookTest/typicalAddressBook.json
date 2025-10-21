@@ -50,30 +50,53 @@
     "tags" : [ ],
     "note" : ""
   } ],
-    "tags": [{
-      "id": 1,
-      "name": "friends",
-      "desc": "Not so close friends",
-      "color": "33FE54"
-    }, {
-      "id": 2,
-      "name": "colleagues",
-      "desc": "Enemies",
-      "color": "FFFE32"
-    }, {
-      "id": 3,
-      "name": "neighbours",
-      "desc": "Good people",
-      "color": "33FEDC"
-    }, {
-      "id": 4,
-      "name": "family",
-      "desc": "Love",
-      "color": "FF32FE"
-    }, {
-      "id": 5,
-      "name": "ex girlfriend",
-      "desc": "Still have chance",
-      "color": "FF3333"
-    }]
+
+  "tags": [{
+    "id": 1,
+    "name": "friends",
+    "desc": "close people",
+    "color": "AABBCC"
+  }, {
+    "id": 2,
+    "name": "acquaintances",
+    "desc": "not close people",
+    "color": "BBCCDD"
+  }, {
+    "id": 3,
+    "name": "coworkers",
+    "desc": "definitely not close people",
+    "color": "CCDDEE"
+  }, {
+    "id": 4,
+    "name": "classmates",
+    "desc": "close close people",
+    "color": "DDEEFF"
+  }, {
+    "id": 5,
+    "name": "ex girlfriends",
+    "desc": "not getting back",
+    "color": "112233"
+  }],
+
+  "relationships": [{
+    "part1": 1,
+    "part2": 2,
+    "desc": "friends"
+  }, {
+    "part1": 2,
+    "part2": 3,
+    "desc": "not friends"
+  }, {
+    "part1": 3,
+    "part2": 4,
+    "desc": "bestie"
+  }, {
+    "part1": 1,
+    "part2": 3,
+    "desc": "enemies"
+  }, {
+    "part1": 1,
+    "part2": 4,
+    "desc": "family"
+  }]
 }

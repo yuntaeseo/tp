@@ -13,13 +13,13 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.id.Id;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
+import seedu.address.testutil.ModelStub;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -134,119 +134,6 @@ public class DeleteTagCommandTest {
             }
             ModelStubWithTags that = (ModelStubWithTags) other;
             return this.tags.equals(that.tags);
-        }
-    }
-
-    /**
-     * Default Model stub (all methods fail unless overridden).
-     */
-    private static class ModelStub implements Model {
-
-        @Override
-        public void setUserPrefs(seedu.address.model.ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public seedu.address.model.ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public seedu.address.commons.core.GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setGuiSettings(seedu.address.commons.core.GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public java.nio.file.Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBookFilePath(java.nio.file.Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBook(seedu.address.model.ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public seedu.address.model.ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addPerson(seedu.address.model.person.Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(seedu.address.model.person.Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(seedu.address.model.person.Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setPerson(seedu.address.model.person.Person target,
-                              seedu.address.model.person.Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public javafx.collections.ObservableList<seedu.address.model.person.Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(
-                java.util.function.Predicate<seedu.address.model.person.Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public javafx.collections.ObservableList<seedu.address.model.tag.Tag> getFilteredTagList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public javafx.collections.ObservableList<seedu.address.model.tag.Tag> getTagList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredTagList(java.util.function.Predicate<seedu.address.model.tag.Tag> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasTag(seedu.address.model.tag.Tag tag) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addTag(seedu.address.model.tag.Tag tag) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteTag(seedu.address.model.tag.Tag tag) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setTag(seedu.address.model.tag.Tag target, seedu.address.model.tag.Tag editedTag) {
-            throw new AssertionError("This method should not be called.");
         }
     }
 }

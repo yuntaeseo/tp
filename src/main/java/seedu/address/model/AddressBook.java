@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.relationship.Relationship;
+import seedu.address.model.relationship.UniqueRelationshipList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -19,6 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueTagList tags;
+    private final UniqueRelationshipList relationships;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         tags = new UniqueTagList();
+        relationships = new UniqueRelationshipList();
     }
 
     public AddressBook() {}
@@ -50,6 +54,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setTags(newData.getTagList());
+        setRelationships(newData.getRelationshipList());
     }
 
 
@@ -144,12 +149,61 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
 
+
+    //  NOTE: RELATIONSHIPS
+
+    /**
+     * Replaces the contents of the relationship list with {@code relationships}.
+     * {@code relationships} must not contain duplicate relationships.
+     */
+    public void setRelationships(List<Relationship> relationships) {
+        this.relationships.setRelationships(relationships);
+    }
+
+    /**
+     * Returns true if a relationship with the same identity as {@code relationship} exists in the address book.
+     */
+    public boolean hasRelationship(Relationship relationship) {
+        requireNonNull(relationship);
+        return relationships.contains(relationship);
+    }
+
+    /**
+     * Adds a relationship into the address book.
+     * The relationship must not already exist in the address book.
+     */
+    public void addRelationship(Relationship relationship) {
+        relationships.add(relationship);
+    }
+
+    /**
+     * Replaces the given relationship {@code target} in the list with {@code editedRelationship}.
+     * {@code target} must exist in the address book.
+     * The identity of {@code editedRelationship} must not be the same as another existing
+     * relationship in the address book.
+     */
+    public void setRelationship(Relationship target, Relationship editedRelationship) {
+        relationships.setRelationship(target, editedRelationship);
+    }
+
+    /**
+     * Removes {@code relationship} from this {@code AddressBook}.
+     * {@code relationship} must exist in the address book.
+     */
+    public void removeRelationship(Relationship relationship) {
+        relationships.remove(relationship);
+    }
+
+
+
     //  NOTE: UTILS
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("tags", tags)
+                .add("relationships", relationships)
                 .toString();
     }
 
@@ -164,6 +218,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Relationship> getRelationshipList() {
+        return relationships.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -175,7 +234,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons)
+            && tags.equals(otherAddressBook.tags)
+            && relationships.equals(otherAddressBook.relationships);
     }
 
     @Override

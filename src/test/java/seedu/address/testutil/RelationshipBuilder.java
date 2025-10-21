@@ -8,20 +8,20 @@ import seedu.address.model.relationship.Relationship;
  * A utility class to help with building Relationship objects.
  */
 public class RelationshipBuilder {
-    public static final Integer DEFAULT_FROM = 2;
-    public static final Integer DEFAULT_TO = 1;
+    public static final Integer DEFAULT_PART1 = 1;
+    public static final Integer DEFAULT_PART2 = 2;
     public static final String DEFAULT_DESC = "minh made this";
 
-    private Id from;
-    private Id to;
+    private Id part1;
+    private Id part2;
     private Description desc;
 
     /**
      * Creates a {@code RelationshipBuilder} with the default details.
      */
     public RelationshipBuilder() {
-        from = new Id(DEFAULT_FROM);
-        to = new Id(DEFAULT_TO);
+        part1 = new Id(DEFAULT_PART1);
+        part2 = new Id(DEFAULT_PART2);
         desc = new Description(DEFAULT_DESC);
     }
 
@@ -29,24 +29,24 @@ public class RelationshipBuilder {
      * Initializes the RelationshipBuilder with the data of {@code copy}.
      */
     public RelationshipBuilder(Relationship copy) {
-        from = copy.getFrom();
-        to = copy.getTo();
+        part1 = copy.getPart1();
+        part2 = copy.getPart2();
         desc = copy.getDescription();
     }
 
     /**
-     * Sets the {@code from} of the {@code Relationship} that we are building.
+     * Sets the {@code part1} of the {@code Relationship} that we are building.
      */
-    public RelationshipBuilder withFrom(Integer from) {
-        this.from = new Id(from);
+    public RelationshipBuilder withPart1(Integer part1) {
+        this.part1 = new Id(part1);
         return this;
     }
 
     /**
-     * Sets the {@code to} of the {@code Relationship} that we are building.
+     * Sets the {@code part2} of the {@code Relationship} that we are building.
      */
-    public RelationshipBuilder withTo(Integer to) {
-        this.to = new Id(to);
+    public RelationshipBuilder withPart2(Integer part2) {
+        this.part2 = new Id(part2);
         return this;
     }
 
@@ -62,6 +62,6 @@ public class RelationshipBuilder {
      * Create the {@code Relationship} with the given data.
      */
     public Relationship build() {
-        return new Relationship(from, to, desc);
+        return new Relationship(part1, part2, desc);
     }
 }

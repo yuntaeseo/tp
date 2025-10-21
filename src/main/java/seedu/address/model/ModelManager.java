@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.relationship.Relationship;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Tag> filteredTags;
+    private final FilteredList<Relationship> filteredRelationships;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,13 +39,16 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
+        filteredRelationships = new FilteredList<>(this.addressBook.getRelationshipList());
     }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+
+
+    //  NOTE: USER PREFERENCES
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -78,7 +83,9 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+
+
+    //  NOTE: ADDRESS BOOK
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -88,6 +95,21 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+
+
+    //  NOTE: PERSON
+
+    @Override
+    public ObservableList<Person> getFilteredPersonList() {
+        return filteredPersons;
+    }
+
+    @Override
+    public void updateFilteredPersonList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(predicate);
     }
 
     @Override
@@ -114,23 +136,25 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
-    }
+
+    //  NOTE: TAGS
 
     @Override
     public ObservableList<Tag> getFilteredTagList() {
         return filteredTags;
     }
 
-    // =========== TAG METHODS ===============================================================================
+    @Override
+    public void updateFilteredTagList(Predicate<Tag> predicate) {
+        requireNonNull(predicate);
+        filteredTags.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Tag> getTagList() {
+        return addressBook.getTagList();
+    }
 
     @Override
     public boolean hasTag(Tag tag) {
@@ -154,22 +178,44 @@ public class ModelManager implements Model {
         addressBook.setTag(target, editedTag);
     }
 
+
+
+    //  NOTE: RELATIONSHIPS
+
     @Override
-    public ObservableList<Tag> getTagList() {
-        return addressBook.getTagList();
+    public ObservableList<Relationship> getFilteredRelationshipList() {
+        return filteredRelationships;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredRelationshipList(Predicate<Relationship> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredRelationships.setPredicate(predicate);
     }
 
     @Override
-    public void updateFilteredTagList(Predicate<Tag> predicate) {
-        requireNonNull(predicate);
-        filteredTags.setPredicate(predicate);
+    public boolean hasRelationship(Relationship relationship) {
+        requireNonNull(relationship);
+        return addressBook.hasRelationship(relationship);
     }
+
+    @Override
+    public void addRelationship(Relationship relationship) {
+        addressBook.addRelationship(relationship);
+        updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
+    }
+
+    @Override
+    public void deleteRelationship(Relationship relationship) {
+        addressBook.removeRelationship(relationship);
+    }
+
+    @Override
+    public void setRelationship(Relationship target, Relationship editedRelationship) {
+        addressBook.setRelationship(target, editedRelationship);
+    }
+
+
 
     @Override
     public boolean equals(Object other) {
@@ -182,11 +228,12 @@ public class ModelManager implements Model {
             return false;
         }
 
-        ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredTags.equals(otherModelManager.filteredTags);
+        ModelManager otherManager = (ModelManager) other;
+        return addressBook.equals(otherManager.addressBook)
+                && userPrefs.equals(otherManager.userPrefs)
+                && filteredPersons.equals(otherManager.filteredPersons)
+                && filteredTags.equals(otherManager.filteredTags)
+                && filteredRelationships.equals(otherManager.filteredRelationships);
     }
 
 }

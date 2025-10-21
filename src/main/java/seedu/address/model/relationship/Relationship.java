@@ -12,8 +12,10 @@ import seedu.address.model.id.Id;
  * Represent a 1-to-1 relationship between two Person in the address book.
  */
 public class Relationship {
-    private final Id from;
-    private final Id to;
+    /** First participant */
+    private final Id part1;
+    /** Second participant */
+    private final Id part2;
     private final Description desc;
 
     /**
@@ -21,19 +23,19 @@ public class Relationship {
      *
      * Every fields must be present and not null.
      */
-    public Relationship(Id from, Id to, Description desc) {
-        requireAllNonNull(to, from, desc);
-        this.from = from;
-        this.to = to;
+    public Relationship(Id part1, Id part2, Description desc) {
+        requireAllNonNull(part1, part2, desc);
+        this.part1 = part1;
+        this.part2 = part2;
         this.desc = desc;
     }
 
-    public Id getTo() {
-        return to;
+    public Id getPart1() {
+        return part1;
     }
 
-    public Id getFrom() {
-        return from;
+    public Id getPart2() {
+        return part2;
     }
 
     public Description getDescription() {
@@ -41,15 +43,20 @@ public class Relationship {
     }
 
     /**
-     * Returns true if both relationships have the same 'to' and 'from' ids.
-     * This defines a weaker notion of equality between two tags.
+     * Returns true if both relationships have the same pair of participants.
+     * This defines a weaker notion of equality between two relationships.
      */
     public boolean isSameRelationship(Relationship other) {
         if (other == this) {
             return true;
         }
 
-        return other != null && this.from == other.from && this.to == other.to;
+        if (other == null) {
+            return false;
+        }
+
+        return (this.part1.equals(other.part1) && this.part2.equals(other.part2))
+            || (this.part1.equals(other.part2) && this.part2.equals(other.part1));
     }
 
     @Override
@@ -65,14 +72,14 @@ public class Relationship {
 
         Relationship otherRelationship = (Relationship) other;
 
-        return this.from == otherRelationship.from
-                && this.to == otherRelationship.to
-                && this.desc == otherRelationship.desc;
+        return this.part1.equals(otherRelationship.part1)
+                && this.part2.equals(otherRelationship.part2)
+                && this.desc.equals(otherRelationship.desc);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from, to, desc);
+        return Objects.hash(part1, part2, desc);
     }
 
     /**
@@ -80,6 +87,6 @@ public class Relationship {
      */
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("from", from).add("to", to).add("description", desc).toString();
+        return new ToStringBuilder(this).add("part1", part1).add("part2", part2).add("description", desc).toString();
     }
 }

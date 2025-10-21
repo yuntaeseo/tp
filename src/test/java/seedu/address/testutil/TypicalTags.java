@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,17 +22,6 @@ public class TypicalTags {
             .withId(5).withName("ex girlfriends").withDesc("not getting back").withColor("112233").build();
 
     private TypicalTags() {} // prevents instantiation
-
-    /**
-     * Returns an {@code AddressBook} with all the typical tags.
-     */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Tag tag : getTypicalTags()) {
-            ab.addTag(tag);
-        }
-        return ab;
-    }
 
     public static List<Tag> getTypicalTags() {
         return new ArrayList<>(Arrays.asList(FRIENDS, ACQUAINTANCES, COWORKERS, CLASSMATES, EX_GIRLFRIEND));

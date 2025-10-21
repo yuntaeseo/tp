@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalRelationships.ONE;
-import static seedu.address.testutil.TypicalRelationships.TWO;
+import static seedu.address.testutil.TypicalRelationships.ONE_TWO;
+import static seedu.address.testutil.TypicalRelationships.TWO_THREE;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,63 +20,73 @@ public class RelationshipTest {
     @Test
     public void isSameRelationship() {
         // same object -> returns true
-        assertTrue(ONE.isSameRelationship(ONE));
+        assertTrue(ONE_TWO.isSameRelationship(ONE_TWO));
 
         // null -> returns false
-        assertFalse(ONE.isSameRelationship(null));
+        assertFalse(ONE_TWO.isSameRelationship(null));
 
-        // same to and from, all other attributes different -> returns true
-        Relationship editedRelationship = new RelationshipBuilder(ONE).withDesc("unexpected").build();
-        assertTrue(ONE.isSameRelationship(editedRelationship));
+        // same part1 and part2, all other attributes different -> returns true
+        Relationship editedRelationship = new RelationshipBuilder(ONE_TWO).withDesc("unexpected").build();
+        assertTrue(ONE_TWO.isSameRelationship(editedRelationship));
 
-        // different to, all other attributes same -> returns false
-        editedRelationship = new RelationshipBuilder(ONE).withTo(1000).build();
-        assertFalse(ONE.isSameRelationship(editedRelationship));
+        // same but reversed part1 and part2, all other attributes same -> returns true
+        editedRelationship = new RelationshipBuilder(ONE_TWO).withPart1(ONE_TWO.getPart2().value)
+            .withPart2(ONE_TWO.getPart1().value).build();
+        assertTrue(ONE_TWO.isSameRelationship(editedRelationship));
 
-        // different from, all other attributes same -> returns false
-        editedRelationship = new RelationshipBuilder(ONE).withFrom(30474).build();
-        assertFalse(ONE.isSameRelationship(editedRelationship));
+        // same but reversed part1 and part2, all other attributes different -> returns true
+        editedRelationship = new RelationshipBuilder().withPart1(ONE_TWO.getPart2().value)
+            .withPart2(ONE_TWO.getPart1().value).withDesc("unexpected").build();
+        assertTrue(ONE_TWO.isSameRelationship(editedRelationship));
 
-        // different to and from, all other attributes same -> returns false
-        editedRelationship = new RelationshipBuilder(ONE).withTo(103845).withFrom(2459).build();
-        assertFalse(ONE.isSameRelationship(editedRelationship));
+        // different part1, all other attributes same -> returns false
+        editedRelationship = new RelationshipBuilder(ONE_TWO).withPart1(30474).build();
+        assertFalse(ONE_TWO.isSameRelationship(editedRelationship));
+
+        // different part2, all other attributes same -> returns false
+        editedRelationship = new RelationshipBuilder(ONE_TWO).withPart2(1000).build();
+        assertFalse(ONE_TWO.isSameRelationship(editedRelationship));
+
+        // different part1 and part2, all other attributes same -> returns false
+        editedRelationship = new RelationshipBuilder(ONE_TWO).withPart2(103845).withPart1(2459).build();
+        assertFalse(ONE_TWO.isSameRelationship(editedRelationship));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Relationship oneCopy = new RelationshipBuilder(ONE).build();
-        assertTrue(ONE.equals(oneCopy));
+        Relationship oneCopy = new RelationshipBuilder(ONE_TWO).build();
+        assertTrue(ONE_TWO.equals(oneCopy));
 
         // same object -> returns true
-        assertTrue(ONE.equals(ONE));
+        assertTrue(ONE_TWO.equals(ONE_TWO));
 
         // null -> returns false
-        assertFalse(ONE.equals(null));
+        assertFalse(ONE_TWO.equals(null));
 
         // different type -> returns false
-        assertFalse(ONE.equals(0.5f));
+        assertFalse(ONE_TWO.equals(0.5f));
 
-        // different tag -> returns false
-        assertFalse(ONE.equals(TWO));
+        // different relationship -> returns false
+        assertFalse(ONE_TWO.equals(TWO_THREE));
 
-        // different to -> returns false
-        Relationship editedRelationship = new RelationshipBuilder(ONE).withTo(100).build();
-        assertFalse(ONE.equals(editedRelationship));
+        // different part1 -> returns false
+        Relationship editedRelationship = new RelationshipBuilder(ONE_TWO).withPart1(10000).build();
+        assertFalse(ONE_TWO.equals(editedRelationship));
 
-        // different from -> returns false
-        editedRelationship = new RelationshipBuilder(ONE).withFrom(10000).build();
-        assertFalse(ONE.equals(editedRelationship));
+        // different part2 -> returns false
+        editedRelationship = new RelationshipBuilder(ONE_TWO).withPart2(100).build();
+        assertFalse(ONE_TWO.equals(editedRelationship));
 
         // different desc -> returns false
-        editedRelationship = new RelationshipBuilder(ONE).withDesc("unexpected").build();
-        assertFalse(ONE.equals(editedRelationship));
+        editedRelationship = new RelationshipBuilder(ONE_TWO).withDesc("unexpected").build();
+        assertFalse(ONE_TWO.equals(editedRelationship));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = Relationship.class.getCanonicalName() + "{from=" + ONE.getFrom() + ", to=" + ONE.getTo()
-                + ", description=" + ONE.getDescription() + "}";
-        assertEquals(expected, ONE.toString());
+        String expected = Relationship.class.getCanonicalName() + "{part1=" + ONE_TWO.getPart1() + ", part2="
+            + ONE_TWO.getPart2() + ", description=" + ONE_TWO.getDescription() + "}";
+        assertEquals(expected, ONE_TWO.toString());
     }
 }

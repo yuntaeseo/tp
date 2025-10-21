@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.description.Description;
 import seedu.address.model.id.Id;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -13,6 +14,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.relationship.Relationship;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
@@ -55,14 +57,31 @@ public class SampleDataUtil {
         };
     }
 
+    public static Relationship[] getSampleRelationships() {
+        return new Relationship[] {
+            new Relationship(new Id(1), new Id(2), new Description("friends from childhood")),
+            new Relationship(new Id(2), new Id(3), new Description("classmates from primary school")),
+            new Relationship(new Id(3), new Id(4), new Description("coworkers from Apple")),
+            new Relationship(new Id(1), new Id(3), new Description("aunt Minh's family")),
+            new Relationship(new Id(1), new Id(4), new Description("ex girlfriend")),
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
+
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+
         for (Tag tag : getSampleTags()) {
             sampleAb.addTag(tag);
         }
+
+        for (Relationship relationship : getSampleRelationships()) {
+            sampleAb.addRelationship(relationship);
+        }
+
         return sampleAb;
     }
 
