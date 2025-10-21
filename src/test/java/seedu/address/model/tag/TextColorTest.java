@@ -71,6 +71,14 @@ public class TextColorTest {
     }
 
     @Test
+    public void testToString() {
+        assertEquals(new TextColor("FFFFFF").toString(), new TextColor("ffffff").toString());
+        assertEquals(new TextColor("FFFFFF").toString(), new TextColor("FFFFFF").toString());
+        assertEquals(new TextColor("123123").toString(), new TextColor("123123").toString());
+        assertEquals(new TextColor("ABC123").toString(), new TextColor("AbC123").toString());
+    }
+
+    @Test
     public void equals() {
         TextColor textColor = new TextColor("121212");
 
