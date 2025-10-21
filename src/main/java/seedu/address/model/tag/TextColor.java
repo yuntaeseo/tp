@@ -18,6 +18,11 @@ public class TextColor {
 
     public final String value;
 
+    /**
+     * Constructs a {@code TextColor}.
+     *
+     * @param value a valid RGB value.
+     */
     public TextColor(String value) {
         requireNonNull(value);
         checkArgument(isValidTextColor(value), MESSAGE_CONSTRAINTS);
