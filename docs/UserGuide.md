@@ -103,7 +103,7 @@ Format: `edit ID [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_ID]…​ [r/NO
 
 * Edits the person with the specified `ID`.
 * The ID refers to the **unique ID** each person is given when created, can be seen with [`list`](#listing-all-tags--listtag).
-* The id **must be a positive integer** 1, 2, 3, …​
+* The ID **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed, i.e adding of tags is not cumulative.
@@ -248,8 +248,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 |-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add person**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [r/NOTE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague r/owes me lunch` |
 | **Clear person list** | `clear`                                                                                                                                                                                        |
-| **Delete person**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                            |
-| **Edit person**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                           |
+| **Delete person**     | `delete ID`<br> e.g., `delete 3`                                                                                                                                                               |
+| **Edit person**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                              |
 | **Find person**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                     |
 | **List person**       | `list`                                                                                                                                                                                         |
 | **Add tag**           | `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `addtag n/JC d/JC friends c/23f1cd`                                                                                                    |
