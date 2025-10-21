@@ -96,6 +96,7 @@ public class Tag {
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("id", id)

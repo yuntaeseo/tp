@@ -47,8 +47,8 @@ public class TagTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Tag aliceCopy = new TagBuilder(FRIENDS).build();
-        assertTrue(FRIENDS.equals(aliceCopy));
+        Tag friendsCopy = new TagBuilder(FRIENDS).build();
+        assertTrue(FRIENDS.equals(friendsCopy));
 
         // same object -> returns true
         assertTrue(FRIENDS.equals(FRIENDS));
