@@ -5,8 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import seedu.address.commons.util.ColorUtil;
 
-import java.util.stream.Collectors;
-
 /**
  * Represents a text's color in RGB format.
  */
