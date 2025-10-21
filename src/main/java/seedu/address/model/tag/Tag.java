@@ -23,7 +23,7 @@ public class Tag {
     /**
      * Constructs a {@code Tag}.
      *
-     * Every fields must be present and not null.
+     * Every field must be present and not null.
      * Only use this constructor when Id is guaranteed to be unique.
      */
     public Tag(Id id, TagName name, TagDesc desc, TagColor color) {
