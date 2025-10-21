@@ -25,7 +25,7 @@ public class Tag {
     /**
      * Constructs a {@code Tag}.
      *
-     * Every fields must be present and not null.
+     * Every field must be present and not null.
      */
     public Tag(int id, TagName name, TagDesc desc, TagColor color) {
         requireAllNonNull(id, name, desc, color);
