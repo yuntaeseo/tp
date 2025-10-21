@@ -1,10 +1,13 @@
 package seedu.address.model.tag;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.util.ColorUtil;
 
 public class TextColorTest {
     @Test
@@ -35,6 +38,36 @@ public class TextColorTest {
         assertTrue(TextColor.isValidTextColor("FFF")); // 3 characters, white
         assertTrue(TextColor.isValidTextColor("ABCABC")); // 6 characters
         assertTrue(TextColor.isValidTextColor("AB12B7")); // mix
+    }
+
+    @Test
+    public void fromTagColor_darkTagColor_returnsWhiteText() {
+        final TagColor black = new TagColor("000");
+        final TagColor darkRed = new TagColor("210403");
+        final TagColor darkBlue = new TagColor("040359");
+        final TagColor olive = new TagColor("3c3d01");
+        final TagColor darkGreen = new TagColor("01360b");
+
+        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(black).value);
+        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(darkRed).value);
+        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(darkBlue).value);
+        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(olive).value);
+        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(darkGreen).value);
+    }
+
+    @Test
+    public void fromTagColor_lightTagColor_returnsBlackText() {
+        final TagColor white = new TagColor("fff");
+        final TagColor lightGreen = new TagColor("05fc34");
+        final TagColor brightYellow = new TagColor("f7f71e");
+        final TagColor lightBlue = new TagColor("3afcfc");
+        final TagColor brightPink = new TagColor("ff85fb");
+
+        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(white).value);
+        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(lightGreen).value);
+        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(brightYellow).value);
+        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(lightBlue).value);
+        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(brightPink).value);
     }
 
     @Test

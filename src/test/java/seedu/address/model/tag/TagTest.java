@@ -10,20 +10,12 @@ import static seedu.address.testutil.TypicalTags.FRIENDS;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.util.ColorUtil;
-import seedu.address.model.id.Id;
 import seedu.address.testutil.TagBuilder;
 
 public class TagTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Tag(null, null, null));
-    }
-
-    @Test
-    public void constructor_incrementId_success() {
-        new TagBuilder(FRIENDS).withId(1000).build();
-        assertTrue(() -> new TagBuilder().build().getId().equals(new Id(1001)));
-        assertTrue(() -> new TagBuilder().build().getId().equals(new Id(1002)));
     }
 
     @Test

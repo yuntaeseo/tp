@@ -1,5 +1,7 @@
 package seedu.address.commons.util;
 
+import java.util.stream.Collectors;
+
 /**
  * Provides utility functions related to colors.
  */
@@ -17,6 +19,21 @@ public class ColorUtil {
     private static final double LUMINANCE_THRESHOLD = 0.18;
 
     /**
+     * Sets RGB string to 6 digits.
+     * @param color RGB string of length 3 or 6.
+     * @return normalized RGB string.
+     */
+    public static String normalizeRgb(String color) {
+        if (color.length() == 6) {
+            return color;
+        } else {
+            return color.chars()
+                    .mapToObj(c -> String.valueOf((char) c) + String.valueOf((char) c))
+                    .collect(Collectors.joining());
+        }
+    }
+
+    /**
      * Returns the text color based on the given {@code backgroundColor}.
      *
      * @param backgroundColor in RGB hex string format.
@@ -27,10 +44,11 @@ public class ColorUtil {
          * Formula taken from:
          * https://stackoverflow.com/questions/596216/formula-to-determine-perceived-brightness-of-rgb-color
          */
+        String normalized = normalizeRgb(backgroundColor);
 
-        int red = getRedChannel(backgroundColor);
-        int green = getGreenChannel(backgroundColor);
-        int blue = getBlueChannel(backgroundColor);
+        int red = getRedChannel(normalized);
+        int green = getGreenChannel(normalized);
+        int blue = getBlueChannel(normalized);
 
         double redLinear = sRgbToLinear(red);
         double greenLinear = sRgbToLinear(green);
