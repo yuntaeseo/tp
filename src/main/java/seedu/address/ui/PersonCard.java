@@ -56,7 +56,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         person.getTags().stream().forEach(id -> {
-            FilteredList<Tag> list = tagList.filtered(tag -> tag.getId() == id);
+            FilteredList<Tag> list = tagList.filtered(tag -> tag.getId().equals(id));
             if (list.size() == 0) {
                 return;
             }

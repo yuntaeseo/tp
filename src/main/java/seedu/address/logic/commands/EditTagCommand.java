@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.id.Id;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
@@ -50,11 +51,11 @@ public class EditTagCommand extends Command {
 
         ObservableList<Tag> tags = model.getFilteredTagList();
         Tag target = tags.stream()
-                .filter(tag -> tag.getId() == idToEdit)
+                .filter(tag -> tag.getId().equals(new Id(idToEdit)))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(MESSAGE_TAG_NOT_FOUND));
 
-        Tag edited = new Tag(idToEdit,
+        Tag edited = new Tag(new Id(idToEdit),
                 newName != null ? newName : target.getName(),
                 newDesc != null ? newDesc : target.getDesc(),
                 newColor != null ? newColor : target.getColor());
