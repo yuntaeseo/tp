@@ -47,7 +47,7 @@ public class EditTagCommandTest {
         TagDesc newDesc = new TagDesc("High school buddies");
         TagColor newColor = new TagColor("00FF00");
 
-        EditTagCommand editCommand = new EditTagCommand(1, newName, newDesc, newColor);
+        EditTagCommand editCommand = new EditTagCommand(new Id(1), newName, newDesc, newColor);
         Tag expectedEdited = new Tag(new Id(1), newName, newDesc, newColor);
 
         String expectedMessage = String.format("Edited Tag: %s", expectedEdited);
@@ -60,7 +60,7 @@ public class EditTagCommandTest {
     public void execute_someFieldsSpecified_success() throws Exception {
         TagDesc newDesc = new TagDesc("Gaming friends only");
 
-        EditTagCommand editCommand = new EditTagCommand(1, null, newDesc, null);
+        EditTagCommand editCommand = new EditTagCommand(new Id(1), null, newDesc, null);
         Tag expectedEdited = new Tag(new Id(1), tag1.getName(), newDesc, tag1.getColor());
 
         String expectedMessage = String.format(EditTagCommand.MESSAGE_EDIT_SUCCESS, expectedEdited);
@@ -71,7 +71,7 @@ public class EditTagCommandTest {
 
     @Test
     public void execute_invalidId_throwsCommandException() {
-        EditTagCommand editCommand = new EditTagCommand(99, new TagName("Invalid"), null, null);
+        EditTagCommand editCommand = new EditTagCommand(new Id(99), new TagName("Invalid"), null, null);
 
         java.util.List<Tag> before = List.copyOf(modelStub.getFilteredTagList());
 
@@ -85,7 +85,7 @@ public class EditTagCommandTest {
 
     @Test
     public void execute_noFieldsProvided_throwsCommandException() {
-        EditTagCommand editCommand = new EditTagCommand(1, null, null, null);
+        EditTagCommand editCommand = new EditTagCommand(new Id(1), null, null, null);
 
         java.util.List<Tag> before = List.copyOf(modelStub.getFilteredTagList());
 
@@ -99,7 +99,7 @@ public class EditTagCommandTest {
 
     @Test
     public void execute_duplicateTag_throwsCommandException() {
-        EditTagCommand editCommand = new EditTagCommand(1, new TagName(tag2.getName().value), null, null);
+        EditTagCommand editCommand = new EditTagCommand(new Id(1), new TagName(tag2.getName().value), null, null);
 
         java.util.List<Tag> before = List.copyOf(modelStub.getFilteredTagList());
 
@@ -118,14 +118,14 @@ public class EditTagCommandTest {
         TagDesc desc = new TagDesc("High school buddies");
         TagColor color = new TagColor("00FF00");
 
-        EditTagCommand editFirstCommand = new EditTagCommand(1, name, desc, color);
-        EditTagCommand editSecondCommand = new EditTagCommand(2, name, desc, color);
+        EditTagCommand editFirstCommand = new EditTagCommand(new Id(1), name, desc, color);
+        EditTagCommand editSecondCommand = new EditTagCommand(new Id(2), name, desc, color);
 
         // same object -> true
         assertTrue(editFirstCommand.equals(editFirstCommand));
 
         // same values -> true
-        EditTagCommand copy = new EditTagCommand(1, name, desc, color);
+        EditTagCommand copy = new EditTagCommand(new Id(1), name, desc, color);
         assertTrue(editFirstCommand.equals(copy));
 
         // different types -> false
@@ -144,7 +144,7 @@ public class EditTagCommandTest {
         TagDesc desc = new TagDesc("Old mates");
         TagColor color = new TagColor("00FF00");
 
-        EditTagCommand editCommand = new EditTagCommand(1, name, desc, color);
+        EditTagCommand editCommand = new EditTagCommand(new Id(1), name, desc, color);
         String expected = EditTagCommand.class.getCanonicalName()
                 + "{idToEdit=1, newName=" + name + ", newDesc=" + desc + ", newColor=" + color + "}";
         assertEquals(expected, editCommand.toString());

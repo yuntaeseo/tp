@@ -43,7 +43,7 @@ public class DeleteTagCommandTest {
 
     @Test
     public void execute_validId_success() throws Exception {
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(2);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(new Id(2));
         String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_SUCCESS, tag2);
 
         ModelStubWithTags expectedModel = new ModelStubWithTags(List.of(tag1, tag3));
@@ -53,7 +53,7 @@ public class DeleteTagCommandTest {
 
     @Test
     public void execute_invalidId_throwsCommandException() {
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(99);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(new Id(99));
 
         java.util.List<Tag> before = List.copyOf(modelStub.getFilteredTagList());
 
@@ -67,14 +67,14 @@ public class DeleteTagCommandTest {
 
     @Test
     public void equals() {
-        DeleteTagCommand deleteFirstCommand = new DeleteTagCommand(1);
-        DeleteTagCommand deleteSecondCommand = new DeleteTagCommand(2);
+        DeleteTagCommand deleteFirstCommand = new DeleteTagCommand(new Id(1));
+        DeleteTagCommand deleteSecondCommand = new DeleteTagCommand(new Id(2));
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteTagCommand deleteFirstCommandCopy = new DeleteTagCommand(1);
+        DeleteTagCommand deleteFirstCommandCopy = new DeleteTagCommand(new Id(1));
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -89,7 +89,7 @@ public class DeleteTagCommandTest {
 
     @Test
     public void toStringMethod() {
-        int id = 1;
+        Id id = new Id(1);
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(id);
         String expected = DeleteTagCommand.class.getCanonicalName() + "{idToDelete=" + id + "}";
         assertEquals(expected, deleteTagCommand.toString());

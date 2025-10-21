@@ -55,14 +55,14 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "No person found with the specified ID.";
 
-    private final int idToEdit;
+    private final Id idToEdit;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
      * @param idToEdit id of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(int idToEdit, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Id idToEdit, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(editPersonDescriptor);
 
         this.idToEdit = idToEdit;
@@ -75,7 +75,7 @@ public class EditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         Person personToEdit = lastShownList.stream()
-                .filter(person -> person.getId() == idToEdit)
+                .filter(person -> person.getId().equals(idToEdit))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(MESSAGE_PERSON_NOT_FOUND));
 
@@ -97,7 +97,7 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        int personId = personToEdit.getId();
+        Id personId = personToEdit.getId();
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
@@ -120,7 +120,7 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return idToEdit == otherEditCommand.idToEdit
+        return idToEdit.equals(otherEditCommand.idToEdit)
                 && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
 

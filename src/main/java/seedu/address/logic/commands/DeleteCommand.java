@@ -8,6 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,9 +26,9 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "No person found with the specified ID.";
 
-    private final int idToDelete;
+    private final Id idToDelete;
 
-    public DeleteCommand(int idToDelete) {
+    public DeleteCommand(Id idToDelete) {
         this.idToDelete = idToDelete;
     }
 
@@ -37,7 +38,7 @@ public class DeleteCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         Person personToDelete = lastShownList.stream()
-                .filter(p -> p.getId() == idToDelete)
+                .filter(p -> p.getId().equals(idToDelete))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(MESSAGE_PERSON_NOT_FOUND));
         model.deletePerson(personToDelete);
@@ -56,7 +57,7 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return idToDelete == otherDeleteCommand.idToDelete;
+        return idToDelete.equals(otherDeleteCommand.idToDelete);
     }
 
     @Override

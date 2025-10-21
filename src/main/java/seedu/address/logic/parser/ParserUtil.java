@@ -41,19 +41,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code idString} into an {@code int} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     * @throws ParseException if the specified id is invalid (not non-zero unsigned integer).
-     */
-    public static int parseId(String idString) throws ParseException {
-        String trimmedIndex = idString.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_ID);
-        }
-        return Integer.parseInt(trimmedIndex);
-    }
-
-    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *

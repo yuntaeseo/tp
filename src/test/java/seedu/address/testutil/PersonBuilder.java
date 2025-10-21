@@ -17,14 +17,14 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final int DEFAULT_ID = 1;
+    public static final Id DEFAULT_ID = new Id(1);
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_NOTE = "";
 
-    private int id;
+    private Id id;
     private Name name;
     private Phone phone;
     private Email email;
@@ -61,7 +61,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code id} of the {@code Person} that we are building.
      */
-    public PersonBuilder withId(int id) {
+    public PersonBuilder withId(Id id) {
         this.id = id;
         return this;
     }

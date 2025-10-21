@@ -27,6 +27,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -42,7 +43,7 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        int idFirstPerson = model.getFilteredPersonList().get(0).getId();
+        Id idFirstPerson = model.getFilteredPersonList().get(0).getId();
         EditCommand editCommand = new EditCommand(idFirstPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -57,7 +58,7 @@ public class EditCommandTest {
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
-        int idLastPerson = lastPerson.getId();
+        Id idLastPerson = lastPerson.getId();
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
@@ -77,7 +78,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        int idFirstPerson = getFirstPersonId(model);
+        Id idFirstPerson = getFirstPersonId(model);
         EditCommand editCommand = new EditCommand(idFirstPerson, new EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
@@ -110,7 +111,7 @@ public class EditCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
 
-        int idSecondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()).getId();
+        Id idSecondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()).getId();
         EditCommand editCommand = new EditCommand(idSecondPerson, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
@@ -132,10 +133,10 @@ public class EditCommandTest {
     public void execute_invalidPersonIdUnfilteredList_failure() {
         // Get largest id + 1
         int invalidId = model.getFilteredPersonList().stream()
-                .reduce(getFirstPersonId(model), (maxId, p) -> Math.max(maxId, p.getId()), Math::max)
+                .reduce(getFirstPersonId(model).value, (maxId, p) -> Math.max(maxId, p.getId().value), Math::max)
                 + 1;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(invalidId, descriptor);
+        EditCommand editCommand = new EditCommand(new Id(invalidId), descriptor);
 
         assertCommandFailure(editCommand, model, MESSAGE_PERSON_NOT_FOUND);
     }
@@ -151,7 +152,7 @@ public class EditCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        int idOutOfBoundsPerson = model.getAddressBook().getPersonList().get(outOfBoundIndex.getZeroBased()).getId();
+        Id idOutOfBoundsPerson = model.getAddressBook().getPersonList().get(outOfBoundIndex.getZeroBased()).getId();
         EditCommand editCommand = new EditCommand(idOutOfBoundsPerson,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
@@ -160,7 +161,7 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        int idFirstPerson = getFirstPersonId(model);
+        Id idFirstPerson = getFirstPersonId(model);
         final EditCommand standardCommand = new EditCommand(idFirstPerson, DESC_AMY);
 
         // same values -> returns true
@@ -178,7 +179,7 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        int idSecondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()).getId();
+        Id idSecondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()).getId();
         assertFalse(standardCommand.equals(new EditCommand(idSecondPerson, DESC_AMY)));
 
         // different descriptor -> returns false
@@ -187,7 +188,7 @@ public class EditCommandTest {
 
     @Test
     public void toStringMethod() {
-        int idFirstPerson = getFirstPersonId(model);
+        Id idFirstPerson = getFirstPersonId(model);
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditCommand editCommand = new EditCommand(idFirstPerson, editPersonDescriptor);
         String expected = EditCommand.class.getCanonicalName() + "{id=" + idFirstPerson + ", editPersonDescriptor="

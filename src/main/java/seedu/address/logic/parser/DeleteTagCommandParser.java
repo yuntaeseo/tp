@@ -19,7 +19,7 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
         }
 
-        int id = ParserUtil.parseId(trimmedArgs);
+        Id id = ParserUtil.parseId(trimmedArgs);
         return new DeleteTagCommand(id);
     }
 }

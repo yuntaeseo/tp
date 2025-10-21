@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.model.id.Id;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -21,7 +22,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(1));
+        assertParseSuccess(parser, "1", new DeleteCommand(new Id(1)));
     }
 
     @Test

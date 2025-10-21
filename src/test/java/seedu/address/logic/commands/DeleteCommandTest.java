@@ -19,6 +19,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 
 /**
@@ -46,9 +47,10 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIdUnfilteredList_throwsCommandException() {
         // Get largest id + 1
-        int outOfBoundId = model.getFilteredPersonList().stream()
-                .reduce(getFirstPersonId(model), (maxId, p) -> Math.max(maxId, p.getId()), Math::max) + 1;
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundId);
+        Integer outOfBoundId = model.getFilteredPersonList().stream()
+                .reduce(getFirstPersonId(model).value, (maxId, p) -> Math.max(maxId, p.getId().value), Math::max)
+                + 1;
+        DeleteCommand deleteCommand = new DeleteCommand(new Id(outOfBoundId));
 
         assertCommandFailure(deleteCommand, model, MESSAGE_PERSON_NOT_FOUND);
     }
@@ -77,7 +79,7 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-        int idOutOfBoundPerson = model.getAddressBook().getPersonList().get(outOfBoundIndex.getZeroBased()).getId();
+        Id idOutOfBoundPerson = model.getAddressBook().getPersonList().get(outOfBoundIndex.getZeroBased()).getId();
 
         DeleteCommand deleteCommand = new DeleteCommand(idOutOfBoundPerson);
 
@@ -86,8 +88,8 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        int idFirstPerson = getFirstPersonId(model);
-        int idSecondPerson = model.getFilteredPersonList().get(1).getId();
+        Id idFirstPerson = getFirstPersonId(model);
+        Id idSecondPerson = model.getFilteredPersonList().get(1).getId();
         DeleteCommand deleteFirstCommand = new DeleteCommand(idFirstPerson);
         DeleteCommand deleteSecondCommand = new DeleteCommand(idSecondPerson);
 
@@ -110,7 +112,7 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        int targetId = 1;
+        Id targetId = new Id(1);
         DeleteCommand deleteCommand = new DeleteCommand(targetId);
         String expected = DeleteCommand.class.getCanonicalName() + "{id=" + targetId + "}";
         assertEquals(expected, deleteCommand.toString());
