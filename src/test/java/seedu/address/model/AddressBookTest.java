@@ -26,6 +26,7 @@ import seedu.address.model.relationship.Relationship;
 import seedu.address.model.relationship.exceptions.DuplicateRelationshipException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.exceptions.DuplicateTagException;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.RelationshipBuilder;
 import seedu.address.testutil.TagBuilder;
@@ -48,9 +49,13 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        ReadOnlyAddressBook readOnlyAddressBook = SampleDataUtil.getSampleAddressBook();
+        addressBook.resetData(readOnlyAddressBook);
+        assertEquals(readOnlyAddressBook, addressBook);
+
+        AddressBook ab = getTypicalAddressBook();
+        addressBook.resetData(ab);
+        assertEquals(ab, addressBook);
     }
 
     @Test
@@ -183,6 +188,39 @@ public class AddressBookTest {
     }
 
 
+
+    @Test
+    public void equals() {
+        AddressBook empty = new AddressBook();
+        addressBook.resetData(empty);
+
+        // same values -> return true
+        assertTrue(addressBook.equals(empty));
+
+        // same object -> return true
+        assertTrue(addressBook.equals(addressBook));
+
+        // null -> returns false
+        assertFalse(addressBook.equals(null));
+
+        // different types -> returns false
+        assertFalse(addressBook.equals(0.5f));
+
+        // different person list -> returns false
+        addressBook.addPerson(ALICE);
+        assertFalse(addressBook.equals(empty));
+        addressBook.resetData(empty);
+
+        // different tag list -> returns false
+        addressBook.addTag(FRIENDS);
+        assertFalse(addressBook.equals(empty));
+        addressBook.resetData(empty);
+
+        // different relationship list -> returns false
+        addressBook.addRelationship(ONE_TWO);
+        assertFalse(addressBook.equals(empty));
+        addressBook.resetData(empty);
+    }
 
     @Test
     public void toStringMethod() {

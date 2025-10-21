@@ -22,7 +22,7 @@ class JsonAdaptedRelationship {
      * Consturcts a {@code JsonAdaptedRelationship} with the given details.
      */
     @JsonCreator
-    public JsonAdaptedRelationship(@JsonProperty("from") Integer part1, @JsonProperty("to") Integer part2,
+    public JsonAdaptedRelationship(@JsonProperty("part1") Integer part1, @JsonProperty("part2") Integer part2,
         @JsonProperty("desc") String desc) {
         this.part1 = part1;
         this.part2 = part2;
@@ -65,7 +65,7 @@ class JsonAdaptedRelationship {
                 Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(desc)) {
-            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         final Description modelDescription = new Description(desc);
 

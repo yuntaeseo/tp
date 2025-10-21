@@ -24,7 +24,7 @@ public class JsonAdaptedTagTest {
     private static final String VALID_COLOR = "AABBCC";
 
     @Test
-    public void toModelType_validTagDetauls_returnsTag() throws Exception {
+    public void toModelType_validTagDetails_returnsTag() throws Exception {
         JsonAdaptedTag jsonTag = new JsonAdaptedTag(FRIENDS);
         assertEquals(FRIENDS, jsonTag.toModelType());
     }

@@ -40,6 +40,7 @@ public class IdTest {
         assertFalse(Id.isValidId(" ")); // spaces only
         assertFalse(Id.isValidId("-1")); // negative number
         assertFalse(Id.isValidId("0")); // zero
+        assertFalse(Id.isValidId("10000000000")); // too large
         assertFalse(Id.isValidId("AABBGG")); // contains characters
 
         // valid id
