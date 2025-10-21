@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -77,7 +78,7 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(Integer... tags) {
-        Set<Integer> tagSet = Stream.of(tags).collect(Collectors.toSet());
+        Set<Id> tagSet = Stream.of(tags).map(Id::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
     }

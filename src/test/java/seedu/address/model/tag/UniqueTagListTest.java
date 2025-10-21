@@ -2,6 +2,7 @@ package seedu.address.model.tag;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalTags.EX_GIRLFRIEND;
@@ -180,6 +181,25 @@ public class UniqueTagListTest {
     @Test
     public void equals_differentType() {
         assertFalse(uniqueTagList.equals(0.5f));
+    }
+
+    @Test
+    public void equals_differentObject_success() {
+        uniqueTagList.add(FRIENDS);
+        uniqueTagList.add(EX_GIRLFRIEND);
+        UniqueTagList compare = new UniqueTagList();
+        compare.add(FRIENDS);
+        compare.add(EX_GIRLFRIEND);
+        assertEquals(uniqueTagList, compare);
+    }
+
+    @Test
+    public void equals_differentObject_failure() {
+        uniqueTagList.add(FRIENDS);
+        UniqueTagList compare = new UniqueTagList();
+        compare.add(FRIENDS);
+        compare.add(EX_GIRLFRIEND);
+        assertNotEquals(uniqueTagList, compare);
     }
 
     @Test

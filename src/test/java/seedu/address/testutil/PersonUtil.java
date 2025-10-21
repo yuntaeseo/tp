@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 
 /**
@@ -51,7 +52,7 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
-            Set<Integer> tags = descriptor.getTags().get();
+            Set<Id> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
                 sb.append(PREFIX_TAG).append(" ");
             } else {
