@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.model.id.Id;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
@@ -10,12 +11,12 @@ import seedu.address.model.tag.TagName;
  */
 public class TagBuilder {
 
-    public static final int DEFAULT_ID = -1;
+    public static final Id DEFAULT_ID = new Id(1);
     public static final String DEFAULT_NAME = "friends";
     public static final String DEFAULT_DESC = "people who I am close with";
     public static final String DEFAULT_COLOR = "123456";
 
-    private int id;
+    private Id id;
     private TagName name;
     private TagDesc desc;
     private TagColor color;
@@ -43,8 +44,8 @@ public class TagBuilder {
     /**
      * Sets the {@code id} of the {@code Tag} that we are building.
      */
-    public TagBuilder withId(int id) {
-        this.id = id;
+    public TagBuilder withId(Integer id) {
+        this.id = new Id(id);
         return this;
     }
 
@@ -73,6 +74,6 @@ public class TagBuilder {
     }
 
     public Tag build() {
-        return id == -1 ? new Tag(name, desc, color) : new Tag(id, name, desc, color);
+        return id.value == -1 ? new Tag(name, desc, color) : new Tag(id, name, desc, color);
     }
 }

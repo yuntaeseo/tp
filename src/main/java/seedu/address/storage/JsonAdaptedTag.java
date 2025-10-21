@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.id.Id;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
@@ -16,7 +17,7 @@ class JsonAdaptedTag {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tag's %s field is missing!";
 
-    private final String id;
+    private final Integer id;
     private final String name;
     private final String desc;
     private final String color;
@@ -25,7 +26,7 @@ class JsonAdaptedTag {
      * Constructs a {@code JsonAdaptedTag} with the given tag details.
      */
     @JsonCreator
-    public JsonAdaptedTag(@JsonProperty("id") String id, @JsonProperty("name") String name,
+    public JsonAdaptedTag(@JsonProperty("id") Integer id, @JsonProperty("name") String name,
             @JsonProperty("desc") String desc, @JsonProperty("color") String color) {
         this.id = id;
         this.name = name;
@@ -37,7 +38,7 @@ class JsonAdaptedTag {
      * Converts a given {@code Tag} into this class for Jackson use.
      */
     public JsonAdaptedTag(Tag source) {
-        id = Integer.toString(source.getId());
+        id = source.getId().value;
         name = source.getName().value;
         desc = source.getDesc().value;
         color = source.getColor().value;
@@ -50,12 +51,13 @@ class JsonAdaptedTag {
      */
     public Tag toModelType() throws IllegalValueException {
         if (id == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "id"));
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName()));
         }
-        if (!id.matches("^[0-9]+$")) {
-            throw new IllegalValueException(Tag.ID_MESSAGE_CONSTRAINTS);
+        if (!Id.isValidId(id)) {
+            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
         }
-        final int modelId = Integer.parseInt(id);
+        final Id modelId = new Id(id);
 
         if (name == null) {
             throw new IllegalValueException(

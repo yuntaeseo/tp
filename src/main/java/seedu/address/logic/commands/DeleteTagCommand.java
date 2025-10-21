@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.id.Id;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,7 +30,7 @@ public class DeleteTagCommand extends Command {
         requireNonNull(model);
         ObservableList<Tag> tags = model.getFilteredTagList();
         Tag target = tags.stream()
-                .filter(tag -> tag.getId() == idToDelete)
+                .filter(tag -> tag.getId().equals(new Id(idToDelete)))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(MESSAGE_TAG_NOT_FOUND));
 

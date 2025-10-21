@@ -9,12 +9,12 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
@@ -114,30 +114,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into an {@code Integer}, the ID of the tag.
+     * Parses a {@code String id} into an {@code Id}, the ID of some object.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code id} is invalid.
      */
-    public static Integer parseTag(String tagId) throws ParseException {
-        requireNonNull(tagId);
-        String trimmedTag = tagId.trim();
-        if (!Tag.isValidTagId(trimmedTag)) {
-            throw new ParseException(Tag.ID_MESSAGE_CONSTRAINTS);
+    public static Id parseId(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!Id.isValidId(trimmedId)) {
+            throw new ParseException(Id.MESSAGE_CONSTRAINTS);
         }
-        return Integer.parseInt(trimmedTag);
+        return new Id(Integer.parseInt(trimmedId));
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Integer>}, a set of tag IDs.
+     * Parses {@code Collection<String> ids} into a {@code Set<Id>}, a set of IDs.
      */
-    public static Set<Integer> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Integer> tagSet = new HashSet<>();
-        for (String tagId : tags) {
-            tagSet.add(parseTag(tagId));
+    public static Set<Id> parseIds(Collection<String> ids) throws ParseException {
+        requireNonNull(ids);
+        final Set<Id> idSet = new HashSet<>();
+        for (String tagId : ids) {
+            idSet.add(parseId(tagId));
         }
-        return tagSet;
+        return idSet;
     }
 
     /**
