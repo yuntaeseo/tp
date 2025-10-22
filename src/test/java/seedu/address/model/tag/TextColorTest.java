@@ -42,7 +42,7 @@ public class TextColorTest {
 
     @Test
     public void fromTagColor_darkTagColor_returnsWhiteText() {
-        final TagColor black = new TagColor("000");
+        final TagColor black = new TagColor("000000");
         final TagColor darkRed = new TagColor("210403");
         final TagColor darkBlue = new TagColor("040359");
         final TagColor olive = new TagColor("3c3d01");
@@ -57,7 +57,7 @@ public class TextColorTest {
 
     @Test
     public void fromTagColor_lightTagColor_returnsBlackText() {
-        final TagColor white = new TagColor("fff");
+        final TagColor white = new TagColor("ffffff");
         final TagColor lightGreen = new TagColor("05fc34");
         final TagColor brightYellow = new TagColor("f7f71e");
         final TagColor lightBlue = new TagColor("3afcfc");

@@ -64,7 +64,7 @@ public class PersonCard extends UiPart<Region> {
             Tag tag = list.get(0);
             Label label = new Label(tag.getName().value);
             label.setStyle(String.format("-fx-background-color: #%s; -fx-text-fill: #%s",
-                    tag.getColor().value, tag.getTextColor().value));
+                    tag.getColor().getDisplayHex(), tag.getTextColor().value));
             tags.getChildren().add(label);
         });
         note.setText(person.getNote().value);
