@@ -5,8 +5,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 
 /**
@@ -44,6 +46,21 @@ public class TestUtil {
      */
     public static Index getLastIndex(Model model) {
         return Index.fromOneBased(model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Returns the id of the first person in the {@code model}'s person list.
+     */
+    public static Id getFirstPersonId(Model model) {
+        return model.getFilteredPersonList().get(0).getId();
+    }
+
+    /**
+     * Returns the id of the lst person in the {@code model}'s person list.
+     */
+    public static Id getLastPersonId(Model model) {
+        ObservableList<Person> personList = model.getFilteredPersonList();
+        return personList.get(personList.size() - 1).getId();
     }
 
     /**

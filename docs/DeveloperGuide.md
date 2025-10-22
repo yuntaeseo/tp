@@ -897,11 +897,11 @@ testers are expected to do more *exploratory* testing.
 
 2. **Test case (edit multiple fields):**  
    `edit 1 p/91234567 e/johndoe@example.com`  
-   **Expected:** The first person’s phone and email fields are updated. Status message shows the updated fields.
+   **Expected:** The person with ID 1 will have phone and email fields updated. Status message shows the updated fields.
 
 3. **Test case (clear all tags):**  
    `edit 2 t/`  
-   **Expected:** The second person’s tags are removed. Status message confirms tags are cleared.
+   **Expected:** The person with ID 2 will have tags removed. Status message confirms tags are cleared.
 
 4. **Test case (no updatable fields provided):**  
    `edit 1`  
