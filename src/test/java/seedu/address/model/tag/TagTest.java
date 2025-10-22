@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalTags.FRIENDS;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.ColorUtil;
 import seedu.address.testutil.TagBuilder;
 
 public class TagTest {
@@ -18,24 +19,15 @@ public class TagTest {
     }
 
     @Test
-    public void constructor_incrementId_success() {
-        new TagBuilder(FRIENDS).withId(1000).build();
-        assertTrue(() -> new TagBuilder().build().getId() == 1001);
-        assertTrue(() -> new TagBuilder().build().getId() == 1002);
-    }
+    public void constructor_tagColors_returnsCorrectTextColor() {
+        Tag tag = new TagBuilder(FRIENDS).build();
+        assertEquals(TextColor.fromTagColor(FRIENDS.getColor()), tag.getTextColor());
 
-    @Test
-    public void isValidTagId() {
-        // invalid ID
-        assertFalse(() -> Tag.isValidTagId(null));
-        assertFalse(() -> Tag.isValidTagId("bruh"));
-        assertFalse(() -> Tag.isValidTagId("1o"));
-        assertFalse(() -> Tag.isValidTagId("-1"));
+        Tag whiteTag = new TagBuilder().withName("white").withColor("FFFFFF").build();
+        assertEquals(ColorUtil.BLACK, whiteTag.getTextColor().value);
 
-        // valid ID
-        assertTrue(() -> Tag.isValidTagId("12"));
-        assertTrue(() -> Tag.isValidTagId("34"));
-        assertTrue(() -> Tag.isValidTagId("0001"));
+        Tag blackTag = new TagBuilder().withName("black").withColor("000000").build();
+        assertEquals(ColorUtil.WHITE, blackTag.getTextColor().value);
     }
 
     @Test
@@ -68,8 +60,8 @@ public class TagTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Tag aliceCopy = new TagBuilder(FRIENDS).build();
-        assertTrue(FRIENDS.equals(aliceCopy));
+        Tag friendsCopy = new TagBuilder(FRIENDS).build();
+        assertTrue(FRIENDS.equals(friendsCopy));
 
         // same object -> returns true
         assertTrue(FRIENDS.equals(FRIENDS));

@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.id.Id;
+import seedu.address.model.id.IdManager;
 
 /**
  * Represents a Person in the address book.
@@ -15,27 +17,44 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Person {
 
+    private static final IdManager idManager = new IdManager();
+
     // Identity fields
+    private final Id id;
     private final Name name;
     private final Phone phone;
     private final Email email;
 
     // Data fields
     private final Address address;
-    private final Set<Integer> tags = new HashSet<>();
+    private final Set<Id> tags = new HashSet<>();
     private final Note note;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Integer> tags, Note note) {
+    public Person(Id id, Name name, Phone phone, Email email, Address address, Set<Id> tags, Note note) {
         requireAllNonNull(name, phone, email, address, tags, note);
+        idManager.setLargest(id);
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.note = note;
+    }
+
+    /**
+     * Constructs a {@code Person}, without needing to provide an ID.
+     * The ID will be automatically generated from {@code idManager}.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Id> tags, Note note) {
+        this(idManager.getNewId(), name, phone, email, address, tags, note);
+    }
+
+    public Id getId() {
+        return id;
     }
 
     public Name getName() {
@@ -58,7 +77,7 @@ public class Person {
      * Returns an immutable set of tag IDs, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Integer> getTags() {
+    public Set<Id> getTags() {
         return Collections.unmodifiableSet(tags);
     }
 
@@ -106,12 +125,13 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, note);
+        return Objects.hash(id, name, phone, email, address, tags, note);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("id", id)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)

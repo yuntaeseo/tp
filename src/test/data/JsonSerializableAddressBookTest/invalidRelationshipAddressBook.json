@@ -1,0 +1,9 @@
+{
+  "persons": [],
+  "tags": [],
+  "relationships": [{
+    "part1": 0,
+    "part2": -2,
+    "desc": "a"
+  }]
+}

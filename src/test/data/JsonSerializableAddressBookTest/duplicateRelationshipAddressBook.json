@@ -1,0 +1,13 @@
+{
+  "persons": [],
+  "tags": [],
+  "relationships": [{
+    "part1": 1,
+    "part2": 2,
+    "desc": "a"
+  }, {
+    "part1": 2,
+    "part2": 1,
+    "desc": "b"
+  }]
+}

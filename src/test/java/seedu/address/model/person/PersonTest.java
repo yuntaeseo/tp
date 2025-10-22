@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -18,6 +19,19 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Person(null, null, null, null, null, null));
+        assertThrows(NullPointerException.class, () -> new Person(null, null, null, null, null, null, null));
+    }
+
+    @Test
+    public void constructor_multiplePersons_hasDifferentId() {
+        Person alice = new PersonBuilder(ALICE).build();
+        Person bob = new PersonBuilder(BOB).build();
+        assertNotEquals(alice.getId(), bob.getId());
+    }
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
@@ -97,7 +111,8 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
+        String expected = Person.class.getCanonicalName() + "{id=" + ALICE.getId()
+                + ", name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
                 + ", note=" + ALICE.getNote() + "}";
         assertEquals(expected, ALICE.toString());

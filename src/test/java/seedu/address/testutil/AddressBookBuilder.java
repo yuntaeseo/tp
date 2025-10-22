@@ -4,6 +4,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.relationship.Relationship;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,6 +45,22 @@ public class AddressBookBuilder {
      */
     public AddressBookBuilder withTags(List<Tag> tags) {
         tags.forEach(addressBook::addTag);
+        return this;
+    }
+
+    /**
+     * Adds a new {@code Relationship} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withRelationship(Relationship relationship) {
+        addressBook.addRelationship(relationship);
+        return this;
+    }
+
+    /**
+     * Adds multiple {@code Relationship}s to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withRelationships(List<Relationship> relationships) {
+        relationships.forEach(addressBook::addRelationship);
         return this;
     }
 

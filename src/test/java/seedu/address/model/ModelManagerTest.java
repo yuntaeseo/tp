@@ -4,10 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RELATIONSHIPS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TAGS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalRelationships.ONE_TWO;
+import static seedu.address.testutil.TypicalTags.FRIENDS;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.TypicalRelationships;
 import seedu.address.testutil.TypicalTags;
 
 
@@ -31,6 +35,10 @@ public class ModelManagerTest {
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
     }
+
+
+
+    //  NOTE: USER PREFERENCES
 
     @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
@@ -63,6 +71,10 @@ public class ModelManagerTest {
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
 
+
+
+    //  NOTE: ADDRESS BOOK
+
     @Test
     public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
@@ -73,6 +85,15 @@ public class ModelManagerTest {
         Path path = Paths.get("address/book/file/path");
         modelManager.setAddressBookFilePath(path);
         assertEquals(path, modelManager.getAddressBookFilePath());
+    }
+
+
+
+    //  NOTE: PERSON
+
+    @Test
+    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
 
     @Test
@@ -91,10 +112,9 @@ public class ModelManagerTest {
         assertTrue(modelManager.hasPerson(ALICE));
     }
 
-    @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
-    }
+
+
+    //  NOTE: TAGS
 
     @Test
     public void getFilteredTagList_modifyList_throwsUnsupportedOperationException() {
@@ -107,11 +127,55 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasTag_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasTag(null));
+    }
+
+    @Test
+    public void hasTag_tagNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasTag(FRIENDS));
+    }
+
+    @Test
+    public void hasTag_tagInAddressBook_returnsTrue() {
+        modelManager.addTag(FRIENDS);
+        assertTrue(modelManager.hasTag(FRIENDS));
+    }
+
+
+
+    //  NOTE: RELATIONSHIPS
+
+    @Test
+    public void getFilteredRelationshipList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredRelationshipList().remove(0));
+    }
+
+    @Test
+    public void hasRelationship_nullRelationship_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasRelationship(null));
+    }
+
+    @Test
+    public void hasRelationship_relationshipNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasRelationship(ONE_TWO));
+    }
+
+    @Test
+    public void hasRelationship_relationshipInAddressBook_returnsTrue() {
+        modelManager.addRelationship(ONE_TWO);
+        assertTrue(modelManager.hasRelationship(ONE_TWO));
+    }
+
+
+
+    @Test
     public void equals() {
         // sample addressBook with two person and typical tags
         AddressBook addressBook = new AddressBookBuilder()
                 .withPerson(ALICE).withPerson(BENSON)
                 .withTags(TypicalTags.getTypicalTags())
+                .withRelationships(TypicalRelationships.getTypicalRelationships())
                 .build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
@@ -133,28 +197,29 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
-        // different filteredList -> returns false
+        // different filteredPerson -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        // after resetting filter -> returns true
+        assertTrue(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // different filteredTag -> returns false
         modelManager.updateFilteredTagList(tag -> tag.equals(TypicalTags.getTypicalTags().get(0)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
-
-        // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         modelManager.updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
-
         // after resetting filter -> returns true
         assertTrue(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
-        // different filteredTagList -> returns false
-        modelManager.updateFilteredTagList(tag -> false);
+        // different filteredRelationship -> returns false
+        modelManager.updateFilteredRelationshipList(rel ->
+            rel.equals(TypicalRelationships.getTypicalRelationships().get(0)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        modelManager.updateFilteredRelationshipList(PREDICATE_SHOW_ALL_RELATIONSHIPS);
+        // after resetting filter -> returns true
+        assertTrue(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
-        // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));

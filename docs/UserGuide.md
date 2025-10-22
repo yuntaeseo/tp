@@ -99,9 +99,11 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`
+Format: `edit ID [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person with the specified `ID`.
+* The ID refers to the **unique ID** each person is given when created, can be seen with [`list`](#listing-all-tags--listtag).
+* The ID **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed, i.e adding of tags is not cumulative.
@@ -109,8 +111,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_ID]…​ [r
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person with id 1 to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the person with id 2 to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
@@ -134,15 +136,15 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete ID`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with the specified `ID`.
+* The ID refers to the **unique ID** each person is given when created, can be seen with [`list`](#listing-all-tags--listtag).
+* The ID **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the person with id 2 in the address book.
+* `find Betsy` followed by `delete 1` deletes the person with id 1 in the results of the `find` command.
 
 ### Clearing all person entries : `clear`
 
@@ -180,7 +182,7 @@ Edits a tag in the address book.
 Format: `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]`
 
 * Edits the tag at the specified `ID`.
-* The ID refers to the **unique ID** each tag is given when created, can be seen when [`listtag`](#listing-all-tags--listtag).
+* The ID refers to the **unique ID** each tag is given when created, can be seen with [`listtag`](#listing-all-tags--listtag).
 * The ID **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -198,7 +200,7 @@ Deletes a tag from the address book.
 Format: `deletetag ID`
 
 * Deletes the tag at the specified `ID`.
-* The ID refers to the **unique ID** each tag is given when created, can be seen when [`listtag`](#listing-all-tags--listtag).
+* The ID refers to the **unique ID** each tag is given when created, can be seen with [`listtag`](#listing-all-tags--listtag).
 * The ID **must be a positive integer** 1, 2, 3, …​
 
 Example:
@@ -246,8 +248,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 |-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add person**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [r/NOTE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague r/owes me lunch` |
 | **Clear person list** | `clear`                                                                                                                                                                                        |
-| **Delete person**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                            |
-| **Edit person**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                           |
+| **Delete person**     | `delete ID`<br> e.g., `delete 3`                                                                                                                                                               |
+| **Edit person**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                              |
 | **Find person**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                     |
 | **List person**       | `list`                                                                                                                                                                                         |
 | **Add tag**           | `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `addtag n/JC d/JC friends c/23f1cd`                                                                                                    |

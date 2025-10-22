@@ -47,21 +47,24 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code person}, {@code tagList} and index to display.
      */
-    public PersonCard(Person person, ObservableList<Tag> tagList, int displayedIndex) {
+    public PersonCard(Person person, ObservableList<Tag> tagList) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
+        id.setText(person.getId() + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         person.getTags().stream().forEach(id -> {
-            FilteredList<Tag> list = tagList.filtered(tag -> tag.getId() == id);
+            FilteredList<Tag> list = tagList.filtered(tag -> tag.getId().equals(id));
             if (list.size() == 0) {
                 return;
             }
-            Label label = new Label(list.get(0).getName().value);
-            label.setStyle(String.format("-fx-background-color: #%s;", list.get(0).getColor().getDisplayHex()));
+
+            Tag tag = list.get(0);
+            Label label = new Label(tag.getName().value);
+            label.setStyle(String.format("-fx-background-color: #%s; -fx-text-fill: #%s",
+                    tag.getColor().getDisplayHex(), tag.getTextColor().value));
             tags.getChildren().add(label);
         });
         note.setText(person.getNote().value);

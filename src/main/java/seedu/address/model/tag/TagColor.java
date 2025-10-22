@@ -12,10 +12,10 @@ public class TagColor {
     /**
      * Regex for enforcing the HEX format (without the '#' at the beginning).
      */
-    public static final String VALIDATION_REGEX = "^(?:[0-9a-fA-F]{3}){1,2}$";
+    public static final String VALIDATION_REGEX = "^(?:[0-9a-fA-F]{6})$";
 
     /** 0: original colour, 1: white */
-    private static final double WHITE_TINT_RATIO = 0.3;
+    private static final double WHITE_TINT_RATIO = 0.2;
 
     public final String value;
     private final String displayValue;
