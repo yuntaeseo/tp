@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 import seedu.address.model.relationship.Relationship;
 import seedu.address.model.tag.Tag;
@@ -100,6 +101,10 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Returns true if a person with the given Id exists in the address book.
+     */
+    boolean hasPersonWithId(Id id);
 
 
     //  NOTE: TAGS
