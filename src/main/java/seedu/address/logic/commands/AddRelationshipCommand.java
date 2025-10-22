@@ -14,7 +14,7 @@ import seedu.address.model.relationship.Relationship;
  */
 public class AddRelationshipCommand extends Command {
 
-    public static final String COMMAND_WORD = "addrelationship";
+    public static final String COMMAND_WORD = "addrel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a relationship to the address book. "
             + "Parameters: "
