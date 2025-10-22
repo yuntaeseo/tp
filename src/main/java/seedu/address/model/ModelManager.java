@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 import seedu.address.model.relationship.Relationship;
 import seedu.address.model.tag.Tag;
@@ -136,6 +137,12 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public boolean hasPersonWithId(Id id) {
+        requireNonNull(id);
+        return addressBook.getPersonList().stream()
+                .anyMatch(person -> person.getId().equals(id));
+    }
 
 
     //  NOTE: TAGS
