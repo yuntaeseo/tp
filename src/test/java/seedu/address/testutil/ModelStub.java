@@ -98,6 +98,11 @@ public class ModelStub implements Model {
         throw new AssertionError("Not called.");
     }
 
+    @Override
+    public boolean hasPersonWithId(seedu.address.model.id.Id id) {
+        throw new AssertionError("Not called.");
+    }
+
 
 
     //  NOTE: TAGS
