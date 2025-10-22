@@ -24,7 +24,8 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_TAG = "Tag list contains duplicate tag(s).";
     public static final String MESSAGE_DUPLICATE_RELATIONSHIP =
-        "Relationship list contains duplicate relationships(s).";
+            "Relationship list contains duplicate relationships(s).";
+    public static final String MESSAGE_NONEXISTENT_TAG_ID = "Tag ID does not exist in tag list.";
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedRelationship> relationships = new ArrayList<>();
@@ -63,20 +64,23 @@ class JsonSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
 
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-            }
-            addressBook.addPerson(person);
-        }
-
         for (JsonAdaptedTag jsonAdaptedTag : tags) {
             Tag tag = jsonAdaptedTag.toModelType();
             if (addressBook.hasTag(tag)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
             }
             addressBook.addTag(tag);
+        }
+
+        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
+            Person person = jsonAdaptedPerson.toModelType();
+            if (addressBook.hasPerson(person)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            }
+            if (!addressBook.hasTagIds(person.getTagIds())) {
+                throw new IllegalValueException(MESSAGE_NONEXISTENT_TAG_ID);
+            }
+            addressBook.addPerson(person);
         }
 
         for (JsonAdaptedRelationship jsonAdaptedRelationship : relationships) {

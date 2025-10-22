@@ -47,7 +47,7 @@ public class Messages {
                 .append(person.getNote())
                 .append("; Tags: ");
         builder.append(String.join(" ",
-                person.getTags().stream().map(Object::toString).toList()));
+                person.getTagIds().stream().map(Object::toString).toList()));
         return builder.toString();
     }
 

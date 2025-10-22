@@ -37,7 +37,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the id used in the displayed person list. "
+            + "by the ID used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: ID (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -54,6 +54,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "No person found with the specified ID.";
+    public static final String MESSAGE_TAG_NOT_FOUND = "No tag found with the specified ID.";
 
     private final Id idToEdit;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -85,6 +86,12 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        // Check that tag IDs exist
+        Set<Id> editedPersonTagIds = editedPerson.getTagIds();
+        if (!model.hasTagIds(editedPersonTagIds)) {
+            throw new CommandException(MESSAGE_TAG_NOT_FOUND);
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -102,7 +109,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Id> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Id> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTagIds());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
 
         return new Person(personId, updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNote);
