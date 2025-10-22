@@ -40,7 +40,7 @@ public class TagColor {
     }
 
     /**
-     * Returns a softened hex string that is easier to render as a background colour.
+     * Returns a softened hex string that is white-tinted as a background color.
      */
     public String getDisplayHex() {
         return displayValue;
@@ -73,14 +73,13 @@ public class TagColor {
 
     /**
      * Softens the given hex color by tinting it with white.
-     * @param hex
+     * @param hex original hex color
      * @return softened hex color
      */
     private static String soften(String hex) {
-        String normalized = normalizeHex(hex);
-        int red = Integer.parseInt(normalized.substring(0, 2), 16);
-        int green = Integer.parseInt(normalized.substring(2, 4), 16);
-        int blue = Integer.parseInt(normalized.substring(4, 6), 16);
+        int red = Integer.parseInt(hex.substring(0, 2), 16);
+        int green = Integer.parseInt(hex.substring(2, 4), 16);
+        int blue = Integer.parseInt(hex.substring(4, 6), 16);
 
         int softenedRed = tint(red);
         int softenedGreen = tint(green);
@@ -89,18 +88,6 @@ public class TagColor {
         return String.format("%02X%02X%02X", softenedRed, softenedGreen, softenedBlue);
     }
 
-    /**
-     * Normalizes a hex color to 6 characters.
-     */
-    private static String normalizeHex(String hex) {
-        if (hex.length() == 6) {
-            return hex.toUpperCase();
-        }
-        char r = hex.charAt(0);
-        char g = hex.charAt(1);
-        char b = hex.charAt(2);
-        return ("" + r + r + g + g + b + b).toUpperCase();
-    }
 
     /**
      * Tints a single color channel with white.
