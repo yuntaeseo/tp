@@ -25,6 +25,7 @@ public class JsonSerializableAddressBookTest {
         TEST_DATA_FOLDER.resolve("invalidRelationshipAddressBook.json");
     private static final Path DUPLICATE_RELATIONSHIP_FILE =
         TEST_DATA_FOLDER.resolve("duplicateRelationshipAddressBook.json");
+    private static final Path NON_EXISTENT_TAG_FILE = TEST_DATA_FOLDER.resolve("nonExistentTagAddressBook.json");
 
     @Test
     public void toModelType_typicalFile_success() throws Exception {
@@ -77,6 +78,14 @@ public class JsonSerializableAddressBookTest {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_RELATIONSHIP_FILE,
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_RELATIONSHIP,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nonExistentTag_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(NON_EXISTENT_TAG_FILE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_NONEXISTENT_TAG_ID,
                 dataFromFile::toModelType);
     }
 }

@@ -13,7 +13,10 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_PERSON_NOT_FOUND;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestUtil.getFirstPersonId;
+import static seedu.address.testutil.TestUtil.getLargestPersonId;
+import static seedu.address.testutil.TestUtil.getLargestTagId;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -23,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -131,10 +135,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_invalidPersonIdUnfilteredList_failure() {
-        // Get largest id + 1
-        int invalidId = model.getFilteredPersonList().stream()
-                .reduce(getFirstPersonId(model).value, (maxId, p) -> Math.max(maxId, p.getId().value), Math::max)
-                + 1;
+        int invalidId = getLargestPersonId(model) + 1;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(new Id(invalidId), descriptor);
 
@@ -157,6 +158,29 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, MESSAGE_PERSON_NOT_FOUND);
+    }
+
+    @Test
+    public void execute_invalidTagId_throwsCommandException() {
+        Id idFirstPerson = getFirstPersonId(model);
+        int invalidId = getLargestTagId(model) + 1;
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags(invalidId).build();
+        EditCommand editCommand = new EditCommand(idFirstPerson, descriptor);
+        assertThrows(CommandException.class, EditCommand.MESSAGE_TAG_NOT_FOUND, () -> editCommand.execute(model));
+    }
+
+    @Test
+    public void execute_validTagId_success() throws CommandException {
+        Person firstPerson = model.getFilteredPersonList().get(0);
+        Id idFirstPerson = firstPerson.getId();
+        Id idFirstTag = model.getFilteredTagList().get(0).getId();
+        EditPersonDescriptor descriptor =
+                new EditPersonDescriptorBuilder(firstPerson).withTags(idFirstTag.value).build();
+        EditCommand editCommand = new EditCommand(idFirstPerson, descriptor);
+        Person editedPerson = new PersonBuilder(firstPerson).withTags(idFirstTag.value).build();
+
+        assertEquals(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
+                editCommand.execute(model).getFeedbackToUser());
     }
 
     @Test

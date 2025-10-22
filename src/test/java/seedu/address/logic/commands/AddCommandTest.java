@@ -20,7 +20,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.ModelStub;
+import seedu.address.testutil.ModelStubAcceptingPersonWithTagIdCheck;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TagBuilder;
 
 public class AddCommandTest {
 
@@ -48,6 +50,35 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_invalidTagId_throwsCommandException() {
+        ModelStubAcceptingPersonWithTagIdCheck modelStub = new ModelStubAcceptingPersonWithTagIdCheck();
+        Person personToAdd = new PersonBuilder().withTags(2).build();
+        AddCommand addCommand = new AddCommand(personToAdd);
+        assertThrows(CommandException.class, AddCommand.MESSAGE_TAG_NOT_FOUND, () -> addCommand.execute(modelStub));
+
+        // Still invalid ID
+        modelStub.addTag(new TagBuilder().withId(1).build());
+        assertThrows(CommandException.class, AddCommand.MESSAGE_TAG_NOT_FOUND, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_validTagId_success() throws CommandException {
+        ModelStubAcceptingPersonWithTagIdCheck modelStub = new ModelStubAcceptingPersonWithTagIdCheck();
+
+        modelStub.addTag(new TagBuilder().withId(1).build());
+        Person person1 = new PersonBuilder().withTags(1).build();
+        CommandResult commandResult1 = new AddCommand(person1).execute(modelStub);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(person1)),
+                commandResult1.getFeedbackToUser());
+
+        modelStub.addTag(new TagBuilder().withId(2).build());
+        Person person2 = new PersonBuilder().withName("Bob").withTags(1, 2).build();
+        CommandResult commandResult2 = new AddCommand(person2).execute(modelStub);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(person2)),
+                commandResult2.getFeedbackToUser());
     }
 
     @Test
@@ -118,7 +149,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasTagId(Id Id) {
+        public boolean hasTagId(Id id) {
             return true;
         }
 
@@ -132,5 +163,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }

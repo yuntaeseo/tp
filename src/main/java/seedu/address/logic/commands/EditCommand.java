@@ -54,7 +54,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "No person found with the specified ID.";
-    public static final String MESSAGE_TAG_NOT_FOUND = "No tag found with the specified ID.";
+    public static final String MESSAGE_TAG_NOT_FOUND = "No tag(s) found with the specified ID(s).";
 
     private final Id idToEdit;
     private final EditPersonDescriptor editPersonDescriptor;

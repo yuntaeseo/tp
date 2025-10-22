@@ -1,0 +1,18 @@
+{
+  "persons": [ {
+    "id": 1,
+    "name": "Elmo",
+    "phone": "94862424",
+    "email": "elmo@email.com",
+    "address": "Sesame street",
+    "tags": [ 2 ],
+    "note": ""
+  } ],
+  "tags": [{
+    "id": 1,
+    "name": "besto friendo",
+    "desc": "my brother",
+    "color": "DD969A"
+  }],
+  "relationships": []
+}

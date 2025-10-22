@@ -43,7 +43,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-    public static final String MESSAGE_TAG_NOT_FOUND = "No tag found with the specified ID.";
+    public static final String MESSAGE_TAG_NOT_FOUND = "No tag(s) found with the specified ID(s).";
 
     private final Person toAdd;
 
