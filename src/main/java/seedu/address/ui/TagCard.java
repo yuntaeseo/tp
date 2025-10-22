@@ -2,10 +2,8 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagName;
 
 /**
  * A UI component that displays a Tag in the same format as PersonListPanel.
