@@ -60,8 +60,11 @@ public class PersonCard extends UiPart<Region> {
             if (list.size() == 0) {
                 return;
             }
-            Label label = new Label(list.get(0).getName().value);
-            label.setStyle(String.format("-fx-background-color: #%s;", list.get(0).getColor().value));
+
+            Tag tag = list.get(0);
+            Label label = new Label(tag.getName().value);
+            label.setStyle(String.format("-fx-background-color: #%s; -fx-text-fill: #%s",
+                    tag.getColor().value, tag.getTextColor().value));
             tags.getChildren().add(label);
         });
         note.setText(person.getNote().value);

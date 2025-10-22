@@ -19,6 +19,7 @@ public class Tag {
     private final TagName name;
     private final TagDesc desc;
     private final TagColor color;
+    private final TextColor textColor;
 
     /**
      * Constructs a {@code Tag}.
@@ -33,6 +34,7 @@ public class Tag {
         this.name = name;
         this.desc = desc;
         this.color = color;
+        this.textColor = TextColor.fromTagColor(color);
     }
 
     /**
@@ -57,6 +59,10 @@ public class Tag {
 
     public TagColor getColor() {
         return color;
+    }
+
+    public TextColor getTextColor() {
+        return textColor;
     }
 
     /**
