@@ -27,21 +27,21 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Id> tags = new HashSet<>();
+    private final Set<Id> tagIds = new HashSet<>();
     private final Note note;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Id id, Name name, Phone phone, Email email, Address address, Set<Id> tags, Note note) {
-        requireAllNonNull(name, phone, email, address, tags, note);
+    public Person(Id id, Name name, Phone phone, Email email, Address address, Set<Id> tagIds, Note note) {
+        requireAllNonNull(name, phone, email, address, tagIds, note);
         idManager.setLargest(id);
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.tagIds.addAll(tagIds);
         this.note = note;
     }
 
@@ -49,8 +49,8 @@ public class Person {
      * Constructs a {@code Person}, without needing to provide an ID.
      * The ID will be automatically generated from {@code idManager}.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Id> tags, Note note) {
-        this(idManager.getNewId(), name, phone, email, address, tags, note);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Id> tagIds, Note note) {
+        this(idManager.getNewId(), name, phone, email, address, tagIds, note);
     }
 
     public Id getId() {
@@ -77,8 +77,8 @@ public class Person {
      * Returns an immutable set of tag IDs, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Id> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Id> getTagIds() {
+        return Collections.unmodifiableSet(tagIds);
     }
 
     public Note getNote() {
@@ -118,14 +118,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
+                && tagIds.equals(otherPerson.tagIds)
                 && note.equals(otherPerson.note);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(id, name, phone, email, address, tags, note);
+        return Objects.hash(id, name, phone, email, address, tagIds, note);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("tags", tagIds)
                 .add("note", note)
                 .toString();
     }

@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.id.Id;
@@ -56,11 +55,21 @@ public class TestUtil {
     }
 
     /**
-     * Returns the id of the lst person in the {@code model}'s person list.
+     * Returns the largest id value in the Person list.
      */
-    public static Id getLastPersonId(Model model) {
-        ObservableList<Person> personList = model.getFilteredPersonList();
-        return personList.get(personList.size() - 1).getId();
+    public static int getLargestPersonId(Model model) {
+        return model.getFilteredPersonList().stream()
+                .map(person -> person.getId().value)
+                .reduce(getFirstPersonId(model).value, Math::max);
+    }
+
+    /**
+     * Returns the largest id value in the Tag list.
+     */
+    public static int getLargestTagId(Model model) {
+        return model.getFilteredTagList().stream()
+                .map(tag -> tag.getId().value)
+                .reduce(0, Math::max);
     }
 
     /**

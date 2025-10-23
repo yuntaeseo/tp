@@ -9,17 +9,20 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalRelationships.ONE_TWO;
+import static seedu.address.testutil.TypicalTags.EX_GIRLFRIEND;
 import static seedu.address.testutil.TypicalTags.FRIENDS;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.relationship.Relationship;
@@ -87,6 +90,48 @@ public class AddressBookTest {
         AddressBookStub newData = new AddressBookStub(null, null, newRelationships);
 
         assertThrows(DuplicateRelationshipException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void hasTagId_idNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasTagId(new Id(1)));
+        assertFalse(addressBook.hasTagId(new Id(10)));
+        assertFalse(addressBook.hasTagId(new Id(67)));
+        assertFalse(addressBook.hasTagId(new Id(65166666)));
+    }
+
+    @Test
+    public void hasTagId_idInAddressBook_returnsTrue() {
+        Tag one = new TagBuilder(FRIENDS).withId(1).build();
+        Tag two = new TagBuilder(EX_GIRLFRIEND).withId(2).build();
+        addressBook.addTag(one);
+        addressBook.addTag(two);
+
+        assertTrue(addressBook.hasTagId(new Id(1)));
+        assertTrue(addressBook.hasTagId(new Id(2)));
+    }
+
+    @Test
+    public void hasTagIds_idsInAddressBook_returnsTrue() {
+        addressBook.addTag(new TagBuilder().withName("wan").withId(1).build());
+        addressBook.addTag(new TagBuilder().withName("tu").withId(2).build());
+        addressBook.addTag(new TagBuilder().withName("tre").withId(3).build());
+
+        assertTrue(addressBook.hasTagIds(Set.of(new Id(1), new Id(3))));
+        assertTrue(addressBook.hasTagIds(Set.of(new Id(2), new Id(1))));
+        assertTrue(addressBook.hasTagIds(Set.of(new Id(1))));
+        assertTrue(addressBook.hasTagIds(Set.of(new Id(1), new Id(2), new Id(3))));
+    }
+
+    @Test
+    public void hasTagIds_idsNotInAddressBook_returnsFalse() {
+        addressBook.addTag(new TagBuilder().withName("er").withId(2).build());
+        addressBook.addTag(new TagBuilder().withName("san").withId(3).build());
+        addressBook.addTag(new TagBuilder().withName("wu").withId(5).build());
+
+        assertFalse(addressBook.hasTagIds(Set.of(new Id(1))));
+        assertFalse(addressBook.hasTagIds(Set.of(new Id(1), new Id(2))));
+        assertFalse(addressBook.hasTagIds(Set.of(new Id(1), new Id(2), new Id(3), new Id(5))));
     }
 
 

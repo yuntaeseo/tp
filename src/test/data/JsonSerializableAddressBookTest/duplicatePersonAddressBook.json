@@ -15,6 +15,11 @@
     "address": "4th street",
     "note": ""
   } ],
-  "tags": [],
+  "tags": [ {
+    "id": 1,
+    "name": "I am a tag",
+    "desc": "I am better than the other tags",
+    "color": "FFFFFF"
+  } ],
   "relationships": []
 }
