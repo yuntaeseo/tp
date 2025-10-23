@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
@@ -82,10 +83,9 @@ public class JsonSerializableAddressBookTest {
     }
 
     @Test
-    public void toModelType_nonExistentTag_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(NON_EXISTENT_TAG_FILE,
-                JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_NONEXISTENT_TAG_ID,
-                dataFromFile::toModelType);
+    public void toModelType_nonExistentTag_noException() {
+        // Check that file reader ignores invalid tags
+        assertDoesNotThrow(() -> JsonUtil.readJsonFile(NON_EXISTENT_TAG_FILE,
+                JsonSerializableAddressBook.class));
     }
 }

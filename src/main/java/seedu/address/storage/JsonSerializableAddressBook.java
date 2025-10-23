@@ -78,7 +78,7 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             if (!addressBook.hasTagIds(person.getTagIds())) {
-                throw new IllegalValueException(MESSAGE_NONEXISTENT_TAG_ID);
+                continue;
             }
             addressBook.addPerson(person);
         }
