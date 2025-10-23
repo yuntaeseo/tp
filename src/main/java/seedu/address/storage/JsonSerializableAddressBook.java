@@ -27,7 +27,6 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_TAG = "Tag list contains duplicate tag(s).";
     public static final String MESSAGE_DUPLICATE_RELATIONSHIP =
             "Relationship list contains duplicate relationships(s).";
-    public static final String MESSAGE_NONEXISTENT_TAG_ID = "Tag ID does not exist in tag list.";
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedRelationship> relationships = new ArrayList<>();
