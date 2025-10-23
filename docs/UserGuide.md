@@ -96,7 +96,7 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/1 r/She owed me lunch`,
 supposed tag with ID 1 is `criminal`
 
-### Listing all connectionss : `list`
+### Listing all connections : `list`
 
 Shows a list of all connectionss in NetWise.
 
@@ -313,10 +313,6 @@ by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the
 keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear.
 The remedy is to manually restore the minimized Help Window.
-3. For `add` and `edit` connection commands, **when you use tag ID that does not exist**, the tag ID is still recorded.
-However, no tag is shown attached to the user until, and no error message is shown.
-Furthermore, if in the future a tag is created with that ID, it will then show up on the connection
-who originally has that tag ID. This issue will be fixed in a later version.
 
 --------------------------------------------------------------------------------------------------------------------
 
