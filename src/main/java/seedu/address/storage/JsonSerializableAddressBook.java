@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_ID;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -83,6 +85,10 @@ class JsonSerializableAddressBook {
             Relationship relationship = jsonAdaptedRelationship.toModelType();
             if (addressBook.hasRelationship(relationship)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_RELATIONSHIP);
+            }
+            if (!addressBook.hasPersonWithId(relationship.getPart1())
+                || !addressBook.hasPersonWithId(relationship.getPart2())) {
+                throw new IllegalValueException(MESSAGE_INVALID_PERSON_ID);
             }
             addressBook.addRelationship(relationship);
         }
