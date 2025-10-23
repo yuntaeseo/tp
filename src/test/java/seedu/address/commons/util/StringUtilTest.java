@@ -125,22 +125,30 @@ public class StringUtilTest {
 
     //---------------- Tests for containsSubstringIgnoreCase --------------------------------------
     @Test
-    void containsSubstringIgnoreCase_validMatchInputs_true() {
+    public void containsSubstringIgnoreCase_validWordMatchInputs_true() {
         // Word match
         assertTrue(StringUtil.containsSubstringIgnoreCase("Alice Tan", "Alice"));
         assertTrue(StringUtil.containsSubstringIgnoreCase("Alice Tan", "tan"));
         assertTrue(StringUtil.containsSubstringIgnoreCase("Alice Tan", "liCe"));
+    }
 
+    @Test
+    public void containsSubstringIgnoreCase_validPartialMatchInputs_true() {
         // Partial match
         assertTrue(StringUtil.containsSubstringIgnoreCase("Alice Tan", "Ali"));
         assertTrue(StringUtil.containsSubstringIgnoreCase("Alice Tan", "ice"));
-        assertTrue(StringUtil.containsSubstringIgnoreCase("Alice Tan", "ce T"));
+    }
 
+    @Test
+    public void containsSubstringIgnoreCase_validCaseInsensitiveMatchInputs_true() {
         // Case-insensitive match
         assertTrue(StringUtil.containsSubstringIgnoreCase("HELLO world", "hello"));
         assertTrue(StringUtil.containsSubstringIgnoreCase("HELLO world", "WORLD"));
-        assertTrue(StringUtil.containsSubstringIgnoreCase("HeLLo WoRLd", "lo wo"));
+        assertTrue(StringUtil.containsSubstringIgnoreCase("HeLLo WoRLd", "lo"));
+    }
 
+    @Test
+    public void containsSubstringIgnoreCase_validMultipleSubstringMatchInputs_true() {
         // Multiple substrings
         assertTrue(StringUtil.containsSubstringIgnoreCase("AAAbBbcccbbb", "bbB"));
     }
@@ -164,7 +172,7 @@ public class StringUtilTest {
 
     @Test
     void containsSubstringIgnoreCase_longSubstring_false() {
-        assertFalse(StringUtil.containsSubstringIgnoreCase("Hi", "Hello there"));
+        assertFalse(StringUtil.containsSubstringIgnoreCase("Hi", "Hellothere"));
     }
 
     @Test

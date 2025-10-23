@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_ADDRESS;
 import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_EMAIL;
 import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_NAME;
 import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_PHONE;
@@ -28,9 +29,9 @@ public class FieldContainsKeywordsPredicateTest {
     }
 
     @Test
-    void test_nameNoMatch_false() {
-        var p = new FieldContainsKeywordsPredicate(GET_NAME, List.of("Zoe"));
-        assertFalse(p.test(new PersonBuilder().withName("Alice Tan").build()));
+    void test_addressNoMatch_false() {
+        var p = new FieldContainsKeywordsPredicate(GET_ADDRESS, List.of("Clementi"));
+        assertFalse(p.test(new PersonBuilder().withName("Little India").build()));
     }
 
     @Test

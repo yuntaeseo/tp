@@ -53,7 +53,12 @@ public class FindCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicates", predicates)
+                .add("predicate", predicates)
                 .toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return predicates.hashCode();
     }
 }

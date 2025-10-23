@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Helper functions for handling strings.
@@ -83,5 +84,12 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    public static List<String> toNonEmptyKeywords(List<String> raw) {
+        return raw.stream()
+                  .map(String::trim)
+                  .filter(s -> !s.isEmpty())
+                  .toList();
     }
 }

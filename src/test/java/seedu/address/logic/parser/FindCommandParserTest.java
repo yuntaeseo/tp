@@ -9,23 +9,38 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.parser.PersonFieldExtractor;
 import seedu.address.model.person.CompositePersonPredicate;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private final FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                "At least one field to find must be provided. " +
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_withPreamble_throwsParseException() {
+        assertParseFailure(parser, " somePreamble n/Ali n/bob",
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyArgWithPrefix_throwsParseException() {
+        assertParseFailure(parser, " n/   a/ \t e/  ",
+                "At least one field to find must be provided. " +
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validNameArgs_returnsFindCommand() {
-        String inputNoWhiteSpace = "n/Ali n/bob";
-        String inputMultipleWhitespaces = " n/ Alice \n \t n/\tBob  \t";
+        // Note the space " " in front of the prefix
+        String inputNoWhiteSpace = " n/Ali n/bob";
+        String inputMultipleWhitespaces = " n/ Ali \n \t n/\tbob  \t";
 
         CompositePersonPredicate expectedPredicates = new CompositePersonPredicate(List.of(
                 new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_NAME, List.of("Ali", "bob"))
@@ -38,8 +53,9 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_multipleFields_returnsFindCommand() {
-        String input = "n/Alice p/9123 e/@example.com a/little india a/#35";
-        String inputDifferentOrder = "a/#35 a/little india   n/Alice \t e/@example.com \np/9123";
+        String input = " n/Alice p/9123 e/@example.com a/little india a/#35";
+        // Note the order of the address should not change, since List put them in order of appearance
+        String inputDifferentOrder = " a/little india a/#35  n/Alice \t e/@example.com \n p/9123";
 
         CompositePersonPredicate expectedPredicates = new CompositePersonPredicate(List.of(
                 new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_NAME, List.of("Alice")),
