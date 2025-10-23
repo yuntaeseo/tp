@@ -22,8 +22,7 @@ public class AddRelationshipCommand extends Command {
             + PREFIX_PART_2 + "PART_2 "
             + PREFIX_DESC + "DESCRIPTION";
 
-    public static final String MESSAGE_SUCCESS = "New relationship added: %1$s";
-    // MESSAGE_DUPLICATE_PERSON removed as it is not used in this class.
+    public static final String MESSAGE_RELATIONSHIP_SUCCESS = "New relationship added: %1$s";
     public static final String MESSAGE_INVALID_PERSON_ID = "One or both person IDs do not exist.";
     public static final String MESSAGE_DUPLICATE_RELATIONSHIP = "This relationship already exists in the address book.";
 
@@ -51,7 +50,7 @@ public class AddRelationshipCommand extends Command {
         }
 
         model.addRelationship(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_RELATIONSHIP_SUCCESS, toAdd));
     }
 
     @Override

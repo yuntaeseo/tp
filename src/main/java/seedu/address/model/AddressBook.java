@@ -103,6 +103,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        removeRelationshipsIfContainsPerson(key.getId());
+    }
+
+    /**
+     * Returns true if a person with the given Id exists in the address book.
+     */
+    public boolean hasPersonWithId(Id id) {
+        return persons.hasPersonWithId(id);
     }
 
 
@@ -210,6 +218,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         relationships.remove(relationship);
     }
 
+    /**
+     * Removes all relationships that involve the person with the given Id.
+     */
+    public void removeRelationshipsIfContainsPerson(Id personId) {
+        relationships.removeIfContainsPerson(personId);
+    }
 
 
     //  NOTE: UTILS

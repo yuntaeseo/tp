@@ -184,6 +184,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void removeRelationshipsIfContainsPerson(seedu.address.model.id.Id personId) {
+        throw new AssertionError("Not called.");
+    }
+
+    @Override
     public void setRelationship(Relationship target, Relationship editedRelationship) {
         throw new AssertionError("Not called.");
     }

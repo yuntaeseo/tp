@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.id.Id;
 import seedu.address.model.relationship.exceptions.DuplicateRelationshipException;
 import seedu.address.model.relationship.exceptions.RelationshipNotFoundException;
 
@@ -80,6 +81,19 @@ public class UniqueRelationshipList implements Iterable<Relationship> {
         }
     }
 
+    /**
+     * Removes all relationships that involve the person with the given Id.
+     */
+    public void removeIfContainsPerson(Id personId) {
+        requireNonNull(personId);
+        internalList.removeIf(relationship ->
+            relationship.getPart1().equals(personId) || relationship.getPart2().equals(personId));
+    }
+
+    /**
+     * Replaces the contents of this list with {@code replacement}.
+     * {@code replacement} must not contain duplicate relationships.
+     */
     public void setRelationships(UniqueRelationshipList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
