@@ -22,8 +22,8 @@ public class AddRelationshipCommand extends Command {
             + PREFIX_PART_2 + "PART_2 "
             + PREFIX_DESC + "DESCRIPTION";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New relationship added: %1$s";
+    // MESSAGE_DUPLICATE_PERSON removed as it is not used in this class.
     public static final String MESSAGE_INVALID_PERSON_ID = "One or both person IDs do not exist.";
     public static final String MESSAGE_DUPLICATE_RELATIONSHIP = "This relationship already exists in the address book.";
 
