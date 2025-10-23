@@ -84,7 +84,6 @@ public class JsonSerializableAddressBookTest {
 
     @Test
     public void toModelType_nonExistentTag_noException() {
-        // Check that file reader ignores invalid tags
         assertDoesNotThrow(() -> JsonUtil.readJsonFile(NON_EXISTENT_TAG_FILE,
                 JsonSerializableAddressBook.class));
     }

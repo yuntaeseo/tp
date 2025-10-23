@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 import seedu.address.model.relationship.Relationship;
 import seedu.address.model.tag.Tag;
@@ -78,7 +80,20 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             if (!addressBook.hasTagIds(person.getTagIds())) {
-                continue;
+                Set<Id> validTagIds = person.getTagIds()
+                        .stream()
+                        .filter(addressBook::hasTagId)
+                        .collect(Collectors.toSet());
+                person = new Person(
+                        person.getId(),
+                        person.getName(),
+                        person.getPhone(),
+                        person.getEmail(),
+                        person.getAddress(),
+                        validTagIds,
+                        person.getNote()
+                );
+
             }
             addressBook.addPerson(person);
         }
