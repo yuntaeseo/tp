@@ -2,10 +2,8 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagName;
 
 /**
  * A UI component that displays a Tag in the same format as PersonListPanel.
@@ -19,23 +17,25 @@ public class TagCard extends UiPart<Region> {
     private Label id;
 
     @FXML
-    private FlowPane tags;
+    private Label tagLabel;
+
+    @FXML
+    private Label description;
 
     /**
      * Creates a {@code TagCard} with the given {@code Tag} and index to display.
      */
-    public TagCard(Tag tag, int displayedIndex) {
+    public TagCard(Tag tag) {
         super(FXML);
         this.tag = tag;
 
         /* The number shown will be the Tags ID */
         id.setText(tag.getId() + ". ");
 
-        TagName tagName = (TagName) tag.getName();
-        Label label = new Label(tagName.toString());
-        label.getStyleClass().add("tag");
-        label.getStyleClass().add("cell_small_label");
-        label.setStyle(String.format("-fx-background-color: #%s;", tag.getColor().value));
-        tags.getChildren().setAll(label);
+        tagLabel.setText(tag.getName().toString());
+        tagLabel.setStyle(String.format("-fx-background-color: #%s; -fx-text-fill: #%s",
+                tag.getColor().getDisplayHex(), tag.getTextColor().value));
+
+        description.setText(tag.getDesc().toString());
     }
 }

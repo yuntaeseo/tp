@@ -14,12 +14,13 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.id.Id;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
+import seedu.address.testutil.ModelStub;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -34,9 +35,9 @@ public class EditTagCommandTest {
 
     @BeforeEach
     public void setup() {
-        tag1 = new Tag(1, new TagName("Friends"), new TagDesc("Schoolmates"), new TagColor("0000FF"));
-        tag2 = new Tag(2, new TagName("Work"), new TagDesc("Office mates"), new TagColor("0000FF"));
-        tag3 = new Tag(3, new TagName("Family"), new TagDesc("Close relatives"), new TagColor("0000FF"));
+        tag1 = new Tag(new Id(1), new TagName("Friends"), new TagDesc("Schoolmates"), new TagColor("0000FF"));
+        tag2 = new Tag(new Id(2), new TagName("Work"), new TagDesc("Office mates"), new TagColor("0000FF"));
+        tag3 = new Tag(new Id(3), new TagName("Family"), new TagDesc("Close relatives"), new TagColor("0000FF"));
         modelStub = new ModelStubWithTags(List.of(tag1, tag2, tag3));
     }
 
@@ -46,8 +47,8 @@ public class EditTagCommandTest {
         TagDesc newDesc = new TagDesc("High school buddies");
         TagColor newColor = new TagColor("00FF00");
 
-        EditTagCommand editCommand = new EditTagCommand(1, newName, newDesc, newColor);
-        Tag expectedEdited = new Tag(1, newName, newDesc, newColor);
+        EditTagCommand editCommand = new EditTagCommand(new Id(1), newName, newDesc, newColor);
+        Tag expectedEdited = new Tag(new Id(1), newName, newDesc, newColor);
 
         String expectedMessage = String.format("Edited Tag: %s", expectedEdited);
 
@@ -59,8 +60,8 @@ public class EditTagCommandTest {
     public void execute_someFieldsSpecified_success() throws Exception {
         TagDesc newDesc = new TagDesc("Gaming friends only");
 
-        EditTagCommand editCommand = new EditTagCommand(1, null, newDesc, null);
-        Tag expectedEdited = new Tag(1, tag1.getName(), newDesc, tag1.getColor());
+        EditTagCommand editCommand = new EditTagCommand(new Id(1), null, newDesc, null);
+        Tag expectedEdited = new Tag(new Id(1), tag1.getName(), newDesc, tag1.getColor());
 
         String expectedMessage = String.format(EditTagCommand.MESSAGE_EDIT_SUCCESS, expectedEdited);
 
@@ -70,7 +71,7 @@ public class EditTagCommandTest {
 
     @Test
     public void execute_invalidId_throwsCommandException() {
-        EditTagCommand editCommand = new EditTagCommand(99, new TagName("Invalid"), null, null);
+        EditTagCommand editCommand = new EditTagCommand(new Id(99), new TagName("Invalid"), null, null);
 
         java.util.List<Tag> before = List.copyOf(modelStub.getFilteredTagList());
 
@@ -84,7 +85,7 @@ public class EditTagCommandTest {
 
     @Test
     public void execute_noFieldsProvided_throwsCommandException() {
-        EditTagCommand editCommand = new EditTagCommand(1, null, null, null);
+        EditTagCommand editCommand = new EditTagCommand(new Id(1), null, null, null);
 
         java.util.List<Tag> before = List.copyOf(modelStub.getFilteredTagList());
 
@@ -97,19 +98,34 @@ public class EditTagCommandTest {
     }
 
     @Test
+    public void execute_duplicateTag_throwsCommandException() {
+        EditTagCommand editCommand = new EditTagCommand(new Id(1), new TagName(tag2.getName().value), null, null);
+
+        java.util.List<Tag> before = List.copyOf(modelStub.getFilteredTagList());
+
+        seedu.address.logic.commands.exceptions.CommandException ex =
+                assertThrows(seedu.address.logic.commands.exceptions.CommandException.class, () ->
+                        editCommand.execute(modelStub));
+        System.out.println(ex.getMessage());
+        assertEquals(EditTagCommand.MESSAGE_DUPLICATE_TAG, ex.getMessage());
+
+        assertEquals(before, modelStub.getFilteredTagList());
+    }
+
+    @Test
     public void equals() {
         TagName name = new TagName("BestFriends");
         TagDesc desc = new TagDesc("High school buddies");
         TagColor color = new TagColor("00FF00");
 
-        EditTagCommand editFirstCommand = new EditTagCommand(1, name, desc, color);
-        EditTagCommand editSecondCommand = new EditTagCommand(2, name, desc, color);
+        EditTagCommand editFirstCommand = new EditTagCommand(new Id(1), name, desc, color);
+        EditTagCommand editSecondCommand = new EditTagCommand(new Id(2), name, desc, color);
 
         // same object -> true
         assertTrue(editFirstCommand.equals(editFirstCommand));
 
         // same values -> true
-        EditTagCommand copy = new EditTagCommand(1, name, desc, color);
+        EditTagCommand copy = new EditTagCommand(new Id(1), name, desc, color);
         assertTrue(editFirstCommand.equals(copy));
 
         // different types -> false
@@ -128,7 +144,7 @@ public class EditTagCommandTest {
         TagDesc desc = new TagDesc("Old mates");
         TagColor color = new TagColor("00FF00");
 
-        EditTagCommand editCommand = new EditTagCommand(1, name, desc, color);
+        EditTagCommand editCommand = new EditTagCommand(new Id(1), name, desc, color);
         String expected = EditTagCommand.class.getCanonicalName()
                 + "{idToEdit=1, newName=" + name + ", newDesc=" + desc + ", newColor=" + color + "}";
         assertEquals(expected, editCommand.toString());
@@ -148,6 +164,11 @@ public class EditTagCommandTest {
         @Override
         public ObservableList<Tag> getFilteredTagList() {
             return tags;
+        }
+
+        @Override
+        public boolean hasTag(seedu.address.model.tag.Tag tag) {
+            return tags.stream().anyMatch(tag::isSameTag);
         }
 
         @Override
@@ -183,116 +204,6 @@ public class EditTagCommandTest {
             if (index >= 0) {
                 tags.set(index, editedTag);
             }
-        }
-    }
-
-    private static class ModelStub implements Model {
-
-        @Override
-        public void setUserPrefs(seedu.address.model.ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public seedu.address.model.ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public seedu.address.commons.core.GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setGuiSettings(seedu.address.commons.core.GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public java.nio.file.Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBookFilePath(java.nio.file.Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBook(seedu.address.model.ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public seedu.address.model.ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addPerson(seedu.address.model.person.Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(seedu.address.model.person.Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(seedu.address.model.person.Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setPerson(seedu.address.model.person.Person target, seedu.address.model.person.Person
-                editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public javafx.collections.ObservableList<seedu.address.model.person.Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(java.util.function.Predicate<seedu.address.model.person.Person>
-                predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public javafx.collections.ObservableList<seedu.address.model.tag.Tag> getFilteredTagList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public javafx.collections.ObservableList<seedu.address.model.tag.Tag> getTagList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredTagList(java.util.function.Predicate<seedu.address.model.tag.Tag> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasTag(seedu.address.model.tag.Tag tag) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addTag(seedu.address.model.tag.Tag tag) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteTag(seedu.address.model.tag.Tag tag) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setTag(seedu.address.model.tag.Tag target, seedu.address.model.tag.Tag editedTag) {
-            throw new AssertionError("This method should not be called.");
         }
     }
 }

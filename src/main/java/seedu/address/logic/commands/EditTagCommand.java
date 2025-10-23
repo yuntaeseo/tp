@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.id.Id;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
@@ -21,8 +22,9 @@ public class EditTagCommand extends Command {
 
     public static final String MESSAGE_EDIT_SUCCESS = "Edited Tag: %1$s";
     public static final String MESSAGE_TAG_NOT_FOUND = "No tag found with the specified ID.";
+    public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the address book.";
 
-    private final int idToEdit;
+    private final Id idToEdit;
     private final TagName newName;
     private final TagDesc newDesc;
     private final TagColor newColor;
@@ -32,7 +34,7 @@ public class EditTagCommand extends Command {
      * @param desc of the edited tag.
      * @param color of the edited tag.
      */
-    public EditTagCommand(int id, TagName name, TagDesc desc, TagColor color) {
+    public EditTagCommand(Id id, TagName name, TagDesc desc, TagColor color) {
         this.idToEdit = id;
         this.newName = name;
         this.newDesc = desc;
@@ -49,7 +51,7 @@ public class EditTagCommand extends Command {
 
         ObservableList<Tag> tags = model.getFilteredTagList();
         Tag target = tags.stream()
-                .filter(tag -> tag.getId() == idToEdit)
+                .filter(tag -> tag.getId().equals(idToEdit))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(MESSAGE_TAG_NOT_FOUND));
 
@@ -57,6 +59,10 @@ public class EditTagCommand extends Command {
                 newName != null ? newName : target.getName(),
                 newDesc != null ? newDesc : target.getDesc(),
                 newColor != null ? newColor : target.getColor());
+
+        if (!target.isSameTag(edited) && model.hasTag(edited)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TAG);
+        }
 
         model.setTag(target, edited);
 
@@ -72,7 +78,7 @@ public class EditTagCommand extends Command {
             return false;
         }
         EditTagCommand otherCommand = (EditTagCommand) other;
-        return idToEdit == otherCommand.idToEdit
+        return idToEdit.equals(otherCommand.idToEdit)
                 && java.util.Objects.equals(newName, otherCommand.newName)
                 && java.util.Objects.equals(newDesc, otherCommand.newDesc)
                 && java.util.Objects.equals(newColor, otherCommand.newColor);

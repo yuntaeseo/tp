@@ -38,7 +38,7 @@ public class TagListPanel extends UiPart<Region> {
                 return;
             }
             // TagCard is a UI component that displays a Tag
-            setGraphic(new TagCard(tag, getIndex() + 1).getRoot());
+            setGraphic(new TagCard(tag).getRoot());
         }
     }
 }
