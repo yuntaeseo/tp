@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class CompositePersonPredicate implements Predicate<Person> {
-    private final List<Predicate<Person>> predicates;
+    private final List<FieldContainsKeywordsPredicate> predicates;
 
-    public CompositePersonPredicate(List<Predicate<Person>> predicates) {
+    public CompositePersonPredicate(List<FieldContainsKeywordsPredicate> predicates) {
         this.predicates = predicates;
     }
 

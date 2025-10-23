@@ -43,7 +43,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        List<Predicate<Person>> predicates = new ArrayList<>();
+        List<FieldContainsKeywordsPredicate> predicates = new ArrayList<>();
+
         List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
         List<String> phoneKeywords = argMultimap.getAllValues(PREFIX_PHONE);
         List<String> emailKeywords = argMultimap.getAllValues(PREFIX_EMAIL);
@@ -64,5 +65,4 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         return new FindCommand(new CompositePersonPredicate(predicates));
     }
-
 }
