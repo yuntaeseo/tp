@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.relationship.Relationship;
@@ -101,6 +102,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        removeIfContainsPerson(key.getId());
+    }
+
+    /**
+     * Returns true if a person with the given Id exists in the address book.
+     */
+    public boolean hasPersonWithId(Id id) {
+        return persons.hasPersonWithId(id);
     }
 
 
@@ -194,6 +203,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         relationships.remove(relationship);
     }
 
+    /**
+     * Removes all relationships that involve the person with the given Id.
+     */
+    public void removeIfContainsPerson(Id personId) {
+        relationships.removeIfContainsPerson(personId);
+    }
 
 
     //  NOTE: UTILS
