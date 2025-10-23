@@ -217,8 +217,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeIfContainsPerson(Id personId) {
-        addressBook.removeIfContainsPerson(personId);
+    public void removeRelationshipsIfContainsPerson(Id personId) {
+        addressBook.removeRelationshipsIfContainsPerson(personId);
     }
 
     @Override

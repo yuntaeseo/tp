@@ -180,7 +180,7 @@ public interface Model {
     /**
      * Removes all relationships that involve the person with the given Id.
      */
-    void removeIfContainsPerson(Id personId);
+    void removeRelationshipsIfContainsPerson(Id personId);
 
     /**
      * Replaces the given relationship {@code target} with {@code editedRelationship}.

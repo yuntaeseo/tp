@@ -172,7 +172,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void removeIfContainsPerson(seedu.address.model.id.Id personId) {
+    public void removeRelationshipsIfContainsPerson(seedu.address.model.id.Id personId) {
         throw new AssertionError("Not called.");
     }
 
