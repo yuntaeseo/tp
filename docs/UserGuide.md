@@ -77,7 +77,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG_ID]…​ [r/NOTE]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -244,17 +244,17 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-| Action                | Format, Examples                                                                                                                                                                               |
-|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add person**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [r/NOTE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague r/owes me lunch` |
-| **Clear person list** | `clear`                                                                                                                                                                                        |
-| **Delete person**     | `delete ID`<br> e.g., `delete 3`                                                                                                                                                               |
-| **Edit person**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                              |
-| **Find person**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                     |
-| **List person**       | `list`                                                                                                                                                                                         |
-| **Add tag**           | `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `addtag n/JC d/JC friends c/23f1cd`                                                                                                    |
-| **Delete tag**        | `deletetag ID` <br> e.g. `deletetag 2`                                                                                                                                                         |
-| **Edit tag**          | `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `edittag 1 d/my extended family c/099fca`                                                                                        |
-| **List tag**          | `listtag`                                                                                                                                                                                      |
-| **Exit program**      | `exit`                                                                                                                                                                                         |
-| **Help**              | `help`                                                                                                                                                                                         |
+| Action                | Format, Examples                                                                                                                                                                                 |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add person**        | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [r/NOTE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague r/owes me lunch` |
+| **Clear person list** | `clear`                                                                                                                                                                                          |
+| **Delete person**     | `delete ID`<br> e.g., `delete 3`                                                                                                                                                                 |
+| **Edit person**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                |
+| **Find person**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                       |
+| **List person**       | `list`                                                                                                                                                                                           |
+| **Add tag**           | `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `addtag n/JC d/JC friends c/23f1cd`                                                                                                      |
+| **Delete tag**        | `deletetag ID` <br> e.g. `deletetag 2`                                                                                                                                                           |
+| **Edit tag**          | `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `edittag 1 d/my extended family c/099fca`                                                                                          |
+| **List tag**          | `listtag`                                                                                                                                                                                        |
+| **Exit program**      | `exit`                                                                                                                                                                                           |
+| **Help**              | `help`                                                                                                                                                                                           |
