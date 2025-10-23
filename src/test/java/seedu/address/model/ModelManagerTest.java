@@ -178,6 +178,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getRelationshipList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getRelationshipList().remove(0));
+    }
+
+    @Test
     public void hasRelationship_nullRelationship_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasRelationship(null));
     }

@@ -115,6 +115,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getPersonList() {
+        return addressBook.getPersonList();
+    }
+
+    @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
@@ -202,6 +207,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Relationship> getFilteredRelationshipList() {
         return filteredRelationships;
+    }
+
+    @Override
+    public ObservableList<Relationship> getRelationshipList() {
+        return addressBook.getRelationshipList();
     }
 
     @Override

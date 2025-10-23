@@ -79,6 +79,11 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Returns an unmodifiable view of the entire person list.
+     */
+    ObservableList<Person> getPersonList();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
@@ -172,6 +177,11 @@ public interface Model {
     void updateFilteredRelationshipList(Predicate<Relationship> predicate);
 
     /**
+     * Returns an unmodifiable view of the entire relationship list.
+     */
+    ObservableList<Relationship> getRelationshipList();
+
+    /**
      * Returns true if a relationship with the same identity as {@code relationship} exists in the address book.
      */
     boolean hasRelationship(Relationship relationship);
@@ -200,4 +210,5 @@ public interface Model {
      * in the address book.
      */
     void setRelationship(Relationship target, Relationship editedRelationship);
+
 }
