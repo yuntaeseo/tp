@@ -102,6 +102,10 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Returns true if a person with the given Id exists in the address book.
+     */
+    boolean hasPersonWithId(Id id);
 
 
     //  NOTE: TAGS

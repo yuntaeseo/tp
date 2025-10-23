@@ -138,6 +138,12 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public boolean hasPersonWithId(Id id) {
+        requireNonNull(id);
+        return addressBook.getPersonList().stream()
+                .anyMatch(person -> person.getId().equals(id));
+    }
 
 
     //  NOTE: TAGS
