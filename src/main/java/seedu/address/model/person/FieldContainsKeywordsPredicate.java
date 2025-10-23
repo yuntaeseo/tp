@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -52,5 +53,10 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
             field = "address";
         }
         return new ToStringBuilder(this).add(field + " keywords", keywords).toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(extractor, keywords);
     }
 }

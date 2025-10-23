@@ -29,4 +29,9 @@ public class CompositePersonPredicate implements Predicate<Person> {
         CompositePersonPredicate otherCompositePersonPredicate = (CompositePersonPredicate) other;
         return predicates.equals(otherCompositePersonPredicate.predicates);
     }
+
+    @Override
+    public int hashCode() {
+        return predicates.hashCode();
+    }
 }

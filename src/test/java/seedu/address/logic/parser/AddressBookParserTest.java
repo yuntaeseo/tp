@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
@@ -24,6 +25,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.id.Id;
+import seedu.address.model.person.CompositePersonPredicate;
+import seedu.address.model.person.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -73,10 +76,18 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        String input = "n/Alice p/9123 e/@example.com a/little india a/#35";
+
+        CompositePersonPredicate expectedPredicates = new CompositePersonPredicate(List.of(
+                new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_NAME, List.of("Alice")),
+                new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_PHONE, List.of("9123")),
+                new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_EMAIL, List.of("@example.com")),
+                new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_ADDRESS, List.of("little india", "#35"))
+        ));
+        FindCommand expectedCommand = new FindCommand(expectedPredicates);
+
+        FindCommand command = (FindCommand) parser.parseCommand(FindCommand.COMMAND_WORD + " " + input);
+        assertEquals(expectedCommand, command);
     }
 
     @Test

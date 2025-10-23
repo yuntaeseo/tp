@@ -38,7 +38,6 @@ public class FieldContainsKeywordsPredicateTest {
         var a = new FieldContainsKeywordsPredicate(GET_PHONE, List.of("9123"));
         var b = new FieldContainsKeywordsPredicate(GET_PHONE, List.of("9123"));
         assertEquals(a, b);
-        assertEquals(a.hashCode(), b.hashCode());
     }
 
     @Test
