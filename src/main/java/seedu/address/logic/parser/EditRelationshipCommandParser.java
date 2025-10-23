@@ -35,7 +35,6 @@ public class EditRelationshipCommandParser implements Parser<EditRelationshipCom
 
         EditRelationshipDescriptor editRelationshipDescriptor = new EditRelationshipDescriptor();
 
-        // ✅ FIXED: use parseId instead of parseName/Phone/Email
         if (argMultimap.getValue(PREFIX_PART_1).isPresent()) {
             editRelationshipDescriptor.setPart1(ParserUtil.parseId(argMultimap.getValue(PREFIX_PART_1).get()));
         }
