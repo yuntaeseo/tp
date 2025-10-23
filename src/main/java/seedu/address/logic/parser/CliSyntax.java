@@ -15,5 +15,7 @@ public class CliSyntax {
     // Tag prefixes
     public static final Prefix PREFIX_DESC = new Prefix("d/");
     public static final Prefix PREFIX_COLOR = new Prefix("c/");
-
+    // Relationship prefixes
+    public static final Prefix PREFIX_PART_1 = new Prefix("p1/");
+    public static final Prefix PREFIX_PART_2 = new Prefix("p2/");
 }

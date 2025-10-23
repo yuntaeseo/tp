@@ -15,12 +15,15 @@ import static seedu.address.testutil.TypicalTags.FRIENDS;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.TagBuilder;
 import seedu.address.testutil.TypicalRelationships;
 import seedu.address.testutil.TypicalTags;
 
@@ -140,6 +143,29 @@ public class ModelManagerTest {
     public void hasTag_tagInAddressBook_returnsTrue() {
         modelManager.addTag(FRIENDS);
         assertTrue(modelManager.hasTag(FRIENDS));
+    }
+
+    @Test
+    public void hasTagId() {
+        modelManager.addTag(new TagBuilder().withName("yi").withId(1).build());
+        modelManager.addTag(new TagBuilder().withName("one hundred").withId(100).build());
+
+        assertTrue(modelManager.hasTagId(new Id(1)));
+        assertTrue(modelManager.hasTagId(new Id(100)));
+        assertFalse(modelManager.hasTagId(new Id(101010)));
+        assertFalse(modelManager.hasTagId(new Id(65166666)));
+    }
+
+    @Test
+    public void hasTagIds() {
+        modelManager.addTag(new TagBuilder().withName("one").withId(1).build());
+        modelManager.addTag(new TagBuilder().withName("two").withId(2).build());
+        modelManager.addTag(new TagBuilder().withName("big").withId(1274983).build());
+
+        assertTrue(modelManager.hasTagIds(Set.of(new Id(1), new Id(2))));
+        assertTrue(modelManager.hasTagIds(Set.of(new Id(2))));
+        assertFalse(modelManager.hasTagIds(Set.of(new Id(3))));
+        assertFalse(modelManager.hasTagIds(Set.of(new Id(67))));
     }
 
 

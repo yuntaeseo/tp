@@ -2,10 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collection;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.relationship.Relationship;
@@ -101,6 +103,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        removeRelationshipsIfContainsPerson(key.getId());
+    }
+
+    /**
+     * Returns true if a person with the given Id exists in the address book.
+     */
+    public boolean hasPersonWithId(Id id) {
+        return persons.hasPersonWithId(id);
     }
 
 
@@ -121,6 +131,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasTag(Tag tag) {
         requireNonNull(tag);
         return tags.contains(tag);
+    }
+
+    /**
+     * Returns true if a tag ID exists in the address book.
+     */
+    public boolean hasTagId(Id id) {
+        return tags.hasTagId(id);
+    }
+
+    /**
+     * Returns true if all the tag IDs in {@code ids} exist in the address book.
+     */
+    public boolean hasTagIds(Collection<Id> ids) {
+        return tags.hasTagIds(ids);
     }
 
     /**
@@ -194,6 +218,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         relationships.remove(relationship);
     }
 
+    /**
+     * Removes all relationships that involve the person with the given Id.
+     */
+    public void removeRelationshipsIfContainsPerson(Id personId) {
+        relationships.removeIfContainsPerson(personId);
+    }
 
 
     //  NOTE: UTILS

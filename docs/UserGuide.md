@@ -82,7 +82,7 @@ Format: `help`
 Adds a connection to NetWise. A connection is someone who you want to keep in contact, such as
 friends, colleagues or people you met from a networking event.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG_ID]…​ [r/NOTE]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A connection can have any number of tags (including 0)

@@ -3,11 +3,13 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.id.Id;
 import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
@@ -33,6 +35,20 @@ public class UniqueTagList implements Iterable<Tag> {
     public boolean contains(Tag toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameTag);
+    }
+
+    /**
+     * Returns true if the list contains the given tag ID.
+     */
+    public boolean hasTagId(Id id) {
+        return internalList.stream().anyMatch(tag -> tag.getId().equals(id));
+    }
+
+    /**
+     * Returns true if the list contains all the Ids in {@code ids}.
+     */
+    public boolean hasTagIds(Collection<Id> ids) {
+        return ids.stream().allMatch(this::hasTagId);
     }
 
     /**

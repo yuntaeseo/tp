@@ -1,10 +1,12 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 import seedu.address.model.relationship.Relationship;
 import seedu.address.model.tag.Tag;
@@ -100,6 +102,10 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Returns true if a person with the given Id exists in the address book.
+     */
+    boolean hasPersonWithId(Id id);
 
 
     //  NOTE: TAGS
@@ -122,6 +128,16 @@ public interface Model {
      * Returns true if a tag with the same identity as {@code tag} exists in the address book.
      */
     boolean hasTag(Tag tag);
+
+    /**
+     * Returns true if a tag ID exists in the address book.
+     */
+    boolean hasTagId(Id id);
+
+    /**
+     * Returns true if all tag IDs in {@code ids} exist in the address book.
+     */
+    boolean hasTagIds(Collection<Id> ids);
 
     /**
      * Adds the given tag.
@@ -171,6 +187,11 @@ public interface Model {
      * The relationship must exist in the address book.
      */
     void deleteRelationship(Relationship relationship);
+
+    /**
+     * Removes all relationships that involve the person with the given Id.
+     */
+    void removeRelationshipsIfContainsPerson(Id personId);
 
     /**
      * Replaces the given relationship {@code target} with {@code editedRelationship}.

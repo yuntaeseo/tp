@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 import seedu.address.model.relationship.Relationship;
 import seedu.address.model.tag.Tag;
@@ -136,6 +138,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public boolean hasPersonWithId(Id id) {
+        requireNonNull(id);
+        return addressBook.hasPersonWithId(id);
+    }
 
 
     //  NOTE: TAGS
@@ -160,6 +167,16 @@ public class ModelManager implements Model {
     public boolean hasTag(Tag tag) {
         requireNonNull(tag);
         return addressBook.hasTag(tag);
+    }
+
+    @Override
+    public boolean hasTagId(Id id) {
+        return addressBook.hasTagId(id);
+    }
+
+    @Override
+    public boolean hasTagIds(Collection<Id> ids) {
+        return addressBook.hasTagIds(ids);
     }
 
     @Override
@@ -208,6 +225,11 @@ public class ModelManager implements Model {
     @Override
     public void deleteRelationship(Relationship relationship) {
         addressBook.removeRelationship(relationship);
+    }
+
+    @Override
+    public void removeRelationshipsIfContainsPerson(Id personId) {
+        addressBook.removeRelationshipsIfContainsPerson(personId);
     }
 
     @Override
