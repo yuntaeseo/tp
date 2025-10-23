@@ -133,6 +133,16 @@ The `Model` component,
 
 </div>
 
+The `Person` component,
+* stores all the fields related to a person.
+* Tags are stored as IDs.
+
+<div>
+
+<img src="images/PersonClassDiagram.png" width="450" />
+
+</div>
+
 
 ### Storage component
 
