@@ -18,6 +18,8 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.CompositePersonPredicate;
+import seedu.address.model.person.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
@@ -35,7 +37,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS;
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -47,11 +49,20 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<String> emailKeywords = argMultimap.getAllValues(PREFIX_EMAIL);
         List<String> addressKeywords = argMultimap.getAllValues(PREFIX_ADDRESS);
 
-        if (!argMultimap.getAllValues(PREFIX_NAME).isEmpty()) {
-            List<String> keywords = argMultimap.getAllValues(PREFIX_NAME)
+        if (!nameKeywords.isEmpty()) {
+            predicates.add(new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_NAME, nameKeywords));
+        }
+        if (!phoneKeywords.isEmpty()) {
+            predicates.add(new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_PHONE, phoneKeywords));
+        }
+        if (!emailKeywords.isEmpty()) {
+            predicates.add(new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_EMAIL, emailKeywords));
+        }
+        if (!addressKeywords.isEmpty()) {
+            predicates.add(new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_ADDRESS, addressKeywords));
         }
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindCommand(new CompositePersonPredicate(predicates));
     }
 
 }
