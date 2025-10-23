@@ -5,6 +5,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.parser.PersonFieldExtractor;
 
 public class FieldContainsKeywordsPredicate implements Predicate<Person> {
     private final Function<Person, String> extractor;
@@ -35,5 +37,20 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
 
         FieldContainsKeywordsPredicate otherPredicate = (FieldContainsKeywordsPredicate) other;
         return keywords.equals(otherPredicate.keywords) && extractor.equals(otherPredicate.extractor);
+    }
+
+    @Override
+    public String toString() {
+        String field = "";
+        if (this.extractor.equals(PersonFieldExtractor.GET_NAME)) {
+            field = "name";
+        } else if (this.extractor.equals(PersonFieldExtractor.GET_PHONE)) {
+            field = "phone";
+        } else if (this.extractor.equals(PersonFieldExtractor.GET_EMAIL)) {
+            field = "email";
+        } else if (this.extractor.equals(PersonFieldExtractor.GET_ADDRESS)) {
+            field = "address";
+        }
+        return new ToStringBuilder(this).add(field + " keywords", keywords).toString();
     }
 }

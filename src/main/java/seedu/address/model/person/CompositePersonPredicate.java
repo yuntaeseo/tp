@@ -12,7 +12,7 @@ public class CompositePersonPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return predicates.stream().allMatch(pred -> pred.test(person));
+        return predicates.stream().allMatch(predicate -> predicate.test(person));
     }
 
     @Override
