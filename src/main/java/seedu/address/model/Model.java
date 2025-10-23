@@ -178,6 +178,11 @@ public interface Model {
     void deleteRelationship(Relationship relationship);
 
     /**
+     * Removes all relationships that involve the person with the given Id.
+     */
+    void removeIfContainsPerson(Id personId);
+
+    /**
      * Replaces the given relationship {@code target} with {@code editedRelationship}.
      * {@code target} must exist in the address book.
      * The identity of {@code editedRelationship} must not be the same as another existing relationship
