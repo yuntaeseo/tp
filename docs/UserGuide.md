@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+NetWise is a **desktop app for managing connections for Computer Science students, optimized for use via a
+Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you can type fast, NetWise can get your connection management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -13,26 +15,28 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   **Mac users:** Ensure you have the precise JDK version prescribed
+    [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T16-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your NetWise.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar NetWise.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all connections.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a connection named
+   `John Doe` to NetWise.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the connection with ID 3.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all connections.
 
    * `exit` : Exits the app.
 
@@ -73,50 +77,56 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a connection : `add`
 
-Adds a person to the address book.
+Adds a connection to NetWise. A connection is someone who you want to keep in contact, such as
+friends, colleagues or people you met from a networking event.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A connection can have any number of tags (including 0)
 </div>
 
-* `TAG_ID` refers to the **unique ID** of each tag, can be seen by using the [`listtag`](#listing-all-tags-listtag) command. The tag ID **must be a positive integer** 1, 2, 3, …​
+* `TAG_ID` refers to the **unique ID** of each tag, can be seen by using the [`listtag`](#listing-all-tags-listtag)
+command. The tag ID **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/1 r/She owed me lunch`, supposed tag with ID 1 is `criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/1 r/She owed me lunch`,
+supposed tag with ID 1 is `criminal`
 
-### Listing all persons : `list`
+### Listing all connections : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all connectionss in NetWise.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a connection : `edit`
 
-Edits an existing person in the address book.
+Edits an existing connection in NetWise.
 
 Format: `edit ID [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`
 
-* Edits the person with the specified `ID`.
-* The ID refers to the **unique ID** each person is given when created, can be seen with [`list`](#listing-all-tags--listtag).
+* Edits the connection with the specified `ID`.
+* The ID refers to the **unique ID** each connection is given when created,
+can be seen with [`list`](#listing-all-tags--listtag).
 * The ID **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed, i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the connection will be removed, i.e adding of tags is not cumulative.
+* You can remove all the connection’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person with id 1 to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the person with id 2 to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the connection with ID 1
+to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the connection with ID 2 to be `Betsy Crower` and
+clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating connections by name : `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds connections whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -124,7 +134,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Connections matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -132,34 +142,36 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a connection : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified connection from NetWise.
 
 Format: `delete ID`
 
-* Deletes the person with the specified `ID`.
-* The ID refers to the **unique ID** each person is given when created, can be seen with [`list`](#listing-all-tags--listtag).
+* Deletes the connection with the specified `ID`.
+* The ID refers to the **unique ID** each connection is given when created, can be seen with
+[`list`](#listing-all-tags--listtag).
 * The ID **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the person with id 2 in the address book.
-* `find Betsy` followed by `delete 1` deletes the person with id 1 in the results of the `find` command.
+* `list` followed by `delete 2` deletes the connection with ID 2 in NetWise.
+* `find Betsy` followed by `delete 1` deletes the connection with ID 1 in the results of the `find` command.
 
-### Clearing all person entries : `clear`
+### Clearing all connection entries : `clear`
 
-Clears all person entries from the address book.
+Clears all connection entries from NetWise.
 
 Format: `clear`
 
 ### Adding a tag : `addtag`
 
-Adds a tag to the address book.
+Adds a tag to NetWise. A tag is a keyword or label used to categorise and organise your connections.
 
 Format: `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]`
 
-* The `RGB_COLOR` describe the colour you want to set for the tag. 
-* `RGB_COLOR` field *must* be a HEX string of length 6, case-insensitive, ***without*** the hash ('#'). I.e. 123456, 0F2AAB, abf1cd, …​
+* The `RGB_COLOR` describe the colour you want to set for the tag.
+* `RGB_COLOR` field *must* be a HEX colour string of length 6, case-insensitive, ***without***
+the hash ('#') such as 123456, 0F2AAB, abf1cd, …​
 * The default `DESCRIPTION` field is "No Description"
 * The default `RGB_COLOR` is gray (#808080)
 * The created tag will be assigned a **fixed** unique ID
@@ -170,19 +182,22 @@ Examples:
 
 ### Listing all tags : `listtag`
 
-Shows a list of all tags in the address book.
+Shows a list of all tags in NetWise.
 
 Format: `listtag`
 
-* Unlike the person list, the tag list does not show tags in any particular order. It shows the tag name along with the associated **unique ID** given when the tag is created.
-### Editing a tag: `edittag`
+* Unlike the connection list, the tag list does not show tags in any particular order.
+It shows the tag name along with the associated **unique ID** given when the tag is created.
 
-Edits a tag in the address book.
+### Editing a tag : `edittag`
+
+Edits a tag in NetWise.
 
 Format: `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]`
 
 * Edits the tag at the specified `ID`.
-* The ID refers to the **unique ID** each tag is given when created, can be seen with [`listtag`](#listing-all-tags--listtag).
+* The ID refers to the **unique ID** each tag is given when created, can be seen with
+[`listtag`](#listing-all-tags--listtag).
 * The ID **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -190,21 +205,70 @@ Format: `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]`
   specifying any additional information after it.
 
 Examples:
-* `edittag 1 d/my extended family c/099fca` changes the description of tag 1 to "my extended family", and set its color to the color with hex code #099fca.
-* `edittag 2 n/Prof d/ c/` changes the name of tag 1 to "Prof", and set both description and color to default value mentioned [above](#adding-a-tag--addtag).
+* `edittag 1 d/my extended family c/099fca` changes the description of tag 1 to "my extended family",
+and set its color to the color with hex code #099fca.
+* `edittag 2 n/Prof d/ c/` changes the name of tag 1 to "Prof", and set both description and color to default
+value mentioned [above](#adding-a-tag--addtag).
 
-### Deleting a tag: `deletetag`
+### Deleting a tag : `deletetag`
 
-Deletes a tag from the address book.
+Deletes a tag from NetWise.
 
 Format: `deletetag ID`
 
 * Deletes the tag at the specified `ID`.
-* The ID refers to the **unique ID** each tag is given when created, can be seen with [`listtag`](#listing-all-tags--listtag).
+* The ID refers to the **unique ID** each tag is given when created, can be seen with
+[`listtag`](#listing-all-tags--listtag).
 * The ID **must be a positive integer** 1, 2, 3, …​
 
 Example:
 * `delete 2` to delete the tag with ID 2
+
+### Adding a relationship : `addrel`
+
+Adds a relationship to NetWise. A relationship links any two connections together.
+
+Format: `addrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION`
+
+* `CONNECTION_1` and `CONNECTION_2` refers to the unique IDs of the two connections that this relationship links.
+* `DESCRIPTION` is a field to describe the relationship, e.g.: colleagues from ABC company
+
+Examples:
+
+* `addrel p1/1 p2/2 d/childhood friends`. Adds a relationship between the connections with ID 1 and 2, noting
+that they are childhood friends.
+
+### Listing all relationships : `listrel`
+
+Shows a list of all relationships in NetWise.
+
+Format: `listrel`
+
+### Editing a relationship : `editrel`
+
+Edits a relationship in NetWise.
+
+Format: `editrel INDEX [p1/CONNECTION_1] [p2/CONNECTION_2] [d/DESCRIPTION]`
+
+* Edits the relationship at the specified index `INDEX` in the relationship list from `listrel`.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+
+* `editrel 3 d/highschool friends`. Edits description of the third relationship in the relationship list.
+
+### Deleting a relationship : `deleterel`
+
+Deletes a relationship from NetWise.
+
+Format: `deleterel INDEX`
+
+* Deletes the relationships at the specified index `INDEX` in the relationship list from `listrel`.
+
+Examples:
+
+* `deleterel 1`. Deletes the first relationship in the relationship list.
 
 ### Exiting the program : `exit`
 
@@ -214,15 +278,21 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+NetWise data are saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+NetWise data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
+Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, NetWise will discard all data and start with an
+empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+<br>
+Furthermore, certain edits can cause NetWise to behave in unexpected ways
+(e.g., if a value entered is outside of the acceptable range).
+Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -230,31 +300,39 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that
+contains the data of your previous NetWise home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. For `add` and `edit` person commands, **when you use tag ID that does not exist**, the tag ID is still recorded. However, no tag is shown attached to the user until, and no error message is shown. Furthermore, if in the future a tag is created with that ID, it will then show up on the person who originally has that tag ID. This issue will be fixed in a later version.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using
+only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created
+by the application before running the application again.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the
+keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear.
+The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action                | Format, Examples                                                                                                                                                                                 |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add person**        | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [r/NOTE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague r/owes me lunch` |
-| **Clear person list** | `clear`                                                                                                                                                                                          |
-| **Delete person**     | `delete ID`<br> e.g., `delete 3`                                                                                                                                                                 |
-| **Edit person**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                |
-| **Find person**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                       |
-| **List person**       | `list`                                                                                                                                                                                           |
-| **Add tag**           | `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `addtag n/JC d/JC friends c/23f1cd`                                                                                                      |
-| **Delete tag**        | `deletetag ID` <br> e.g. `deletetag 2`                                                                                                                                                           |
-| **Edit tag**          | `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `edittag 1 d/my extended family c/099fca`                                                                                          |
-| **List tag**          | `listtag`                                                                                                                                                                                        |
-| **Exit program**      | `exit`                                                                                                                                                                                           |
-| **Help**              | `help`                                                                                                                                                                                           |
+| Action                    | Format, Examples                                                                                                                                                                          |
+|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add connection**        | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [r/NOTE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/1 2 r/owes me lunch`    |
+| **Clear connection list** | `clear`                                                                                                                                                                                   |
+| **Delete connection**     | `delete ID`<br> e.g., `delete 3`                                                                                                                                                          |
+| **Edit connection**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                    |
+| **Find connection**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
+| **List connection**       | `list`                                                                                                                                                                                    |
+| **Add tag**               | `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `addtag n/JC d/JC friends c/23f1cd`                                                                                               |
+| **Delete tag**            | `deletetag ID` <br> e.g. `deletetag 2`                                                                                                                                                    |
+| **Edit tag**              | `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `edittag 1 d/my extended family c/099fca`                                                                                   |
+| **List tag**              | `listtag`                                                                                                                                                                                 |
+| **Add relationship**      | `addrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION` <br> e.g. `addrel p1/1 p2/2 d/friends`                                                                                             |
+| **List relationships**    | `listrel`                                                                                                                                                                                 |
+| **Edit relationship**     | `editrel INDEX [p1/CONNECTION_1] [p2/CONNECTION_2] [d/DESCRIPTION]` <br> e.g. `editrel 1 d/friends`                                                                                       |
+| **Delete relationship**   | `deleterel INDEX` <br> e.g. `deleterel 1`                                                                                                                                                 |
+| **Exit program**          | `exit`                                                                                                                                                                                    |
+| **Help**                  | `help`                                                                                                                                                                                    |
