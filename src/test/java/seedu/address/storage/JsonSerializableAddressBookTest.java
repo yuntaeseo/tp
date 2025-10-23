@@ -83,8 +83,14 @@ public class JsonSerializableAddressBookTest {
     }
 
     @Test
-    public void toModelType_nonExistentTag_noException() {
+    public void toModelType_nonExistentTag_noException() throws Exception {
         assertDoesNotThrow(() -> JsonUtil.readJsonFile(NON_EXISTENT_TAG_FILE,
                 JsonSerializableAddressBook.class));
+        JsonSerializableAddressBook dataFromInvalidTagsFile = JsonUtil.readJsonFile(NON_EXISTENT_TAG_FILE,
+                JsonSerializableAddressBook.class).get();
+        JsonSerializableAddressBook dataFromValidTagsFile = JsonUtil.readJsonFile(TYPICAL_FILE,
+                JsonSerializableAddressBook.class).get();
+
+        assertEquals(dataFromInvalidTagsFile.toModelType(), dataFromValidTagsFile.toModelType());
     }
 }

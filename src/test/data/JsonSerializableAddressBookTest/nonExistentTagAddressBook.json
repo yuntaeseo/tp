@@ -1,18 +1,109 @@
 {
-  "persons": [ {
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "persons" : [ {
     "id": 1,
-    "name": "Elmo",
-    "phone": "94862424",
-    "email": "elmo@email.com",
-    "address": "Sesame street",
-    "tags": [ 2 ],
-    "note": ""
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tags" : [ 1, 2, 1000 ],
+    "note" : "Alice in wonderland"
+  }, {
+    "id": 2,
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "tags" : [ 2, 3, 82719043 ],
+    "note" : "Benny Ben Ben"
+  }, {
+    "id": 3,
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "tags" : [ 71297349, 1234 ],
+    "note" : ""
+  }, {
+    "id": 4,
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "tags" : [ 1 ],
+    "note" : ""
+  }, {
+    "id": 5,
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "tags" : [ ],
+    "note" : ""
+  }, {
+    "id": 6,
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "tags" : [ ],
+    "note" : ""
+  }, {
+    "id": 7,
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "tags" : [ ],
+    "note" : ""
   } ],
+
   "tags": [{
     "id": 1,
-    "name": "besto friendo",
-    "desc": "my brother",
-    "color": "DD969A"
+    "name": "friends",
+    "desc": "close people",
+    "color": "AABBCC"
+  }, {
+    "id": 2,
+    "name": "acquaintances",
+    "desc": "not close people",
+    "color": "BBCCDD"
+  }, {
+    "id": 3,
+    "name": "coworkers",
+    "desc": "definitely not close people",
+    "color": "CCDDEE"
+  }, {
+    "id": 4,
+    "name": "classmates",
+    "desc": "close close people",
+    "color": "DDEEFF"
+  }, {
+    "id": 5,
+    "name": "ex girlfriends",
+    "desc": "not getting back",
+    "color": "112233"
   }],
-  "relationships": []
+
+  "relationships": [{
+    "part1": 1,
+    "part2": 2,
+    "desc": "friends"
+  }, {
+    "part1": 2,
+    "part2": 3,
+    "desc": "not friends"
+  }, {
+    "part1": 3,
+    "part2": 4,
+    "desc": "bestie"
+  }, {
+    "part1": 1,
+    "part2": 3,
+    "desc": "enemies"
+  }, {
+    "part1": 1,
+    "part2": 4,
+    "desc": "family"
+  }]
 }
