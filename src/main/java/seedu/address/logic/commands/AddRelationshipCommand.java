@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.relationship.Relationship;
 
 /**
- * Adds a person to the address book.
+ * Adds a relationship to the address book.
  */
 public class AddRelationshipCommand extends Command {
 
