@@ -968,7 +968,7 @@ testers are expected to do more *exploratory* testing.
    `edit 1`
    **Expected:** No change. Error message states that at least one editable field must be provided.
 
-6. **Other test cases to try:** index out of range (`edit 999 ...`), invalid email or phone formats, editing a person while viewing a filtered list (indices refer to the filtered list).
+6. **Other test cases to try:** ID out of range (`edit 999 ...`), invalid email or phone formats, editing a person while viewing a filtered list (indices refer to the filtered list).
    **Expected:** Proper error handling and correct index interpretation against the currently displayed list.
 
 ---
@@ -1102,7 +1102,7 @@ testers are expected to do more *exploratory* testing.
 
 4. **Test case (invalid participants IDs: non-existant or not a postive integer):**
    `addrel p1/3955 p2/485349 d/bruh` or `addrel p1/-23 p2/49.3 d/bruh`
-   **Expected:** No tag is created. Error message states that the color must be six hexadecimal digits without the hash symbol.
+   **Expected:** No relationship is created. Error message states that the identifier is invalid.
 
 5. **Other test cases to try:** duplicate relationship (if disallowed, expect a duplicate-relationship error), very long descriptions.
    **Expected:** Appropriate validation or acceptance per product decision.
