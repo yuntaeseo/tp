@@ -140,8 +140,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPersonWithId(Id id) {
         requireNonNull(id);
-        return addressBook.getPersonList().stream()
-                .anyMatch(person -> person.getId().equals(id));
+        return addressBook.hasPersonWithId(id);
     }
 
 
@@ -215,6 +214,11 @@ public class ModelManager implements Model {
     @Override
     public void deleteRelationship(Relationship relationship) {
         addressBook.removeRelationship(relationship);
+    }
+
+    @Override
+    public void removeIfContainsPerson(Id personId) {
+        addressBook.removeIfContainsPerson(personId);
     }
 
     @Override
