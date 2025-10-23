@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.relationship.Relationship;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,13 +25,20 @@ public class PersonListPanel extends UiPart<Region> {
     private ListView<Person> personListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code personList} and {@code tagList}.
+     * Creates a {@code PersonListPanel} with the given data sources.
      */
-    public PersonListPanel(ObservableList<Person> personList, ObservableList<Tag> tagList) {
+    public PersonListPanel(ObservableList<Person> personList,
+            ObservableList<Tag> tagList,
+            ObservableList<Relationship> relationshipList,
+            ObservableList<Person> allPersons) {
         super(FXML);
         personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell(tagList));
+        personListView.setCellFactory(listView ->
+                new PersonListViewCell(tagList, relationshipList, allPersons));
+        // NOTE: refreshes person list when tags or relationships are updated
         tagList.addListener((ListChangeListener<Tag>) change ->
+                Platform.runLater(personListView::refresh));
+        relationshipList.addListener((ListChangeListener<Relationship>) change ->
                 Platform.runLater(personListView::refresh));
     }
 
@@ -38,10 +46,16 @@ public class PersonListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
-        private ObservableList<Tag> tagList;
+        private final ObservableList<Tag> tagList;
+        private final ObservableList<Relationship> relationshipList;
+        private final ObservableList<Person> allPersons;
 
-        PersonListViewCell(ObservableList<Tag> tagList) {
+        PersonListViewCell(ObservableList<Tag> tagList,
+                ObservableList<Relationship> relationshipList,
+                ObservableList<Person> allPersons) {
             this.tagList = tagList;
+            this.relationshipList = relationshipList;
+            this.allPersons = allPersons;
         }
 
         @Override
@@ -52,7 +66,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, tagList).getRoot());
+                setGraphic(new PersonCard(person, tagList, relationshipList, allPersons).getRoot());
             }
         }
     }

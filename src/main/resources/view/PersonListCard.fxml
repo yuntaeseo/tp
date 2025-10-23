@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" alignment="TOP_LEFT" spacing="18" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -34,4 +34,12 @@
       <Label fx:id="note" styleClass="cell_small_label" text="\$note" />
     </VBox>
   </GridPane>
+  <VBox fx:id="relationshipSection" alignment="TOP_LEFT" spacing="6">
+    <padding>
+      <Insets top="10" right="15" bottom="10" left="0" />
+    </padding>
+    <Label fx:id="relationshipHeading" styleClass="cell_small_label" text="Relationships" />
+    <FlowPane fx:id="relationshipItems" hgap="12" vgap="12" prefWrapLength="220" />
+    <Label fx:id="relationshipEmptyText" styleClass="cell_small_label muted-label" text="No relationships recorded" />
+  </VBox>
 </HBox>

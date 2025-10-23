@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.relationship.Relationship;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,6 +38,11 @@ public interface Logic {
     ObservableList<Person> getFilteredPersonList();
 
     /**
+     * Returns an unmodifiable view of the entire list of persons.
+     */
+    ObservableList<Person> getPersonList();
+
+    /**
      * Returns an unmodifiable view of the filtered list of tags.
      */
     ObservableList<Tag> getFilteredTagList();
@@ -45,6 +51,16 @@ public interface Logic {
      * Returns an unmodifiable view of the entire list of tags.
      */
     ObservableList<Tag> getTagList();
+
+    /**
+     * Returns an unmodifiable view of the filtered list of relationships.
+     */
+    ObservableList<Relationship> getFilteredRelationshipList();
+
+    /**
+     * Returns an unmodifiable view of the entire list of relationships.
+     */
+    ObservableList<Relationship> getRelationshipList();
 
     /**
      * Returns the user prefs' address book file path.

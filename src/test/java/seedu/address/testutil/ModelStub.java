@@ -81,6 +81,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableList<Person> getPersonList() {
+        throw new AssertionError("Not called.");
+    }
+
+    @Override
     public void addPerson(Person person) {
         throw new AssertionError("Not called.");
     }
@@ -160,6 +165,11 @@ public class ModelStub implements Model {
 
     @Override
     public ObservableList<Relationship> getFilteredRelationshipList() {
+        throw new AssertionError("Not called.");
+    }
+
+    @Override
+    public ObservableList<Relationship> getRelationshipList() {
         throw new AssertionError("Not called.");
     }
 
