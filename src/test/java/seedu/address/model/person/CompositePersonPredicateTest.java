@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_NAME;
-import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_PHONE;
+import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_NAME_STUB;
+import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_PHONE_STUB;
 
 import java.util.List;
 
@@ -15,35 +15,46 @@ import seedu.address.testutil.PersonBuilder;
 
 public class CompositePersonPredicateTest {
     @Test
-    void test_andAcrossFields_allMustMatch() {
-        var namePred = new FieldContainsKeywordsPredicate(GET_NAME, List.of("Alice"));
-        var phonePred = new FieldContainsKeywordsPredicate(GET_PHONE, List.of("9123"));
-        var composite = new CompositePersonPredicate(List.of(namePred, phonePred));
+    public void test_andAcrossFields_allMustMatch() {
+        FieldContainsKeywordsPredicate namePred = new FieldContainsKeywordsPredicate(GET_NAME_STUB, List.of("Alice"));
+        FieldContainsKeywordsPredicate phonePred = new FieldContainsKeywordsPredicate(GET_PHONE_STUB, List.of("9123"));
+        CompositePersonPredicate composite = new CompositePersonPredicate(List.of(namePred, phonePred));
 
-        var person1 = new PersonBuilder().withName("Alice Tan").withPhone("91234567").build();
-        var person2 = new PersonBuilder().withName("Alice Tan").withPhone("77777777").build();
+        Person person1 = new PersonBuilder().withName("Alice Tan").withPhone("91234567").build();
+        Person person2 = new PersonBuilder().withName("Alice Tan").withPhone("77777777").build();
 
         assertTrue(composite.test(person1));  // both match
         assertFalse(composite.test(person2)); // phone fails
     }
 
     @Test
-    void equals_samePartsSameOrder_true() {
-        var p1 = new FieldContainsKeywordsPredicate(GET_NAME, List.of("Alice"));
-        var p2 = new FieldContainsKeywordsPredicate(GET_PHONE, List.of("9123"));
-        var a = new CompositePersonPredicate(List.of(p1, p2));
-        var b = new CompositePersonPredicate(List.of(
-                new FieldContainsKeywordsPredicate(GET_NAME, List.of("Alice")),
-                new FieldContainsKeywordsPredicate(GET_PHONE, List.of("9123"))));
-        assertEquals(a, b);
+    public void equals_true() {
+        FieldContainsKeywordsPredicate p1 = new FieldContainsKeywordsPredicate(GET_NAME_STUB, List.of("Alice"));
+        FieldContainsKeywordsPredicate p2 = new FieldContainsKeywordsPredicate(GET_PHONE_STUB, List.of("9123"));
+        CompositePersonPredicate a = new CompositePersonPredicate(List.of(p1, p2));
+
+        CompositePersonPredicate b = new CompositePersonPredicate(List.of(
+                new FieldContainsKeywordsPredicate(GET_NAME_STUB, List.of("Alice")),
+                new FieldContainsKeywordsPredicate(GET_PHONE_STUB, List.of("9123"))));
+
+        assertEquals(a, a); // same object -> true
+        assertEquals(a, b); // different objects of same parts and same order -> true
     }
 
     @Test
-    void equals_samePartsDifferentOrder_ifList_thenFalse() {
-        var p1 = new FieldContainsKeywordsPredicate(GET_NAME, List.of("Alice"));
-        var p2 = new FieldContainsKeywordsPredicate(GET_PHONE, List.of("9123"));
-        var a = new CompositePersonPredicate(List.of(p1, p2));
-        var b = new CompositePersonPredicate(List.of(p2, p1));
-        assertNotEquals(a, b);
+    public void equals_false() {
+        FieldContainsKeywordsPredicate p1 = new FieldContainsKeywordsPredicate(GET_NAME_STUB, List.of("Alice"));
+        FieldContainsKeywordsPredicate p2 = new FieldContainsKeywordsPredicate(GET_PHONE_STUB, List.of("9123"));
+
+        CompositePersonPredicate a = new CompositePersonPredicate(List.of(p1, p2));
+        CompositePersonPredicate b = new CompositePersonPredicate(List.of(p2, p1));
+
+        CompositePersonPredicate c = new CompositePersonPredicate(List.of(p1));
+        CompositePersonPredicate d = new CompositePersonPredicate(List.of(p2));
+
+        assertNotEquals(a, b); // objects of same parts different order
+        assertNotEquals(c, d); // contains different predicates
+        assertNotEquals(a, new Object()); // different instances -> false
+        assertNotEquals(a, null); // null -> false;
     }
 }

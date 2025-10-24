@@ -42,7 +42,7 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public String toString() {
-        String field = "";
+        String field;
         if (this.extractor.equals(PersonFieldExtractor.GET_NAME)) {
             field = "name";
         } else if (this.extractor.equals(PersonFieldExtractor.GET_PHONE)) {
@@ -51,8 +51,10 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
             field = "email";
         } else if (this.extractor.equals(PersonFieldExtractor.GET_ADDRESS)) {
             field = "address";
+        } else {
+            field = "unknown";
         }
-        return new ToStringBuilder(this).add(field + " keywords", keywords).toString();
+        return new ToStringBuilder(this).add(field + "Keywords", keywords.toString()).toString();
     }
 
     @Override

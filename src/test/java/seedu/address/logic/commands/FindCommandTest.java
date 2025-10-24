@@ -28,7 +28,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.CompositePersonPredicate;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
-import seedu.address.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -124,7 +123,7 @@ public class FindCommandTest {
     }
 
     @Test
-    void execute_nullModel_throwsNullPointerException() {
+    public void execute_nullModel_throwsNullPointerException() {
         CompositePersonPredicate pred = new CompositePersonPredicate(List.of(
                 new FieldContainsKeywordsPredicate(GET_NAME, List.of("Alice"))
         ));
@@ -134,7 +133,7 @@ public class FindCommandTest {
     }
 
     @Test
-    void equals_samePredicate_true() {
+    public void equals_true() {
         CompositePersonPredicate predA = new CompositePersonPredicate(List.of(
                 new FieldContainsKeywordsPredicate(GET_ADDRESS, List.of("street"))
         ));
@@ -143,21 +142,24 @@ public class FindCommandTest {
                 new FieldContainsKeywordsPredicate(GET_ADDRESS, List.of("street"))
         )));
 
-        assertEquals(a, b);
-        assertEquals(a.hashCode(), b.hashCode());
-        assertNotEquals(null, a);
-        assertNotEquals(new Object(), a);
+        assertEquals(a, b); // same predicate -> true
+        assertEquals(a, a); // same object -> true
+        assertEquals(a.hashCode(), b.hashCode()); // same hashCode -> true
     }
 
     @Test
-    void equals_differentPredicates_false() {
+    public void equals_false() {
         FindCommand a = new FindCommand(new CompositePersonPredicate(List.of(
                 new FieldContainsKeywordsPredicate(GET_NAME, List.of("Alice"))
         )));
         FindCommand b = new FindCommand(new CompositePersonPredicate(List.of(
                 new FieldContainsKeywordsPredicate(GET_NAME, List.of("Bob"))
         )));
-        assertNotEquals(a, b);
+
+        assertNotEquals(a, b); // different predicate -> false
+        assertNotEquals(a.hashCode(), b.hashCode()); // different hashCode -> false
+        assertNotEquals(a, null); // null -> false
+        assertNotEquals(a, new Object()); // empty object -> false
     }
 
     @Test
