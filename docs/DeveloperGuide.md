@@ -40,8 +40,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [
-`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [
-`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in
+`Main`](../src/main/java/seedu/address/Main.java) and [
+`MainApp`](../src/main/java/seedu/address/MainApp.java)) is in
 charge of the app launch and shut down.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
@@ -81,7 +81,7 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified in [
-`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -91,9 +91,9 @@ the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of the [
-`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java)
 is specified in [
-`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -105,7 +105,7 @@ The `UI` component,
 ### Logic component
 
 **API** : [
-`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -146,7 +146,7 @@ How the parsing works:
 ### Model component
 
 **API** : [
-`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -182,7 +182,7 @@ The `Person` component,
 ### Storage component
 
 **API** : [
-`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -1050,16 +1050,17 @@ testers are expected to do more *exploratory* testing.
 ### Listing all persons : `list`
 
 1. **Test case:** `list`
-   **Expected:** Full person list is shown. Indices refresh to match the currently displayed list. Simple relationship list which shows personID and name of related persons of each person in the list is also shown. 
+   **Expected:** Full person list is shown. Indices refresh to match the currently displayed list.
+   Simple relationship list which shows personID and name of related persons of each person in the list is also shown. 
 
-2. **Test case after a `find` result:**
+3. **Test case after a `find` result:**
    Run `find John` then `list`.
    **Expected:** List switches from the filtered results back to all persons.
 
-3. **Test case when there is no relationship for a particular person:**
+4. **Test case when there is no relationship for a particular person:**
    **Expected:** Shows an empty relationship message for that person in the list.
 
-4. **Other test cases to try:** `list 123` (extraneous parameters).
+5. **Other test cases to try:** `list 123` (extraneous parameters).
    **Expected:** Same as `list`. Extraneous parameters are ignored.
 
 ---
