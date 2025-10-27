@@ -16,8 +16,8 @@ import javafx.collections.ObservableList;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.id.Id;
+import seedu.address.model.tag.Color;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
 import seedu.address.testutil.ModelStub;
@@ -35,9 +35,9 @@ public class EditTagCommandTest {
 
     @BeforeEach
     public void setup() {
-        tag1 = new Tag(new Id(1), new TagName("Friends"), new TagDesc("Schoolmates"), new TagColor("0000FF"));
-        tag2 = new Tag(new Id(2), new TagName("Work"), new TagDesc("Office mates"), new TagColor("0000FF"));
-        tag3 = new Tag(new Id(3), new TagName("Family"), new TagDesc("Close relatives"), new TagColor("0000FF"));
+        tag1 = new Tag(new Id(1), new TagName("Friends"), new TagDesc("Schoolmates"), new Color("0000FF"));
+        tag2 = new Tag(new Id(2), new TagName("Work"), new TagDesc("Office mates"), new Color("0000FF"));
+        tag3 = new Tag(new Id(3), new TagName("Family"), new TagDesc("Close relatives"), new Color("0000FF"));
         modelStub = new ModelStubWithTags(List.of(tag1, tag2, tag3));
     }
 
@@ -45,7 +45,7 @@ public class EditTagCommandTest {
     public void execute_allFieldsSpecified_success() throws Exception {
         TagName newName = new TagName("BestFriends");
         TagDesc newDesc = new TagDesc("High school buddies");
-        TagColor newColor = new TagColor("00FF00");
+        Color newColor = new Color("00FF00");
 
         EditTagCommand editCommand = new EditTagCommand(new Id(1), newName, newDesc, newColor);
         Tag expectedEdited = new Tag(new Id(1), newName, newDesc, newColor);
@@ -116,7 +116,7 @@ public class EditTagCommandTest {
     public void equals() {
         TagName name = new TagName("BestFriends");
         TagDesc desc = new TagDesc("High school buddies");
-        TagColor color = new TagColor("00FF00");
+        Color color = new Color("00FF00");
 
         EditTagCommand editFirstCommand = new EditTagCommand(new Id(1), name, desc, color);
         EditTagCommand editSecondCommand = new EditTagCommand(new Id(2), name, desc, color);
@@ -142,7 +142,7 @@ public class EditTagCommandTest {
     public void toStringMethod() {
         TagName name = new TagName("Friends");
         TagDesc desc = new TagDesc("Old mates");
-        TagColor color = new TagColor("00FF00");
+        Color color = new Color("00FF00");
 
         EditTagCommand editCommand = new EditTagCommand(new Id(1), name, desc, color);
         String expected = EditTagCommand.class.getCanonicalName()

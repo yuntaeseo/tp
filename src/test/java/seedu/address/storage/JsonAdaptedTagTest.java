@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.id.Id;
-import seedu.address.model.tag.TagColor;
+import seedu.address.model.tag.Color;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
 
@@ -67,14 +67,14 @@ public class JsonAdaptedTagTest {
     @Test
     public void toModelType_invalidColor_throwsIllegalValueException() {
         JsonAdaptedTag tag = new JsonAdaptedTag(VALID_ID, VALID_NAME, VALID_DESC, INVALID_COLOR);
-        String expectedMessage = TagColor.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Color.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, tag::toModelType);
     }
 
     @Test
     public void toModelType_nullColor_throwsIllegalValueException() {
         JsonAdaptedTag tag = new JsonAdaptedTag(VALID_ID, VALID_NAME, VALID_DESC, null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, TagColor.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Color.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, tag::toModelType);
     }
 }

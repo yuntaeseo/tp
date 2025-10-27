@@ -30,10 +30,10 @@ public class TextColor {
     }
 
     /**
-     * Gets the {@code TextColor} to be displayed based on {@code TagColor}.
+     * Gets the {@code TextColor} to be displayed based on {@code Color}.
      * @return {@code TextColor} that represents white/black color.
      */
-    public static TextColor fromTagColor(TagColor backgroundColor) {
+    public static TextColor fromTagColor(Color backgroundColor) {
         return new TextColor(ColorUtil.getTextColor(backgroundColor.value));
     }
 

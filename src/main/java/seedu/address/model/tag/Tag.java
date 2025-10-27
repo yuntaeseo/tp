@@ -18,7 +18,7 @@ public class Tag {
     private final Id id;
     private final TagName name;
     private final TagDesc desc;
-    private final TagColor color;
+    private final Color color;
     private final TextColor textColor;
 
     /**
@@ -27,7 +27,7 @@ public class Tag {
      * Every field must be present and not null.
      * Only use this constructor when Id is guaranteed to be unique.
      */
-    public Tag(Id id, TagName name, TagDesc desc, TagColor color) {
+    public Tag(Id id, TagName name, TagDesc desc, Color color) {
         requireAllNonNull(id, name, desc, color);
         idManager.setLargest(id);
         this.id = id;
@@ -41,7 +41,7 @@ public class Tag {
      * Constructs a {@code Tag}, without needing to provide an id.
      * The unique Id will be automatically generated using {@code IdManager}.
      */
-    public Tag(TagName name, TagDesc desc, TagColor color) {
+    public Tag(TagName name, TagDesc desc, Color color) {
         this(idManager.getNewId(), name, desc, color);
     }
 
@@ -57,7 +57,7 @@ public class Tag {
         return desc;
     }
 
-    public TagColor getColor() {
+    public Color getColor() {
         return color;
     }
 

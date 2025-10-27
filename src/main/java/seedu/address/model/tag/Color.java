@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag's color in HEX format.
+ * Represents a color in HEX format.
  */
-public class TagColor {
-    public static final String MESSAGE_CONSTRAINTS = "Tags colors should be in HEX format (without the '#'): RRGGBB";
+public class Color {
+    public static final String MESSAGE_CONSTRAINTS = "Colors should be in HEX format (without the '#'): RRGGBB";
 
     /**
      * Regex for enforcing the HEX format (without the '#' at the beginning).
@@ -21,11 +21,11 @@ public class TagColor {
     private final String displayValue;
 
     /**
-     * Constructs a {@code TagColor}
+     * Constructs a {@code Color}
      *
      * @param tagColor A valid tag color.
      */
-    public TagColor(String tagColor) {
+    public Color(String tagColor) {
         requireNonNull(tagColor);
         checkArgument(isValidTagColor(tagColor), MESSAGE_CONSTRAINTS);
         value = tagColor;
@@ -58,11 +58,11 @@ public class TagColor {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TagColor)) {
+        if (!(other instanceof Color)) {
             return false;
         }
 
-        TagColor otherTagColor = (TagColor) other;
+        Color otherTagColor = (Color) other;
         return value.equals(otherTagColor.value);
     }
 

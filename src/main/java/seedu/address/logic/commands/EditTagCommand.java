@@ -6,8 +6,8 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.id.Id;
+import seedu.address.model.tag.Color;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
 /**
@@ -27,14 +27,14 @@ public class EditTagCommand extends Command {
     private final Id idToEdit;
     private final TagName newName;
     private final TagDesc newDesc;
-    private final TagColor newColor;
+    private final Color newColor;
     /**
      * @param id of the tag to edit.
      * @param name of the edited tag.
      * @param desc of the edited tag.
      * @param color of the edited tag.
      */
-    public EditTagCommand(Id id, TagName name, TagDesc desc, TagColor color) {
+    public EditTagCommand(Id id, TagName name, TagDesc desc, Color color) {
         this.idToEdit = id;
         this.newName = name;
         this.newDesc = desc;

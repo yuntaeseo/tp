@@ -9,8 +9,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.Color;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
 
@@ -32,7 +32,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
 
         TagName name = ParserUtil.parseTagName(argMultimap.getValue(PREFIX_NAME).get());
         TagDesc desc = ParserUtil.parseTagDesc(argMultimap.getValue(PREFIX_DESC).orElse("No description"));
-        TagColor color = ParserUtil.parseTagColor(argMultimap.getValue(PREFIX_COLOR).orElse("808080"));
+        Color color = ParserUtil.parseColor(argMultimap.getValue(PREFIX_COLOR).orElse("808080"));
 
         Tag tag = new Tag(name, desc, color);
         return new AddTagCommand(tag);

@@ -23,8 +23,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddTagCommand;
+import seedu.address.model.tag.Color;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagName;
 import seedu.address.testutil.TagBuilder;
 
@@ -96,7 +96,7 @@ public class AddTagCommandParserTest {
 
         // invalid color
         assertParseFailure(parser, TAG_NAME_DESC_FRIENDS + TAG_DESC_DESC_FRIENDS + INVALID_TAG_COLOR_DESC,
-                TagColor.MESSAGE_CONSTRAINTS);
+                Color.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + TAG_NAME_DESC_FRIENDS + TAG_DESC_DESC_FRIENDS

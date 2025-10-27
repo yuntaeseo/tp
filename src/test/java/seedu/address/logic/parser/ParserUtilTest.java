@@ -19,7 +19,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.TagColor;
+import seedu.address.model.tag.Color;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
 
@@ -267,24 +267,24 @@ public class ParserUtilTest {
 
     @Test
     public void parseTagColor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTagColor((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseColor((String) null));
     }
 
     @Test
     public void parseTagColor_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTagColor(INVALID_TAG_COLOR));
+        assertThrows(ParseException.class, () -> ParserUtil.parseColor(INVALID_TAG_COLOR));
     }
 
     @Test
     public void parseTagColor_validValueWithoutWhitespace_returnsTagColor() throws Exception {
-        TagColor expectedColor = new TagColor(VALID_TAG_COLOR);
-        assertEquals(expectedColor, ParserUtil.parseTagColor(VALID_TAG_COLOR));
+        Color expectedColor = new Color(VALID_TAG_COLOR);
+        assertEquals(expectedColor, ParserUtil.parseColor(VALID_TAG_COLOR));
     }
 
     @Test
     public void parseTagColor_validValueWithWhitespace_returnsTrimmedTagColor() throws Exception {
         String colorWithWhitespace = WHITESPACE + VALID_TAG_COLOR + WHITESPACE;
-        TagColor expectedColor = new TagColor(VALID_TAG_COLOR);
-        assertEquals(expectedColor, ParserUtil.parseTagColor(colorWithWhitespace));
+        Color expectedColor = new Color(VALID_TAG_COLOR);
+        assertEquals(expectedColor, ParserUtil.parseColor(colorWithWhitespace));
     }
 }

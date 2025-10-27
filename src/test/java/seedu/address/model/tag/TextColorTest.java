@@ -42,11 +42,11 @@ public class TextColorTest {
 
     @Test
     public void fromTagColor_darkTagColor_returnsWhiteText() {
-        final TagColor black = new TagColor("000000");
-        final TagColor darkRed = new TagColor("210403");
-        final TagColor darkBlue = new TagColor("040359");
-        final TagColor olive = new TagColor("3c3d01");
-        final TagColor darkGreen = new TagColor("01360b");
+        final Color black = new Color("000000");
+        final Color darkRed = new Color("210403");
+        final Color darkBlue = new Color("040359");
+        final Color olive = new Color("3c3d01");
+        final Color darkGreen = new Color("01360b");
 
         assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(black).value);
         assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(darkRed).value);
@@ -57,11 +57,11 @@ public class TextColorTest {
 
     @Test
     public void fromTagColor_lightTagColor_returnsBlackText() {
-        final TagColor white = new TagColor("ffffff");
-        final TagColor lightGreen = new TagColor("05fc34");
-        final TagColor brightYellow = new TagColor("f7f71e");
-        final TagColor lightBlue = new TagColor("3afcfc");
-        final TagColor brightPink = new TagColor("ff85fb");
+        final Color white = new Color("ffffff");
+        final Color lightGreen = new Color("05fc34");
+        final Color brightYellow = new Color("f7f71e");
+        final Color lightBlue = new Color("3afcfc");
+        final Color brightPink = new Color("ff85fb");
 
         assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(white).value);
         assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(lightGreen).value);
