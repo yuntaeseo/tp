@@ -124,7 +124,7 @@ to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the connection with ID 2 to be `Betsy Crower` and
 clears all existing tags.
 
-### Locating connections by name : `find`
+### Locating connections by fields : `find`
 
 Finds all connections (persons) whose specified fields contain any of the given keywords.
 Matching is **case-insensitive** and supports **substring** (for most fields) and **word-based** (for tags) matching.
