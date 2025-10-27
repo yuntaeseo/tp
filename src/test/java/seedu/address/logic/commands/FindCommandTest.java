@@ -40,7 +40,7 @@ public class FindCommandTest {
     @Test
     public void execute_nameMatchEitherSubstrings_listAllMatches() {
         // Name: “Ali” OR “Mei”
-        // Match 4: ALICE, BENSON (Benson Meier), DANIEL (Daniel Meier), HOON Meier
+        // Match 4: ALICE, BENSON (Benson Meier), DANIEL (Daniel Meier)
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         CompositePersonPredicate pred = new CompositePersonPredicate(List.of(
                 new FieldContainsKeywordsPredicate(GET_NAME, List.of("Ali", "Mei"))

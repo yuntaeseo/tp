@@ -23,17 +23,17 @@ import seedu.address.model.person.Person;
  */
 public final class PersonFieldExtractor {
     /** Extracts the person's name, phone, email, or address as a single-element list. */
-    public static final Function<Person, List<String>> GET_NAME = p -> List.of(p.getName().toString());
-    public static final Function<Person, List<String>> GET_PHONE = p -> List.of(p.getPhone().toString());
-    public static final Function<Person, List<String>> GET_EMAIL = p -> List.of(p.getEmail().toString());
-    public static final Function<Person, List<String>> GET_ADDRESS = p -> List.of(p.getAddress().toString());
+    public static final Function<Person, List<String>> GET_NAME = p -> List.of(p.getName().fullName);
+    public static final Function<Person, List<String>> GET_PHONE = p -> List.of(p.getPhone().value);
+    public static final Function<Person, List<String>> GET_EMAIL = p -> List.of(p.getEmail().value);
+    public static final Function<Person, List<String>> GET_ADDRESS = p -> List.of(p.getAddress().value);
 
     /**
      * Extracts all tag identifiers associated with the person as a list of strings.
-     * Each tag ID is converted to its string representation using {@link Id#toString()}.
+     * Each tag ID is converted to its string representation.
      */
     public static final Function<Person, List<String>> GET_TAGS = p ->
-            p.getTagIds().stream().map(Id::toString).toList();
+            p.getTagIds().stream().map(Id -> Id.value.toString()).toList();
 
     // Private constructor to prevent instantiation.
     private PersonFieldExtractor() {}

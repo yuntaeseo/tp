@@ -9,11 +9,6 @@ import static seedu.address.logic.parser.PersonFieldExtractor.GET_EMAIL;
 import static seedu.address.logic.parser.PersonFieldExtractor.GET_NAME;
 import static seedu.address.logic.parser.PersonFieldExtractor.GET_PHONE;
 import static seedu.address.logic.parser.PersonFieldExtractor.GET_TAGS;
-import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_ADDRESS_STUB;
-import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_EMAIL_STUB;
-import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_NAME_STUB;
-import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_PHONE_STUB;
-import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_TAGS_STUB;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,38 +21,38 @@ import seedu.address.testutil.PersonBuilder;
 public class FieldContainsKeywordsPredicateTest {
     @Test
     public void test_nameWholeWordMatch_true() {
-        FieldContainsKeywordsPredicate p = new FieldContainsKeywordsPredicate(GET_NAME_STUB, List.of("Alice", "Zoe"));
+        FieldContainsKeywordsPredicate p = new FieldContainsKeywordsPredicate(GET_NAME, List.of("Alice", "Zoe"));
         assertTrue(p.test(new PersonBuilder().withName("Alice Tan").build()));
     }
 
     @Test
     void test_nameCaseInsensitive_true() {
-        FieldContainsKeywordsPredicate p = new FieldContainsKeywordsPredicate(GET_NAME_STUB, List.of("aLiCe"));
+        FieldContainsKeywordsPredicate p = new FieldContainsKeywordsPredicate(GET_NAME, List.of("aLiCe"));
         assertTrue(p.test(new PersonBuilder().withName("ALICE TAN").build()));
     }
 
     @Test
     public void test_addressNoMatch_false() {
-        FieldContainsKeywordsPredicate p = new FieldContainsKeywordsPredicate(GET_ADDRESS_STUB, List.of("Clementi"));
+        FieldContainsKeywordsPredicate p = new FieldContainsKeywordsPredicate(GET_ADDRESS, List.of("Clementi"));
         assertFalse(p.test(new PersonBuilder().withAddress("Little India").build()));
     }
 
     @Test
     public void test_tagMatch_true() {
-        FieldContainsKeywordsPredicate p = new FieldContainsKeywordsPredicate(GET_TAGS_STUB, List.of("1", "2"), true);
+        FieldContainsKeywordsPredicate p = new FieldContainsKeywordsPredicate(GET_TAGS, List.of("1", "2"), true);
         assertTrue(p.test(new PersonBuilder().withTags(1, 10, 12).build()));
     }
 
     @Test
     public void test_tagNoMatch_false() {
-        FieldContainsKeywordsPredicate p = new FieldContainsKeywordsPredicate(GET_TAGS_STUB, List.of("1", "2"), true);
+        FieldContainsKeywordsPredicate p = new FieldContainsKeywordsPredicate(GET_TAGS, List.of("1", "2"), true);
         assertFalse(p.test(new PersonBuilder().withTags(10, 20, 12).build()));
     }
 
     @Test
     public void equals_sameExtractorSameKeywords_true() {
-        FieldContainsKeywordsPredicate a = new FieldContainsKeywordsPredicate(GET_PHONE_STUB, List.of("9123"));
-        FieldContainsKeywordsPredicate b = new FieldContainsKeywordsPredicate(GET_PHONE_STUB, List.of("9123"));
+        FieldContainsKeywordsPredicate a = new FieldContainsKeywordsPredicate(GET_PHONE, List.of("9123"));
+        FieldContainsKeywordsPredicate b = new FieldContainsKeywordsPredicate(GET_PHONE, List.of("9123"));
         assertEquals(a, b);
         assertEquals(a.hashCode(), b.hashCode());
         assertEquals(a, a); // same object -> true
@@ -65,8 +60,8 @@ public class FieldContainsKeywordsPredicateTest {
 
     @Test
     public void equals_differentExtractor_false() {
-        FieldContainsKeywordsPredicate a = new FieldContainsKeywordsPredicate(GET_TAGS_STUB, List.of("9123"));
-        FieldContainsKeywordsPredicate b = new FieldContainsKeywordsPredicate(GET_NAME_STUB, List.of("9123"));
+        FieldContainsKeywordsPredicate a = new FieldContainsKeywordsPredicate(GET_TAGS, List.of("9123"));
+        FieldContainsKeywordsPredicate b = new FieldContainsKeywordsPredicate(GET_NAME, List.of("9123"));
         assertNotEquals(a, b);
         assertNotEquals(a.hashCode(), b.hashCode());
 
@@ -76,8 +71,8 @@ public class FieldContainsKeywordsPredicateTest {
 
     @Test
     public void equals_differentKeywords_false() {
-        FieldContainsKeywordsPredicate a = new FieldContainsKeywordsPredicate(GET_EMAIL_STUB, List.of("ex.com"));
-        FieldContainsKeywordsPredicate b = new FieldContainsKeywordsPredicate(GET_EMAIL_STUB, List.of("mail.com"));
+        FieldContainsKeywordsPredicate a = new FieldContainsKeywordsPredicate(GET_EMAIL, List.of("ex.com"));
+        FieldContainsKeywordsPredicate b = new FieldContainsKeywordsPredicate(GET_EMAIL, List.of("mail.com"));
         assertNotEquals(a, b);
     }
 
