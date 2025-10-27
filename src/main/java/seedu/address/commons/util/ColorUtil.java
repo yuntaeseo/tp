@@ -87,21 +87,21 @@ public class ColorUtil {
     }
 
     /**
-     * Returns red channel from given {@code color}.
+     * Returns red channel from the given {@code color}.
      */
     private static int getRedChannel(Color color) {
         return Integer.parseInt(color.value.substring(0, 2), 16);
     }
 
     /**
-     * Returns green channel from given {@code color}.
+     * Returns green channel from the given {@code color}.
      */
     private static int getGreenChannel(Color color) {
         return Integer.parseInt(color.value.substring(2, 4), 16);
     }
 
     /**
-     * Returns blue channel from given {@code color}.
+     * Returns blue channel from the given {@code color}.
      */
     private static int getBlueChannel(Color color) {
         return Integer.parseInt(color.value.substring(4, 6), 16);
