@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Helper functions for handling strings.
@@ -39,6 +40,25 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code sentence} contains the {@code substring}.
+     *   Ignore cases, and only substring match is required
+     * @param sentence cannot be null
+     * @param substring cannot be null, cannot be empty
+     * @return true if {@code sentence} contains {@code substring}
+     */
+    public static boolean containsSubstringIgnoreCase(String sentence, String substring) {
+        requireNonNull(sentence);
+        requireNonNull(substring);
+
+        String preppedWord = substring.trim();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+
+
+        return sentence.toLowerCase().contains(preppedWord.toLowerCase());
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
@@ -64,5 +84,32 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Returns a list of non-empty, trimmed keyword strings from a given raw input list.
+     * <p>
+     * Each string in the input list is first {@link String#trim() trimmed} to remove leading and trailing whitespace,
+     * and then filtered to exclude empty entries (i.e. strings of zero length after trimming).
+     * </p>
+     * <p>
+     * This method is typically used by command parsers to clean user input before creating
+     * field-based predicates for commands such as {@code find}.
+     * </p>
+     *
+     * Example:
+     * <pre>
+     * Input:  [" Alice ", " ", "Bob", ""]
+     * Output: ["Alice", "Bob"]
+     * </pre>
+     *
+     * @param raw A list of raw keyword strings, possibly containing extra spaces or empty entries.
+     * @return A new list containing only non-empty, trimmed keyword strings.
+     */
+    public static List<String> toNonEmptyKeywords(List<String> raw) {
+        return raw.stream()
+                  .map(String::trim)
+                  .filter(s -> !s.isEmpty())
+                  .toList();
     }
 }

@@ -513,6 +513,39 @@ Use case ends.
 
       Use case ends.
 
+#### UC15 - Find Person
+
+**Goal:** To allow users to search for persons in the address book by any combination of fields (name, phone, email, address, and tags).
+
+**Preconditions:** The address book contains one or more persons.
+
+**Postconditions:** If success, the filtered person list in the model contains only persons matching all specified field predicates.
+
+MSS
+
+1. User types the find command followed by one or more field prefixes and keywords.
+2. **System** validates the command and the provided fields.
+3. **System** filters out the persons satisfying all conditions.
+4. **System** displays the number of matching persons and the list all the matching person.
+
+Use case ends.
+
+Use case ends.
+
+**Extensions**
+
+* **2a. Invalid command format (e.g., unrecognized prefix or extra arguments).**
+  * **2a1.** **System** informs the user the command is invalid and shows the correct command format.
+    Use case ends.
+
+* **2b. No field prefixes provided (e.g., find without arguments).**
+  * **2b1.** **System** informs the **User** that at least one field must be provided
+  Use case ends.
+
+* **3a. Field provided but with empty values (e.g., `n/` or `n/     ` (whitespaces) ).**
+  * **3a1.** Empty or whitespace-only keywords are ignored by `StringUtil.toNonEmptyKeywords()` in **System** and not taken into consideration when finding.
+  Use case ends.
+
 [comment]: TAGS
 
 #### UC21 - List Tags
@@ -920,6 +953,7 @@ Use case ends.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Connection**: Refers to someone who you want to keep in contact, such as friends, colleagues or people you met from a networking event.
 * **Relationship**: Refers to a connection between two persons in the contacts list. From one person you can see all the
   other people in the contact that they are connected to.
 
@@ -1093,25 +1127,30 @@ testers are expected to do more *exploratory* testing.
 
 ### Locating persons by name : `find`
 
-1. **Prerequisite:** Ensure the list has multiple persons with varied names.
+1. **Prerequisite:** Ensure the list has:
+* multiple persons with varied names, phone numbers, emails, addresses, and tags.
+* multiple tags with varied names
 
 2. **Test case (single keyword):**
-   `find John`
-   **Expected:** Shows persons whose names contain the word “John” (case-insensitive). Indices refer to this filtered
+   e.g. `find n/John`
+   **Expected:** Shows persons whose names contain the substring “John” (case-insensitive). Indices refer to this filtered
    list.
 
-3. **Test case (multiple keywords, order irrelevant):**
-   `find alex david`
-   **Expected:** Shows persons whose names contain “alex” or “david” (case-insensitive, full word match). Matches “Alex
-   Yeoh” and “David Li”.
+3. **Test case (multiple name keywords):**
+   e.g. `find n/alex n/dav`
+   **Expected:** Shows persons whose names contain “alex” OR “dav” (case-insensitive, substring match). Potential names matched: "Alex Ho", "Alexander", "David", "Daven Li", etc.
 
-4. **Test case (no match):**
-   `find Zyxwv`
+4. **Test case (address no match):**
+   e.g. `find a/Zyrtxwv`
    **Expected:** Empty list with a message indicating zero persons found.
 
-5. **Other test cases to try:** mixed casing (`find hAnS`), partial word (`find Han` should not match “Hans”), leading
-   or trailing spaces.
-   **Expected:** Behaves per specification (case-insensitive, full-word, name-only search).
+5. **Test case (multiple fields):**
+    e.g. `find n/jo e/@gmail a/clementi`
+    **Expected:** List of people whose name contains the substring "jo" (e.g. John, Joelle,...), email containing "@gmail", and addressing containg "clementi"
+
+6. **Test case (repeating fields):**
+    e.g. `find p/1234 a/clem a/bishan t/5 t/2`
+    **Expected:** List of people whose phone number contains "1234" in it, address contains EITHER "clem" OR "bishan" or both, and with EITHER tags 5, 2, or both. 
 
 ---
 
