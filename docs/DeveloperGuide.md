@@ -1053,14 +1053,14 @@ testers are expected to do more *exploratory* testing.
    **Expected:** Full person list is shown. Indices refresh to match the currently displayed list.
    Simple relationship list which shows personID and name of related persons of each person in the list is also shown. 
 
-3. **Test case after a `find` result:**
+2. **Test case after a `find` result:**
    Run `find John` then `list`.
    **Expected:** List switches from the filtered results back to all persons.
 
-4. **Test case when there is no relationship for a particular person:**
+3. **Test case when there is no relationship for a particular person:**
    **Expected:** Shows an empty relationship message for that person in the list.
 
-5. **Other test cases to try:** `list 123` (extraneous parameters).
+4. **Other test cases to try:** `list 123` (extraneous parameters).
    **Expected:** Same as `list`. Extraneous parameters are ignored.
 
 ---
