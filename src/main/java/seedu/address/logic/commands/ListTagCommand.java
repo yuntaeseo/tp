@@ -3,9 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TAGS;
 
-import javafx.collections.ObservableList;
 import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
 
 /**
  * Lists all tags in the address book to the user.
