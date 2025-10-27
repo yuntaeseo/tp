@@ -4,25 +4,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.Color;
+
 public class ColorUtilTest {
     @Test
     public void getTextColor_whiteBackground_returnsBlack() {
-        final String white = "FFFFFF";
-        assertEquals(ColorUtil.BLACK, ColorUtil.getTextColor(white));
+        assertEquals(ColorUtil.BLACK, ColorUtil.getTextColor(ColorUtil.WHITE));
     }
 
     @Test
     public void getTextColor_blackBackground_returnsWhite() {
-        final String black = "000000";
-        assertEquals(ColorUtil.WHITE, ColorUtil.getTextColor(black));
+        assertEquals(ColorUtil.WHITE, ColorUtil.getTextColor(ColorUtil.BLACK));
     }
 
     @Test
     public void getTextColor_darkBackground_returnsWhite() {
-        final String darkRed = "210403";
-        final String darkBlue = "040359";
-        final String olive = "3c3d01";
-        final String darkGreen = "01360b";
+        final Color darkRed = new Color("210403");
+        final Color darkBlue = new Color("040359");
+        final Color olive = new Color("3c3d01");
+        final Color darkGreen = new Color("01360b");
 
         assertEquals(ColorUtil.WHITE, ColorUtil.getTextColor(darkRed));
         assertEquals(ColorUtil.WHITE, ColorUtil.getTextColor(darkBlue));
@@ -32,10 +32,10 @@ public class ColorUtilTest {
 
     @Test
     public void getTextColor_lightBackground_returnsBlack() {
-        final String lightGreen = "05fc34";
-        final String brightYellow = "f7f71e";
-        final String lightBlue = "3afcfc";
-        final String brightPink = "ff85fb";
+        final Color lightGreen = new Color("05fc34");
+        final Color brightYellow = new Color("f7f71e");
+        final Color lightBlue = new Color("3afcfc");
+        final Color brightPink = new Color("ff85fb");
 
         assertEquals(ColorUtil.BLACK, ColorUtil.getTextColor(lightGreen));
         assertEquals(ColorUtil.BLACK, ColorUtil.getTextColor(brightYellow));

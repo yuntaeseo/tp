@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
 import seedu.address.model.id.Id;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.Color;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
 

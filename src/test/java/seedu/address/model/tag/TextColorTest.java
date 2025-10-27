@@ -48,11 +48,11 @@ public class TextColorTest {
         final Color olive = new Color("3c3d01");
         final Color darkGreen = new Color("01360b");
 
-        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(black).value);
-        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(darkRed).value);
-        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(darkBlue).value);
-        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(olive).value);
-        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(darkGreen).value);
+        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(black));
+        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(darkRed));
+        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(darkBlue));
+        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(olive));
+        assertEquals(ColorUtil.WHITE, TextColor.fromTagColor(darkGreen));
     }
 
     @Test
@@ -63,11 +63,11 @@ public class TextColorTest {
         final Color lightBlue = new Color("3afcfc");
         final Color brightPink = new Color("ff85fb");
 
-        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(white).value);
-        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(lightGreen).value);
-        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(brightYellow).value);
-        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(lightBlue).value);
-        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(brightPink).value);
+        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(white));
+        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(lightGreen));
+        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(brightYellow));
+        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(lightBlue));
+        assertEquals(ColorUtil.BLACK, TextColor.fromTagColor(brightPink));
     }
 
     @Test

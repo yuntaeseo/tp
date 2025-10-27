@@ -21,13 +21,13 @@ public class TagTest {
     @Test
     public void constructor_tagColors_returnsCorrectTextColor() {
         Tag tag = new TagBuilder(FRIENDS).build();
-        assertEquals(TextColor.fromTagColor(FRIENDS.getColor()), tag.getTextColor());
+        assertEquals(ColorUtil.getTextColor(FRIENDS.getDisplayColor()), tag.getTextColor());
 
         Tag whiteTag = new TagBuilder().withName("white").withColor("FFFFFF").build();
-        assertEquals(ColorUtil.BLACK, whiteTag.getTextColor().value);
+        assertEquals(ColorUtil.BLACK, whiteTag.getTextColor());
 
         Tag blackTag = new TagBuilder().withName("black").withColor("000000").build();
-        assertEquals(ColorUtil.WHITE, blackTag.getTextColor().value);
+        assertEquals(ColorUtil.WHITE, blackTag.getTextColor());
     }
 
     @Test
