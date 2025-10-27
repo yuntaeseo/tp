@@ -134,7 +134,7 @@ find `[n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [a/ADDRESS_KEYWORD
 * At least one field prefix (`n/`, `p/`, `e/`, `a/`, `t/`) must be provided.
 * Each field can take one or more keywords separated by spaces.
 * Matching is partial for name, phone, email, and address (e.g., `n/Ali` matches “Alice”).
-* Matching is exact (word-based) for tags (e.g., `t/5` only matches tag “5”).
+* Matching is exact (ID-based) for tags (e.g., `t/5` only matches tag “5”).
 * The search across different fields uses **AND logic** — a person must match all fields provided. 
   (e.g. `n/Ali e/gmail` finds persons whose **name contains “Ali”** *and* **email contains “gmail”**.)
 * The search within the same field uses **OR logic** — any one of the field’s keywords will match.
@@ -143,11 +143,11 @@ find `[n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [a/ADDRESS_KEYWORD
 Examples:
 * `find n/Ali` → Finds all persons with names containing “Ali”.
 * `find e/gmail a/Clementi` → Finds persons whose email contains “gmail” and address contains “Clementi”.
-* `find n/Ali e/gmail a/Clementi a/Bishan t/2 t/5 t/7` → Finds persons whose 
+* `find n/Ali e/gmail a/Clementi a/Bishan t/2 t/5 t/7` → Finds persons who: 
   * name contains “Ali”:
   * email contains “gmail”,
   *	address contains “Clementi” or “Bishan”, and
-  *	tags include “2”, “5”, or “7”.
+  *	has tag IDs 2, 5, or 7.
 
 ### Deleting a connection : `delete`
 
