@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -203,5 +204,19 @@ public class ModelStub implements Model {
         throw new AssertionError("Not called.");
     }
 
+    @Override
+    public ObservableList<Pair<Person, Relationship>> getRelationshipQuery() {
+        throw new AssertionError("Not called.");
+    }
+
+    @Override
+    public void queryImmediateRelationship(Id id) {
+        throw new AssertionError("Not called.");
+    }
+
+    @Override
+    public void queryLink(Id person1, Id person2) {
+        throw new AssertionError("Not called.");
+    }
 }
 

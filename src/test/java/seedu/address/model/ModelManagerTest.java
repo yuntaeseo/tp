@@ -9,6 +9,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TAGS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalRelationships.ONE_TWO;
 import static seedu.address.testutil.TypicalTags.FRIENDS;
 
@@ -19,9 +21,12 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.description.Description;
 import seedu.address.model.id.Id;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.relationship.Relationship;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.TagBuilder;
 import seedu.address.testutil.TypicalRelationships;
@@ -198,7 +203,73 @@ public class ModelManagerTest {
         assertTrue(modelManager.hasRelationship(ONE_TWO));
     }
 
+    @Test
+    public void queryImmediateRelationship_nullId() {
+        assertThrows(NullPointerException.class, () -> modelManager.queryImmediateRelationship(null));
+    }
 
+    @Test
+    public void queryImmediateRelationship_emptyResult() {
+        modelManager.addPerson(ALICE);
+        modelManager.queryImmediateRelationship(ALICE.getId());
+        assertTrue(modelManager.getRelationshipQuery().size() == 0);
+    }
+
+    @Test
+    public void queryImmediateRelationship_nonEmptyResult() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BOB);
+        modelManager.addPerson(BENSON);
+        Relationship rel1 = new Relationship(ALICE.getId(), BOB.getId(), new Description(""));
+        Relationship rel2 = new Relationship(ALICE.getId(), BENSON.getId(), new Description(""));
+        modelManager.addRelationship(rel1);
+        modelManager.addRelationship(rel2);
+        modelManager.queryImmediateRelationship(ALICE.getId());
+        assertEquals(modelManager.getRelationshipQuery().get(0), new Pair<>(BOB, rel1));
+        assertEquals(modelManager.getRelationshipQuery().get(1), new Pair<>(BENSON, rel2));
+    }
+
+    @Test
+    public void queryLink_nullId() {
+        assertThrows(NullPointerException.class, () -> modelManager.queryLink(null, null));
+    }
+
+    @Test
+    public void queryLink_noLink() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BOB);
+        modelManager.addPerson(BENSON);
+        modelManager.addPerson(CARL);
+        Relationship rel1 = new Relationship(ALICE.getId(), BOB.getId(), new Description(""));
+        Relationship rel2 = new Relationship(ALICE.getId(), BENSON.getId(), new Description(""));
+        Relationship rel3 = new Relationship(BOB.getId(), BENSON.getId(), new Description(""));
+        modelManager.addRelationship(rel1);
+        modelManager.addRelationship(rel2);
+        modelManager.addRelationship(rel3);
+        modelManager.queryLink(ALICE.getId(), CARL.getId());
+        assertTrue(modelManager.getRelationshipQuery().size() == 0);
+    }
+
+    @Test
+    public void queryLink_linkExist() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BOB);
+        modelManager.addPerson(BENSON);
+        modelManager.addPerson(CARL);
+        Relationship rel1 = new Relationship(ALICE.getId(), BOB.getId(), new Description(""));
+        Relationship rel2 = new Relationship(BOB.getId(), BENSON.getId(), new Description(""));
+        Relationship rel3 = new Relationship(BENSON.getId(), ALICE.getId(), new Description(""));
+        Relationship rel4 = new Relationship(BENSON.getId(), CARL.getId(), new Description(""));
+        modelManager.addRelationship(rel1);
+        modelManager.addRelationship(rel2);
+        modelManager.addRelationship(rel3);
+        modelManager.addRelationship(rel4);
+        modelManager.queryLink(ALICE.getId(), CARL.getId());
+        assertTrue(modelManager.getRelationshipQuery().size() == 3);
+        assertEquals(modelManager.getRelationshipQuery().get(0), new Pair<>(ALICE, rel3));
+        assertEquals(modelManager.getRelationshipQuery().get(1), new Pair<>(BENSON, rel4));
+        assertEquals(modelManager.getRelationshipQuery().get(2), new Pair<>(CARL, null));
+    }
 
     @Test
     public void equals() {
