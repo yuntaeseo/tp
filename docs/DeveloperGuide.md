@@ -513,6 +513,41 @@ Use case ends.
 
       Use case ends.
 
+#### UC15 - Find Person
+
+**Goal:** To allow users to search for persons in the address book by any combination of fields (name, phone, email, address, and tags).
+
+**Preconditions:** The address book contains one or more persons.
+
+**Postconditions:** If success, the filtered person list in the model contains only persons matching all specified field predicates.
+
+MSS
+
+1. User types the find command followed by one or more field prefixes and keywords.
+2. System tokenizes and parses the input using FindCommandParser. 
+3. System creates individual FieldContainsKeywordsPredicate objects for each provided field. 
+4. System combines all field predicates into a CompositePersonPredicate. 
+5. System updates the model’s filtered person list with persons satisfying all predicates. 
+6. System displays the number of matching persons and updates the UI list.
+
+Use case ends.
+
+Use case ends.
+
+**Extensions**
+
+* **2a. Invalid command format (e.g., unrecognized prefix or extra arguments).**
+  * **2a1.** **System** informs the user the command is invalid and shows the correct command format.
+    Use case ends.
+
+* **2b. No field prefixes provided (e.g., find without arguments).**
+  * **2b1.** **System** informs the **User** that at least one field must be provided
+  Use case ends.
+
+* **3a. Field provided but with empty values (e.g., `n/` or `n/     ` (whitespaces) ).**
+  * **3a1.** Empty or whitespace-only keywords are ignored by `StringUtil.toNonEmptyKeywords()` in **System** and not taken into consideration when finding.
+  Use case ends.
+
 [comment]: TAGS
 
 #### UC21 - List Tags

@@ -126,21 +126,28 @@ clears all existing tags.
 
 ### Locating connections by name : `find`
 
-Finds connections whose names contain any of the given keywords.
+Finds all connections (persons) whose specified fields contain any of the given keywords.
+Matching is **case-insensitive** and supports **substring** (for most fields) and **word-based** (for tags) matching.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+find `[n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_IDS] [MORE KEYWORDS]...`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Connections matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* At least one field prefix (`n/`, `p/`, `e/`, `a/`, `t/`) must be provided.
+* Each field can take one or more keywords separated by spaces.
+* Matching is partial for name, phone, email, and address (e.g., `n/Ali` matches “Alice”).
+* Matching is exact (word-based) for tags (e.g., `t/5` only matches tag “5”).
+* The search across different fields uses **AND logic** — a person must match all fields provided. 
+  (e.g. `n/Ali e/gmail` finds persons whose **name contains “Ali”** *and* **email contains “gmail”**.)
+* The search within the same field uses **OR logic** — any one of the field’s keywords will match.
+  (e.g. `a/Clementi a/Bishan` finds persons living in *either* Clementi *or* Bishan.)
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/Ali` → Finds all persons with names containing “Ali”.
+* `find e/gmail a/Clementi` → Finds persons whose email contains “gmail” and address contains “Clementi”.
+* `find n/Ali e/gmail a/Clementi a/Bishan t/2 t/5 t/7` → Finds persons whose 
+  * name contains “Ali”:
+  * email contains “gmail”,
+  *	address contains “Clementi” or “Bishan”, and
+  *	tags include “2”, “5”, or “7”.
 
 ### Deleting a connection : `delete`
 
