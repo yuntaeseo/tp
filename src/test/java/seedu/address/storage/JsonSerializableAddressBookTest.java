@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
@@ -25,6 +26,7 @@ public class JsonSerializableAddressBookTest {
         TEST_DATA_FOLDER.resolve("invalidRelationshipAddressBook.json");
     private static final Path DUPLICATE_RELATIONSHIP_FILE =
         TEST_DATA_FOLDER.resolve("duplicateRelationshipAddressBook.json");
+    private static final Path NON_EXISTENT_TAG_FILE = TEST_DATA_FOLDER.resolve("nonExistentTagAddressBook.json");
 
     @Test
     public void toModelType_typicalFile_success() throws Exception {
@@ -78,5 +80,17 @@ public class JsonSerializableAddressBookTest {
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_RELATIONSHIP,
                 dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nonExistentTag_noException() throws Exception {
+        assertDoesNotThrow(() -> JsonUtil.readJsonFile(NON_EXISTENT_TAG_FILE,
+                JsonSerializableAddressBook.class));
+        JsonSerializableAddressBook dataFromInvalidTagsFile = JsonUtil.readJsonFile(NON_EXISTENT_TAG_FILE,
+                JsonSerializableAddressBook.class).get();
+        JsonSerializableAddressBook dataFromValidTagsFile = JsonUtil.readJsonFile(TYPICAL_FILE,
+                JsonSerializableAddressBook.class).get();
+
+        assertEquals(dataFromInvalidTagsFile.toModelType(), dataFromValidTagsFile.toModelType());
     }
 }

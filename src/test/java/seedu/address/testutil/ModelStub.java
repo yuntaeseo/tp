@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -8,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 import seedu.address.model.relationship.Relationship;
 import seedu.address.model.tag.Tag;
@@ -79,6 +81,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableList<Person> getPersonList() {
+        throw new AssertionError("Not called.");
+    }
+
+    @Override
     public void addPerson(Person person) {
         throw new AssertionError("Not called.");
     }
@@ -95,6 +102,11 @@ public class ModelStub implements Model {
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
+        throw new AssertionError("Not called.");
+    }
+
+    @Override
+    public boolean hasPersonWithId(seedu.address.model.id.Id id) {
         throw new AssertionError("Not called.");
     }
 
@@ -123,6 +135,16 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasTagId(Id id) {
+        throw new AssertionError("Not called.");
+    }
+
+    @Override
+    public boolean hasTagIds(Collection<Id> ids) {
+        throw new AssertionError("Not called.");
+    }
+
+    @Override
     public void addTag(Tag tag) {
         throw new AssertionError("Not called.");
     }
@@ -147,6 +169,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableList<Relationship> getRelationshipList() {
+        throw new AssertionError("Not called.");
+    }
+
+    @Override
     public void updateFilteredRelationshipList(Predicate<Relationship> predicate) {
         throw new AssertionError("Not called.");
     }
@@ -163,6 +190,11 @@ public class ModelStub implements Model {
 
     @Override
     public void deleteRelationship(Relationship relationship) {
+        throw new AssertionError("Not called.");
+    }
+
+    @Override
+    public void removeRelationshipsIfContainsPerson(seedu.address.model.id.Id personId) {
         throw new AssertionError("Not called.");
     }
 

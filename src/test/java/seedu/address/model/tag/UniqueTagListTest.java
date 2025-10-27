@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalTags.COWORKERS;
 import static seedu.address.testutil.TypicalTags.EX_GIRLFRIEND;
 import static seedu.address.testutil.TypicalTags.FRIENDS;
 
@@ -12,9 +13,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.id.Id;
 import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 import seedu.address.testutil.TagBuilder;
@@ -161,6 +164,45 @@ public class UniqueTagListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueTagList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void hasTagId_idInList_returnsTrue() {
+        List<Tag> tagList = List.of(FRIENDS, EX_GIRLFRIEND);
+        uniqueTagList.setTags(tagList);
+
+        assertTrue(uniqueTagList.hasTagId(FRIENDS.getId()));
+        assertTrue(uniqueTagList.hasTagId(EX_GIRLFRIEND.getId()));
+    }
+
+    @Test
+    public void hasTagId_idNotInList_returnsFalse() {
+        uniqueTagList.add(new TagBuilder(FRIENDS).withId(1).build());
+        uniqueTagList.add(new TagBuilder(EX_GIRLFRIEND).withId(2).build());
+
+        assertFalse(uniqueTagList.hasTagId(new Id(3)));
+        assertFalse(uniqueTagList.hasTagId(new Id(298412)));
+    }
+
+    @Test
+    public void hasTagIds_idsInList_returnsTrue() {
+        List<Tag> tagList = List.of(FRIENDS, EX_GIRLFRIEND, COWORKERS);
+        uniqueTagList.setTags(tagList);
+
+        assertTrue(uniqueTagList.hasTagIds(Set.of(EX_GIRLFRIEND.getId())));
+        assertTrue(uniqueTagList.hasTagIds(Set.of(FRIENDS.getId(), COWORKERS.getId())));
+        assertTrue(uniqueTagList.hasTagIds(Set.of(FRIENDS.getId(), EX_GIRLFRIEND.getId(), COWORKERS.getId())));
+    }
+
+    @Test
+    public void hasTagIds_idsNotInList_returnsFalse() {
+        uniqueTagList.add(new TagBuilder(FRIENDS).withId(2).build());
+        uniqueTagList.add(new TagBuilder(EX_GIRLFRIEND).withId(3).build());
+        uniqueTagList.add(new TagBuilder(COWORKERS).withId(5).build());
+
+        assertFalse(uniqueTagList.hasTagIds(Set.of(new Id(1))));
+        assertFalse(uniqueTagList.hasTagIds(Set.of(new Id(1), new Id(2))));
+        assertFalse(uniqueTagList.hasTagIds(Set.of(new Id(5), new Id(2), new Id(3), new Id(71284))));
     }
 
     @Test
