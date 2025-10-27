@@ -33,9 +33,9 @@ public class ColorUtil {
          * https://stackoverflow.com/questions/596216/formula-to-determine-perceived-brightness-of-rgb-color
          */
 
-        int red = getRedChannel(backgroundColor);
-        int green = getGreenChannel(backgroundColor);
-        int blue = getBlueChannel(backgroundColor);
+        int red = backgroundColor.getRedChannel();
+        int green = backgroundColor.getGreenChannel();
+        int blue = backgroundColor.getBlueChannel();
 
         double redLinear = sRgbToLinear(red);
         double greenLinear = sRgbToLinear(green);
@@ -67,9 +67,9 @@ public class ColorUtil {
      * @return softened color
      */
     public static Color soften(Color color) {
-        int red = getRedChannel(color);
-        int green = getGreenChannel(color);
-        int blue = getBlueChannel(color);
+        int red = color.getRedChannel();
+        int green = color.getGreenChannel();
+        int blue = color.getBlueChannel();
 
         int softenedRed = tint(red);
         int softenedGreen = tint(green);
@@ -84,26 +84,5 @@ public class ColorUtil {
     private static int tint(int channel) {
         double tinted = channel * (1 - WHITE_TINT_RATIO) + 255 * WHITE_TINT_RATIO;
         return (int) Math.round(Math.min(255, Math.max(0, tinted)));
-    }
-
-    /**
-     * Returns red channel from the given {@code color}.
-     */
-    private static int getRedChannel(Color color) {
-        return Integer.parseInt(color.value.substring(0, 2), 16);
-    }
-
-    /**
-     * Returns green channel from the given {@code color}.
-     */
-    private static int getGreenChannel(Color color) {
-        return Integer.parseInt(color.value.substring(2, 4), 16);
-    }
-
-    /**
-     * Returns blue channel from the given {@code color}.
-     */
-    private static int getBlueChannel(Color color) {
-        return Integer.parseInt(color.value.substring(4, 6), 16);
     }
 }

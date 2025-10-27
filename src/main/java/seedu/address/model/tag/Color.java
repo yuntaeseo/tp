@@ -34,6 +34,27 @@ public class Color {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns red channel of the color.
+     */
+    public int getRedChannel() {
+        return Integer.parseInt(value.substring(0, 2), 16);
+    }
+
+    /**
+     * Returns green channel of the color.
+     */
+    public int getGreenChannel() {
+        return Integer.parseInt(value.substring(2, 4), 16);
+    }
+
+    /**
+     * Returns blue channel of the color.
+     */
+    public int getBlueChannel() {
+        return Integer.parseInt(value.substring(4, 6), 16);
+    }
+
     @Override
     public String toString() {
         return value.toUpperCase();
@@ -58,6 +79,4 @@ public class Color {
     public int hashCode() {
         return value.hashCode();
     }
-
-
 }
