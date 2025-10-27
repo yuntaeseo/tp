@@ -96,16 +96,16 @@ public class FieldContainsKeywordsPredicateTest {
         FieldContainsKeywordsPredicate t = new FieldContainsKeywordsPredicate(GET_TAGS, tagList);
 
 
-        String nameExpected = FieldContainsKeywordsPredicate.class.getCanonicalName() +
-                "{nameKeywords=" + nameList + "}";
-        String phoneExpected = FieldContainsKeywordsPredicate.class.getCanonicalName() +
-                "{phoneKeywords=" + phoneList + "}";
-        String emailExpected = FieldContainsKeywordsPredicate.class.getCanonicalName() +
-                "{emailKeywords=" + emailList + "}";
-        String addressExpected = FieldContainsKeywordsPredicate.class.getCanonicalName() +
-                "{addressKeywords=" + addressList + "}";
-        String tagsExpected = FieldContainsKeywordsPredicate.class.getCanonicalName() +
-                "{tagsKeywords=" + tagList + "}";
+        String nameExpected = FieldContainsKeywordsPredicate.class.getCanonicalName()
+                + "{nameKeywords=" + nameList + "}";
+        String phoneExpected = FieldContainsKeywordsPredicate.class.getCanonicalName()
+                + "{phoneKeywords=" + phoneList + "}";
+        String emailExpected = FieldContainsKeywordsPredicate.class.getCanonicalName()
+                + "{emailKeywords=" + emailList + "}";
+        String addressExpected = FieldContainsKeywordsPredicate.class.getCanonicalName()
+                + "{addressKeywords=" + addressList + "}";
+        String tagsExpected = FieldContainsKeywordsPredicate.class.getCanonicalName()
+                + "{tagsKeywords=" + tagList + "}";
 
         assertEquals(nameExpected, n.toString());
         assertEquals(phoneExpected, p.toString());
@@ -120,8 +120,8 @@ public class FieldContainsKeywordsPredicateTest {
         List<String> unknownList = Collections.emptyList();
         FieldContainsKeywordsPredicate unknown = new FieldContainsKeywordsPredicate(unknownFunction, unknownList);
 
-        String unknownExpected = FieldContainsKeywordsPredicate.class.getCanonicalName() +
-                "{unknownKeywords=" + unknownList + "}";
+        String unknownExpected = FieldContainsKeywordsPredicate.class.getCanonicalName()
+                + "{unknownKeywords=" + unknownList + "}";
 
         assertEquals(unknownExpected, unknown.toString());
     }

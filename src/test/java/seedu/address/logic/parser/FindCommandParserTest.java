@@ -19,8 +19,8 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ",
-                "At least one field to find must be provided. " +
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                "At least one field to find must be provided. "
+                        + String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -32,8 +32,8 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyArgWithPrefix_throwsParseException() {
         assertParseFailure(parser, " n/   a/ \t e/  ",
-                "At least one field to find must be provided. " +
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                "At least one field to find must be provided. "
+                        + String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_multipleFields_returnsFindCommand() {
-        String input = " n/Alice p/9123 e/@example.com a/little india a/#35 t/1 t/10" ;
+        String input = " n/Alice p/9123 e/@example.com a/little india a/#35 t/1 t/10";
         // Note the order of the address should not change, since List put them in order of appearance
         String inputDifferentOrder = " a/little india a/#35  n/Alice t/1 \t e/@example.com t/10 \n p/9123";
 

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_NAME_STUB;
 import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_PHONE_STUB;
+import static seedu.address.testutil.PersonFieldExtractorsTestUtil.GET_TAGS_STUB;
 
 import java.util.List;
 
@@ -23,8 +24,20 @@ public class CompositePersonPredicateTest {
         Person person1 = new PersonBuilder().withName("Alice Tan").withPhone("91234567").build();
         Person person2 = new PersonBuilder().withName("Alice Tan").withPhone("77777777").build();
 
-        assertTrue(composite.test(person1));  // both match
+        assertTrue(composite.test(person1)); // both match
         assertFalse(composite.test(person2)); // phone fails
+    }
+
+    @Test
+    public void test_matchTags_matchExactString() {
+        FieldContainsKeywordsPredicate tagPred = new FieldContainsKeywordsPredicate(GET_TAGS_STUB, List.of("1"), true);
+        CompositePersonPredicate composite = new CompositePersonPredicate(List.of(tagPred));
+
+        Person person1 = new PersonBuilder().withName("Alice Tan").withPhone("91234567").withTags(1, 2).build();
+        Person person2 = new PersonBuilder().withName("Alice Tan").withPhone("12345678").withTags(2, 10).build();
+
+        assertTrue(composite.test(person1)); // match tags
+        assertFalse(composite.test(person2)); // does not exact match tags
     }
 
     @Test

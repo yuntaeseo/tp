@@ -38,7 +38,7 @@ public class FindCommandTest {
 
     // execute(): single field - OR relationships within the field keywords (name1 OR name2)
     @Test
-    public void execute_nameSubstrings_matchEither_listAllMatches() {
+    public void execute_nameMatchEitherSubstrings_listAllMatches() {
         // Name: “Ali” OR “Mei”
         // Match 4: ALICE, BENSON (Benson Meier), DANIEL (Daniel Meier), HOON Meier
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
@@ -56,12 +56,12 @@ public class FindCommandTest {
     // execute(): multiple fields - AND relationships across fields (name)
     // Composite example: (name1 OR name2) AND phone AND (address1 OR address2 OR address3)
     @Test
-    public void execute_nameAndAddress_mustMatchBoth_listAllIntersectingMatches() {
+    public void execute_bothNameAndAddressMustMatch_listAllIntersectingMatches() {
         // Name: "Benso" AND Address: "Clementi"
         // Match 1: BENSON
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         CompositePersonPredicate pred = new CompositePersonPredicate(List.of(
-                new FieldContainsKeywordsPredicate(GET_NAME,  List.of("Benso")),
+                new FieldContainsKeywordsPredicate(GET_NAME, List.of("Benso")),
                 new FieldContainsKeywordsPredicate(GET_ADDRESS, List.of("Clementi"))
         ));
 
@@ -90,13 +90,13 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_nameAndEmailSubstrings_BothMustMatch_listAllIntersectingMatches() {
+    public void execute_bothNameAndEmailSubstringsMustMatch_listAllIntersectingMatches() {
         // Name: “son” (BENSON) AND email: “@example.com”
         // Match 1: BENSON (email “johnd@example.com”)
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
 
         CompositePersonPredicate predicate = new CompositePersonPredicate(List.of(
-                new FieldContainsKeywordsPredicate(GET_NAME,  List.of("son")),
+                new FieldContainsKeywordsPredicate(GET_NAME, List.of("son")),
                 new FieldContainsKeywordsPredicate(GET_EMAIL, List.of("@example.com"))
         ));
 

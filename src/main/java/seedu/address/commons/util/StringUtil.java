@@ -86,6 +86,26 @@ public class StringUtil {
         }
     }
 
+    /**
+     * Returns a list of non-empty, trimmed keyword strings from a given raw input list.
+     * <p>
+     * Each string in the input list is first {@link String#trim() trimmed} to remove leading and trailing whitespace,
+     * and then filtered to exclude empty entries (i.e. strings of zero length after trimming).
+     * </p>
+     * <p>
+     * This method is typically used by command parsers to clean user input before creating
+     * field-based predicates for commands such as {@code find}.
+     * </p>
+     *
+     * Example:
+     * <pre>
+     * Input:  [" Alice ", " ", "Bob", ""]
+     * Output: ["Alice", "Bob"]
+     * </pre>
+     *
+     * @param raw A list of raw keyword strings, possibly containing extra spaces or empty entries.
+     * @return A new list containing only non-empty, trimmed keyword strings.
+     */
     public static List<String> toNonEmptyKeywords(List<String> raw) {
         return raw.stream()
                   .map(String::trim)

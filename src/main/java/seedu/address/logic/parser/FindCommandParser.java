@@ -4,35 +4,39 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.StringUtil.toNonEmptyKeywords;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COLOR;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.CompositePersonPredicate;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new {@link FindCommand} object.
+ * <p>
+ * The parser tokenizes input by field prefixes (name, phone, email, address, tag),
+ * extracts non-empty keyword lists for each field, and constructs
+ * a {@link FieldContainsKeywordsPredicate} for every field provided by the user.
+ * </p>
+ * <p>
+ * Multiple field predicates are combined into a single {@link CompositePersonPredicate}
+ * using logical AND — a person must match all field conditions to be returned.
+ * </p>
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given {@code String args} into a {@link FindCommand}.
+     *
+     * @param args The full user input string following the "find" command word.
+     * @return A {@link FindCommand} ready for execution.
+     * @throws ParseException If the input format is invalid or no valid fields are provided.
      */
     public FindCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -68,8 +72,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             predicates.add(new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_TAGS, tagKeywords, true));
         }
         if (predicates.isEmpty()) {
-            throw new ParseException("At least one field to find must be provided. " +
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseException("At least one field to find must be provided. "
+                    + String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         return new FindCommand(new CompositePersonPredicate(predicates));

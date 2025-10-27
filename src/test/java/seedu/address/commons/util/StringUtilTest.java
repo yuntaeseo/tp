@@ -189,14 +189,14 @@ public class StringUtilTest {
 
     @Test
     void containsSubstringIgnoreCase_nullSentence_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> StringUtil.containsSubstringIgnoreCase(null, "Alice"));
+        assertThrows(NullPointerException.class, ()
+                -> StringUtil.containsSubstringIgnoreCase(null, "Alice"));
     }
 
     @Test
     void containsSubstringIgnoreCase_nullSubstring_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> StringUtil.containsSubstringIgnoreCase("Alice Tan", null));
+        assertThrows(NullPointerException.class, ()
+                -> StringUtil.containsSubstringIgnoreCase("Alice Tan", null));
     }
 
     //---------------- Tests for getDetails --------------------------------------
