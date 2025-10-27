@@ -37,7 +37,7 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
 
         return keywords.stream().anyMatch(keyword ->
                         personFieldList.stream().anyMatch(value ->
-                                value != null && stringChecker.test(value, keyword))); // substring matching
+                                stringChecker.test(value, keyword))); // substring matching
     }
 
     @Override
@@ -65,6 +65,8 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
             field = "email";
         } else if (this.extractor.equals(PersonFieldExtractor.GET_ADDRESS)) {
             field = "address";
+        } else if(this.extractor.equals(PersonFieldExtractor.GET_TAGS)) {
+            field = "tags";
         } else {
             field = "unknown";
         }

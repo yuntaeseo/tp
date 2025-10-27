@@ -53,15 +53,16 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_multipleFields_returnsFindCommand() {
-        String input = " n/Alice p/9123 e/@example.com a/little india a/#35";
+        String input = " n/Alice p/9123 e/@example.com a/little india a/#35 t/1 t/10" ;
         // Note the order of the address should not change, since List put them in order of appearance
-        String inputDifferentOrder = " a/little india a/#35  n/Alice \t e/@example.com \n p/9123";
+        String inputDifferentOrder = " a/little india a/#35  n/Alice t/1 \t e/@example.com t/10 \n p/9123";
 
         CompositePersonPredicate expectedPredicates = new CompositePersonPredicate(List.of(
                 new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_NAME, List.of("Alice")),
                 new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_PHONE, List.of("9123")),
                 new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_EMAIL, List.of("@example.com")),
-                new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_ADDRESS, List.of("little india", "#35"))
+                new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_ADDRESS, List.of("little india", "#35")),
+                new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_TAGS, List.of("1", "10"))
                 ));
         FindCommand expectedCommand = new FindCommand(expectedPredicates);
 
