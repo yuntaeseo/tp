@@ -188,7 +188,7 @@ public class ParserUtil {
     public static Color parseColor(String color) throws ParseException {
         requireNonNull(color);
         String trimmedColor = color.trim();
-        if (!Color.isValidTagColor(trimmedColor)) {
+        if (!Color.isValidColor(trimmedColor)) {
             throw new ParseException(Color.MESSAGE_CONSTRAINTS);
         }
         return new Color(trimmedColor);

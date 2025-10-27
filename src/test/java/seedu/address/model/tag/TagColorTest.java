@@ -22,19 +22,19 @@ public class TagColorTest {
     @Test
     public void isValidColor() {
         // null name
-        assertThrows(NullPointerException.class, () -> Color.isValidTagColor(null));
+        assertThrows(NullPointerException.class, () -> Color.isValidColor(null));
 
         // invalid name
-        assertFalse(Color.isValidTagColor("")); // empty string
-        assertFalse(Color.isValidTagColor(" ")); // spaces only
-        assertFalse(Color.isValidTagColor("12345")); // 5 characters only
-        assertFalse(Color.isValidTagColor("AABBGG")); // contains non-hexadecimal characters
+        assertFalse(Color.isValidColor("")); // empty string
+        assertFalse(Color.isValidColor(" ")); // spaces only
+        assertFalse(Color.isValidColor("12345")); // 5 characters only
+        assertFalse(Color.isValidColor("AABBGG")); // contains non-hexadecimal characters
 
         // valid name
-        assertTrue(Color.isValidTagColor("AABBCC")); // alphabets uppercase only
-        assertTrue(Color.isValidTagColor("aabbcc")); // alphabets lowercase only
-        assertTrue(Color.isValidTagColor("123456")); // numbers only
-        assertTrue(Color.isValidTagColor("AA11cc")); // combined
+        assertTrue(Color.isValidColor("AABBCC")); // alphabets uppercase only
+        assertTrue(Color.isValidColor("aabbcc")); // alphabets lowercase only
+        assertTrue(Color.isValidColor("123456")); // numbers only
+        assertTrue(Color.isValidColor("AA11cc")); // combined
     }
 
     @Test
