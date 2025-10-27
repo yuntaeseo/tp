@@ -98,7 +98,7 @@ supposed tag with ID 1 is `criminal`
 
 ### Listing all connections : `list`
 
-Shows a list of all connectionss in NetWise.
+Shows a list of all connections in NetWise.
 
 Format: `list`
 
@@ -240,7 +240,7 @@ that they are childhood friends.
 
 ### Listing all relationships : `listrel`
 
-Shows a list of all relationships in NetWise.
+Shows a list of relationships for each filtered person in the list in NetWise.
 
 Format: `listrel`
 
