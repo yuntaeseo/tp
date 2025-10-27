@@ -28,18 +28,18 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+          <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="note" styleClass="cell_small_label" text="\$note" />
     </VBox>
   </GridPane>
-  <VBox fx:id="relationshipSection" alignment="TOP_LEFT" spacing="6">
+  <VBox fx:id="relationshipSection" alignment="TOP_LEFT" spacing="6" prefWidth="220">
     <padding>
       <Insets top="10" right="15" bottom="10" left="0" />
     </padding>
-    <Label fx:id="relationshipHeading" styleClass="cell_small_label" text="Relationships" />
+    <Label fx:id="relationshipHeading" styleClass="cell_small_label, relationship_label" text="Relationships" />
     <FlowPane fx:id="relationshipItems" hgap="12" vgap="12" prefWrapLength="220" />
-    <Label fx:id="relationshipEmptyText" styleClass="cell_small_label muted-label" text="No relationships recorded" />
+    <Label fx:id="relationshipEmptyText" styleClass="cell_small_label, muted_label" text="No relationships recorded" />
   </VBox>
 </HBox>
