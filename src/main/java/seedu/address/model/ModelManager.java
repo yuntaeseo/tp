@@ -287,13 +287,17 @@ public class ModelManager implements Model {
         requireAllNonNull(person1, person2);
         internalRelQuery.clear();
 
+        // Algorithm: Breath-First Search using Adjacency List
+
+        // Setting up the list of nodes
         Person[] people = addressBook.getPersonList().toArray(new Person[addressBook.getPersonList().size()]);
         HashMap<Id, Integer> idIndexMap = new HashMap<>();
         for (int i = 0; i < people.length; i++) {
             idIndexMap.put(people[i].getId(), i);
         }
 
-        // adjList[i] is the list of indexes of all Person adjacent (immediately related) to people[i].
+        // adjList[i] is the list of indexes of all Person adjacent (immediately related) to people[i]
+        // Setting up the adjacency list
         ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
         for (int i = 0; i < people.length; i++) {
             adjList.add(new ArrayList<>());
@@ -304,6 +308,7 @@ public class ModelManager implements Model {
             adjList.get(idIndexMap.get(rel.getPart2())).add(idIndexMap.get(rel.getPart1()));
         }
 
+        // Setting up the variables needed for BFS traversal
         HashSet<Integer> visited = new HashSet<>();
         Queue<ArrayList<Integer>> nextPath = new ArrayDeque<>();
         ArrayList<Integer> result = new ArrayList<>();
@@ -312,6 +317,7 @@ public class ModelManager implements Model {
         nextPath.add(new ArrayList<>());
         nextPath.peek().add(start);
 
+        // Actual BFS algorithm
         while (!nextPath.isEmpty()) {
             ArrayList<Integer> path = nextPath.remove();
             Integer last = path.get(path.size() - 1);
@@ -336,6 +342,7 @@ public class ModelManager implements Model {
             return;
         }
 
+        // Trace the route that we took and fill up internalRelQuery
         for (int i = 0; i < result.size() - 1; i++) {
             Person cur = people[result.get(i)];
             Person next = people[result.get(i + 1)];
