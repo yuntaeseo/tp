@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -10,19 +11,33 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.PersonFieldExtractor;
 
 public class FieldContainsKeywordsPredicate implements Predicate<Person> {
-    private final Function<Person, String> extractor;
+    private final Function<Person, List<String>> extractor;
     private final List<String> keywords;
+    private boolean isTag = false;
 
-    public FieldContainsKeywordsPredicate(Function<Person, String> extractor, List<String> keywords) {
+    public FieldContainsKeywordsPredicate(Function<Person, List<String>> extractor, List<String> keywords) {
         this.extractor = extractor;
         this.keywords = keywords;
     }
 
+    public FieldContainsKeywordsPredicate(Function<Person, List<String>> extractor,
+                                          List<String> keywords,
+                                          boolean isTag) {
+        this.extractor = extractor;
+        this.keywords = keywords;
+        this.isTag = isTag;
+    }
+
     @Override
     public boolean test(Person person) {
-        String personField = extractor.apply(person);
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(personField, keyword)); // substring matching
+        List<String> personFieldList = extractor.apply(person);
+        BiPredicate<String, String> stringChecker = isTag
+                ? StringUtil::containsWordIgnoreCase
+                : StringUtil::containsSubstringIgnoreCase;
+
+        return keywords.stream().anyMatch(keyword ->
+                        personFieldList.stream().anyMatch(value ->
+                                value != null && stringChecker.test(value, keyword))); // substring matching
     }
 
     @Override
@@ -32,11 +47,10 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FieldContainsKeywordsPredicate)) {
+        if (!(other instanceof FieldContainsKeywordsPredicate otherPredicate)) {
             return false;
         }
 
-        FieldContainsKeywordsPredicate otherPredicate = (FieldContainsKeywordsPredicate) other;
         return keywords.equals(otherPredicate.keywords) && extractor.equals(otherPredicate.extractor);
     }
 

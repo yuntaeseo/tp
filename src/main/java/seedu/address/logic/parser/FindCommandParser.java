@@ -50,6 +50,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<String> phoneKeywords = toNonEmptyKeywords(argMultimap.getAllValues(PREFIX_PHONE));
         List<String> emailKeywords = toNonEmptyKeywords(argMultimap.getAllValues(PREFIX_EMAIL));
         List<String> addressKeywords = toNonEmptyKeywords(argMultimap.getAllValues(PREFIX_ADDRESS));
+        List<String> tagKeywords = toNonEmptyKeywords(argMultimap.getAllValues(PREFIX_TAG));
 
         if (!nameKeywords.isEmpty()) {
             predicates.add(new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_NAME, nameKeywords));
@@ -62,6 +63,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
         if (!addressKeywords.isEmpty()) {
             predicates.add(new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_ADDRESS, addressKeywords));
+        }
+        if (!tagKeywords.isEmpty()) {
+            predicates.add(new FieldContainsKeywordsPredicate(PersonFieldExtractor.GET_TAGS, tagKeywords, true));
         }
         if (predicates.isEmpty()) {
             throw new ParseException("At least one field to find must be provided. " +
