@@ -100,7 +100,7 @@ public class FieldContainsKeywordsPredicateTest {
         String addressExpected = FieldContainsKeywordsPredicate.class.getCanonicalName()
                 + "{addressKeywords=" + addressList + "}";
         String tagsExpected = FieldContainsKeywordsPredicate.class.getCanonicalName()
-                + "{tagsKeywords=" + tagList + "}";
+                + "{tagsIds=" + tagList + "}";
 
         assertEquals(nameExpected, n.toString());
         assertEquals(phoneExpected, p.toString());

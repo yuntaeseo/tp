@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
@@ -20,6 +21,14 @@ import seedu.address.logic.parser.PersonFieldExtractor;
  * </p>
  */
 public class FieldContainsKeywordsPredicate implements Predicate<Person> {
+    /** Map of each {@link PersonFieldExtractor} static lambda to a label for the toString() method */
+    private static final Map<Function<Person, List<String>>, String> LABELS = Map.of(
+            PersonFieldExtractor.GET_NAME, "nameKeywords",
+            PersonFieldExtractor.GET_PHONE, "phoneKeywords",
+            PersonFieldExtractor.GET_EMAIL, "emailKeywords",
+            PersonFieldExtractor.GET_ADDRESS, "addressKeywords",
+            PersonFieldExtractor.GET_TAGS, "tagsIds"
+    );
     private final Function<Person, List<String>> extractor;
     private final List<String> keywords;
     private boolean isTag = false;
@@ -87,21 +96,8 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public String toString() {
-        String field;
-        if (this.extractor.equals(PersonFieldExtractor.GET_NAME)) {
-            field = "name";
-        } else if (this.extractor.equals(PersonFieldExtractor.GET_PHONE)) {
-            field = "phone";
-        } else if (this.extractor.equals(PersonFieldExtractor.GET_EMAIL)) {
-            field = "email";
-        } else if (this.extractor.equals(PersonFieldExtractor.GET_ADDRESS)) {
-            field = "address";
-        } else if (this.extractor.equals(PersonFieldExtractor.GET_TAGS)) {
-            field = "tags";
-        } else {
-            field = "unknown";
-        }
-        return new ToStringBuilder(this).add(field + "Keywords", keywords.toString()).toString();
+        String field = LABELS.getOrDefault(this.extractor, "unknownKeywords");
+        return new ToStringBuilder(this).add(field, keywords.toString()).toString();
     }
 
     @Override
