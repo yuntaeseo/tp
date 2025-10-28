@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
@@ -211,4 +212,28 @@ public interface Model {
      */
     void setRelationship(Relationship target, Relationship editedRelationship);
 
+    /**
+     * Returns an unmodifiable view of the relationship query result.
+     */
+    ObservableList<Pair<Person, Relationship>> getRelationshipQuery();
+
+    /**
+     * Computes people who have an immediate relationship with {@code Person} with {@code Id}.
+     * Results are stored in {@code getRelationshipQuery()}, which contains all Person related
+     * to Person with ID 'id' and the {@code Relationship} between them.
+     *
+     * E.g.: Assuming that the target Person is PersonT, result is
+     * {@code [[PersonA, Rel(A->T)], [PersonB, Rel(B->T)], [PersonC, Rel(C->T)], ...]}
+     */
+    void queryImmediateRelationship(Id id);
+
+    /**
+     * Computes the shortest sequence of Person whose relationships link Person with id 'person1' and 'person2'.
+     * Results are stored in {@code getRelationshipQuery()}, which contains a list of Person
+     * and the Relationship link between the previous and the next Person.
+     *
+     * E.g.: Assuming that we are finding the link between PersonA and PersonD, result is
+     * {@code [[PersonA, Rel(A->B)], [PersonB, Rel(B->C)], [PersonC, Rel(C->D)], [PersonD, null]]}
+     */
+    public void queryLink(Id person1, Id person2);
 }
