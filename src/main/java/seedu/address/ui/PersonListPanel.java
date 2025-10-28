@@ -46,6 +46,9 @@ public class PersonListPanel extends UiPart<Region> {
                 Platform.runLater(personListView::refresh));
         relationshipList.addListener((ListChangeListener<Relationship>) change ->
                 Platform.runLater(personListView::refresh));
+        // NOTE: refreshes person list when any person entry changes so relationship chips stay in sync
+        allPersons.addListener((ListChangeListener<Person>) change ->
+                Platform.runLater(personListView::refresh));
     }
 
     /**
