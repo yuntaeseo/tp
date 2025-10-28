@@ -309,9 +309,9 @@ public class ModelManager implements Model {
         }
 
         // Trace the route that we took and fill up internalRelQuery
-        for (int i = 0; i < result.size() - 1; i++) {
-            Person cur = people[result.get(i)];
-            Person next = people[result.get(i + 1)];
+        for (int i = 0; i < path.size() - 1; i++) {
+            Person cur = people[path.get(i)];
+            Person next = people[path.get(i + 1)];
             internalRelQuery.add(new Pair<>(cur, relationships.filtered(rel ->
                     rel.isSameRelationship(new Relationship(cur.getId(), next.getId(), new Description("")))).get(0)));
         }
