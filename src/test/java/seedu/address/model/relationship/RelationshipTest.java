@@ -54,13 +54,13 @@ public class RelationshipTest {
     }
 
     @Test
-    public void containsRelationShip_notContained_returnsFalse() {
+    public void hasPersonWithId_doesNotHaveId_returnsFalse() {
         assertFalse(ONE_TWO.hasPersonWithId(new Id(3)));
         assertFalse(ONE_TWO.hasPersonWithId(new Id(100)));
     }
 
     @Test
-    public void containsRelationShip_isContained_returnsTrue() {
+    public void hasPersonWithId_hasId_returnsTrue() {
         assertTrue(ONE_TWO.hasPersonWithId(new Id(1)));
         assertTrue(ONE_TWO.hasPersonWithId(new Id(2)));
     }
