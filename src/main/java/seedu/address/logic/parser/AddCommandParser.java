@@ -27,7 +27,7 @@ import seedu.address.model.person.Phone;
 public class AddCommandParser implements Parser<AddCommand> {
 
     /** Dummy ID with negative id value */
-    private static final Id DUMMY_ID = Id.INVALID_ID;
+    public static final Id DUMMY_ID = Id.INVALID_ID;
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand

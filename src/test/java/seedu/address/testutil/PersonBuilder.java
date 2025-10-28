@@ -32,6 +32,8 @@ public class PersonBuilder {
     private Set<Id> tags;
     private Note note;
 
+    private boolean hasId = false;
+
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
@@ -63,6 +65,7 @@ public class PersonBuilder {
      */
     public PersonBuilder withId(Id id) {
         this.id = id;
+        hasId = true;
         return this;
     }
 
@@ -115,7 +118,9 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, note);
+        return hasId
+                ? new Person(id, name, phone, email, address, tags, note)
+                : new Person(name, phone, email, address, tags, note);
     }
 
 }
