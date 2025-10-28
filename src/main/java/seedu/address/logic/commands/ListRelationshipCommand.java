@@ -19,13 +19,13 @@ public class ListRelationshipCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists relationships.\n"
             + "Usage:\n"
-            + "  " + COMMAND_WORD + "            → lists all relationships\n"
-            + "  " + COMMAND_WORD + PREFIX_PART_1 + "ID      → lists all relationships involving that person\n"
-            + "  " + COMMAND_WORD + PREFIX_PART_1 + "ID1" + PREFIX_PART_2 + "ID2 → shows link between two persons\n"
+            + "  " + COMMAND_WORD + ": Lists all relationships\n"
+            + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "ID: lists all relationships involving that person\n"
+            + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "ID1 " + PREFIX_PART_2 + "ID2: shows link between two persons\n"
             + "Examples:\n"
             + "  " + COMMAND_WORD + "\n"
-            + "  " + COMMAND_WORD + PREFIX_PART_1 + "/1\n"
-            + "  " + COMMAND_WORD + PREFIX_PART_1 + "/1 " + PREFIX_PART_2 + "/3";
+            + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "1\n"
+            + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "1 " + PREFIX_PART_2 + "3";
 
     public static final String MESSAGE_SUCCESS_ALL = "Listed all relationships";
     public static final String MESSAGE_SUCCESS_ONE = "Listed all relationships involving person ID %1$s";
