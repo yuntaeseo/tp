@@ -316,12 +316,12 @@ public class ModelManager implements Model {
         Integer end = idIndexMap.get(person2);
         nextPath.add(new ArrayList<>());
         nextPath.peek().add(start);
+        visited.add(start);
 
         // Actual BFS algorithm
         while (!nextPath.isEmpty()) {
             ArrayList<Integer> path = nextPath.remove();
             Integer last = path.get(path.size() - 1);
-            visited.add(last);
 
             if (last.equals(end)) {
                 result = path;
@@ -330,6 +330,7 @@ public class ModelManager implements Model {
 
             for (Integer adj : adjList.get(last)) {
                 if (!visited.contains(adj)) {
+                    visited.add(adj);
                     ArrayList<Integer> newPath = new ArrayList<>(path);
                     newPath.add(adj);
                     nextPath.add(newPath);
