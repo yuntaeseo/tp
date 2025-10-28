@@ -77,7 +77,7 @@ public class ListRelationshipCommand extends Command {
         if (!model.hasPersonWithId(id1) || !model.hasPersonWithId(id2)) {
             throw new CommandException(MESSAGE_INVALID_PERSON_ID);
         }
-        model.queryLink(id1, id2);
+        model.queryLink(id1, id2); //Note that the method does not actually state whether it found a link or not
         return new CommandResult(String.format(MESSAGE_SUCCESS_TWO, id1, id2));
     }
 
