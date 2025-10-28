@@ -342,14 +342,8 @@ public class ModelManager implements Model {
         for (int i = 0; i < result.size() - 1; i++) {
             Person cur = people[result.get(i)];
             Person next = people[result.get(i + 1)];
-            internalRelQuery.add(
-                    new Pair<>(
-                            cur,
-                            relationships.filtered(rel ->
-                                            rel.isSameRelationship(new Relationship(cur.getId(), next.getId(), new Description(""))))
-                                    .get(0)
-                    )
-            );
+            internalRelQuery.add(new Pair<>(cur, relationships.filtered(rel ->
+                    rel.isSameRelationship(new Relationship(cur.getId(), next.getId(), new Description("")))).get(0)));
         }
 
         internalRelQuery.add(new Pair<>(people[end], null));
