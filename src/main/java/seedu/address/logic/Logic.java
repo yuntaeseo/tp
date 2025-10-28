@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -61,6 +62,11 @@ public interface Logic {
      * Returns an unmodifiable view of the entire list of relationships.
      */
     ObservableList<Relationship> getRelationshipList();
+
+    /**
+     * Returns an unmodifiable view of the most recent relationship query results.
+     */
+    ObservableList<Pair<Person, Relationship>> getRelationshipQuery();
 
     /**
      * Returns the user prefs' address book file path.

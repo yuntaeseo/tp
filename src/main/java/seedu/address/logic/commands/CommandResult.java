@@ -61,6 +61,20 @@ public class CommandResult {
         return feedbackToUser.equals("Listed all tags");
     }
 
+    /**
+     * Returns true if the command result is to show the immediate relationship query panel.
+     */
+    public boolean isShowRelationshipQueryList() {
+        return feedbackToUser.equals("Displayed relationship query list");
+    }
+
+    /**
+     * Returns true if the command result is to show the relationship link query panel.
+     */
+    public boolean isShowRelationshipQueryLink() {
+        return feedbackToUser.equals("Displayed relationship query link");
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

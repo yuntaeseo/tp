@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fx:id="cardRoot" alignment="TOP_LEFT" spacing="18" xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1" styleClass="relationship-query-card">
+    <VBox alignment="TOP_LEFT" spacing="4" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="6" right="6" bottom="6" left="15"/>
+        </padding>
+        <HBox spacing="0.5" alignment="CENTER_LEFT">
+            <Label fx:id="counterpartId" styleClass="cell_big_label">
+                <minWidth>
+                    <Region fx:constant="USE_PREF_SIZE"/>
+                </minWidth>
+            </Label>
+            <Label fx:id="counterpartName" styleClass="cell_big_label" />
+        </HBox>
+        <Label fx:id="counterpartPhone" styleClass="cell_small_label" />
+        <Label fx:id="counterpartAddress" styleClass="cell_small_label" />
+        <Label fx:id="counterpartEmail" styleClass="cell_small_label" />
+        <Label fx:id="counterpartNote" styleClass="cell_small_label" />
+    </VBox>
+    <VBox alignment="TOP_LEFT" spacing="4" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="6" right="15" bottom="6" left="0"/>
+        </padding>
+        <Label fx:id="relationshipDescription" wrapText="true" styleClass="cell_small_label" />
+    </VBox>
+</HBox>

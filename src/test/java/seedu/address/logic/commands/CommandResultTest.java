@@ -24,6 +24,21 @@ public class CommandResultTest {
         assertFalse(otherResult.isShowTagList());
     }
 
+    @Test
+    public void isShowRelationshipQueries() {
+        CommandResult listQueryResult = new CommandResult("Displayed relationship query list");
+        assertTrue(listQueryResult.isShowRelationshipQueryList());
+        assertFalse(listQueryResult.isShowRelationshipQueryLink());
+
+        CommandResult linkQueryResult = new CommandResult("Displayed relationship query link");
+        assertTrue(linkQueryResult.isShowRelationshipQueryLink());
+        assertFalse(linkQueryResult.isShowRelationshipQueryList());
+
+        CommandResult otherResult = new CommandResult("feedback");
+        assertFalse(otherResult.isShowRelationshipQueryList());
+        assertFalse(otherResult.isShowRelationshipQueryLink());
+    }
+
 
     @Test
     public void equals() {
