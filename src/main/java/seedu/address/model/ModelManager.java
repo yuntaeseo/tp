@@ -53,9 +53,6 @@ public class ModelManager implements Model {
         this.filteredTags = new FilteredList<>(this.addressBook.getTagList());
         this.filteredRelationships = new FilteredList<>(this.addressBook.getRelationshipList());
         this.internalRelQuery = FXCollections.observableArrayList();
-        // Testing
-        populateSampleRelationshipQuery();
-
         this.relQuery = FXCollections.unmodifiableObservableList(internalRelQuery);
     }
 
@@ -64,18 +61,17 @@ public class ModelManager implements Model {
     }
 
 
-
     //  NOTE: USER PREFERENCES
+
+    @Override
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
+    }
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
-    }
-
-    @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
     }
 
     @Override
@@ -101,19 +97,17 @@ public class ModelManager implements Model {
     }
 
 
-
     //  NOTE: ADDRESS BOOK
-
-    @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
     }
 
+    @Override
+    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetData(addressBook);
+    }
 
 
     //  NOTE: PERSON
@@ -165,7 +159,6 @@ public class ModelManager implements Model {
     }
 
 
-
     //  NOTE: TAGS
 
     @Override
@@ -215,7 +208,6 @@ public class ModelManager implements Model {
     public void setTag(Tag target, Tag editedTag) {
         addressBook.setTag(target, editedTag);
     }
-
 
 
     //  NOTE: RELATIONSHIPS
@@ -351,53 +343,17 @@ public class ModelManager implements Model {
             Person cur = people[result.get(i)];
             Person next = people[result.get(i + 1)];
             internalRelQuery.add(
-                new Pair<>(
-                    cur,
-                    relationships.filtered(rel ->
-                        rel.isSameRelationship(new Relationship(cur.getId(), next.getId(), new Description(""))))
-                            .get(0)
-                )
+                    new Pair<>(
+                            cur,
+                            relationships.filtered(rel ->
+                                            rel.isSameRelationship(new Relationship(cur.getId(), next.getId(), new Description(""))))
+                                    .get(0)
+                    )
             );
         }
 
         internalRelQuery.add(new Pair<>(people[end], null));
     }
-
-
-
-    private void populateSampleRelationshipQuery() {
-        ObservableList<Person> samplePersons = this.addressBook.getPersonList();
-        ObservableList<Relationship> sampleRelationships = this.addressBook.getRelationshipList();
-
-        if (samplePersons.isEmpty() || sampleRelationships.isEmpty()) {
-            return;
-        }
-
-        int entries = Math.min(sampleRelationships.size(), 3);
-        for (int i = 0; i < entries; i++) {
-            Relationship relationship = sampleRelationships.get(i);
-            Person counterpart = findPersonById(relationship.getPart2());
-            if (counterpart == null) {
-                counterpart = findPersonById(relationship.getPart1());
-            }
-            if (counterpart != null) {
-                internalRelQuery.add(new Pair<>(counterpart, relationship));
-            }
-        }
-
-        if (!internalRelQuery.isEmpty()) {
-            Person finalPerson = internalRelQuery.get(internalRelQuery.size() - 1).getKey();
-            internalRelQuery.add(new Pair<>(finalPerson, null));
-        }
-    }
-
-    private Person findPersonById(Id id) {
-        return addressBook.getPersonList().stream()
-                .filter(person -> person.getId().equals(id))
-                .findFirst()
-                .orElse(null);
-    }
-
 
 
     @Override

@@ -81,7 +81,6 @@ public class RelationshipQueryLinkCard extends UiPart<Region> {
         linkArrow.setVisible(false);
         linkArrow.setManaged(false);
 
-
         Node descriptionContainer = relationshipDescription.getParent();
         if (descriptionContainer != null) {
             descriptionContainer.setVisible(false);
