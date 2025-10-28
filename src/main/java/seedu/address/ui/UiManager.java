@@ -42,6 +42,11 @@ public class UiManager implements Ui {
         try {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
+
+            // Set the program to pop up in front of other windows;list
+            primaryStage.setAlwaysOnTop(true);
+            primaryStage.setAlwaysOnTop(false);
+
             mainWindow.fillInnerParts();
 
         } catch (Throwable e) {
