@@ -287,7 +287,7 @@ public class ModelManager implements Model {
         requireAllNonNull(person1, person2);
         internalRelQuery.clear();
 
-        // Algorithm: Breath-First Search using Adjacency List
+        // Algorithm: Breadth-First Search using Adjacency List
 
         // Setting up the list of nodes
         Person[] people = addressBook.getPersonList().toArray(new Person[addressBook.getPersonList().size()]);
