@@ -49,6 +49,14 @@ public class Tag {
         this(idManager.getNewId(), name, desc, color);
     }
 
+    /**
+     * Constructs a {@code Tag} by copying the fields from {@code toCopy}.
+     * A new ID will be automatically generated from {@code idManager}.
+     */
+    public Tag(Tag toCopy) {
+        this(toCopy.name, toCopy.desc, toCopy.color);
+    }
+
     public Id getId() {
         return id;
     }
