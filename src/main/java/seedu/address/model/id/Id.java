@@ -8,6 +8,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * for objects of other classes.
  */
 public class Id {
+    /**
+     * This is an invalid ID containing id value -1 that is mainly used for temporary entities.
+     * Ensure no entity with {@code INVALID_ID} is added to the system.
+     */
+    public static final Id INVALID_ID = new Id(-1, true);
+
     public static final String MESSAGE_CONSTRAINTS =
             String.format("Id must be a positive integer not larger than %d", Integer.MAX_VALUE);
 
@@ -33,6 +39,19 @@ public class Id {
         requireNonNull(id);
         checkArgument(isValidId(id), MESSAGE_CONSTRAINTS);
         value = Integer.parseInt(id);
+    }
+
+    /**
+     * Used to create an ID without validation, mainly for utility IDs with invalid values.
+     * @param id any value.
+     * @param skipValidation boolean to indicate whether to skip validation. Typically true if using this constructor.
+     */
+    private Id(Integer id, boolean skipValidation) {
+        requireNonNull(id);
+        if (!skipValidation) {
+            checkArgument(isValidId(id), MESSAGE_CONSTRAINTS);
+        }
+        this.value = id;
     }
 
     /**

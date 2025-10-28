@@ -73,14 +73,20 @@ public class IdTest {
 
         // same object -> returns true
         assertTrue(id.equals(id));
+        assertTrue(Id.INVALID_ID.equals(Id.INVALID_ID));
 
         // null -> returns false
         assertFalse(id.equals(null));
+        assertFalse(Id.INVALID_ID.equals(null));
 
         // different types -> returns false
         assertFalse(id.equals(5.0f));
 
         // different values -> returns false
         assertFalse(id.equals(new Id("3")));
+
+        // valid ID does not equal invalid ID -> return false
+        assertFalse(id.equals(Id.INVALID_ID));
+        assertFalse(Id.INVALID_ID.equals(id));
     }
 }
