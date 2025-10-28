@@ -1,7 +1,6 @@
 package seedu.address.model.tag;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.commons.util.ColorUtil.soften;
 
 import java.util.Objects;
 
@@ -37,7 +36,7 @@ public class Tag {
         this.name = name;
         this.desc = desc;
         this.color = color;
-        this.displayColor = soften(color);
+        this.displayColor = ColorUtil.soften(color);
         this.textColor = ColorUtil.getTextColor(displayColor);
     }
 
