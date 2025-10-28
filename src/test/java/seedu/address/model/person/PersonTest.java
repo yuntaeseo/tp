@@ -61,8 +61,8 @@ public class PersonTest {
         assertFalse(BOB.isSamePerson(editedBob));
 
         // name has different name, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + "bruh";
-        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
+        String differentName = VALID_NAME_BOB + "bruh";
+        editedBob = new PersonBuilder(BOB).withName(differentName).build();
         assertFalse(BOB.isSamePerson(editedBob));
     }
 
