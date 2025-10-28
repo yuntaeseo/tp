@@ -33,6 +33,8 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private TagListPanel tagListPanel;
+    private RelationshipQueryListPanel relationshipQueryListPanel;
+    private RelationshipQueryLinkPanel relationshipQueryLinkPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -117,9 +119,20 @@ public class MainWindow extends UiPart<Stage> {
                 logic.getTagList(),
                 logic.getRelationshipList(),
                 logic.getPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         tagListPanel = new TagListPanel(logic.getFilteredTagList());
+
+        relationshipQueryListPanel = new RelationshipQueryListPanel(
+                logic.getRelationshipQuery(),
+                logic.getPersonList(),
+                logic.getRelationshipList());
+
+        relationshipQueryLinkPanel = new RelationshipQueryLinkPanel(
+                logic.getRelationshipQuery(),
+                logic.getPersonList(),
+                logic.getRelationshipList());
+
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -137,6 +150,14 @@ public class MainWindow extends UiPart<Stage> {
 
     public void showTagList() {
         personListPanelPlaceholder.getChildren().setAll(tagListPanel.getRoot());
+    }
+
+    public void showRelationshipQueryList() {
+        personListPanelPlaceholder.getChildren().setAll(relationshipQueryListPanel.getRoot());
+    }
+
+    public void showRelationshipQueryLink() {
+        personListPanelPlaceholder.getChildren().setAll(relationshipQueryLinkPanel.getRoot());
     }
 
     /**
@@ -210,6 +231,14 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowTagList()) {
                 // Switch to list tag
                 showTagList();
+            }
+
+            if (commandResult.isShowRelationshipQueryList()) {
+                showRelationshipQueryList();
+            }
+
+            if (commandResult.isShowRelationshipQueryLink()) {
+                showRelationshipQueryLink();
             }
 
             return commandResult;

@@ -59,18 +59,17 @@ public class ModelManager implements Model {
     }
 
 
-
     //  NOTE: USER PREFERENCES
+
+    @Override
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
+    }
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
-    }
-
-    @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
     }
 
     @Override
@@ -96,19 +95,17 @@ public class ModelManager implements Model {
     }
 
 
-
     //  NOTE: ADDRESS BOOK
-
-    @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
     }
 
+    @Override
+    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetData(addressBook);
+    }
 
 
     //  NOTE: PERSON
@@ -160,7 +157,6 @@ public class ModelManager implements Model {
     }
 
 
-
     //  NOTE: TAGS
 
     @Override
@@ -210,7 +206,6 @@ public class ModelManager implements Model {
     public void setTag(Tag target, Tag editedTag) {
         addressBook.setTag(target, editedTag);
     }
-
 
 
     //  NOTE: RELATIONSHIPS
@@ -317,19 +312,12 @@ public class ModelManager implements Model {
         for (int i = 0; i < path.size() - 1; i++) {
             Person cur = people[path.get(i)];
             Person next = people[path.get(i + 1)];
-            internalRelQuery.add(
-                new Pair<>(
-                    cur,
-                    relationships.filtered(rel ->
-                        rel.isSameRelationship(new Relationship(cur.getId(), next.getId(), new Description(""))))
-                            .get(0)
-                )
-            );
+            internalRelQuery.add(new Pair<>(cur, relationships.filtered(rel ->
+                    rel.isSameRelationship(new Relationship(cur.getId(), next.getId(), new Description("")))).get(0)));
         }
 
         internalRelQuery.add(new Pair<>(people[end], null));
     }
-
 
 
     @Override
