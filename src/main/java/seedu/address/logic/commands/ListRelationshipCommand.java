@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PART_1;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PART_2;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RELATIONSHIPS;
 
+import java.util.Objects;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.id.Id;
@@ -91,9 +93,9 @@ public class ListRelationshipCommand extends Command {
         if (!(other instanceof ListRelationshipCommand)) {
             return false;
         }
-        ListRelationshipCommand c = (ListRelationshipCommand) other;
-        return (id1 == null ? c.id1 == null : id1.equals(c.id1))
-                && (id2 == null ? c.id2 == null : id2.equals(c.id2));
+
+        ListRelationshipCommand otherCommand = (ListRelationshipCommand) other;
+        return Objects.equals(id1, otherCommand.id1) && Objects.equals(id2, otherCommand.id2);
     }
 
     @Override
