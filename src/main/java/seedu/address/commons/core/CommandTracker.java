@@ -34,7 +34,7 @@ public class CommandTracker {
 
     /**
      * Returns the next command inputted by the user,
-     * assuming that users is navigating their past commands.
+     * assuming that user is navigating their past commands.
      */
     public String getNextCommand() {
         if (history.isEmpty() || commandIndex == history.size()) {
