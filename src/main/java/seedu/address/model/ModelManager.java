@@ -53,6 +53,9 @@ public class ModelManager implements Model {
         this.filteredTags = new FilteredList<>(this.addressBook.getTagList());
         this.filteredRelationships = new FilteredList<>(this.addressBook.getRelationshipList());
         this.internalRelQuery = FXCollections.observableArrayList();
+        // Testing
+        populateSampleRelationshipQuery();
+
         this.relQuery = FXCollections.unmodifiableObservableList(internalRelQuery);
     }
 
@@ -358,6 +361,41 @@ public class ModelManager implements Model {
         }
 
         internalRelQuery.add(new Pair<>(people[end], null));
+    }
+
+
+
+    private void populateSampleRelationshipQuery() {
+        ObservableList<Person> samplePersons = this.addressBook.getPersonList();
+        ObservableList<Relationship> sampleRelationships = this.addressBook.getRelationshipList();
+
+        if (samplePersons.isEmpty() || sampleRelationships.isEmpty()) {
+            return;
+        }
+
+        int entries = Math.min(sampleRelationships.size(), 3);
+        for (int i = 0; i < entries; i++) {
+            Relationship relationship = sampleRelationships.get(i);
+            Person counterpart = findPersonById(relationship.getPart2());
+            if (counterpart == null) {
+                counterpart = findPersonById(relationship.getPart1());
+            }
+            if (counterpart != null) {
+                internalRelQuery.add(new Pair<>(counterpart, relationship));
+            }
+        }
+
+        if (!internalRelQuery.isEmpty()) {
+            Person finalPerson = internalRelQuery.get(internalRelQuery.size() - 1).getKey();
+            internalRelQuery.add(new Pair<>(finalPerson, null));
+        }
+    }
+
+    private Person findPersonById(Id id) {
+        return addressBook.getPersonList().stream()
+                .filter(person -> person.getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 
 

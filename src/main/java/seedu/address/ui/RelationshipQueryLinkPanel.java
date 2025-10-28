@@ -38,7 +38,7 @@ public class RelationshipQueryLinkPanel extends UiPart<Region> {
 
         relationshipQueryLinkListView.setItems(queryResults);
         relationshipQueryLinkListView.setCellFactory(listView ->
-                new RelationshipQueryLinkViewCell(allPersons));
+                new RelationshipQueryLinkViewCell());
 
         queryResults.addListener((ListChangeListener<Pair<Person, Relationship>>) change ->
                 Platform.runLater(relationshipQueryLinkListView::refresh));
@@ -52,23 +52,18 @@ public class RelationshipQueryLinkPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays {@code queryLink} entries.
      */
     class RelationshipQueryLinkViewCell extends ListCell<Pair<Person, Relationship>> {
-        private final ObservableList<Person> allPersons;
-
-        RelationshipQueryLinkViewCell(ObservableList<Person> allPersons) {
-            this.allPersons = allPersons;
-        }
 
         @Override
         protected void updateItem(Pair<Person, Relationship> entry, boolean empty) {
             super.updateItem(entry, empty);
 
-            if (empty || entry == null || entry.getValue() == null) {
+            if (empty || entry == null) {
                 setGraphic(null);
                 setText(null);
                 return;
             }
 
-            setGraphic(new RelationshipQueryLinkCard(entry, allPersons).getRoot());
+            setGraphic(new RelationshipQueryLinkCard(entry).getRoot());
         }
     }
 }

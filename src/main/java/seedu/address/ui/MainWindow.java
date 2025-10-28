@@ -119,7 +119,6 @@ public class MainWindow extends UiPart<Stage> {
                 logic.getTagList(),
                 logic.getRelationshipList(),
                 logic.getPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         tagListPanel = new TagListPanel(logic.getFilteredTagList());
 
@@ -132,6 +131,8 @@ public class MainWindow extends UiPart<Stage> {
                 logic.getRelationshipQuery(),
                 logic.getPersonList(),
                 logic.getRelationshipList());
+
+        personListPanelPlaceholder.getChildren().add(relationshipQueryLinkPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

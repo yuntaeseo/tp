@@ -2,10 +2,12 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.layout.StackPane?>
 <HBox fx:id="cardRoot" id="cardPane" alignment="TOP_LEFT" spacing="18" xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1">
     <VBox alignment="TOP_LEFT" spacing="4">
@@ -18,34 +20,28 @@
                     <Region fx:constant="USE_PREF_SIZE"/>
                 </minWidth>
             </Label>
-            <Label fx:id="primaryName" styleClass="cell_big_label" />
+            <Label fx:id="primaryName" styleClass="cell_big_label"/>
         </HBox>
-        <Label fx:id="primaryPhone" styleClass="cell_small_label" />
-        <Label fx:id="primaryAddress" styleClass="cell_small_label" />
-        <Label fx:id="primaryEmail" styleClass="cell_small_label" />
-        <Label fx:id="primaryNote" styleClass="cell_small_label" />
+        <Label fx:id="primaryPhone" styleClass="cell_small_label"/>
+        <Label fx:id="primaryAddress" styleClass="cell_small_label"/>
+        <Label fx:id="primaryEmail" styleClass="cell_small_label"/>
+        <Label fx:id="primaryNote" styleClass="cell_small_label"/>
+        <StackPane alignment="CENTER">
+            <ImageView fx:id="linkArrow" fitWidth="30" preserveRatio="true" pickOnBounds="true">
+                <image>
+                    <Image url="@../images/arrow.png"/>
+                </image>
+            </ImageView>
+        </StackPane>
     </VBox>
-    <VBox alignment="TOP_LEFT" spacing="4">
+    <VBox alignment="BOTTOM_CENTER" spacing="4">
         <padding>
-            <Insets top="6" right="6" bottom="6" left="0"/>
+            <Insets top="6" right="15" bottom="6" left="10"/>
         </padding>
-        <HBox spacing="0.5" alignment="CENTER_LEFT">
-            <Label fx:id="counterpartId" styleClass="cell_big_label">
-                <minWidth>
-                    <Region fx:constant="USE_PREF_SIZE"/>
-                </minWidth>
-            </Label>
-            <Label fx:id="counterpartName" styleClass="cell_big_label" />
+        <HBox spacing="6" alignment="CENTER_LEFT">
+            <Label text="Relationship info:" styleClass="cell_big_label " style="-fx-font-size: 14px"/>
+            <Label fx:id="relationshipDescription" wrapText="true" styleClass="cell_small_label"
+                   style="-fx-font-size: 14px"/>
         </HBox>
-        <Label fx:id="counterpartPhone" styleClass="cell_small_label" />
-        <Label fx:id="counterpartAddress" styleClass="cell_small_label" />
-        <Label fx:id="counterpartEmail" styleClass="cell_small_label" />
-        <Label fx:id="counterpartNote" styleClass="cell_small_label" />
-    </VBox>
-    <VBox alignment="TOP_LEFT" spacing="4" HBox.hgrow="ALWAYS">
-        <padding>
-            <Insets top="6" right="15" bottom="6" left="0"/>
-        </padding>
-        <Label fx:id="relationshipDescription" wrapText="true" styleClass="cell_small_label" />
     </VBox>
 </HBox>
