@@ -21,7 +21,8 @@ public class ListRelationshipCommand extends Command {
             + "Usage:\n"
             + "  " + COMMAND_WORD + ": Lists all relationships\n"
             + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "ID: lists all relationships involving that person\n"
-            + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "ID1 " + PREFIX_PART_2 + "ID2: shows link between two persons\n"
+            + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "ID1 " + PREFIX_PART_2
+            + "ID2: shows link between two persons\n"
             + "Examples:\n"
             + "  " + COMMAND_WORD + "\n"
             + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "1\n"
@@ -77,7 +78,8 @@ public class ListRelationshipCommand extends Command {
         if (!model.hasPersonWithId(id1) || !model.hasPersonWithId(id2)) {
             throw new CommandException(MESSAGE_INVALID_PERSON_ID);
         }
-        model.queryLink(id1, id2); //Note that the method does not actually state whether it found a link or not
+
+        model.queryLink(id1, id2); // Note that the method does not actually state whether it found a link or not
         return new CommandResult(String.format(MESSAGE_SUCCESS_TWO, id1, id2));
     }
 
