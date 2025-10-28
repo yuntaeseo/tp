@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.logging.Logger;
 
@@ -36,10 +36,7 @@ public class PersonListPanel extends UiPart<Region> {
 
         super(FXML);
 
-        requireNonNull(personList);
-        requireNonNull(tagList);
-        requireNonNull(relationshipList);
-        requireNonNull(allPersons);
+        requireAllNonNull(personList, tagList, relationshipList, allPersons);
 
         personListView.setItems(personList);
         personListView.setCellFactory(listView ->
