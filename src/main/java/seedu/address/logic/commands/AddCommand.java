@@ -45,32 +45,35 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String MESSAGE_TAG_NOT_FOUND = "No tag(s) found with the specified ID(s).";
 
-    private final Person toAdd;
+    // Person object to perform checks on
+    private final Person toAddDummy;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
     public AddCommand(Person person) {
         requireNonNull(person);
-        toAdd = person;
+        toAddDummy = person;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasPerson(toAddDummy)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         // Check that tag IDs exist
-        Set<Id> personTagIds = toAdd.getTagIds();
+        Set<Id> personTagIds = toAddDummy.getTagIds();
         if (!model.hasTagIds(personTagIds)) {
             throw new CommandException(MESSAGE_TAG_NOT_FOUND);
         }
 
+        // All checks pass, create the actual Person object with a fresh ID
+        Person toAdd = new Person(toAddDummy);
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAddDummy)));
     }
 
     @Override
@@ -85,13 +88,13 @@ public class AddCommand extends Command {
         }
 
         AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        return toAddDummy.equals(otherAddCommand.toAddDummy);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("toAdd", toAddDummy)
                 .toString();
     }
 }
