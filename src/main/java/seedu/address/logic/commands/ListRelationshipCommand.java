@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PART_1;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PART_2;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RELATIONSHIPS;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.id.Id;
@@ -84,8 +83,12 @@ public class ListRelationshipCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) return true;
-        if (!(other instanceof ListRelationshipCommand)) return false;
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof ListRelationshipCommand)) {
+            return false;
+        }
         ListRelationshipCommand c = (ListRelationshipCommand) other;
         return (id1 == null ? c.id1 == null : id1.equals(c.id1))
                 && (id2 == null ? c.id2 == null : id2.equals(c.id2));
@@ -93,8 +96,12 @@ public class ListRelationshipCommand extends Command {
 
     @Override
     public String toString() {
-        if (id1 == null && id2 == null) return COMMAND_WORD + " (all)";
-        if (id2 == null) return COMMAND_WORD + " (id1=" + id1 + ")";
+        if (id1 == null && id2 == null) {
+            return COMMAND_WORD + " (all)";
+        }
+        if (id2 == null) {
+            return COMMAND_WORD + " (id1=" + id1 + ")";
+        }
         return COMMAND_WORD + " (id1=" + id1 + ", id2=" + id2 + ")";
     }
 }
