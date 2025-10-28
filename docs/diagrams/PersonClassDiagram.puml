@@ -14,7 +14,7 @@ Class Phone
 Class Note
 
 Person --> "person id" Id
-Person --> "~* tagId" Id
+Person --> "~* tag Id" Id
 Person *--> Name
 Person *--> Phone
 Person *--> Email
