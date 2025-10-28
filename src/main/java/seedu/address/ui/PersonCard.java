@@ -25,6 +25,7 @@ import seedu.address.model.tag.Tag;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String UNKNOWN_PERSON = "Unknown person";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -84,6 +85,7 @@ public class PersonCard extends UiPart<Region> {
         tags.getChildren().clear();
         person.getTagIds().forEach(tagId -> {
             FilteredList<Tag> list = tagList.filtered(tag -> tag.getId().equals(tagId));
+
             if (list.isEmpty()) {
                 return;
             }
@@ -97,7 +99,7 @@ public class PersonCard extends UiPart<Region> {
     }
 
     private void populateRelationships(ObservableList<Relationship> relationshipList,
-            ObservableList<Person> allPersons) {
+                                       ObservableList<Person> allPersons) {
         relationshipItems.getChildren().clear();
         // Returns a list of relationships involving this person, sorted by counterpart id
         List<Relationship> connections = relationshipList.stream()
@@ -119,7 +121,7 @@ public class PersonCard extends UiPart<Region> {
             Id counterpartId = getCounterpartId(relationship);
             String counterpartName = findPersonById(allPersons, counterpartId)
                     .map(other -> other.getName().fullName)
-                    .orElse("Unknown person");
+                    .orElse(UNKNOWN_PERSON);
 
             Label idLabel = new Label(counterpartId.toString());
             idLabel.getStyleClass().add("relationship-entry-id");
@@ -142,6 +144,7 @@ public class PersonCard extends UiPart<Region> {
 
     /**
      * Returns true if the relationship involves the person with the given id.
+     *
      * @param relationship
      * @param id
      * @return boolean
@@ -152,6 +155,7 @@ public class PersonCard extends UiPart<Region> {
 
     /**
      * Returns the counterpart id in the relationship involving this person.
+     *
      * @param relationship
      * @return Id
      */

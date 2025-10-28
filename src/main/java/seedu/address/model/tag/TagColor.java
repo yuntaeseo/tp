@@ -17,6 +17,10 @@ public class TagColor {
     /** 0: original colour, 1: white */
     private static final double WHITE_TINT_RATIO = 0.2;
 
+    private static final int HEX_LENGTH = 6;
+    private static final int MIN_CHANNEL_VALUE = 0;
+    private static final int MAX_CHANNEL_VALUE = 255;
+
     public final String value;
     private final String displayValue;
 
@@ -77,6 +81,7 @@ public class TagColor {
      * @return softened hex color
      */
     private static String soften(String hex) {
+        assert hex.length() == HEX_LENGTH : "Hex color should be 6 characters long.";
         int red = Integer.parseInt(hex.substring(0, 2), 16);
         int green = Integer.parseInt(hex.substring(2, 4), 16);
         int blue = Integer.parseInt(hex.substring(4, 6), 16);
@@ -93,7 +98,9 @@ public class TagColor {
      * Tints a single color channel with white.
      */
     private static int tint(int channel) {
-        double tinted = channel * (1 - WHITE_TINT_RATIO) + 255 * WHITE_TINT_RATIO;
-        return (int) Math.round(Math.min(255, Math.max(0, tinted)));
+        assert channel >= MIN_CHANNEL_VALUE && channel <= MAX_CHANNEL_VALUE
+                : "Channel should be within 0-255 range.";
+        double tinted = channel * (1 - WHITE_TINT_RATIO) + MAX_CHANNEL_VALUE * (WHITE_TINT_RATIO);
+        return (int) Math.round(Math.min(MAX_CHANNEL_VALUE, Math.max(MIN_CHANNEL_VALUE, tinted)));
     }
 }

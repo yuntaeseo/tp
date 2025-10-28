@@ -18,8 +18,9 @@ public class ListTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        assert model.getTagList() != null : "Tag list doesn't exist.";
         model.updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
+        assert model.getFilteredTagList() != null : "Filtered tag list isn't available after update.";
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
-
