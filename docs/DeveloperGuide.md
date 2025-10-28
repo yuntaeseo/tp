@@ -143,6 +143,25 @@ The `Person` component,
 
 </div>
 
+The `Tag` component,
+* Stores the related data for each Tag, such as TagColor
+* Each `Person` points to it via its Id.
+
+<div>
+
+<img src="images/TagClassDiagram.png" width="450" />
+
+</div>
+
+The `Relationship` component,
+* Stores two Ids for each person in the Relationship
+* Stores the Description for this Relationship
+
+<div>
+
+<img src="images/RelationshipClassDiagram.png" width="450" />
+
+</div>
 
 ### Storage component
 
