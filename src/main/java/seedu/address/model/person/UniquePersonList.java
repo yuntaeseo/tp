@@ -115,7 +115,8 @@ public class UniquePersonList implements Iterable<Person> {
     public void removeTagIdFromPersons(Id id) {
         requireNonNull(id);
 
-        for (Person person : internalList) {
+        for (int i = 0; i < internalList.size(); ++i) {
+            Person person = internalList.get(i);
             Set<Id> personTagIds = person.getTagIds();
             if (!personTagIds.contains(id)) {
                 continue;
@@ -125,7 +126,7 @@ public class UniquePersonList implements Iterable<Person> {
             newIdSet.remove(id);
             Person editedPerson = new Person(person.getId(), person.getName(), person.getPhone(), person.getEmail(),
                     person.getAddress(), newIdSet, person.getNote());
-            setPerson(person, editedPerson);
+            internalList.set(i, editedPerson);
         }
     }
 
