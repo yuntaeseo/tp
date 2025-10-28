@@ -123,6 +123,82 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
+    //---------------- Tests for containsSubstringIgnoreCase --------------------------------------
+    @Test
+    public void containsSubstringIgnoreCase_validWordMatchInputs_true() {
+        // Word match
+        assertTrue(StringUtil.containsSubstringIgnoreCase("Alice Tan", "Alice"));
+        assertTrue(StringUtil.containsSubstringIgnoreCase("Alice Tan", "tan"));
+        assertTrue(StringUtil.containsSubstringIgnoreCase("Alice Tan", "liCe"));
+    }
+
+    @Test
+    public void containsSubstringIgnoreCase_validPartialMatchInputs_true() {
+        // Partial match
+        assertTrue(StringUtil.containsSubstringIgnoreCase("Alice Tan", "Ali"));
+        assertTrue(StringUtil.containsSubstringIgnoreCase("Alice Tan", "ice"));
+    }
+
+    @Test
+    public void containsSubstringIgnoreCase_validCaseInsensitiveMatchInputs_true() {
+        // Case-insensitive match
+        assertTrue(StringUtil.containsSubstringIgnoreCase("HELLO world", "hello"));
+        assertTrue(StringUtil.containsSubstringIgnoreCase("HELLO world", "WORLD"));
+        assertTrue(StringUtil.containsSubstringIgnoreCase("HeLLo WoRLd", "lo"));
+    }
+
+    @Test
+    public void containsSubstringIgnoreCase_validMultipleSubstringMatchInputs_true() {
+        // Multiple substrings
+        assertTrue(StringUtil.containsSubstringIgnoreCase("AAAbBbcccbbb", "bbB"));
+    }
+
+    @Test
+    void containsSubstringIgnoreCase_trimsInput_true() {
+        assertTrue(StringUtil.containsSubstringIgnoreCase("Alice Tan", "  alice  "));
+    }
+
+    @Test
+    void containsSubstringIgnoreCase_validNoMatchInputs_false() {
+        assertFalse(StringUtil.containsSubstringIgnoreCase("Alice Tan", "Bob"));
+        assertFalse(StringUtil.containsSubstringIgnoreCase("Alice Tan", " Alicee"));
+        assertFalse(StringUtil.containsSubstringIgnoreCase("Alice Tan", "tanisha"));
+    }
+
+    @Test
+    void containsSubstringIgnoreCase_emptySentence_false() {
+        assertFalse(StringUtil.containsSubstringIgnoreCase("", "alice"));
+    }
+
+    @Test
+    void containsSubstringIgnoreCase_longSubstring_false() {
+        assertFalse(StringUtil.containsSubstringIgnoreCase("Hi", "Hellothere"));
+    }
+
+    @Test
+    void containsSubstringIgnoreCase_emptySubstring_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "Word parameter cannot be empty", ()
+                -> StringUtil.containsSubstringIgnoreCase("typical sentence", "  "));
+    }
+
+    @Test
+    public void containsSubstringIgnoreCase_multipleWords_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "Word parameter should be a single word", ()
+                -> StringUtil.containsSubstringIgnoreCase("typical sentence", "aaa BBB"));
+    }
+
+    @Test
+    void containsSubstringIgnoreCase_nullSentence_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, ()
+                -> StringUtil.containsSubstringIgnoreCase(null, "Alice"));
+    }
+
+    @Test
+    void containsSubstringIgnoreCase_nullSubstring_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, ()
+                -> StringUtil.containsSubstringIgnoreCase("Alice Tan", null));
+    }
+
     //---------------- Tests for getDetails --------------------------------------
 
     /*

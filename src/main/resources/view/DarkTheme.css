@@ -120,9 +120,7 @@
     -fx-text-fill: white;
 }
 
-.muted-label {
-    -fx-opacity: 0.7;
-}
+
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
@@ -134,6 +132,15 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
+}
+
+.muted_label {
+    -fx-opacity: 0.7;
+    -fx-font-size: 10pt;
+}
+
+.relationship_label {
+    -fx-font-family: "Segoe UI Semibold";
 }
 
 .relationship-entry {

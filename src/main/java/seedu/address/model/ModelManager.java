@@ -4,14 +4,22 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Queue;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.description.Description;
 import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
 import seedu.address.model.relationship.Relationship;
@@ -28,6 +36,8 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Tag> filteredTags;
     private final FilteredList<Relationship> filteredRelationships;
+    private final ObservableList<Pair<Person, Relationship>> internalRelQuery;
+    private final ObservableList<Pair<Person, Relationship>> relQuery;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,9 +49,11 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredTags = new FilteredList<>(this.addressBook.getTagList());
-        filteredRelationships = new FilteredList<>(this.addressBook.getRelationshipList());
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredTags = new FilteredList<>(this.addressBook.getTagList());
+        this.filteredRelationships = new FilteredList<>(this.addressBook.getRelationshipList());
+        this.internalRelQuery = FXCollections.observableArrayList();
+        this.relQuery = FXCollections.unmodifiableObservableList(internalRelQuery);
     }
 
     public ModelManager() {
@@ -150,6 +162,7 @@ public class ModelManager implements Model {
     }
 
 
+
     //  NOTE: TAGS
 
     @Override
@@ -245,6 +258,106 @@ public class ModelManager implements Model {
     @Override
     public void setRelationship(Relationship target, Relationship editedRelationship) {
         addressBook.setRelationship(target, editedRelationship);
+    }
+
+    @Override
+    public ObservableList<Pair<Person, Relationship>> getRelationshipQuery() {
+        return relQuery;
+    }
+
+    @Override
+    public void queryImmediateRelationship(Id id) {
+        requireNonNull(id);
+        internalRelQuery.clear();
+
+        ObservableList<Person> people = addressBook.getPersonList();
+        ObservableList<Relationship> relationships = addressBook.getRelationshipList();
+
+        for (Relationship rel : relationships) {
+            if (rel.getPart1().equals(id) || rel.getPart2().equals(id)) {
+                Id otherId = rel.getPart1().equals(id) ? rel.getPart2() : rel.getPart1();
+                Person other = people.filtered(person -> person.getId().equals(otherId)).get(0);
+                internalRelQuery.add(new Pair<>(other, rel));
+            }
+        }
+    }
+
+    @Override
+    public void queryLink(Id person1, Id person2) {
+        requireAllNonNull(person1, person2);
+        internalRelQuery.clear();
+
+        // Algorithm: Breadth-First Search using Adjacency List
+
+        // Setting up the list of nodes
+        Person[] people = addressBook.getPersonList().toArray(new Person[addressBook.getPersonList().size()]);
+        HashMap<Id, Integer> idIndexMap = new HashMap<>();
+        for (int i = 0; i < people.length; i++) {
+            idIndexMap.put(people[i].getId(), i);
+        }
+
+        // adjList[i] is the list of indexes of all Person adjacent (immediately related) to people[i]
+        // Setting up the adjacency list
+        ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
+        for (int i = 0; i < people.length; i++) {
+            adjList.add(new ArrayList<>());
+        }
+        ObservableList<Relationship> relationships = addressBook.getRelationshipList();
+        for (Relationship rel : relationships) {
+            adjList.get(idIndexMap.get(rel.getPart1())).add(idIndexMap.get(rel.getPart2()));
+            adjList.get(idIndexMap.get(rel.getPart2())).add(idIndexMap.get(rel.getPart1()));
+        }
+
+        // Setting up the variables needed for BFS traversal
+        HashSet<Integer> visited = new HashSet<>();
+        Queue<ArrayList<Integer>> nextPath = new ArrayDeque<>();
+        ArrayList<Integer> result = new ArrayList<>();
+        Integer start = idIndexMap.get(person1);
+        Integer end = idIndexMap.get(person2);
+        nextPath.add(new ArrayList<>());
+        nextPath.peek().add(start);
+        visited.add(start);
+
+        // Actual BFS algorithm
+        while (!nextPath.isEmpty()) {
+            ArrayList<Integer> path = nextPath.remove();
+            Integer last = path.get(path.size() - 1);
+
+            if (last.equals(end)) {
+                result = path;
+                break;
+            }
+
+            for (Integer adj : adjList.get(last)) {
+                if (!visited.contains(adj)) {
+                    visited.add(adj);
+                    ArrayList<Integer> newPath = new ArrayList<>(path);
+                    newPath.add(adj);
+                    nextPath.add(newPath);
+                }
+            }
+        }
+
+        // There is no link between person1 and person2
+        if (result.isEmpty()) {
+            return;
+        }
+
+        // Trace the route that we took and fill up internalRelQuery
+        for (int i = 0; i < result.size() - 1; i++) {
+            Person cur = people[result.get(i)];
+            Person next = people[result.get(i + 1)];
+            internalRelQuery.add(
+                new Pair<>(
+                    cur,
+                    relationships.filtered(rel ->
+                        rel.isSameRelationship(new Relationship(cur.getId(), next.getId(), new Description(""))))
+                            .get(0)
+                )
+            );
+        }
+
+        internalRelQuery.add(new Pair<>(people[end], null));
     }
 
 

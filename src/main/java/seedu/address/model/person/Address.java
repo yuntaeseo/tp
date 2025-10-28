@@ -61,5 +61,4 @@ public class Address {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
