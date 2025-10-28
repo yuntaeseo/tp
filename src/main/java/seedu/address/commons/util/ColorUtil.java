@@ -1,14 +1,14 @@
 package seedu.address.commons.util;
 
-import java.util.stream.Collectors;
+import seedu.address.model.tag.Color;
 
 /**
  * Provides utility functions related to colors.
  */
 public class ColorUtil {
 
-    public static final String WHITE = "FFFFFF";
-    public static final String BLACK = "000000";
+    public static final Color WHITE = new Color("FFFFFF");
+    public static final Color BLACK = new Color("000000");
 
     // for luminance calculations
     private static final double RED_WEIGHT = 0.2126;
@@ -18,20 +18,11 @@ public class ColorUtil {
     // Number above which to switch to black text
     private static final double LUMINANCE_THRESHOLD = 0.18;
 
-    /**
-     * Sets RGB string to 6 digits.
-     * @param color RGB string of length 3 or 6.
-     * @return normalized RGB string.
-     */
-    public static String normalizeRgb(String color) {
-        if (color.length() == 6) {
-            return color;
-        } else {
-            return color.chars()
-                    .mapToObj(c -> String.valueOf((char) c) + String.valueOf((char) c))
-                    .collect(Collectors.joining());
-        }
-    }
+    /** 0: original colour, 1: white */
+    private static final double WHITE_TINT_RATIO = 0.2;
+
+    private static final int MIN_CHANNEL_VALUE = 0;
+    private static final int MAX_CHANNEL_VALUE = 255;
 
     /**
      * Returns the text color based on the given {@code backgroundColor}.
@@ -39,16 +30,15 @@ public class ColorUtil {
      * @param backgroundColor in RGB hex string format.
      * @return white/black color RGB hex code.
      */
-    public static String getTextColor(String backgroundColor) {
+    public static Color getTextColor(Color backgroundColor) {
         /*
          * Formula taken from:
          * https://stackoverflow.com/questions/596216/formula-to-determine-perceived-brightness-of-rgb-color
          */
-        String normalized = normalizeRgb(backgroundColor);
 
-        int red = getRedChannel(normalized);
-        int green = getGreenChannel(normalized);
-        int blue = getBlueChannel(normalized);
+        int red = backgroundColor.getRedChannel();
+        int green = backgroundColor.getGreenChannel();
+        int blue = backgroundColor.getBlueChannel();
 
         double redLinear = sRgbToLinear(red);
         double greenLinear = sRgbToLinear(green);
@@ -75,29 +65,29 @@ public class ColorUtil {
     }
 
     /**
-     * Returns red channel from RGB string.
-     *
-     * @param color in RRGGBB format.
+     * Softens the given color by tinting it with white.
+     * @param color original color
+     * @return softened color
      */
-    private static int getRedChannel(String color) {
-        return Integer.parseInt(color.substring(0, 2), 16);
+    public static Color soften(Color color) {
+        int red = color.getRedChannel();
+        int green = color.getGreenChannel();
+        int blue = color.getBlueChannel();
+
+        int softenedRed = tint(red);
+        int softenedGreen = tint(green);
+        int softenedBlue = tint(blue);
+
+        return new Color(String.format("%02X%02X%02X", softenedRed, softenedGreen, softenedBlue));
     }
 
     /**
-     * Returns green channel from RGB string.
-     *
-     * @param color in RRGGBB format.
+     * Tints a single color channel with white.
      */
-    private static int getGreenChannel(String color) {
-        return Integer.parseInt(color.substring(2, 4), 16);
-    }
-
-    /**
-     * Returns blue channel from RGB string.
-     *
-     * @param color in RRGGBB format.
-     */
-    private static int getBlueChannel(String color) {
-        return Integer.parseInt(color.substring(4, 6), 16);
+    private static int tint(int channel) {
+        assert channel >= MIN_CHANNEL_VALUE && channel <= MAX_CHANNEL_VALUE
+                : "Channel should be within 0-255 range.";
+        double tinted = channel * (1 - WHITE_TINT_RATIO) + MAX_CHANNEL_VALUE * (WHITE_TINT_RATIO);
+        return (int) Math.round(Math.min(MAX_CHANNEL_VALUE, Math.max(MIN_CHANNEL_VALUE, tinted)));
     }
 }

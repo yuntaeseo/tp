@@ -18,24 +18,27 @@ public class AddTagCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New tag added: %1$s";
 
-    private final Tag toAdd;
+    // Tag object to perform checks on
+    private final Tag toAddDummy;
 
     /**
      * Creates AddTagCommand to add the specified {@code Tag}
      */
     public AddTagCommand(Tag tag) {
         requireNonNull(tag);
-        toAdd = tag;
+        toAddDummy = tag;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasTag(toAdd)) {
+        if (model.hasTag(toAddDummy)) {
             throw new CommandException("This tag already exists in the address book");
         }
 
+        // All checks pass, create the actual Tag object with a fresh ID
+        Tag toAdd = new Tag(toAddDummy);
         model.addTag(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
@@ -44,11 +47,11 @@ public class AddTagCommand extends Command {
     public boolean equals(Object other) {
         return other == this // same object
                 || (other instanceof AddTagCommand // same type
-                && toAdd.equals(((AddTagCommand) other).toAdd));
+                && toAddDummy.equals(((AddTagCommand) other).toAddDummy));
     }
 
     @Override
     public String toString() {
-        return getClass().getCanonicalName() + "{toAdd=" + toAdd + "}";
+        return getClass().getCanonicalName() + "{toAdd=" + toAddDummy + "}";
     }
 }

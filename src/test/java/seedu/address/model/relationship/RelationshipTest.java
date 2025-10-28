@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalRelationships.TWO_THREE;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.id.Id;
 import seedu.address.testutil.RelationshipBuilder;
 
 public class RelationshipTest {
@@ -50,6 +51,26 @@ public class RelationshipTest {
         // different part1 and part2, all other attributes same -> returns false
         editedRelationship = new RelationshipBuilder(ONE_TWO).withPart2(103845).withPart1(2459).build();
         assertFalse(ONE_TWO.isSameRelationship(editedRelationship));
+    }
+
+    @Test
+    public void hasPersonWithId_doesNotHaveId_returnsFalse() {
+        assertFalse(ONE_TWO.hasPersonWithId(new Id(3)));
+        assertFalse(ONE_TWO.hasPersonWithId(new Id(100)));
+    }
+
+    @Test
+    public void hasPersonWithId_hasId_returnsTrue() {
+        assertTrue(ONE_TWO.hasPersonWithId(new Id(1)));
+        assertTrue(ONE_TWO.hasPersonWithId(new Id(2)));
+    }
+
+    @Test
+    public void getCounterpartId() {
+        Id one = new Id(1);
+        Id two = new Id(2);
+        assertEquals(one, ONE_TWO.getCounterpartId(two));
+        assertEquals(two, ONE_TWO.getCounterpartId(one));
     }
 
     @Test

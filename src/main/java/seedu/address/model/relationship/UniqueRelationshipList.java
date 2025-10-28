@@ -82,12 +82,11 @@ public class UniqueRelationshipList implements Iterable<Relationship> {
     }
 
     /**
-     * Removes all relationships that involve the person with the given Id.
+     * Removes all relationships that involve the person with the given ID.
      */
     public void removeIfContainsPerson(Id personId) {
         requireNonNull(personId);
-        internalList.removeIf(relationship ->
-            relationship.getPart1().equals(personId) || relationship.getPart2().equals(personId));
+        internalList.removeIf(relationship -> relationship.hasPersonWithId(personId));
     }
 
     /**

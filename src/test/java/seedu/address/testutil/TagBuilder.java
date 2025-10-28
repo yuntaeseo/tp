@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
 import seedu.address.model.id.Id;
+import seedu.address.model.tag.Color;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
 
@@ -19,7 +19,9 @@ public class TagBuilder {
     private Id id;
     private TagName name;
     private TagDesc desc;
-    private TagColor color;
+    private Color color;
+
+    private boolean hasId = false;
 
     /**
      * Creates a {@code TagBuilder} with the default details.
@@ -28,7 +30,7 @@ public class TagBuilder {
         id = DEFAULT_ID;
         name = new TagName(DEFAULT_NAME);
         desc = new TagDesc(DEFAULT_DESC);
-        color = new TagColor(DEFAULT_COLOR);
+        color = new Color(DEFAULT_COLOR);
     }
 
     /**
@@ -36,6 +38,7 @@ public class TagBuilder {
      */
     public TagBuilder(Tag tagToCopy) {
         id = tagToCopy.getId();
+        hasId = true;
         name = tagToCopy.getName();
         desc = tagToCopy.getDesc();
         color = tagToCopy.getColor();
@@ -46,6 +49,7 @@ public class TagBuilder {
      */
     public TagBuilder withId(Integer id) {
         this.id = new Id(id);
+        hasId = true;
         return this;
     }
 
@@ -69,11 +73,11 @@ public class TagBuilder {
      * Sets the {@code Color} of the {@code Tag} that we are building.
      */
     public TagBuilder withColor(String color) {
-        this.color = new TagColor(color);
+        this.color = new Color(color);
         return this;
     }
 
     public Tag build() {
-        return id.value == -1 ? new Tag(name, desc, color) : new Tag(id, name, desc, color);
+        return hasId ? new Tag(id, name, desc, color) : new Tag(name, desc, color);
     }
 }

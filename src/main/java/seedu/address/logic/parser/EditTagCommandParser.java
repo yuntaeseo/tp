@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import seedu.address.logic.commands.EditTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.id.Id;
-import seedu.address.model.tag.TagColor;
+import seedu.address.model.tag.Color;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
 
@@ -38,7 +38,7 @@ public class EditTagCommandParser implements Parser<EditTagCommand> {
 
         TagName name = null;
         TagDesc desc = null;
-        TagColor color = null;
+        Color color = null;
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             name = ParserUtil.parseTagName(argMultimap.getValue(PREFIX_NAME).get());
@@ -47,7 +47,7 @@ public class EditTagCommandParser implements Parser<EditTagCommand> {
             desc = ParserUtil.parseTagDesc(argMultimap.getValue(PREFIX_DESC).get());
         }
         if (argMultimap.getValue(PREFIX_COLOR).isPresent()) {
-            color = ParserUtil.parseTagColor(argMultimap.getValue(PREFIX_COLOR).get());
+            color = ParserUtil.parseColor(argMultimap.getValue(PREFIX_COLOR).get());
         }
 
         if (name == null && desc == null && color == null) {

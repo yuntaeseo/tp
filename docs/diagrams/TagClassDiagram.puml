@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Tag as TagPackage <<Rectangle>> {
+    Class Tag
+    Class Id
+    Class TagName
+    Class TagDesc
+    Class TagColor
+    Class TextColor
+
+    Tag --> Id
+    Tag --> TagName
+    Tag --> TagDesc
+    Tag --> TagColor
+    Tag --> TextColor
+
+@enduml

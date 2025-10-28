@@ -16,7 +16,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.TagColor;
+import seedu.address.model.tag.Color;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
 
@@ -180,17 +180,17 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String color} into a {@code TagColor}.
+     * Parses a {@code String color} into a {@code Color}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code color} is invalid.
      */
-    public static TagColor parseTagColor(String color) throws ParseException {
+    public static Color parseColor(String color) throws ParseException {
         requireNonNull(color);
         String trimmedColor = color.trim();
-        if (!TagColor.isValidTagColor(trimmedColor)) {
-            throw new ParseException(TagColor.MESSAGE_CONSTRAINTS);
+        if (!Color.isValidColor(trimmedColor)) {
+            throw new ParseException(Color.MESSAGE_CONSTRAINTS);
         }
-        return new TagColor(trimmedColor);
+        return new Color(trimmedColor);
     }
 }

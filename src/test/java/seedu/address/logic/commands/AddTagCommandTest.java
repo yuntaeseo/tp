@@ -12,13 +12,15 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddTagCommandParser;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.tag.Color;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
 import seedu.address.testutil.ModelStub;
+import seedu.address.testutil.TagBuilder;
 
 public class AddTagCommandTest {
 
@@ -29,19 +31,24 @@ public class AddTagCommandTest {
 
     @Test
     public void execute_tagAcceptedByModel_addSuccessful() throws Exception {
+        Tag testTag = new TagBuilder().build();
+        int expectedIdValue = testTag.getId().value + 1;
+
         ModelStubAcceptingTagAdded modelStub = new ModelStubAcceptingTagAdded();
-        Tag validTag = new Tag(new TagName("Friends"), new TagDesc("Schoolmates"), new TagColor("0000FF"));
+        Tag validTag = new Tag(AddTagCommandParser.DUMMY_ID,
+                new TagName("Friends"), new TagDesc("Schoolmates"), new Color("0000FF"));
 
         CommandResult commandResult = new AddTagCommand(validTag).execute(modelStub);
+        Tag expectedTag = new TagBuilder(validTag).withId(expectedIdValue).build();
 
-        assertEquals(String.format(AddTagCommand.MESSAGE_SUCCESS, validTag),
+        assertEquals(String.format(AddTagCommand.MESSAGE_SUCCESS, expectedTag),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validTag), modelStub.tagsAdded);
+        assertEquals(Arrays.asList(expectedTag), modelStub.tagsAdded);
     }
 
     @Test
     public void execute_duplicateTag_throwsCommandException() {
-        Tag validTag = new Tag(new TagName("Friends"), new TagDesc("Schoolmates"), new TagColor("0000FF"));
+        Tag validTag = new Tag(new TagName("Friends"), new TagDesc("Schoolmates"), new Color("0000FF"));
         AddTagCommand addTagCommand = new AddTagCommand(validTag);
         ModelStub modelStub = new ModelStubWithTag(validTag);
 
@@ -51,8 +58,8 @@ public class AddTagCommandTest {
 
     @Test
     public void equals() {
-        Tag friends = new Tag(new TagName("Friends"), new TagDesc("Schoolmates"), new TagColor("0000FF"));
-        Tag coworkers = new Tag(new TagName("Coworkers"), new TagDesc("Office mates"), new TagColor("0000FF"));
+        Tag friends = new Tag(new TagName("Friends"), new TagDesc("Schoolmates"), new Color("0000FF"));
+        Tag coworkers = new Tag(new TagName("Coworkers"), new TagDesc("Office mates"), new Color("0000FF"));
         AddTagCommand addFriendsCommand = new AddTagCommand(friends);
         AddTagCommand addCoworkersCommand = new AddTagCommand(coworkers);
 
@@ -75,7 +82,7 @@ public class AddTagCommandTest {
 
     @Test
     public void toStringMethod() {
-        Tag tag = new Tag(new TagName("Friends"), new TagDesc("Schoolmates"), new TagColor("0000FF"));
+        Tag tag = new Tag(new TagName("Friends"), new TagDesc("Schoolmates"), new Color("0000FF"));
         AddTagCommand addTagCommand = new AddTagCommand(tag);
         String expected = AddTagCommand.class.getCanonicalName() + "{toAdd=" + tag + "}";
         assertEquals(expected, addTagCommand.toString());
