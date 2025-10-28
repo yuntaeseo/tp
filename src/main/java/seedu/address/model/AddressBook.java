@@ -170,6 +170,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeTag(Tag tag) {
         tags.remove(tag);
+        persons.removeTagIdFromPersons(tag.getId());
     }
 
 
