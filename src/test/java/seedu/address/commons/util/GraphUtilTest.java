@@ -13,7 +13,11 @@ import org.junit.jupiter.api.Test;
 public class GraphUtilTest {
     @Test
     public void getShortestPath_emptyGraph_returnsEmptyList() {
+        // Set up adjacency list, 2 nodes
         List<List<Integer>> adjList = new ArrayList<>();
+        adjList.add(List.of());
+        adjList.add(List.of());
+
         assertTrue(getShortestPath(adjList, 0, 1).isEmpty());
     }
 
