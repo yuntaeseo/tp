@@ -39,7 +39,8 @@ public class PersonTest {
         assertNotEquals(ALICE.getId(), aliceCopy.getId());
     }
 
-    @Test public void constructor_copyConstructor_hasSameFields() {
+    @Test
+    public void constructor_copyConstructor_hasSameFields() {
         Person bob = new PersonBuilder().withName("Bob").withPhone("12345678").withEmail("bob@gmail.com")
                 .withAddress("Bobsville").withTags(1, 2, 3).withNote("the builder").build();
         Person bobCopy = new Person(bob);

@@ -21,6 +21,8 @@ public class TagBuilder {
     private TagDesc desc;
     private Color color;
 
+    private boolean hasId = false;
+
     /**
      * Creates a {@code TagBuilder} with the default details.
      */
@@ -36,6 +38,7 @@ public class TagBuilder {
      */
     public TagBuilder(Tag tagToCopy) {
         id = tagToCopy.getId();
+        hasId = true;
         name = tagToCopy.getName();
         desc = tagToCopy.getDesc();
         color = tagToCopy.getColor();
@@ -46,6 +49,7 @@ public class TagBuilder {
      */
     public TagBuilder withId(Integer id) {
         this.id = new Id(id);
+        hasId = true;
         return this;
     }
 
@@ -74,6 +78,6 @@ public class TagBuilder {
     }
 
     public Tag build() {
-        return id.value == -1 ? new Tag(name, desc, color) : new Tag(id, name, desc, color);
+        return hasId ? new Tag(id, name, desc, color) : new Tag(name, desc, color);
     }
 }

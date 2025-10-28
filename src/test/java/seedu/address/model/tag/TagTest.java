@@ -2,6 +2,7 @@ package seedu.address.model.tag;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalTags.EX_GIRLFRIEND;
@@ -28,6 +29,22 @@ public class TagTest {
 
         Tag blackTag = new TagBuilder().withName("black").withColor("000000").build();
         assertEquals(ColorUtil.WHITE, blackTag.getTextColor());
+    }
+
+    @Test
+    public void constructor_copyConstructor_hasDifferentId() {
+        Tag friendsCopy = new Tag(FRIENDS);
+        assertNotEquals(FRIENDS.getId(), friendsCopy.getId());
+    }
+
+    @Test
+    public void constructor_copyConstructor_hasSameFields() {
+        Tag exGirlfriendCopy = new Tag(EX_GIRLFRIEND);
+
+        // All non-id fields should be the same
+        assertEquals(EX_GIRLFRIEND.getName(), exGirlfriendCopy.getName());
+        assertEquals(EX_GIRLFRIEND.getDesc(), exGirlfriendCopy.getDesc());
+        assertEquals(EX_GIRLFRIEND.getColor(), exGirlfriendCopy.getColor());
     }
 
     @Test

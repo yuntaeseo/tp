@@ -52,6 +52,7 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         id = personToCopy.getId();
+        hasId = true;
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();

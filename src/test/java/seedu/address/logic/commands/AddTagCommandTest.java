@@ -12,6 +12,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddTagCommandParser;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.tag.Color;
@@ -19,6 +20,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
 import seedu.address.testutil.ModelStub;
+import seedu.address.testutil.TagBuilder;
 
 public class AddTagCommandTest {
 
@@ -29,14 +31,19 @@ public class AddTagCommandTest {
 
     @Test
     public void execute_tagAcceptedByModel_addSuccessful() throws Exception {
+        Tag testTag = new TagBuilder().build();
+        int expectedIdValue = testTag.getId().value + 1;
+
         ModelStubAcceptingTagAdded modelStub = new ModelStubAcceptingTagAdded();
-        Tag validTag = new Tag(new TagName("Friends"), new TagDesc("Schoolmates"), new Color("0000FF"));
+        Tag validTag = new Tag(AddTagCommandParser.DUMMY_ID,
+                new TagName("Friends"), new TagDesc("Schoolmates"), new Color("0000FF"));
 
         CommandResult commandResult = new AddTagCommand(validTag).execute(modelStub);
+        Tag expectedTag = new TagBuilder(validTag).withId(expectedIdValue).build();
 
-        assertEquals(String.format(AddTagCommand.MESSAGE_SUCCESS, validTag),
+        assertEquals(String.format(AddTagCommand.MESSAGE_SUCCESS, expectedTag),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validTag), modelStub.tagsAdded);
+        assertEquals(Arrays.asList(expectedTag), modelStub.tagsAdded);
     }
 
     @Test
