@@ -53,6 +53,14 @@ public class Person {
         this(idManager.getNewId(), name, phone, email, address, tagIds, note);
     }
 
+    /**
+     * Constructs a {@code Person} by copying the fields from {@code toCopy}.
+     * A new ID will be automatically generated from {@code idManager}.
+     */
+    public Person(Person toCopy) {
+        this(toCopy.name, toCopy.phone, toCopy.email, toCopy.address, toCopy.getTagIds(), toCopy.note);
+    }
+
     public Id getId() {
         return id;
     }
