@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -31,7 +33,11 @@ public class PersonListPanel extends UiPart<Region> {
             ObservableList<Tag> tagList,
             ObservableList<Relationship> relationshipList,
             ObservableList<Person> allPersons) {
+
         super(FXML);
+
+        requireAllNonNull(personList, tagList, relationshipList, allPersons);
+
         personListView.setItems(personList);
         personListView.setCellFactory(listView ->
                 new PersonListViewCell(tagList, relationshipList, allPersons));
@@ -39,6 +45,9 @@ public class PersonListPanel extends UiPart<Region> {
         tagList.addListener((ListChangeListener<Tag>) change ->
                 Platform.runLater(personListView::refresh));
         relationshipList.addListener((ListChangeListener<Relationship>) change ->
+                Platform.runLater(personListView::refresh));
+        // NOTE: refreshes person list when any person entry changes so relationship chips stay in sync
+        allPersons.addListener((ListChangeListener<Person>) change ->
                 Platform.runLater(personListView::refresh));
     }
 
@@ -65,9 +74,10 @@ public class PersonListPanel extends UiPart<Region> {
             if (empty || person == null) {
                 setGraphic(null);
                 setText(null);
-            } else {
-                setGraphic(new PersonCard(person, tagList, relationshipList, allPersons).getRoot());
+                return;
             }
+            // PersonCard is a UI component that displays a Person
+            setGraphic(new PersonCard(person, tagList, relationshipList, allPersons).getRoot());
         }
     }
 
