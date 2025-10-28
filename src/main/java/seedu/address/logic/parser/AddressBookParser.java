@@ -101,7 +101,7 @@ public class AddressBookParser {
             return new DeleteRelationshipCommandParser().parse(arguments);
 
         case ListRelationshipCommand.COMMAND_WORD:
-            return new ListRelationshipCommand();
+            return new ListRelationshipCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
