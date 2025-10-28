@@ -219,7 +219,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes all relationships that involve the person with the given Id.
+     * Removes all relationships that involve the person with the given ID.
      */
     public void removeRelationshipsIfContainsPerson(Id personId) {
         relationships.removeIfContainsPerson(personId);

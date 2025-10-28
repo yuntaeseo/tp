@@ -274,8 +274,8 @@ public class ModelManager implements Model {
         ObservableList<Relationship> relationships = addressBook.getRelationshipList();
 
         for (Relationship rel : relationships) {
-            if (rel.getPart1().equals(id) || rel.getPart2().equals(id)) {
-                Id otherId = rel.getPart1().equals(id) ? rel.getPart2() : rel.getPart1();
+            if (rel.hasPersonWithId(id)) {
+                Id otherId = rel.getCounterpartId(id);
                 Person other = people.filtered(person -> person.getId().equals(otherId)).get(0);
                 internalRelQuery.add(new Pair<>(other, rel));
             }

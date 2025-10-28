@@ -103,8 +103,8 @@ public class PersonCard extends UiPart<Region> {
         relationshipItems.getChildren().clear();
         // Returns a list of relationships involving this person, sorted by counterpart id
         List<Relationship> connections = relationshipList.stream()
-                .filter(relationship -> involvesPerson(relationship, person.getId()))
-                .sorted(Comparator.comparing(rel -> getCounterpartId(rel).value))
+                .filter(relationship -> relationship.hasPersonWithId(person.getId()))
+                .sorted(Comparator.comparing((Relationship rel) -> rel.getCounterpartId(person.getId()).value))
                 .collect(Collectors.toList());
 
         boolean hasConnections = !connections.isEmpty();
@@ -118,7 +118,7 @@ public class PersonCard extends UiPart<Region> {
         }
 
         connections.forEach(relationship -> {
-            Id counterpartId = getCounterpartId(relationship);
+            Id counterpartId = relationship.getCounterpartId(person.getId());
             String counterpartName = findPersonById(allPersons, counterpartId)
                     .map(other -> other.getName().fullName)
                     .orElse(UNKNOWN_PERSON);
@@ -140,29 +140,6 @@ public class PersonCard extends UiPart<Region> {
 
             relationshipItems.getChildren().add(chip);
         });
-    }
-
-    /**
-     * Returns true if the relationship involves the person with the given id.
-     *
-     * @param relationship
-     * @param id
-     * @return boolean
-     */
-    private boolean involvesPerson(Relationship relationship, Id id) {
-        return relationship.getPart1().equals(id) || relationship.getPart2().equals(id);
-    }
-
-    /**
-     * Returns the counterpart id in the relationship involving this person.
-     *
-     * @param relationship
-     * @return Id
-     */
-    private Id getCounterpartId(Relationship relationship) {
-        return relationship.getPart1().equals(person.getId())
-                ? relationship.getPart2()
-                : relationship.getPart1();
     }
 
     /**

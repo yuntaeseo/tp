@@ -43,6 +43,21 @@ public class Relationship {
     }
 
     /**
+     * Returns true if and only if the Person with ID {@code id} exists in the relationship.
+     */
+    public boolean hasPersonWithId(Id id) {
+        return part1.equals(id) || part2.equals(id);
+    }
+
+    /**
+     * Returns the ID of the counterpart of the person with ID {@code id}.
+     * Assumes a person with ID {@code id} exists in the relationship.
+     */
+    public Id getCounterpartId(Id id) {
+        return part1.equals(id) ? part2 : part1;
+    }
+
+    /**
      * Returns true if both relationships have the same pair of participants.
      * This defines a weaker notion of equality between two relationships.
      */
