@@ -1,6 +1,13 @@
 package seedu.address.commons.util;
 
-import java.util.*;
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Queue;
 
 /**
  * Contains utility methods for graph-related features.
@@ -8,6 +15,7 @@ import java.util.*;
 public class GraphUtil {
     /**
      * Returns the shortest path from {@code start} to {@code end}.
+     * Assumes 0 <= {@code start}, {@code end} < adjList.size().
      * @param adjList graph to traverse.
      * @param start starting node index.
      * @param end ending node index.
@@ -16,13 +24,19 @@ public class GraphUtil {
      */
     public static List<Integer> getShortestPath(List<List<Integer>> adjList, int start, int end) {
         // Finds shortest path using BFS
+        requireNonNull(adjList);
 
         int numOfNodes = adjList.size();
-        final int NO_PARENT = -1;
+
+        if (start == end || adjList.isEmpty()) {
+            return List.of();
+        }
+
+        final int noParent = -1;
 
         // Set up
         int[] parent = new int[numOfNodes];
-        Arrays.fill(parent, NO_PARENT);
+        Arrays.fill(parent, noParent);
         boolean[] visited = new boolean[numOfNodes];
         Queue<Integer> queue = new ArrayDeque<>();
         queue.add(start);
@@ -45,13 +59,13 @@ public class GraphUtil {
             }
         }
 
-        if (parent[end] == NO_PARENT) {
+        if (parent[end] == noParent) {
             return List.of();
         }
 
         // reconstruct the shortest path from end to start
         ArrayList<Integer> result = new ArrayList<>();
-        for (int cur = end; cur != NO_PARENT; cur = parent[cur]) {
+        for (int cur = end; cur != noParent; cur = parent[cur]) {
             result.add(cur);
         }
 
