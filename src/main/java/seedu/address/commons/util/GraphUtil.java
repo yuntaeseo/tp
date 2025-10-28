@@ -22,7 +22,7 @@ public class GraphUtil {
      * @return The shortest path from the starting node the ending node using indices denoted by {@code adjList}.
      *         Returns an empty list if {@code end} is not reachable from {@code start}.
      */
-    public static List<Integer> getShortestPath(List<List<Integer>> adjList, int start, int end) {
+    public static List<Integer> getShortestPath(List<? extends List<? extends Integer>> adjList, int start, int end) {
         // Finds shortest path using BFS
         requireNonNull(adjList);
 

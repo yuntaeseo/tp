@@ -4,12 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Queue;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -19,6 +17,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.GraphUtil;
 import seedu.address.model.description.Description;
 import seedu.address.model.id.Id;
 import seedu.address.model.person.Person;
@@ -287,8 +286,6 @@ public class ModelManager implements Model {
         requireAllNonNull(person1, person2);
         internalRelQuery.clear();
 
-        // Algorithm: Breadth-First Search using Adjacency List
-
         // Setting up the list of nodes
         Person[] people = addressBook.getPersonList().toArray(new Person[addressBook.getPersonList().size()]);
         HashMap<Id, Integer> idIndexMap = new HashMap<>();
@@ -308,45 +305,19 @@ public class ModelManager implements Model {
             adjList.get(idIndexMap.get(rel.getPart2())).add(idIndexMap.get(rel.getPart1()));
         }
 
-        // Setting up the variables needed for BFS traversal
-        HashSet<Integer> visited = new HashSet<>();
-        Queue<ArrayList<Integer>> nextPath = new ArrayDeque<>();
-        ArrayList<Integer> result = new ArrayList<>();
         Integer start = idIndexMap.get(person1);
         Integer end = idIndexMap.get(person2);
-        nextPath.add(new ArrayList<>());
-        nextPath.peek().add(start);
-        visited.add(start);
-
-        // Actual BFS algorithm
-        while (!nextPath.isEmpty()) {
-            ArrayList<Integer> path = nextPath.remove();
-            Integer last = path.get(path.size() - 1);
-
-            if (last.equals(end)) {
-                result = path;
-                break;
-            }
-
-            for (Integer adj : adjList.get(last)) {
-                if (!visited.contains(adj)) {
-                    visited.add(adj);
-                    ArrayList<Integer> newPath = new ArrayList<>(path);
-                    newPath.add(adj);
-                    nextPath.add(newPath);
-                }
-            }
-        }
+        List<Integer> path = GraphUtil.getShortestPath(adjList, start, end);
 
         // There is no link between person1 and person2
-        if (result.isEmpty()) {
+        if (path.isEmpty()) {
             return;
         }
 
         // Trace the route that we took and fill up internalRelQuery
-        for (int i = 0; i < result.size() - 1; i++) {
-            Person cur = people[result.get(i)];
-            Person next = people[result.get(i + 1)];
+        for (int i = 0; i < path.size() - 1; i++) {
+            Person cur = people[path.get(i)];
+            Person next = people[path.get(i + 1)];
             internalRelQuery.add(
                 new Pair<>(
                     cur,
