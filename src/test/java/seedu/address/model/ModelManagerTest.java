@@ -212,7 +212,7 @@ public class ModelManagerTest {
     public void queryImmediateRelationship_emptyResult() {
         modelManager.addPerson(ALICE);
         modelManager.queryImmediateRelationship(ALICE.getId());
-        assertTrue(modelManager.getRelationshipQuery().size() == 0);
+        assertEquals(0, modelManager.getRelationshipQuery().size());
     }
 
     @Test
