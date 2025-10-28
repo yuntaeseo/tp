@@ -265,7 +265,7 @@ public class ModelManagerTest {
         modelManager.addRelationship(rel3);
         modelManager.addRelationship(rel4);
         modelManager.queryLink(ALICE.getId(), CARL.getId());
-        assertTrue(modelManager.getRelationshipQuery().size() == 3);
+        assertEquals(3, modelManager.getRelationshipQuery().size());
         assertEquals(modelManager.getRelationshipQuery().get(0), new Pair<>(ALICE, rel3));
         assertEquals(modelManager.getRelationshipQuery().get(1), new Pair<>(BENSON, rel4));
         assertEquals(modelManager.getRelationshipQuery().get(2), new Pair<>(CARL, null));
