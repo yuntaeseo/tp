@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox fx:id="cardRoot" alignment="TOP_LEFT" spacing="18" xmlns="http://javafx.com/javafx/17"
-      xmlns:fx="http://javafx.com/fxml/1" styleClass="relationship-query-card">
+<HBox fx:id="cardRoot" id="cardPane" alignment="TOP_LEFT" spacing="18" xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1">
     <VBox alignment="TOP_LEFT" spacing="4">
         <padding>
             <Insets top="6" right="6" bottom="6" left="15"/>
