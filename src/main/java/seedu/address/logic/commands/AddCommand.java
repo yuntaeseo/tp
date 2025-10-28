@@ -73,7 +73,7 @@ public class AddCommand extends Command {
         // All checks pass, create the actual Person object with a fresh ID
         Person toAdd = new Person(toAddDummy);
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAddDummy)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override

@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.id.Id;
 import seedu.address.model.tag.Color;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagDesc;
@@ -18,6 +19,9 @@ import seedu.address.model.tag.TagName;
  * Parses input arguments and creates a new AddTagCommand object
  */
 public class AddTagCommandParser implements Parser<AddTagCommand> {
+
+    /** Dummy ID with negative id value. */
+    public static final Id DUMMY_ID = Id.INVALID_ID;
 
     @Override
     public AddTagCommand parse(String args) throws ParseException {
@@ -34,8 +38,9 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
         TagDesc desc = ParserUtil.parseTagDesc(argMultimap.getValue(PREFIX_DESC).orElse("No description"));
         Color color = ParserUtil.parseColor(argMultimap.getValue(PREFIX_COLOR).orElse("808080"));
 
-        Tag tag = new Tag(name, desc, color);
-        return new AddTagCommand(tag);
+        // dummy tag with dummy ID
+        Tag dummyTag = new Tag(DUMMY_ID, name, desc, color);
+        return new AddTagCommand(dummyTag);
     }
 
     /** Utility: checks all prefixes are present */
