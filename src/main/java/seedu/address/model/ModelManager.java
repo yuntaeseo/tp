@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -307,7 +306,7 @@ public class ModelManager implements Model {
 
         Integer start = idIndexMap.get(person1);
         Integer end = idIndexMap.get(person2);
-        List<Integer> path = GraphUtil.getShortestPath(adjList, start, end);
+        ArrayList<Integer> path = GraphUtil.getShortestPath(adjList, start, end);
 
         // There is no link between person1 and person2
         if (path.isEmpty()) {
