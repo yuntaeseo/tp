@@ -1,0 +1,15 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Relationship as RelationshipPackage <<Rectangle>> {
+    Class Id
+    Class Description
+
+    Relationship *--> Description
+    Relationship --> "part1" Id
+    Relationship --> "part2" Id
+
+@enduml
