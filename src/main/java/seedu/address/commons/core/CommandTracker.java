@@ -20,7 +20,7 @@ public class CommandTracker {
 
     /**
      * Returns the previous command inputted by the user,
-     * assuming that user is nagivating their past commands.
+     * assuming that user is navigating their past commands.
      */
     public String getPreviousCommand() {
         if (history.isEmpty()) {
