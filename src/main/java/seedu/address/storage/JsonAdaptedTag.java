@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.id.Id;
+import seedu.address.model.tag.Color;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
 
@@ -77,12 +77,12 @@ class JsonAdaptedTag {
 
         if (color == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, TagColor.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Color.class.getSimpleName()));
         }
-        if (!TagColor.isValidTagColor(color)) {
-            throw new IllegalValueException(TagColor.MESSAGE_CONSTRAINTS);
+        if (!Color.isValidColor(color)) {
+            throw new IllegalValueException(Color.MESSAGE_CONSTRAINTS);
         }
-        final TagColor modelColor = new TagColor(color);
+        final Color modelColor = new Color(color);
 
         return new Tag(modelId, modelName, modelDesc, modelColor);
     }

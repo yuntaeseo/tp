@@ -34,7 +34,7 @@ public class TagCard extends UiPart<Region> {
 
         tagLabel.setText(tag.getName().toString());
         tagLabel.setStyle(String.format("-fx-background-color: #%s; -fx-text-fill: #%s",
-                tag.getColor().getDisplayHex(), tag.getTextColor().value));
+                tag.getDisplayColor().value, tag.getTextColor().value));
 
         description.setText(tag.getDesc().toString());
     }

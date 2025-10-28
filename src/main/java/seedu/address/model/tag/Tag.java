@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.commons.util.ColorUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.id.Id;
 import seedu.address.model.id.IdManager;
@@ -18,31 +19,41 @@ public class Tag {
     private final Id id;
     private final TagName name;
     private final TagDesc desc;
-    private final TagColor color;
-    private final TextColor textColor;
+    private final Color color;
+    private final Color displayColor;
+    private final Color textColor;
 
     /**
      * Constructs a {@code Tag}.
      *
      * Every field must be present and not null.
-     * Only use this constructor when Id is guaranteed to be unique.
+     * Only use this constructor when ID is guaranteed to be unique.
      */
-    public Tag(Id id, TagName name, TagDesc desc, TagColor color) {
+    public Tag(Id id, TagName name, TagDesc desc, Color color) {
         requireAllNonNull(id, name, desc, color);
         idManager.setLargest(id);
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.color = color;
-        this.textColor = TextColor.fromTagColor(color);
+        this.displayColor = ColorUtil.soften(color);
+        this.textColor = ColorUtil.getTextColor(displayColor);
     }
 
     /**
      * Constructs a {@code Tag}, without needing to provide an id.
-     * The unique Id will be automatically generated using {@code IdManager}.
+     * The unique ID will be automatically generated using {@code IdManager}.
      */
-    public Tag(TagName name, TagDesc desc, TagColor color) {
+    public Tag(TagName name, TagDesc desc, Color color) {
         this(idManager.getNewId(), name, desc, color);
+    }
+
+    /**
+     * Constructs a {@code Tag} by copying the fields from {@code toCopy}.
+     * A new ID will be automatically generated from {@code idManager}.
+     */
+    public Tag(Tag toCopy) {
+        this(toCopy.name, toCopy.desc, toCopy.color);
     }
 
     public Id getId() {
@@ -57,11 +68,15 @@ public class Tag {
         return desc;
     }
 
-    public TagColor getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public TextColor getTextColor() {
+    public Color getDisplayColor() {
+        return displayColor;
+    }
+
+    public Color getTextColor() {
         return textColor;
     }
 

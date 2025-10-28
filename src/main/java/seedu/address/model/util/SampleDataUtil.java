@@ -15,8 +15,8 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.relationship.Relationship;
+import seedu.address.model.tag.Color;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.TagDesc;
 import seedu.address.model.tag.TagName;
 
@@ -50,11 +50,11 @@ public class SampleDataUtil {
 
     public static Tag[] getSampleTags() {
         return new Tag[] {
-            new Tag(new Id(1), new TagName("friends"), new TagDesc("Not so close friends"), new TagColor("03C04A")),
-            new Tag(new Id(2), new TagName("colleagues"), new TagDesc("Enemies"), new TagColor("EDC001")),
-            new Tag(new Id(3), new TagName("neighbours"), new TagDesc("Good people"), new TagColor("0080FE")),
-            new Tag(new Id(4), new TagName("family"), new TagDesc("Love"), new TagColor("FF32FE")),
-            new Tag(new Id(5), new TagName("exgirlfriend"), new TagDesc("Still have chance"), new TagColor("FF3333")),
+            new Tag(new Id(1), new TagName("friends"), new TagDesc("Not so close friends"), new Color("03C04A")),
+            new Tag(new Id(2), new TagName("colleagues"), new TagDesc("Enemies"), new Color("EDC001")),
+            new Tag(new Id(3), new TagName("neighbours"), new TagDesc("Good people"), new Color("0080FE")),
+            new Tag(new Id(4), new TagName("family"), new TagDesc("Love"), new Color("FF32FE")),
+            new Tag(new Id(5), new TagName("exgirlfriend"), new TagDesc("Still have chance"), new Color("FF3333")),
         };
     }
 

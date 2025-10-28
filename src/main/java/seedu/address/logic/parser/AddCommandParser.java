@@ -26,6 +26,9 @@ import seedu.address.model.person.Phone;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
+    /** Dummy ID with negative id value. */
+    public static final Id DUMMY_ID = Id.INVALID_ID;
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -49,9 +52,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Id> tagList = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_TAG));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
 
-        Person person = new Person(name, phone, email, address, tagList, note);
+        // dummy person with a dummy ID
+        Person toAddDummy = new Person(DUMMY_ID, name, phone, email, address, tagList, note);
 
-        return new AddCommand(person);
+        return new AddCommand(toAddDummy);
     }
 
     /**

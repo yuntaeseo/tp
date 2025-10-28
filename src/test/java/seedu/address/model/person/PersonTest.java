@@ -34,6 +34,27 @@ public class PersonTest {
     }
 
     @Test
+    public void constructor_copyConstructor_hasDifferentId() {
+        Person aliceCopy = new Person(ALICE);
+        assertNotEquals(ALICE.getId(), aliceCopy.getId());
+    }
+
+    @Test
+    public void constructor_copyConstructor_hasSameFields() {
+        Person bob = new PersonBuilder().withName("Bob").withPhone("12345678").withEmail("bob@gmail.com")
+                .withAddress("Bobsville").withTags(1, 2, 3).withNote("the builder").build();
+        Person bobCopy = new Person(bob);
+
+        // All non-id fields should be the same
+        assertEquals(bob.getName(), bobCopy.getName());
+        assertEquals(bob.getPhone(), bobCopy.getPhone());
+        assertEquals(bob.getEmail(), bobCopy.getEmail());
+        assertEquals(bob.getAddress(), bobCopy.getAddress());
+        assertEquals(bob.getTagIds(), bobCopy.getTagIds());
+        assertEquals(bob.getNote(), bobCopy.getNote());
+    }
+
+    @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getTagIds().remove(0));
