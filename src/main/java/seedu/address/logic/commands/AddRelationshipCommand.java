@@ -25,6 +25,7 @@ public class AddRelationshipCommand extends Command {
     public static final String MESSAGE_RELATIONSHIP_SUCCESS = "New relationship added: %1$s";
     public static final String MESSAGE_INVALID_PERSON_ID = "One or both person IDs do not exist.";
     public static final String MESSAGE_DUPLICATE_RELATIONSHIP = "This relationship already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "A person cannot have a relationship with themselves.";
 
     private final Relationship toAdd;
 
@@ -44,11 +45,17 @@ public class AddRelationshipCommand extends Command {
         if (!model.hasPersonWithId(toAdd.getPart1()) || !model.hasPersonWithId(toAdd.getPart2())) {
             throw new CommandException(MESSAGE_INVALID_PERSON_ID);
         }
+        
+        // Validate that the two persons are not the same
+        if (toAdd.getPart1().equals(toAdd.getPart2())) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
 
+        // Check for duplicate relationship
         if (model.hasRelationship(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_RELATIONSHIP);
         }
-
+        
         model.addRelationship(toAdd);
         return new CommandResult(String.format(MESSAGE_RELATIONSHIP_SUCCESS, toAdd));
     }
