@@ -85,11 +85,6 @@ public class PersonCard extends UiPart<Region> {
         tags.getChildren().clear();
         person.getTagIds().forEach(tagId -> {
             FilteredList<Tag> list = tagList.filtered(tag -> tag.getId().equals(tagId));
-
-            if (list.isEmpty()) {
-                return;
-            }
-
             Tag tag = list.get(0);
             Label label = new Label(tag.getName().value);
             label.setStyle(String.format("-fx-background-color: #%s; -fx-text-fill: #%s",
