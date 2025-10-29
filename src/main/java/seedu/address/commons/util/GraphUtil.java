@@ -19,7 +19,7 @@ public class GraphUtil {
 
     /**
      * Returns the shortest path from {@code start} to {@code end}.
-     * Assumes 0 <= {@code start}, {@code end} < adjList.size().
+     * Assumes 0 <= {@code start}, {@code end} < {@code adjList.size()}.
      * @param adjList graph to traverse.
      * @param start starting node index.
      * @param end ending node index.
@@ -35,7 +35,7 @@ public class GraphUtil {
         assert 0 <= end && end < numOfNodes : "end node should be a valid index";
 
         if (start == end) {
-            return new ArrayList<>();
+            return new ArrayList<>(List.of(start));
         }
 
         // Set up

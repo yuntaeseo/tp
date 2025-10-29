@@ -1,6 +1,7 @@
 package seedu.address.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.util.GraphUtil.getShortestPath;
 
@@ -12,6 +13,37 @@ import org.junit.jupiter.api.Test;
 
 public class GraphUtilTest {
     @Test
+    public void getShortestPath_nullAdjList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> getShortestPath(null, 0, 0));
+    }
+
+    @Test
+    public void getShortestPath_invalidAdjList_throwsAssertionError() {
+        // List too short
+        List<List<Integer>> adjList = new ArrayList<>();
+        assertThrows(AssertionError.class, () -> getShortestPath(adjList, 0, 1));
+    }
+
+    @Test
+    public void getShortestPath_invalidEndPoints_throwsAssertionError() {
+        // size 1 adjacency list
+        List<List<Integer>> adjList = new ArrayList<>();
+        adjList.add(List.of(1));
+
+        // invalid start point
+        assertThrows(AssertionError.class, () -> getShortestPath(adjList, 2, 0));
+        assertThrows(AssertionError.class, () -> getShortestPath(adjList, -1, 0));
+
+        // invalid end point
+        assertThrows(AssertionError.class, () -> getShortestPath(adjList, 0, -1));
+        assertThrows(AssertionError.class, () -> getShortestPath(adjList, 0, 2));
+
+        // invalid start and end points
+        assertThrows(AssertionError.class, () -> getShortestPath(adjList, -1, 2));
+        assertThrows(AssertionError.class, () -> getShortestPath(adjList, 100, 200));
+    }
+
+    @Test
     public void getShortestPath_emptyGraph_returnsEmptyList() {
         // Set up adjacency list, 2 nodes
         List<List<Integer>> adjList = new ArrayList<>();
@@ -22,14 +54,16 @@ public class GraphUtilTest {
     }
 
     @Test
-    public void getShortestPath_sameStartAndEnd_returnsEmptyList() {
+    public void getShortestPath_sameStartAndEnd_returnsSingletonList() {
         // Set up adjacency list, 3 nodes
         List<List<Integer>> adjList = new ArrayList<>();
         adjList.add(List.of(1, 2));
         adjList.add(List.of(0, 2));
         adjList.add(List.of(0, 1));
 
-        assertTrue(getShortestPath(adjList, 0, 0).isEmpty());
+        ArrayList<Integer> path = getShortestPath(adjList, 0, 0);
+        assertEquals(1, path.size());
+        assertEquals(0, path.get(0));
     }
 
     @Test
