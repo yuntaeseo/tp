@@ -12,9 +12,9 @@
       xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
-            <ColumnConstraints hgrow="NEVER" minWidth="10" prefWidth="260" maxWidth="260"/>
+            <ColumnConstraints hgrow="NEVER" minWidth="10" prefWidth="300" maxWidth="300"/>
         </columnConstraints>
-        <VBox alignment="CENTER_LEFT" minHeight="105" prefWidth="260" maxWidth="260"  GridPane.columnIndex="0">
+        <VBox alignment="CENTER_LEFT" minHeight="105" prefWidth="300" maxWidth="300"  GridPane.columnIndex="0">
             <padding>
                 <Insets top="5" right="5" bottom="5" left="15"/>
             </padding>
@@ -27,7 +27,7 @@
                 </Label>
                 <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true" maxWidth="260"/>
             </HBox>
-            <FlowPane fx:id="tags" prefWrapLength="260" maxWidth="260"  hgap="8" vgap="6"/>
+            <FlowPane fx:id="tags" prefWrapLength="280" maxWidth="300"  hgap="8" vgap="6"/>
             <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true" maxWidth="260"/>
             <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true" maxWidth="260"/>
             <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true" maxWidth="260"/>
