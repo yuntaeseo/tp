@@ -182,6 +182,19 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void removeTagIdFromPersons_doesNotContainId_noIdRemoved() {
+        Person alice = new PersonBuilder(ALICE).withTags(1).build();
+        Person bob = new PersonBuilder(BOB).withTags(2).build();
+        uniquePersonList.setPersons(List.of(alice, bob));
+
+        UniquePersonList expectedPersonList = new UniquePersonList();
+        expectedPersonList.setPersons(uniquePersonList);
+
+        uniquePersonList.removeTagIdFromPersons(new Id(3));
+        assertEquals(expectedPersonList, uniquePersonList);
+    }
+
+    @Test
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
     }
