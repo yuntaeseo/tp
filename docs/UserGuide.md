@@ -72,14 +72,14 @@ If you can type fast, NetWise can get your connection management tasks done fast
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
+
+![help message](images/helpMessage.png)
 
 
 ### Adding a connection : `add`
 
-Adds a connection to NetWise. A connection is someone who you want to keep in contact, such as
+Adds a connection to NetWise. A _connection_ is someone who you want to keep in contact, such as
 friends, colleagues or people you met from a networking event.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`
@@ -93,14 +93,18 @@ command. The tag ID **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/1 r/She owed me lunch`,
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 t/1 r/She owed me lunch`,
 supposed tag with ID 1 is `criminal`
+
 
 ### Listing all connections : `list`
 
 Shows a list of all connections in NetWise.
 
 Format: `list`
+
+![list message](images/listMessage.png)
+
 
 ### Editing a connection : `edit`
 
@@ -124,6 +128,13 @@ to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the connection with ID 2 to be `Betsy Crower` and
 clears all existing tags.
 
+* Before editing:
+![before edit message](images/beforePersonEdit.png)
+
+* After editing:
+![after edit message](images/editMessage.png)
+
+
 ### Locating connections by fields : `find`
 
 Finds all connections (persons) whose specified fields contain any of the given keywords.
@@ -139,6 +150,7 @@ find `[n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [a/ADDRESS_KEYWORD
   (e.g. `n/Ali e/gmail` finds persons whose **name contains “Ali”** *and* **email contains “gmail”**.)
 * The search within the same field uses **OR logic** — any one of the field’s keywords will match.
   (e.g. `a/Clementi a/Bishan` finds persons living in *either* Clementi *or* Bishan.)
+* **Note**: `find` does not support locating connections by *notes*.
 
 Examples:
 * `find n/Ali` → Finds all persons with names containing “Ali”.
@@ -148,6 +160,9 @@ Examples:
   * email contains “gmail”,
   *	address contains “Clementi” or “Bishan”, and
   *	has tag IDs 2, 5, or 7.
+
+![find message](images/findMessage.png)
+
 
 ### Deleting a connection : `delete`
 
@@ -164,11 +179,15 @@ Examples:
 * `list` followed by `delete 2` deletes the connection with ID 2 in NetWise.
 * `find Betsy` followed by `delete 1` deletes the connection with ID 1 in the results of the `find` command.
 
+![delete message](images/deleteMessage.png)
+
+
 ### Clearing all connection entries : `clear`
 
 Clears all connection entries from NetWise.
 
 Format: `clear`
+
 
 ### Adding a tag : `addtag`
 
@@ -187,6 +206,7 @@ Examples:
 * `addtag n/JC d/JC friends c/23f1cd`
 * `addtag n/coworkers`
 
+
 ### Listing all tags : `listtag`
 
 Shows a list of all tags in NetWise.
@@ -195,6 +215,9 @@ Format: `listtag`
 
 * Unlike the connection list, the tag list does not show tags in any particular order.
 It shows the tag name along with the associated **unique ID** given when the tag is created.
+
+![listtag message](images/listtagMessage.png)
+
 
 ### Editing a tag : `edittag`
 
@@ -217,6 +240,7 @@ and set its color to the color with hex code #099fca.
 * `edittag 2 n/Prof d/ c/` changes the name of tag 1 to "Prof", and set both description and color to default
 value mentioned [above](#adding-a-tag--addtag).
 
+
 ### Deleting a tag : `deletetag`
 
 Deletes a tag from NetWise.
@@ -230,6 +254,9 @@ Format: `deletetag ID`
 
 Example:
 * `delete 2` to delete the tag with ID 2
+
+![deletetag message](images/deletetagMessage.png)
+
 
 ### Adding a relationship : `addrel`
 
@@ -245,11 +272,24 @@ Examples:
 * `addrel p1/1 p2/2 d/childhood friends`. Adds a relationship between the connections with ID 1 and 2, noting
 that they are childhood friends.
 
+![addrel Message](images/addrelMessage.png)
+
+
 ### Listing all relationships : `listrel`
 
-Shows a list of relationships for each filtered person in the list in NetWise.
+Shows a list of relationships for each person in the list in NetWise.
 
-Format: `listrel`
+Format (one person): `listrel p1/CONNECTION`: show a list of all person related to `CONNECTION` along with the relationship info
+Format (two persons): `listrel p1/CONNECTION_1 p2/CONNECTION_2`: show the relationship between `CONNECTION_1` and `CONNECTION_2` (if exist), along with the relationship info.
+
+* `CONNECTION`, `CONNECTION_1`, and `CONNECTION_2` refers to the unique IDs of the two connections that this relationship links.
+
+Examples:
+* For one person:
+![listrel one person message](images/listrel1Message.png)
+
+* For two persons:
+![listrel two person message](images/listrel2Message.png)
 
 ### Editing a relationship : `editrel`
 
@@ -265,6 +305,7 @@ Examples:
 
 * `editrel 3 d/highschool friends`. Edits description of the third relationship in the relationship list.
 
+
 ### Deleting a relationship : `deleterel`
 
 Deletes a relationship from NetWise.
@@ -277,16 +318,19 @@ Examples:
 
 * `deleterel 1`. Deletes the first relationship in the relationship list.
 
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
+
 ### Saving the data
 
 NetWise data are saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
+
 
 ### Editing the data file
 
