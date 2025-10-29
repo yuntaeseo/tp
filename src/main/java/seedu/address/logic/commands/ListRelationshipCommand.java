@@ -31,8 +31,8 @@ public class ListRelationshipCommand extends Command {
             + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "1 " + PREFIX_PART_2 + "3";
 
     public static final String MESSAGE_SUCCESS_ALL = "Listed all relationships";
-    public static final String MESSAGE_SUCCESS_ONE = "Listed all relationships involving person ID %1$s";
-    public static final String MESSAGE_SUCCESS_TWO = "Listed link between person IDs %1$s and %2$s";
+    public static final String MESSAGE_SUCCESS_ONE = "Listed all relationships involving person ID " + "%1$s";
+    public static final String MESSAGE_SUCCESS_TWO = "Listed link between person IDs " + "%1$s and %2$s";
     public static final String MESSAGE_INVALID_PERSON_ID = "One or both person IDs do not exist.";
 
     private final Id id1;
