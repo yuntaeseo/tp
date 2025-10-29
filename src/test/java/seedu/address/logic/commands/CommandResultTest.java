@@ -26,11 +26,11 @@ public class CommandResultTest {
 
     @Test
     public void isShowRelationshipQueries() {
-        CommandResult listQueryResult = new CommandResult("Displayed relationship query list");
+        CommandResult listQueryResult = new CommandResult("Listed all relationships involving person ID");
         assertTrue(listQueryResult.isShowRelationshipQueryList());
         assertFalse(listQueryResult.isShowRelationshipQueryLink());
 
-        CommandResult linkQueryResult = new CommandResult("Displayed relationship query link");
+        CommandResult linkQueryResult = new CommandResult("Listed link between person IDs");
         assertTrue(linkQueryResult.isShowRelationshipQueryLink());
         assertFalse(linkQueryResult.isShowRelationshipQueryList());
 

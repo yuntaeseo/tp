@@ -146,8 +146,9 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+        // Refresh query result when edited
+        refreshRelationshipQueryForPerson(editedPerson);
     }
 
     @Override
@@ -251,6 +252,8 @@ public class ModelManager implements Model {
     @Override
     public void setRelationship(Relationship target, Relationship editedRelationship) {
         addressBook.setRelationship(target, editedRelationship);
+        // Refresh query result when edited
+        refreshRelationshipQueryForRelationship(editedRelationship);
     }
 
     @Override
@@ -317,6 +320,34 @@ public class ModelManager implements Model {
         }
 
         internalRelQuery.add(new Pair<>(people[end], null));
+    }
+
+    /**
+     * Updates current relationship query entries so that edited person matches.
+     */
+    private void refreshRelationshipQueryForPerson(Person updatedPerson) {
+        for (int i = 0; i < internalRelQuery.size(); i++) {
+            Pair<Person, Relationship> entry = internalRelQuery.get(i);
+            Person currentPerson = entry.getKey();
+
+            if (currentPerson != null && currentPerson.getId().equals(updatedPerson.getId())) {
+                internalRelQuery.set(i, new Pair<>(updatedPerson, entry.getValue()));
+            }
+        }
+    }
+
+    /**
+     * Updates current relationship query entries so that edited relationship matches.
+     */
+    private void refreshRelationshipQueryForRelationship(Relationship updatedRelationship) {
+        for (int i = 0; i < internalRelQuery.size(); i++) {
+            Pair<Person, Relationship> entry = internalRelQuery.get(i);
+            Relationship currentRelationship = entry.getValue();
+
+            if (currentRelationship != null && currentRelationship.isSameRelationship(updatedRelationship)) {
+                internalRelQuery.set(i, new Pair<>(entry.getKey(), updatedRelationship));
+            }
+        }
     }
 
 

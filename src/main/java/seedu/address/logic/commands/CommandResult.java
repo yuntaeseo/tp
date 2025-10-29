@@ -65,14 +65,14 @@ public class CommandResult {
      * Returns true if the command result is to show the immediate relationship query panel.
      */
     public boolean isShowRelationshipQueryList() {
-        return feedbackToUser.equals("Displayed relationship query list");
+        return feedbackToUser.startsWith("Listed all relationships involving person ID");
     }
 
     /**
      * Returns true if the command result is to show the relationship link query panel.
      */
     public boolean isShowRelationshipQueryLink() {
-        return feedbackToUser.equals("Displayed relationship query link");
+        return feedbackToUser.startsWith("Listed link between person IDs");
     }
 
     @Override
