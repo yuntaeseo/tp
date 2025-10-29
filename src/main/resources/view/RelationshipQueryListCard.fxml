@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <HBox fx:id="cardRoot" id="cardPane" alignment="TOP_LEFT" spacing="18" xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1">
-    <VBox alignment="TOP_LEFT" spacing="4">
+    <VBox alignment="TOP_LEFT" spacing="4" prefWidth="260" minWidth="260" maxWidth="260" fillWidth="true">
         <padding>
             <Insets top="6" right="6" bottom="6" left="15"/>
         </padding>
@@ -17,21 +17,21 @@
                     <Region fx:constant="USE_PREF_SIZE"/>
                 </minWidth>
             </Label>
-            <Label fx:id="counterpartName" styleClass="cell_big_label"/>
+            <Label fx:id="counterpartName" styleClass="cell_big_label" wrapText="true" maxWidth="Infinity"/>
         </HBox>
-        <Label fx:id="counterpartPhone" styleClass="cell_small_label"/>
-        <Label fx:id="counterpartAddress" styleClass="cell_small_label"/>
-        <Label fx:id="counterpartEmail" styleClass="cell_small_label"/>
-        <Label fx:id="counterpartNote" styleClass="cell_small_label"/>
+        <Label fx:id="counterpartPhone" styleClass="cell_small_label" wrapText="true" maxWidth="Infinity"/>
+        <Label fx:id="counterpartAddress" styleClass="cell_small_label" wrapText="true" maxWidth="Infinity"/>
+        <Label fx:id="counterpartEmail" styleClass="cell_small_label" wrapText="true" maxWidth="Infinity"/>
+        <Label fx:id="counterpartNote" styleClass="cell_small_label" wrapText="true" maxWidth="Infinity"/>
     </VBox>
-    <VBox alignment="CENTER_LEFT" spacing="4">
+    <VBox alignment="CENTER_LEFT" spacing="4" prefWidth="600" minWidth="600" maxWidth="800">
         <padding>
             <Insets top="6" right="15" bottom="6" left="40"/>
         </padding>
         <HBox spacing="6" alignment="CENTER_LEFT">
             <Label text="Relationship info:" styleClass="cell_big_label " style="-fx-font-size: 14px"/>
             <Label fx:id="relationshipDescription" wrapText="true" styleClass="cell_small_label"
-                   style="-fx-font-size: 14px"/>
+                   maxWidth="400" style="-fx-font-size: 14px"/>
         </HBox>
     </VBox>
 </HBox>

@@ -391,3 +391,9 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.tag-chip {
+    -fx-padding: 2 6 2 6;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}

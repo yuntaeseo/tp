@@ -25,6 +25,7 @@ import seedu.address.model.tag.Tag;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final double TAG_MAX_WIDTH = 260;
     private static final String UNKNOWN_PERSON = "Unknown person";
 
     /**
@@ -92,8 +93,12 @@ public class PersonCard extends UiPart<Region> {
 
             Tag tag = list.get(0);
             Label label = new Label(tag.getName().value);
+
+            label.getStyleClass().add("tag-chip");
             label.setStyle(String.format("-fx-background-color: #%s; -fx-text-fill: #%s",
                     tag.getDisplayColor().value, tag.getTextColor().value));
+            label.setMaxWidth(TAG_MAX_WIDTH);
+
             tags.getChildren().add(label);
         });
     }
