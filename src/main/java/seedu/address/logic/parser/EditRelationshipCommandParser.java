@@ -26,7 +26,8 @@ public class EditRelationshipCommandParser implements Parser<EditRelationshipCom
                 || !argMultimap.getValue(PREFIX_PART_2).isPresent()
                 || !argMultimap.getValue(PREFIX_DESC).isPresent()
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditRelationshipCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, EditRelationshipCommand.MESSAGE_USAGE));
         }
 
         Id part1 = ParserUtil.parseId(argMultimap.getValue(PREFIX_PART_1).get());
