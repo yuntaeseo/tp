@@ -147,7 +147,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
-        //
+        // Refresh query result when edited
         refreshRelationshipQueryForPerson(editedPerson);
     }
 
@@ -252,6 +252,7 @@ public class ModelManager implements Model {
     @Override
     public void setRelationship(Relationship target, Relationship editedRelationship) {
         addressBook.setRelationship(target, editedRelationship);
+        // Refresh query result when edited
         refreshRelationshipQueryForRelationship(editedRelationship);
     }
 
