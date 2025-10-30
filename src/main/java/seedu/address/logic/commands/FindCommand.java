@@ -21,8 +21,8 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose attributes contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_IDS] "
-            + "[MORE KEYWORDS]...\n"
+            + "Parameters: [n/NAME_KEYWORDS]… [p/PHONE_KEYWORDS]… "
+            + "[e/EMAIL_KEYWORDS]… [a/ADDRESS_KEYWORDS]… [t/TAG_ID]…\n"
             + "Example: " + COMMAND_WORD + " n/Ali e/gmail a/Clementi a/Bishan t/2 t/5 t/7\n"
             + "Will find ALL contacts with names containing 'Ali', emails containing 'gmail', addresses containing "
             + "EITHER 'Clementi' or 'Bishan', and have EITHER tag 2, 5, or 7.";

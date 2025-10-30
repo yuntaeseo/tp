@@ -4,7 +4,7 @@ title: Developer Guide
 ---
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -324,11 +324,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-COMING SOON
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -356,6 +351,7 @@ COMING SOON
 
 **Value proposition**: manages these connections' information faster than Linkedin.
 
+
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -377,62 +373,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | regular user who has not used tags                        | edit tags of existing contacts                                                             | trial-and-error this feature to get started                                           |
 | `* * *`  | regular user                                              | assign multiple tags to a contact at once                                                  | capture all relevant categories                                                       |
 |   `*`    | experienced user                                          | bulk-filter by multiple tags                                                               | narrow down groups (e.g., Company A + Exco)                                           |
-|  `* *`   | beginner user                                             | filter contacts by a single tag                                                            | see everyone in that category                                                         |
+| `* * *`  | beginner user                                             | filter contacts by a single tag                                                            | see everyone in that category                                                         |
 |   `*`    | beginner user                                             | insert multiple data in one network                                                        | avoid inserting every relationship individually from a single person                  |
-|  `* *`   | user who has many friends and acquaintances               | click through the GUI graphs                                                               | explore the relationships of myself and others                                        |
+|   `*`    | user who has many friends and acquaintances               | click through the GUI graphs                                                               | explore the relationships of myself and others                                        |
 |   `*`    | forgetful user                                            | read a simple tag on the relationship entry                                                | readily search through the network and understand the relationships clearly           |
-|  `* *`   | user who is looking to meet people                        | search through the relationships of my friends                                             | find new people                                                                       |
-|  `* *`   | inquisitive user                                          | trace through the relationships between my friends                                         | find relationships among them                                                         |
-|  `* *`   | user who is looking to boost my career through networking | search through the people with good careers                                                | find people who can support my career                                                 |
-|   `*`    | user who is trying to introduce a girl/boy to my friend   | look through my network                                                                    | search for a best-fit person                                                          |
-|  `* *`   | user                                                      | create relationship between people                                                         | add new relationships once I know about them                                          |
-|  `* *`   | user                                                      | delete relationship between people                                                         | remove incorrect relationship                                                         |
-|   `*`    | good friend                                               | set birthday reminders for my contacts                                                     | remember to wish them happy birthday                                                  |
-|  `* *`   | social butterfly                                          | create customized reminders                                                                | maintain my relationships meaningfully                                                |
-|  `* *`   | person who cares about my networks                        | be reminded of personal notes on contacts                                                  | recall meaningful details when I talk to them                                         |
-|  `* *`   | person who is always prepared                             | view all upcoming reminders                                                                | plan my future schedule                                                               |
-|  `* *`   | person who does not have a lot of time                    | edit a reminder                                                                            | to correct mistakes                                                                   |
-|  `* *`   | person who cannot manage a large network                  | delete reminders for people                                                                | forget about them                                                                     |
-|  `* *`   | user                                                      | export my contacts to an external drive                                                    | transfer them to another device                                                       |
-|  `* *`   | person with connections                                   | import my contacts                                                                         | avoid re-entering the contact information again                                       |
+| `* * *`  | user who is looking to meet people                        | search through the relationships of my friends                                             | find new people                                                                       |
+| `* * *`  | inquisitive user                                          | trace through the relationships between my friends                                         | find relationships among them                                                         |
+| `* * *`  | user                                                      | create relationship between people                                                         | add new relationships once I know about them                                          |
+| `* * *`  | user                                                      | delete relationship between people                                                         | remove incorrect relationship                                                         |
+|   `*`    | user                                                      | export my contacts to an external drive                                                    | transfer them to another device                                                       |
+|   `*`    | person with connections                                   | import my contacts                                                                         | avoid re-entering the contact information again                                       |
 |   `*`    | user                                                      | choose the contacts I want to export                                                       | avoid exporting irrelevant/outdated contacts                                          |
+
 
 ### Use cases
 
 (For all use cases below, the **System** is `NetWise` and the **Actor** is the `user`, unless specified otherwise)
 
-[comment]: PERSONS
+[comment]: CONNECTIONS
 
-#### UC10 - Add Person
+#### UC10 - Add Connections
 
-**Goal:** Add a person
+**Goal:** Add a connection.
 
-**Preconditions:** None
+**Preconditions:** None.
 
-**Postconditions:** If success, a person is added into the list.
+**Postconditions:** If success, a connection is added into the list.
 
 MSS
 
 1. **User** selects the text input.
-2. **User** inputs the command and details to add a new person.
+2. **User** inputs the command and details to add a new connection.
 3. **System** validates the command.
-4. **System** informs the user that the person has been added and its details.
+4. **System** informs the user that the connection has been added and its details.
 
 Use case ends.
 
 **Extensions**
 
-- **2a. System detects an error in the entered command.**
+- **2a. System detects an error in the entered command (i.e. missing/wrong prefix, empty fields, etc.).**
     - 2a1. **System** informs the user of the correct way to add the necessary fields.
       Use case ends.
 
-- **2b. (TO BE IMPLEMENTED) System detects a very similar contact has already existed.**
-    - **2b1.** **System** warns the user about the potential duplicate.
-    - **2b2.** **User** presses Enter again to ignore the warning. User can continue to step 3.
+* **\[TO BE IMPLEMENTED\] 3a. A connection with the same name already exists.**
+    * **3a1.** **System** informs the user about the already existed connection.
 
-#### UC11 - List Persons
 
-**Goal:** View all persons in the list.
+#### UC11 - List Connections
+
+**Goal:** View all connections in the list.
 
 **Preconditions:** None.
 
@@ -440,60 +429,62 @@ Use case ends.
 
 **MSS**
 
-1. **User** issues the command to list contacts.
-2. **System** reads the contact storage/data.
-3. If contacts exist, **System** displays each contact along with their index.
-4. If no contacts exist, **System** informs the user that the contact list is empty.
+1. **User** issues the command to list connections.
+2. **System** reads the connection storage/data.
+3. If connections exist, **System** displays each connection along with their index and corresponding information.
+4. If no connections exist, **System** informs the user that the connection list is empty.
 
 **Extensions**
 
-- **4a. System detects an error while retrieving contacts.**
+- **4a. System detects an error while retrieving connections.**
     - **4a1.** **System** displays an error message and offers options: retry or cancel.
     - **4a2.** **User** chooses to retry.
-    - **4a3.** **System** attempts to retrieve contacts again.
+    - **4a3.** **System** attempts to retrieve connections again.
 
       Steps **4a1–4a3** repeat until retrieval succeeds or user cancels.
       If retrieval succeeds, use case resumes at step 4.
       If user cancels, use case ends.
 
-#### UC12 - Edit Person
 
-**Goal:** Edit a person's info in the list.
+#### UC12 - Edit Connection
 
-**Preconditions:** There exists one or more persons in the list.
+**Goal:** Edit a connection's info in the list.
 
-**Postconditions:** If success, the fields of the person edited will be updated correctly and accordingly.
+**Preconditions:** There exists one or more connections in the list.
+
+**Postconditions:** If success, the fields of the connection edited will be updated correctly and accordingly.
 
 MSS
 
 1. **User** selects the text input.
-2. **User** inputs the command and details to edit an existing person.
+2. **User** inputs the command and details to edit an existing connection.
 3. **System** validates the command.
-4. **System** informs the user that the person has been edited and its updated details.
+4. **System** informs the user that the connection has been edited and its updated details.
 
 Use case ends.
 
 **Extensions**
 
 - **2a. System detects an error in the entered command.**
-    - **2a1.** **System** informs the user of the correct way to edit a contact.
+    - **2a1.** **System** informs the user of the correct way to edit a connection.
       Use case ends.
 
 - **2b. No updatable fields are provided (only index).**
     - **2b1.** **System** informs the user that no updatable fields were provided.
+      Use case ends.
 
-- **2c. The provided index does not correspond to any existing contacts.**
+- **2c. The provided index does not correspond to any existing connection.**
     - **2c1.** **System** informs the user about the error.
       Use case ends.
 
-#### UC13 - Delete Contact
 
-**Goal:** Delete a person from the list.
+#### UC13 - Delete connection
 
-**Preconditions:** There exists one or more persons in the list.
+**Goal:** Delete a connection from the list.
 
-**Postconditions:** If success, the person can no longer be found in the list, and everybody with index below them will
-be pushed up by 1.
+**Preconditions:** There exists one or more connections in the list.
+
+**Postconditions:** If success, the connection can no longer be found in the list.
 
 MSS
 
@@ -509,15 +500,14 @@ Use case ends.
 
 - **2a. User enters an incorrect or unsupported command format.**
     - **2a1.** **System** informs the user the command is invalid and shows the correct command format.
-
       Use case ends.
 
 - **3a. The provided ID does not correspond to any existing contact.**
     - **3a1.** **System** informs the user about the error.
-
       Use case ends.
 
-#### UC14 - Clear Person List
+
+#### UC14 - Clear Connection List
 
 **Goal:** Clear the person list.
 
@@ -530,8 +520,8 @@ Use case ends.
 
 - **2a. User enters an incorrect or unsupported command format.**
     - **2a1.** **System** informs the user the command is invalid and shows the correct command format.
-
       Use case ends.
+
 
 #### UC15 - Find Person
 
@@ -543,12 +533,10 @@ Use case ends.
 
 MSS
 
-1. User types the find command followed by one or more field prefixes and keywords.
+1. **User** types the find command followed by one or more field prefixes and keywords.
 2. **System** validates the command and the provided fields.
 3. **System** filters out the persons satisfying all conditions.
 4. **System** displays the number of matching persons and the list all the matching person.
-
-Use case ends.
 
 Use case ends.
 
@@ -563,33 +551,12 @@ Use case ends.
   Use case ends.
 
 * **3a. Field provided but with empty values (e.g., `n/` or `n/     ` (whitespaces) ).**
-  * **3a1.** Empty or whitespace-only keywords are ignored by `StringUtil.toNonEmptyKeywords()` in **System** and not taken into consideration when finding.
+  * **3a1.** Empty or whitespace-only keywords are ignored by **System** and not taken into consideration when finding.
   Use case ends.
+
 
 [comment]: TAGS
 
-#### UC21 - List Tags
-
-**Goal:** view all tag groups
-
-**Preconditions:** none
-
-**Postconditions:** none (read-only)
-
-**MSS**
-
-1. **User** enters the command to list tags.
-2. **System** retrieves all tags.
-3. **System** displays tags in a list format (ID and Name per line).
-
-Use case ends.
-
-**Extensions**
-
-* **2a. the tag list is empty.**
-    * **2a1.** **System** shows an empty-state message.
-
-      Use case ends.
 
 #### UC22 - Create Tag
 
@@ -613,15 +580,36 @@ Use case ends.
 
 * **1a. User omits optional attributes.**
     * **1a1.** **System** applies defaults.
-
       Use case resumes at step 2.
+  
 * **2a. Command format invalid or required Name is missing.**
     * **2a1.** **System** informs the user of the correct command format.
-
       Use case ends.
-* **\[PROPOSED\] 3a. A tag with the same name already exists.**
-    * **3a1.** **System** informs the user about the error.
+  
+* **\[TO BE IMPLEMENTED\] 3a. A tag with the same name already exists.**
+    * **3a1.** **System** informs the user about the already existed tag.
+      Use case ends.
 
+#### UC21 - List Tags
+
+**Goal:** view all tag groups
+
+**Preconditions:** none
+
+**Postconditions:** none (read-only)
+
+**MSS**
+
+1. **User** enters the command to list tags.
+2. **System** retrieves all tags.
+3. **System** displays tags in a list format (ID and Name per line).
+
+Use case ends.
+
+**Extensions**
+
+* **2a. the tag list is empty.**
+    * **2a1.** **System** shows an empty-state message.
       Use case ends.
 
 #### UC23 - Update Tag (Global)
