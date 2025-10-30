@@ -17,15 +17,15 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2526s1-cs2103t-t16-1.github.io/tp/UserGuide.html";
     public static final String COMMANDS = "Add connection\n"
-                + "`add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [r/NOTE]`\n\n"
+                + "`add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`\n\n"
                 + "Clear connection list \n"
                 + "`clear`\n\n"
                 + "Delete connection \n"
                 + "`delete ID` \n\n"
                 + "Edit connection \n"
-                + "`edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [r/NOTE]` \n\n"
+                + "`edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]` \n\n"
                 + "Find connection\n"
-                + "`find [n/NAME_KEYWORDS]… [p/PHONE_KEYWORDS]… [e/EMAIL_KEYWORDS]… [a/ADDRESS_KEYWORDS]… [t/TAG_IDS]…`"
+                + "`find [n/NAME_KEYWORDS]… [p/PHONE_KEYWORDS]… [e/EMAIL_KEYWORDS]… [a/ADDRESS_KEYWORDS]… [t/TAG_ID]…`"
                 + "\n\n"
                 + "List connection \n"
                 + "`list`\n\n"
