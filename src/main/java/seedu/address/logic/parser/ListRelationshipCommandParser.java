@@ -25,12 +25,6 @@ public class ListRelationshipCommandParser implements Parser<ListRelationshipCom
         Optional<String> part1 = argMultimap.getValue(PREFIX_PART_1);
         Optional<String> part2 = argMultimap.getValue(PREFIX_PART_2);
 
-        // If no ID provided, invalid
-        if (part1.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ListRelationshipCommand.MESSAGE_USAGE));
-        }
-
         // only one ID: queryImmediateRelationship
         if (part1.isPresent() && part2.isEmpty()) {
             Id id1 = ParserUtil.parseId(part1.get());
