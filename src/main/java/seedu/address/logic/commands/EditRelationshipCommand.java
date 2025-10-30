@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PART_1;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PART_2;
@@ -48,9 +49,7 @@ public class EditRelationshipCommand extends Command {
      * @param newDescription The new description for the relationship.
      */
     public EditRelationshipCommand(Id part1, Id part2, Description newDescription) {
-        requireNonNull(part1);
-        requireNonNull(part2);
-        requireNonNull(newDescription);
+        requireAllNonNull(part1, part2, newDescription);
         this.part1 = part1;
         this.part2 = part2;
         this.newDescription = newDescription;

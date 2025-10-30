@@ -25,7 +25,7 @@ public class DeleteRelationshipCommand extends Command {
             + "identified by their IDs.\n"
             + "Parameters: "
             + PREFIX_PART_1 + "PERSON_ID_1 "
-            + PREFIX_PART_2 + "PERSON_ID_2 "
+            + PREFIX_PART_2 + "PERSON_ID_2 \n"
             + "Example: " + COMMAND_WORD + " p1/1 p2/2";
 
     public static final String MESSAGE_DELETE_RELATIONSHIP_SUCCESS = "Deleted Relationship: %1$s";
