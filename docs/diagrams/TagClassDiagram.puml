@@ -9,13 +9,11 @@ Package Tag as TagPackage <<Rectangle>> {
     Class Id
     Class TagName
     Class TagDesc
-    Class TagColor
-    Class TextColor
+    Class Color
 
     Tag --> Id
     Tag --> TagName
     Tag --> TagDesc
-    Tag --> TagColor
-    Tag --> TextColor
+    Tag --> Color
 
 @enduml
