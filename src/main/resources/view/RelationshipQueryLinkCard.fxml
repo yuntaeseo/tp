@@ -36,12 +36,12 @@
     </VBox>
     <VBox alignment="BOTTOM_CENTER" spacing="4" prefWidth="600" minWidth="600" maxWidth="800">
         <padding>
-            <Insets top="6" right="15" bottom="6" left="10"/>
+            <Insets top="6" right="15" bottom="6" left="0"/>
         </padding>
         <HBox spacing="6" alignment="CENTER_LEFT">
             <Label text="Relationship info:" styleClass="cell_big_label " style="-fx-font-size: 14px"/>
             <Label fx:id="relationshipDescription" wrapText="true" styleClass="cell_small_label"
-                   maxWidth="400" style="-fx-font-size: 14px"/>
+                   maxWidth="300" style="-fx-font-size: 14px"/>
         </HBox>
     </VBox>
 </HBox>
