@@ -381,21 +381,21 @@ end. This will be fixed in the upcoming updates.
 
 ## Command summary
 
-| Action                    | Format, Examples                                                                                                                                                                  |
-|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add connection**        | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [r/NOTE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/1 2 r/owes me lunch` |
-| **List connection**       | `list`                                                                                                                                                                            |
-| **Edit connection**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
-| **Delete connection**     | `delete ID`<br> e.g., `delete 3`                                                                                                                                                  |
-| **Clear connection list** | `clear`                                                                                                                                                                           |
-| **Find connection**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                        |
-| **Add tag**               | `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `addtag n/JC d/JC friends c/23f1cd`                                                                                       |
-| **List tag**              | `listtag`                                                                                                                                                                         |
-| **Edit tag**              | `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `edittag 1 d/my extended family c/099fca`                                                                           |
-| **Delete tag**            | `deletetag ID` <br> e.g. `deletetag 2`                                                                                                                                            |
-| **Add relationship**      | `addrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION` <br> e.g. `addrel p1/1 p2/2 d/friends`                                                                                     |
-| **List relationships**    | `listrel`                                                                                                                                                                         |
-| **Edit relationship**     | `editrel INDEX [p1/CONNECTION_1] [p2/CONNECTION_2] [d/DESCRIPTION]` <br> e.g. `editrel 1 d/friends`                                                                               |
-| **Delete relationship**   | `deleterel INDEX` <br> e.g. `deleterel 1`                                                                                                                                         |
-| **Help**                  | `help`                                                                                                                                                                            |
-| **Exit program**          | `exit`                                                                                                                                                                            |
+| Action                    | Format, Examples                                                                                                                                                                     |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add connection**        | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/1 2 r/owes me lunch` |
+| **List connection**       | `list`                                                                                                                                                                               |
+| **Edit connection**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
+| **Delete connection**     | `delete ID`<br> e.g., `delete 3`                                                                                                                                                     |
+| **Clear connection list** | `clear`                                                                                                                                                                              |
+| **Find connection**       | `find [n/NAME_KEYWORDS]…​ [p/PHONE_KEYWORDS]…​ [e/EMAIL_KEYWORDS]…​ [a/ADDRESS_KEYWORDS]…​ [t/TAG_ID]…​` <br> e.g., `find e/gmail a/Clementi`                                        |
+| **Add tag**               | `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `addtag n/JC d/JC friends c/23f1cd`                                                                                          |
+| **List tag**              | `listtag`                                                                                                                                                                            |
+| **Edit tag**              | `edittag TAG_ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `edittag 1 d/my extended family c/099fca`                                                                          |
+| **Delete tag**            | `deletetag TAG_ID` <br> e.g. `deletetag 2`                                                                                                                                           |
+| **Add relationship**      | `addrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION` <br> e.g. `addrel p1/1 p2/2 d/friends`                                                                                        |
+| **List relationships**    | `listrel p1/CONNECTION_1 [p2/CONNECTION_2]`                                                                                                                                          |
+| **Edit relationship**     | `editrel INDEX [p1/CONNECTION_1] [p2/CONNECTION_2] [d/DESCRIPTION]` <br> e.g. `editrel 1 d/friends`                                                                                  |
+| **Delete relationship**   | `deleterel INDEX` <br> e.g. `deleterel 1`                                                                                                                                            |
+| **Help**                  | `help`                                                                                                                                                                               |
+| **Exit program**          | `exit`                                                                                                                                                                               |
