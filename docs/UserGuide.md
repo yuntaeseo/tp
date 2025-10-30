@@ -77,17 +77,28 @@ Format: `help`
 
 ### Adding a connection : `add`
 
-Adds a connection to NetWise. A _connection_ is someone who you want to keep in contact, such as
+Adds a connection to NetWise. A *connection* is someone who you want to keep in contact, such as
 friends, colleagues or people you met from a networking event.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`
+Format: `add n/NAME p/PHONE e/EMAIL [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A connection can have any number of tags (including 0)
 </div>
 
-* `TAG_ID` refers to the **unique ID** of each tag, can be seen by using the [`listtag`](#listing-all-tags-listtag)
-command. The tag ID **must be a positive integer** 1, 2, 3, …​
+* `NAME` should only contain alphanumeric characters, commas, full-stops, apostrophes and spaces, and it must not be empty. 
+  * Name should be unique. The same name must not be repeated, case-sensitive (i.e. 'Ben' is different from 'ben')
+* `PHONE` should only contain numbers, a plus `+` only at the beginning for country code, and spaces or dashes `-`
+  * There should be at least **two** numbers between every spaces/dashes.
+  * The phone number should be at least 5 digits long (not counting the special characters/spaces)
+* `EMAIL` should be of format `local-part@domain` and adhere to the following constraints:
+  * `local-part` should only contain alphanumeric characters and these special characters: `+`, `-`, `.`, `_`. The local-part may not start or end with any special characters.
+  * This is followed by a '@' and then a `domain`. The `domain` is made up of domain labels separated by periods. There should be at least
+  two domain labels, with the final domain label (i.e. `.com`, `.sg`, `.net`, etc.) should have at least 2 characters.
+* `TAG_ID` refers to the **unique ID** of each tag (**not** their names), can be seen by using the [`listtag`](#listing-all-tags-listtag) command. 
+  * The tag ID **must be a positive integer** 1, 2, 3, …​
+  * One user can be assigned multiple tag IDs, and these do not have to be in any order (i.e. `t/1 t/3` and `t/3 t/1` will both assign tags with IDs 1 and 3 to the connection)
+* `NOTE` can accept any character input of any length.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -109,14 +120,17 @@ Edits an existing connection in NetWise.
 Format: `edit ID [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`
 
 * Edits the connection with the specified `ID`.
-* The ID refers to the **unique ID** each connection is given when created,
+* The `ID` refers to the **unique ID** each connection is given when created,
 can be seen with [`list`](#listing-all-tags--listtag).
-* The ID **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+  * The `ID` **must be a positive integer** 1, 2, 3, …​
+* If the connection with the input `ID` does not exist in the list, expect a message informing that no person found.
+* Further conditions for `NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `TAG_ID`, and `NOTE` follows the same as in [`add`](#adding-a-connection--add).
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the connection will be removed, i.e adding of tags is not cumulative.
-* You can remove all the connection’s tags by typing `t/` without
-    specifying any tags after it.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can remove all the connection’s tags by typing `t/` without specifying any tags after it.
+</div>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the connection with ID 1
@@ -132,9 +146,10 @@ Deletes the specified connection from NetWise.
 Format: `delete ID`
 
 * Deletes the connection with the specified `ID`.
-* The ID refers to the **unique ID** each connection is given when created, can be seen with
-[`list`](#listing-all-connections--list).
-* The ID **must be a positive integer** 1, 2, 3, …​
+* The `ID` refers to the **unique ID** each connection is given when created, can be seen with [`list`](#listing-all-connections--list).
+* If the connection with the input `ID` does not exist in the list, expect a message informing that no person found.
+* The `ID` **must be a positive integer** 1, 2, 3, …​
+* If the connection with the input `ID` does not exist in the list, expect a message informing that no person found.
 
 Examples:
 * `list` followed by `delete 2` deletes the connection with ID 2 in NetWise.
@@ -159,6 +174,9 @@ Format: `find [n/NAME_KEYWORDS]…​ [p/PHONE_KEYWORDS]…​ [e/EMAIL_KEYWORDS
 * Each field can take one or more keywords separated by spaces.
 * Matching is partial for name, phone, email, and address (e.g., `n/Ali` matches “Alice”).
 * Matching is exact (ID-based) for tags (e.g., `t/5` only matches tag with ID 5, **not** that contains the character "5").
+* Unlike [`add`](#adding-a-connection--add) and [`edit`](#editing-a-connection--edit) commands, the keyword parameters
+does not have any input restrictions for flexibility.
+* Empty input fields (i.e. `n/` or `p/    ` (whitespaces)) will **not** be taken into account when filtering for connections. 
 * The search across different fields uses **AND logic** — a person must match all fields provided.
   (e.g. `n/Ali e/gmail` finds persons whose **name contains “Ali”** *and* **email contains “gmail”**.)
 * The search within the same field uses **OR logic** — any one of the field’s keywords will match.
@@ -182,12 +200,16 @@ Adds a tag to NetWise. A tag is a keyword or label used to categorise and organi
 Format: `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]`
 
 * Add a tag into NetWise, along with an optional description and tag colour.
+* `NAME` should only contain alphanumeric characters, and it must not be empty.
+  * Name should be unique. The same name must not be repeated, case-sensitive (i.e. 'FRIEND' is different from 'friend')
+* `DESCRIPTION` can accept any character input of any length.
 * The `RGB_COLOR` describe the colour you want to set for the tag.
-* `RGB_COLOR` field *must* be a HEX colour string of length 6, case-insensitive, ***without***
-the hash ('#') such as 123456, 0F2AAB, abf1cd, …​
-* The default `DESCRIPTION` field is "No Description"
-* The default `RGB_COLOR` is gray (#808080)
+* `RGB_COLOR` field *must* be a HEX colour string of length 6, case-insensitive, and must not be left empty if the prefix is included.
+  * The string should be written ***without*** the hash ('#'), such as `123456`, `0F2AAB`, `abf1cd`, …​
+* The default `DESCRIPTION` field is "No description" (if prefix is not included)
+* The default `RGB_COLOR` is gray (#808080) (if prefix is not included)
 * The created tag will be assigned a **FIXED unique tag ID**, can be seen with the [`listtag`](#listing-all-tags--listtag) command.
+
 Examples:
 * `addtag n/JC d/JC friends c/23f1cd`
 * `addtag n/coworkers`
@@ -213,11 +235,11 @@ Format: `edittag TAG_ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]`
 * Edits the tag at the specified `TAG_ID`.
 * `TAG_ID` refers to the **unique tag ID** each tag is given when created, can be seen with
 [`listtag`](#listing-all-tags--listtag).
-* The ID **must be a positive integer** 1, 2, 3, …​
+  * `TAG_ID` **must be a positive integer** 1, 2, 3, …​
+* If the tag with the input `TAG_ID` does not exist in the list, expect a message informing that no tag found.
+* Further conditions for `NAME`, `DESCRIPTION`, and `RGB_COLOR` follows the same as in [`addtag`](#adding-a-tag--addtag).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* You can change the description or colour back to the default option by typing `d/` or `c/` without
-  specifying any additional information after it.
 
 Examples:
 * `edittag 1 d/my extended family c/099fca` changes the description of tag 1 to "my extended family",
@@ -235,7 +257,8 @@ Format: `deletetag TAG_ID`
 * Deletes the tag at the specified `TAG_ID`.
 * `TAG_ID` refers to the **unique ID** each tag is given when created, can be seen with
 [`listtag`](#listing-all-tags--listtag).
-* The ID **must be a positive integer** 1, 2, 3, …​
+  * `TAG_ID` **must be a positive integer** 1, 2, 3, …​
+* If the tag with the input `TAG_ID` does not exist in the list, expect a message informing that no tag found.
 
 Example:
 * `delete 2` to delete the tag with ID 2
@@ -248,7 +271,10 @@ Adds a relationship to NetWise. A *relationship* links any two connections toget
 Format: `addrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION`
 
 * `CONNECTION_1` and `CONNECTION_2` refers to the unique IDs of the two connections that this relationship links.
+  * `CONNECTION_1` and `CONNECTION_2` **must be a positive integer** 1, 2, 3, …​
+* If either, or both, of the connections `CONNECTION_1` and `CONNECTION_2` do not exist in the list, expect a message informing that no tag found.
 * `DESCRIPTION` is a field to describe the relationship, e.g.: colleagues from ABC company
+* `DESCRIPTION` can accept any character input of any length.
 
 Examples:
 
@@ -260,10 +286,12 @@ that they are childhood friends.
 
 Shows a list of relationships for each person in the list in NetWise.
 
-Format (one person): `listrel p1/CONNECTION`: show a list of all person related to `CONNECTION` along with the relationship info
+Format (one person): `listrel p1/CONNECTION_1`: show a list of all person related to `CONNECTION` along with the relationship info
 Format (two persons): `listrel p1/CONNECTION_1 p2/CONNECTION_2`: show all relationships between `CONNECTION_1` and `CONNECTION_2` (if exist), along with the relationship infos.
 
-* `CONNECTION`, `CONNECTION_1`, and `CONNECTION_2` refers to the unique IDs of the two connections that this relationship links.
+* `CONNECTION_1` and `CONNECTION_2` refers to the unique IDs of the two connections that this relationship links.
+    * `CONNECTION_1` and `CONNECTION_2` **must be a positive integer** 1, 2, 3, …​
+* If either, or both, of the connections `CONNECTION_1` and `CONNECTION_2` do not exist in the list, expect a message informing that no tag found.
 
 
 ### Editing a relationship : `editrel`
