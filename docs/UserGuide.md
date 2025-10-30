@@ -247,35 +247,41 @@ that they are childhood friends.
 
 ### Listing all relationships : `listrel`
 
-Shows a list of relationships for each filtered person in the list in NetWise.
+Shows a list of relationships and people who are connected to p1. If p2 is stated as well, listrel will
+give a string of connections of how p1 and p2 are related to each other if a connection exists.
 
-Format: `listrel`
+Format: `listrel p1/CONNECTION_1 [p2/CONNECTION_2]`
+
+Examples:
+*  `listrel p1/1`. Shows a list of connections who has a relationship to ID 1 and the description of their relationship.
+*  `listrel p1/1 p2/3`. Shows a list of relationships in order to see how connection 1 may be connected to connection 2
+via a chain of relationships.
 
 ### Editing a relationship : `editrel`
 
-Edits a relationship in NetWise.
+Edits the description of a relationship in NetWise.
 
-Format: `editrel INDEX [p1/CONNECTION_1] [p2/CONNECTION_2] [d/DESCRIPTION]`
+Format: `editrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION`
 
-* Edits the relationship at the specified index `INDEX` in the relationship list from `listrel`.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* Edits the relationship between p1 and p2. `editrel` will edit the description of the relationship between p1 and p2.
+* All fields must be provided.
 
 Examples:
 
-* `editrel 3 d/highschool friends`. Edits description of the third relationship in the relationship list.
+* `editrel p1/1 p2/2 d/highschool friends`. Edits the description of the relationship between connection ID 1 and 
+connection ID 2.
 
 ### Deleting a relationship : `deleterel`
 
 Deletes a relationship from NetWise.
 
-Format: `deleterel INDEX`
+Format: `deleterel p1/CONNECTION_1 p2/CONNECTION_2`
 
-* Deletes the relationships at the specified index `INDEX` in the relationship list from `listrel`.
+* Deletes the relationship between p1 and p2.
 
 Examples:
 
-* `deleterel 1`. Deletes the first relationship in the relationship list.
+* `deleterel p1/1 p2/2`. Deletes the relationship between connection ID 1 and connection ID 2.
 
 ### Exiting the program : `exit`
 
