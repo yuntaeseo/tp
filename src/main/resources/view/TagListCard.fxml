@@ -13,7 +13,7 @@
             <Label fx:id="id" minWidth="20" styleClass="cell_medium_label" />
             <Label fx:id="tagLabel" styleClass="tag" />
         </HBox>
-        <Label fx:id="description" styleClass="cell_small_label" text="\$description">
+        <Label fx:id="description" styleClass="cell_small_label" wrapText="true" maxWidth="580" text="\$description">
             <padding>
                 <Insets left="20" />
             </padding>

@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -25,6 +26,7 @@ import seedu.address.model.tag.Tag;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final double TAG_MAX_WIDTH = 240.0;
     private static final String UNKNOWN_PERSON = "Unknown person";
 
     /**
@@ -83,12 +85,18 @@ public class PersonCard extends UiPart<Region> {
 
     private void populateTags(ObservableList<Tag> tagList) {
         tags.getChildren().clear();
+
         person.getTagIds().forEach(tagId -> {
             FilteredList<Tag> list = tagList.filtered(tag -> tag.getId().equals(tagId));
             Tag tag = list.get(0);
             Label label = new Label(tag.getName().value);
+
+            label.getStyleClass().add("tag-chip");
             label.setStyle(String.format("-fx-background-color: #%s; -fx-text-fill: #%s",
                     tag.getDisplayColor().value, tag.getTextColor().value));
+            label.setTextOverrun(OverrunStyle.ELLIPSIS);
+            label.setMaxWidth(TAG_MAX_WIDTH);
+
             tags.getChildren().add(label);
         });
     }
