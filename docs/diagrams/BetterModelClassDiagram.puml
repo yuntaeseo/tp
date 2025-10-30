@@ -10,12 +10,15 @@ UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -[hidden]down- UniquePersonList
 
 UniqueTagList -right-> "*" Tag
+Tag -> Id
 UniquePersonList -right-> Person
 
-Person -up-> "*" Tag
+Person -up-> "Person ID" Id
 
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person --> "tag IDs" Id
+Person *--> Note
 @enduml

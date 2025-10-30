@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a description (for anything).
  */
 public class Description {
-    public static final String MESSAGE_CONSTRAINTS = "Description should not have leading or trailing whitespaces";
+    public static final String MESSAGE_CONSTRAINTS = "Description should not be empty";
 
     public final String value;
 
@@ -24,9 +24,10 @@ public class Description {
 
     /**
      * Returns true if a given string is a valid description.
+     * The description should not be blank.
      */
     public static boolean isValidDescription(String test) {
-        return test.trim().equals(test);
+        return test.trim().equals(test) && !test.trim().isEmpty();
     }
 
     @Override

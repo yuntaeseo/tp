@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.id.Id;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -166,6 +167,31 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void removeTagIdFromPersons_containsId_idRemoved() {
+        Person alice = new PersonBuilder(ALICE).withTags(1, 2).build();
+        Person bob = new PersonBuilder(BOB).withTags(1, 2, 3).build();
+        uniquePersonList.setPersons(List.of(alice, bob));
+
+        Id toRemove = new Id(1);
+        uniquePersonList.removeTagIdFromPersons(toRemove);
+        assertTrue(uniquePersonList.asUnmodifiableObservableList().stream()
+                .noneMatch(person -> person.getTagIds().contains(toRemove)));
+    }
+
+    @Test
+    public void removeTagIdFromPersons_doesNotContainId_noIdRemoved() {
+        Person alice = new PersonBuilder(ALICE).withTags(1).build();
+        Person bob = new PersonBuilder(BOB).withTags(2).build();
+        uniquePersonList.setPersons(List.of(alice, bob));
+
+        UniquePersonList expectedPersonList = new UniquePersonList();
+        expectedPersonList.setPersons(uniquePersonList);
+
+        uniquePersonList.removeTagIdFromPersons(new Id(3));
+        assertEquals(expectedPersonList, uniquePersonList);
     }
 
     @Test

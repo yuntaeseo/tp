@@ -83,7 +83,7 @@ The sections below give more details of each component.
 The **API** of this component is specified in [
 `Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<img src="images/UiClassDiagram.png" alt="Structure of the UI Component" width="720">
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
 `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
@@ -100,7 +100,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person`, `Tag`, `Relationship`  object residing in the `Model`.
 
 ### Logic component
 
@@ -148,7 +148,7 @@ How the parsing works:
 **API** : [
 `Model.java`](../src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="650" />
 
 
 The `Model` component,
@@ -181,21 +181,21 @@ The `Person` component,
 
 The `Tag` component,
 * Stores the related data for each Tag, such as TagColor
-* Each `Person` points to it via its Id.
+* Each `Person` points to it via its ID.
 
 <div>
 
-<img src="images/TagClassDiagram.png" width="450" />
+<img src="images/TagClassDiagram.png" width="350" />
 
 </div>
 
 The `Relationship` component,
 * Stores two Ids for each person in the Relationship
-* Stores the Description for this Relationship
+* Stores the Description for the Relationship
 
 <div>
 
-<img src="images/RelationshipClassDiagram.png" width="450" />
+<img src="images/RelationshipClassDiagram.png" width="200" />
 
 </div>
 
@@ -342,7 +342,7 @@ _{more aspects and alternatives to be added}_
 
 **Target user profile**:
 
-* has a very big network of friends, co-workers and acquaintances for professional and work-related reasons.
+* CS student who has a very big network of friends, co-workers and acquaintances for professional and work-related reasons.
 * want to keep track of the intricate relationships between him and his networks and amongst his networks.
 * prefer desktop apps over other types.
 * can type fast.
@@ -1077,14 +1077,15 @@ testers are expected to do more *exploratory* testing.
 
 4. **Test case (name already exist):**
    `add n/Minh p/12345678 e/minh@gmail.com a/Minh street`
-   **Expected:** No change. Error message indicates that the addition will result in duplicate contact.
+   **Expected:** No change. Error message indicates that the addition will result in duplicate contact. Case-sensitive, so
+   John and john are different names.
 
 5. **Test case (missing required field):**
    `add p/98765432 e/jane@example.com a/Somewhere`
    **Expected:** No person is added. Error message indicates that `n/NAME` is required and shows correct usage.
 
-6. **Other test cases to try:** invalid email (`e/notanemail`), invalid phone (non-digits), extremely long address,
-   duplicate person details (if duplicate detection is implemented later).
+6. **Other test cases to try:** invalid email (`e/notanemail`), invalid phone (non-digits), non-existent tags 
+   (Invalid Tag ID), extremely long address, duplicate person details (if duplicate detection is implemented later).
    **Expected:** Appropriate validation errors or acceptance per your product decision.
 
 ---
@@ -1096,7 +1097,7 @@ testers are expected to do more *exploratory* testing.
    Simple relationship list which shows personID and name of related persons of each person in the list is also shown. 
 
 2. **Test case after a `find` result:**
-   Run `find John` then `list`.
+   Run `find n/John` then `list`.
    **Expected:** List switches from the filtered results back to all persons.
 
 3. **Test case when there is no relationship for a particular person:**
@@ -1127,8 +1128,8 @@ testers are expected to do more *exploratory* testing.
    `edit 1`
    **Expected:** No change. Error message states that at least one editable field must be provided.
 
-6. **Other test cases to try:** ID out of range (`edit 999 ...`), invalid email or phone formats, editing a person while
-   viewing a filtered list (indices refer to the filtered list).
+6. **Other test cases to try:** ID out of range (`edit 999 ...`), invalid email or phone formats, empty names,
+   editing a person while viewing a filtered list (indices refer to the filtered list).
    **Expected:** Proper error handling and correct index interpretation against the currently displayed list.
 
 ---
@@ -1286,51 +1287,46 @@ testers are expected to do more *exploratory* testing.
 5. **Other test cases to try:** duplicate relationship (if disallowed, expect a duplicate-relationship error), very long
    descriptions.
    **Expected:** Appropriate validation or acceptance per product decision.
-
+ 
 ---
 
 ### Listing relationships : `listrel`
 
-1. **Test case:** `listrel`
-   **Expected:** Displays relationships of the filtered people in the list with descriptions of relationships.
-   Relationships ordered by the person ID for each person in the current displayed list.
+1. **Test case:** `listrel p1/1`
+   **Expected:** Displays relationships of the people in the list who are directly related to p1 with 
+   descriptions of relationships. Relationships ordered by the person ID for each person in the current displayed list.
 
-2. **Test case after a `find` result:**
-   Run `find John` then `listrel`.
-   **Expected:** Lists relationships only among the filtered persons named John.
+2. **Test case:** `listrel p1/1 p2/3`
+   **Expected:** Displays a list of relationships in an order from p1 linking to p2. If no link can be made, an empty
+   list will be shown.
 
 3. **Test case when there are no relationship for the listed person:**
-   If relationships of the person have been cleared or none exist, run `listrel`.
+   If relationships of the person have been cleared or none exist, run `listrel p1/1`.
    **Expected:** Shows an empty-state message for the person.
 
-4. **Other test cases to try:** `listrel extra` (extraneous parameters).
-   **Expected:** Same as `listrel`. Extraneous parameters are ignored.
+4. **Other test cases to try:** `listrel p1/9999`(Invalid Id), `listrel 1`(Invalid identifier)
+   **Expected:** Appropriate error handling.
 
 ---
 
 ### Editing a relationship : `editrel`
 
-1. **Prerequisite:** Ensure at least one relationship exists (create with `addrel` and confirm with `listrel` to obtain
-   the relationship index).
+1. **Prerequisite:** Ensure at least one relationship exists (create with `addrel` and confirm with `listrel`). p1 and
+   p2 are valid IDs for the relationship being edited.
 
 2. **Test case (change description):**
-   `editref 1 d/my extended family`
-   **Expected:** Relationship with index 1 is updated. Status message shows new description.
+   `editrel p1/1 p2/3 d/my extended family`
+   **Expected:** Relationship with ID 1 and ID 3 is updated. Status message shows new description.
 
-3. **Test case (changes participants):**
-   `editref 1 p1/1 p2/2 d/friends`
-   **Expected:** Relationship with index 2 now has participants ID 1 and 2; description is now `friends`. Status message
-   confirms.
+3. **Test case (empty description):**
+   `editrel p1/1 p2/3 d/`
+   **Expected:** No change. Error message indicates that the description should not be empty.
 
-4. **Test case (changes participants but set of new participants already exist):**
-   `editref 1 p1/1 p2/2 d/friends`
-   **Expected:** No change. Error message indicates that the edit will result in duplicate relationship.
+4. **Test case (missing fields):**
+   `editrel p1/1 d/NewName`
+   **Expected:** No change. Error message indicates that the command format is invalid and shows the correct command format.
 
-5. **Test case (missing index):**
-   `editrel n/NewName`
-   **Expected:** No change. Error message indicates that an index is required and shows the correct command format.
-
-6. **Other test cases to try:** invalid index (`editred 999 ...`), no updatable fields provided (`edittag 1`), invalid
+5. **Other test cases to try:** invalid relationship (`editred p1/999 ...`), no updatable fields provided (`edittag p1/1 p2/3`), invalid
    participant ID format.
    **Expected:** Proper error messages; no changes applied.
 
@@ -1338,14 +1334,14 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a relationship : `deleterel`
 
-1. **Prerequisite:** Ensure the target relationship exists and note its index using `listrel`.
+1. **Prerequisite:** Ensure the target relationship exists between p1 and p2.
 
 2. **Test case:**
-   `deleterel 2`
-   **Expected:** Relationship with index 2 is removed from the relationship list. Status message confirms deletion.
+   `deleterel p1/1 p2/2`
+   **Expected:** Relationship between p1 and p2 is removed from the relationship list. Status message confirms deletion.
 
 3. **Test case (invalid index):**
-   `deleterel 999`
+   `deleterel p1/999 p2/1`
    **Expected:** No relationship is deleted. Error message indicates the index is invalid.
 
 4. **Other test cases to try:** `deleterel` (missing identifier), deleting a relationship that is currently shown in the
@@ -1409,3 +1405,15 @@ testers are expected to do more *exploratory* testing.
    and confirm that identifiers and references remain consistent.
    **Expected:** Appropriate warnings or non-persistence when writes are blocked; consistent behavior for tag
    references.
+
+## **Appendix: Planned Enhancement**
+
+**Team size: 5**
+
+**1. Prevent UI from breaking:** While the current UI supports wrapping for all fields and attributes — including person, relationship, and tag names — it can still break in an extreme case where a single tag name is so long that it exceeds the total width limit. We plan to enhance the UI to handle even such extreme tag names by allowing them to wrap properly, preventing any UI breakage.
+
+**2. Change arguments that requires ID into name** Since NetWise requires users to input the unique IDs of tags and relationships, which can be inconvenient, we plan to enhance the system by allowing users to use names instead of IDs for commands that require id identification. This change aims to improve user experience by making it easier to reference entries without needing to recall specific IDs.
+
+**3. Support name input for colors also:** Currently, NetWise requires users to input colors in hexadecimal format when creating or editing tags, which may not be user-friendly for everyone. We plan to enhance the system by allowing users to input common color names (like "red", "blue", "green") in addition to hexadecimal codes. This change aims to make it easier for users to select colors without needing to know or look up hexadecimal values.
+
+**4. Support when editing a tag, if empty description is input, the UI change to 'No description':** When users edit a tag and provide an empty description, the system currently leaves the description blank. We plan to enhance this behavior so that if an empty description is input during tag editing, the UI will automatically update the description to display 'No Description'. This change aims to provide clearer feedback to users about the state of the tag's description.

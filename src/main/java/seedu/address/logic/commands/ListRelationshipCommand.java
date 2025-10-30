@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PART_1;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PART_2;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RELATIONSHIPS;
 
 import java.util.Objects;
 
@@ -19,30 +18,21 @@ public class ListRelationshipCommand extends Command {
 
     public static final String COMMAND_WORD = "listrel";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists relationships.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists relationships related to a connection.\n"
             + "Usage:\n"
-            + "  " + COMMAND_WORD + ": Lists all relationships\n"
-            + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "ID: lists all relationships involving that person\n"
+            + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "ID: lists all relationships involving that connection\n"
             + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "ID1 " + PREFIX_PART_2
             + "ID2: shows link between two persons\n"
             + "Examples:\n"
-            + "  " + COMMAND_WORD + "\n"
             + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "1\n"
             + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "1 " + PREFIX_PART_2 + "3";
 
-    public static final String MESSAGE_SUCCESS_ALL = "Listed all relationships";
     public static final String MESSAGE_SUCCESS_ONE = "Listed all relationships involving person ID " + "%1$s";
     public static final String MESSAGE_SUCCESS_TWO = "Listed link between person IDs " + "%1$s and %2$s";
     public static final String MESSAGE_INVALID_PERSON_ID = "One or both person IDs do not exist.";
 
     private final Id id1;
     private final Id id2;
-
-    /** Constructor for listing all relationships */
-    public ListRelationshipCommand() {
-        this.id1 = null;
-        this.id2 = null;
-    }
 
     /** Constructor for one-ID (immediate relationship) query */
     public ListRelationshipCommand(Id id1) {
@@ -61,13 +51,7 @@ public class ListRelationshipCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Case 1: list all
-        if (id1 == null && id2 == null) {
-            model.updateFilteredRelationshipList(PREDICATE_SHOW_ALL_RELATIONSHIPS);
-            return new CommandResult(MESSAGE_SUCCESS_ALL);
-        }
-
-        // Case 2: one ID — queryImmediateRelationship
+        // Case 1: one ID — queryImmediateRelationship
         if (id2 == null) {
             if (!model.hasPersonWithId(id1)) {
                 throw new CommandException(MESSAGE_INVALID_PERSON_ID);
@@ -76,7 +60,7 @@ public class ListRelationshipCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS_ONE, id1));
         }
 
-        // Case 3: two IDs — queryLink
+        // Case 2: two IDs — queryLink
         if (!model.hasPersonWithId(id1) || !model.hasPersonWithId(id2)) {
             throw new CommandException(MESSAGE_INVALID_PERSON_ID);
         }

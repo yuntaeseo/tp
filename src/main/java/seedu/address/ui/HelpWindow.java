@@ -16,7 +16,42 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2526s1-cs2103t-t16-1.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String COMMANDS = "Add connection\n"
+                + "`add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`\n\n"
+                + "Clear connection list \n"
+                + "`clear`\n\n"
+                + "Delete connection \n"
+                + "`delete ID` \n\n"
+                + "Edit connection \n"
+                + "`edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]` \n\n"
+                + "Find connection\n"
+                + "`find [n/NAME_KEYWORDS]… [p/PHONE_KEYWORDS]… [e/EMAIL_KEYWORDS]… [a/ADDRESS_KEYWORDS]… [t/TAG_ID]…`"
+                + "\n\n"
+                + "List connection \n"
+                + "`list`\n\n"
+                + "Add tag\n"
+                + "`addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]`\n\n"
+                + "Delete tag\n"
+                + "`deletetag ID`\n\n"
+                + "Edit tag\n"
+                + "`edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]`\n\n"
+                + "List tag\n"
+                + "`listtag`\n\n"
+                + "Add relationship\n"
+                + "`addrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION`\n\n"
+                + "List relationships\n"
+                + "`listrel p1/CONNECTION_1 [p2/CONNECTION_2]`\n\n"
+                + "Edit relationship\n"
+                + "`editrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION`\n\n"
+                + "Delete relationship\n"
+                + "`deleterel p1/CONNECTION_1 p2/CONNECTION_2`\n\n"
+                + "Exit program\n"
+                + "`exit`\n\n"
+                + "Help\n"
+                + "`help`\n";
+
+    private static final String HELP_MESSAGE = COMMANDS
+            + "\n\nRefer to the user guide for additional information: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
