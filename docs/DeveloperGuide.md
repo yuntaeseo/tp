@@ -612,7 +612,7 @@ Use case ends.
     * **2a1.** **System** shows an empty-state message.
       Use case ends.
 
-#### UC23 - Update Tag (Global)
+#### UC23 - Update Tag 
 
 **Goal:** update an existing tag’s attributes
 
@@ -646,7 +646,7 @@ Use case ends.
 
       Use case ends.
 
-#### UC24 - Delete Tag (Global)
+#### UC24 - Delete Tag 
 
 **Goal:** delete an existing tag group
 

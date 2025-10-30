@@ -208,6 +208,7 @@ Format: `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]`
 * `RGB_COLOR` field *must* be a HEX colour string of length 6, case-insensitive, and must not be left empty if the prefix is included.
   * The string should be written ***without*** the hash ('#'), such as `123456`, `0F2AAB`, `abf1cd`, …​
 * The default `DESCRIPTION` field is "No description" (if prefix is not included)
+* Empty `DESCRIPTION` field (i.e. `d/`) will set the description to be empty.
 * The default `RGB_COLOR` is gray (#808080) (if prefix is not included)
 * The created tag will be assigned a **FIXED unique tag ID**, can be seen with the [`listtag`](#listing-all-tags--listtag) command.
 
@@ -243,10 +244,9 @@ Format: `edittag TAG_ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]`
 * Existing values will be updated to the input values.
 
 Examples:
-* `edittag 1 d/my extended family c/099fca` changes the description of tag 1 to "my extended family",
+* `edittag 1 d/my extended family c/099fca` changes the description of tag with ID 1 to "my extended family",
 and set its color to the color with hex code #099fca.
-* `edittag 2 n/Prof d/ c/` changes the name of tag 1 to "Prof", and set both description and color to default
-value mentioned [above](#adding-a-tag--addtag).
+* `edittag 2 n/Prof d/` changes the name of tag with ID 2 to "Prof", set description to be empty.
 
 
 ### Deleting a tag : `deletetag`
