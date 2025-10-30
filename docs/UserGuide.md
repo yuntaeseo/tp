@@ -165,7 +165,7 @@ Format: `clear`
 Finds all connections (persons) whose specified fields contain any of the given keywords.
 Matching is **case-insensitive** and supports **substring** (for most fields) and **word-based** (for tags) matching.
 
-Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_ID] [MORE KEYWORDS]...`
+Format: `find [n/NAME_KEYWORDS]…​ [p/PHONE_KEYWORDS]…​ [e/EMAIL_KEYWORDS]…​ [a/ADDRESS_KEYWORDS]…​ [t/TAG_ID]…​`
 
 * **At least ONE** field (`n/`, `p/`, `e/`, `a/`, `t/`) must be provided.
 * Each field can take one or more keywords separated by spaces.
@@ -213,7 +213,7 @@ Shows a list of all tags in NetWise.
 
 Format: `listtag`
 
-* List all tags along
+* List all tags along with their description and assigned color.
 * The tag list does not show tags in any particular order.
 It shows the tag name along with the associated **unique tag ID** given when the tag is created.
 
