@@ -18,15 +18,17 @@ public class Description {
      */
     public Description(String desc) {
         requireNonNull(desc);
-        checkArgument(isValidDescription(desc), MESSAGE_CONSTRAINTS);
-        value = desc;
+        String trimmed = desc.trim();
+        checkArgument(isValidDescription(trimmed), MESSAGE_CONSTRAINTS);
+        value = trimmed;
     }
 
     /**
      * Returns true if a given string is a valid description.
+     * The description should not be blank, and should not contain leading or trailing whitespaces.
      */
     public static boolean isValidDescription(String test) {
-        return test.trim().equals(test);
+        return test.trim().equals(test) && !test.trim().isEmpty();
     }
 
     @Override
