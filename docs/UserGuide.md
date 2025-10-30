@@ -74,8 +74,6 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-![help message](images/helpMessage.png)
-
 
 ### Adding a connection : `add`
 
@@ -103,8 +101,6 @@ Shows a list of all connections in NetWise.
 
 Format: `list`
 
-![list message](images/listMessage.png)
-
 
 ### Editing a connection : `edit`
 
@@ -128,12 +124,6 @@ to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the connection with ID 2 to be `Betsy Crower` and
 clears all existing tags.
 
-* Before editing:
-![before edit message](images/beforePersonEdit.png)
-
-* After editing:
-![after edit message](images/editMessage.png)
-
 
 ### Deleting a connection : `delete`
 
@@ -149,8 +139,6 @@ Format: `delete ID`
 Examples:
 * `list` followed by `delete 2` deletes the connection with ID 2 in NetWise.
 * `find Betsy` followed by `delete 1` deletes the connection with ID 1 in the results of the `find` command.
-
-![delete message](images/deleteMessage.png)
 
 
 ### Clearing all connection entries : `clear`
@@ -186,8 +174,6 @@ Examples:
     *	address contains “Clementi” or “Bishan”, and
     *	has tag IDs 2, 5, or 7.
 
-![find message](images/findMessage.png)
-
 
 ### Adding a tag : `addtag`
 
@@ -216,8 +202,6 @@ Format: `listtag`
 * List all tags along with their description and assigned color.
 * The tag list does not show tags in any particular order.
 It shows the tag name along with the associated **unique tag ID** given when the tag is created.
-
-![listtag message](images/listtagMessage.png)
 
 
 ### Editing a tag : `edittag`
@@ -256,8 +240,6 @@ Format: `deletetag TAG_ID`
 Example:
 * `delete 2` to delete the tag with ID 2
 
-![deletetag message](images/deletetagMessage.png)
-
 
 ### Adding a relationship : `addrel`
 
@@ -273,8 +255,6 @@ Examples:
 * `addrel p1/1 p2/2 d/childhood friends`. Adds a relationship between the connections with ID 1 and 2, noting
 that they are childhood friends.
 
-![addrel Message](images/addrelMessage.png)
-
 
 ### Listing all relationships : `listrel`
 
@@ -285,12 +265,6 @@ Format (two persons): `listrel p1/CONNECTION_1 p2/CONNECTION_2`: show all relati
 
 * `CONNECTION`, `CONNECTION_1`, and `CONNECTION_2` refers to the unique IDs of the two connections that this relationship links.
 
-Examples:
-* For one person:
-![listrel one person message](images/listrel1Message.png)
-
-* For two persons:
-![listrel two person message](images/listrel2Message.png)
 
 ### Editing a relationship : `editrel`
 
