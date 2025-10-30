@@ -13,8 +13,8 @@ Class Name
 Class Phone
 Class Note
 
-Person --> "person id" Id
-Person --> "~* tag Id" Id
+Person --> "Person ID" Id
+Person --> "~* Tag ID" Id
 Person *--> Name
 Person *--> Phone
 Person *--> Email
