@@ -20,8 +20,8 @@ public class EditTagCommand extends Command {
 
     public static final String COMMAND_WORD = "edittag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a tag identified by its ID.\n"
-            + "Parameters: ID"
-            + PREFIX_NAME + "NAME "
+            + "Parameters: ID "
+            + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DESC + "DESCRIPTION] "
             + "[" + PREFIX_COLOR + "COLOR]\n"
             + "Example: " + COMMAND_WORD + " 1 n/BestFriends c/RRGGBB";

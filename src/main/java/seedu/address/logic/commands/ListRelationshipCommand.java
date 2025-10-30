@@ -18,7 +18,7 @@ public class ListRelationshipCommand extends Command {
 
     public static final String COMMAND_WORD = "listrel";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " : Lists relationships related to a connection.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "listrel: Lists relationships related to a connection.\n"
             + "Usage:\n"
             + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "ID: lists all relationships involving that connection\n"
             + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "ID1 " + PREFIX_PART_2
