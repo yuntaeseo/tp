@@ -16,8 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2526s1-cs2103t-t16-1.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL + "\n\n"
-                + "Add connection\n"
+    public static final String COMMANDS = "Add connection\n"
                 + "`add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [r/NOTE]`\n\n"
                 + "Clear connection list \n"
                 + "`clear`\n\n"
@@ -48,7 +47,10 @@ public class HelpWindow extends UiPart<Stage> {
                 + "Exit program\n"
                 + "`exit`\n\n"
                 + "Help\n"
-                + "`help`";
+                + "`help`\n";
+
+    private static final String HELP_MESSAGE = COMMANDS
+            + "\n\nRefer to the user guide for additional information: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";

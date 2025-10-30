@@ -19,6 +19,7 @@
   <scene>
     <Scene>
       <stylesheets>
+<!--        <URL value="@DarkTheme.css" />-->
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
@@ -27,10 +28,10 @@
                   pannable="true"
                   vbarPolicy="AS_NEEDED"
                   hbarPolicy="NEVER"
-                  prefHeight = "400.0"
-                  prefWidth = "300.0">
+                  prefHeight = "700.0"
+                  prefWidth = "500.0">
         <content>
-          <VBox alignment="CENTER" fx:id="helpMessageContainer" spacing="10">
+          <VBox alignment="TOP_LEFT" fx:id="helpMessageContainer" spacing="10">
             <children>
               <Label fx:id="helpMessage" text="Label" wrapText="true">
                 <VBox.margin>
