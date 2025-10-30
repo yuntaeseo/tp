@@ -1089,14 +1089,15 @@ testers are expected to do more *exploratory* testing.
 
 4. **Test case (name already exist):**
    `add n/Minh p/12345678 e/minh@gmail.com a/Minh street`
-   **Expected:** No change. Error message indicates that the addition will result in duplicate contact.
+   **Expected:** No change. Error message indicates that the addition will result in duplicate contact. Case-sensitive, so
+   John and john are different names.
 
 5. **Test case (missing required field):**
    `add p/98765432 e/jane@example.com a/Somewhere`
    **Expected:** No person is added. Error message indicates that `n/NAME` is required and shows correct usage.
 
-6. **Other test cases to try:** invalid email (`e/notanemail`), invalid phone (non-digits), extremely long address,
-   duplicate person details (if duplicate detection is implemented later).
+6. **Other test cases to try:** invalid email (`e/notanemail`), invalid phone (non-digits), non-existent tags 
+   (Invalid Tag ID), extremely long address, duplicate person details (if duplicate detection is implemented later).
    **Expected:** Appropriate validation errors or acceptance per your product decision.
 
 ---
@@ -1108,7 +1109,7 @@ testers are expected to do more *exploratory* testing.
    Simple relationship list which shows personID and name of related persons of each person in the list is also shown. 
 
 2. **Test case after a `find` result:**
-   Run `find John` then `list`.
+   Run `find n/John` then `list`.
    **Expected:** List switches from the filtered results back to all persons.
 
 3. **Test case when there is no relationship for a particular person:**
@@ -1139,8 +1140,8 @@ testers are expected to do more *exploratory* testing.
    `edit 1`
    **Expected:** No change. Error message states that at least one editable field must be provided.
 
-6. **Other test cases to try:** ID out of range (`edit 999 ...`), invalid email or phone formats, editing a person while
-   viewing a filtered list (indices refer to the filtered list).
+6. **Other test cases to try:** ID out of range (`edit 999 ...`), invalid email or phone formats, empty names,
+   editing a person while viewing a filtered list (indices refer to the filtered list).
    **Expected:** Proper error handling and correct index interpretation against the currently displayed list.
 
 ---
@@ -1298,51 +1299,46 @@ testers are expected to do more *exploratory* testing.
 5. **Other test cases to try:** duplicate relationship (if disallowed, expect a duplicate-relationship error), very long
    descriptions.
    **Expected:** Appropriate validation or acceptance per product decision.
-
+ 
 ---
 
 ### Listing relationships : `listrel`
 
-1. **Test case:** `listrel`
-   **Expected:** Displays relationships of the filtered people in the list with descriptions of relationships.
-   Relationships ordered by the person ID for each person in the current displayed list.
+1. **Test case:** `listrel p1/1`
+   **Expected:** Displays relationships of the people in the list who are directly related to p1 with 
+   descriptions of relationships. Relationships ordered by the person ID for each person in the current displayed list.
 
-2. **Test case after a `find` result:**
-   Run `find John` then `listrel`.
-   **Expected:** Lists relationships only among the filtered persons named John.
+2. **Test case:** `listrel p1/1 p2/3`
+   **Expected:** Displays a list of relationships in an order from p1 linking to p2. If no link can be made, an empty
+   list will be shown.
 
 3. **Test case when there are no relationship for the listed person:**
-   If relationships of the person have been cleared or none exist, run `listrel`.
+   If relationships of the person have been cleared or none exist, run `listrel p1/1`.
    **Expected:** Shows an empty-state message for the person.
 
-4. **Other test cases to try:** `listrel extra` (extraneous parameters).
-   **Expected:** Same as `listrel`. Extraneous parameters are ignored.
+4. **Other test cases to try:** `listrel p1/9999`(Invalid Id), `listrel 1`(Invalid identifier)
+   **Expected:** Appropriate error handling.
 
 ---
 
 ### Editing a relationship : `editrel`
 
-1. **Prerequisite:** Ensure at least one relationship exists (create with `addrel` and confirm with `listrel` to obtain
-   the relationship index).
+1. **Prerequisite:** Ensure at least one relationship exists (create with `addrel` and confirm with `listrel`). p1 and
+   p2 are valid IDs for the relationship being edited.
 
 2. **Test case (change description):**
-   `editref 1 d/my extended family`
-   **Expected:** Relationship with index 1 is updated. Status message shows new description.
+   `editrel p1/1 p2/3 d/my extended family`
+   **Expected:** Relationship with ID 1 and ID 3 is updated. Status message shows new description.
 
-3. **Test case (changes participants):**
-   `editref 1 p1/1 p2/2 d/friends`
-   **Expected:** Relationship with index 2 now has participants ID 1 and 2; description is now `friends`. Status message
-   confirms.
+3. **Test case (empty description):**
+   `editrel p1/1 p2/3 d/`
+   **Expected:** No change. Error message indicates that the description should not be empty.
 
-4. **Test case (changes participants but set of new participants already exist):**
-   `editref 1 p1/1 p2/2 d/friends`
-   **Expected:** No change. Error message indicates that the edit will result in duplicate relationship.
+4. **Test case (missing fields):**
+   `editrel p1/1 d/NewName`
+   **Expected:** No change. Error message indicates that the command format is invalid and shows the correct command format.
 
-5. **Test case (missing index):**
-   `editrel n/NewName`
-   **Expected:** No change. Error message indicates that an index is required and shows the correct command format.
-
-6. **Other test cases to try:** invalid index (`editred 999 ...`), no updatable fields provided (`edittag 1`), invalid
+5. **Other test cases to try:** invalid relationship (`editred p1/999 ...`), no updatable fields provided (`edittag p1/1 p2/3`), invalid
    participant ID format.
    **Expected:** Proper error messages; no changes applied.
 
@@ -1350,14 +1346,14 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a relationship : `deleterel`
 
-1. **Prerequisite:** Ensure the target relationship exists and note its index using `listrel`.
+1. **Prerequisite:** Ensure the target relationship exists between p1 and p2.
 
 2. **Test case:**
-   `deleterel 2`
-   **Expected:** Relationship with index 2 is removed from the relationship list. Status message confirms deletion.
+   `deleterel p1/1 p2/2`
+   **Expected:** Relationship between p1 and p2 is removed from the relationship list. Status message confirms deletion.
 
 3. **Test case (invalid index):**
-   `deleterel 999`
+   `deleterel p1/999 p2/1`
    **Expected:** No relationship is deleted. Error message indicates the index is invalid.
 
 4. **Other test cases to try:** `deleterel` (missing identifier), deleting a relationship that is currently shown in the
