@@ -18,18 +18,15 @@ public class ListRelationshipCommand extends Command {
 
     public static final String COMMAND_WORD = "listrel";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists relationships.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " p1/ID: Lists relationships related to a connection.\n"
             + "Usage:\n"
-            + "  " + COMMAND_WORD + ": Lists all relationships\n"
-            + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "ID: lists all relationships involving that person\n"
+            + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "ID: lists all relationships involving that connection\n"
             + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "ID1 " + PREFIX_PART_2
             + "ID2: shows link between two persons\n"
             + "Examples:\n"
-            + "  " + COMMAND_WORD + "\n"
             + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "1\n"
             + "  " + COMMAND_WORD + " " + PREFIX_PART_1 + "1 " + PREFIX_PART_2 + "3";
 
-    public static final String MESSAGE_SUCCESS_ALL = "Listed all relationships";
     public static final String MESSAGE_SUCCESS_ONE = "Listed all relationships involving person ID " + "%1$s";
     public static final String MESSAGE_SUCCESS_TWO = "Listed link between person IDs " + "%1$s and %2$s";
     public static final String MESSAGE_INVALID_PERSON_ID = "One or both person IDs do not exist.";
