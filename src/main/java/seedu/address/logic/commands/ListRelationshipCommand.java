@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PART_1;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PART_2;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RELATIONSHIPS;
 
 import java.util.Objects;
 
