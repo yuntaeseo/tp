@@ -8,9 +8,13 @@ title: AddressBook Level-3
 
 ![Ui](images/Ui.png)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+NetWise is a **desktop app for managing connections for Computer Science students, optimized for use via a
+Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you can type fast, NetWise can get your connection management tasks done faster than traditional GUI apps. 
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+NetWise is best used with minimal screen space, so you can use it easily while doing other work, and it features a comfortable interface and color palette designed to reduce eye strain.
+
+* If you are interested in using NetWise, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
