@@ -9,8 +9,7 @@ Command Line Interface** (CLI) while still having the benefits of a Graphical Us
 If you can type fast, NetWise can get your connection management tasks done faster than traditional GUI apps. NetWise is best used with minimal screen space, so you can use it easily while doing other work, and it features a comfortable interface and color palette designed to reduce eye strain.
 
 * Table of Contents
-{:toc}
-
+  {:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start

@@ -100,7 +100,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person`, `Tag`, `Relationship`  object residing in the `Model`.
 
 ### Logic component
 
@@ -347,7 +347,7 @@ COMING SOON
 
 **Target user profile**:
 
-* has a very big network of friends, co-workers and acquaintances for professional and work-related reasons.
+* CS student who has a very big network of friends, co-workers and acquaintances for professional and work-related reasons.
 * want to keep track of the intricate relationships between him and his networks and amongst his networks.
 * prefer desktop apps over other types.
 * can type fast.
@@ -1421,3 +1421,15 @@ testers are expected to do more *exploratory* testing.
    and confirm that identifiers and references remain consistent.
    **Expected:** Appropriate warnings or non-persistence when writes are blocked; consistent behavior for tag
    references.
+
+## **Appendix: Planned Enhancement**
+
+**Team size: 5**
+
+**1. Prevent UI from breaking:** While the current UI supports wrapping for all fields and attributes — including person, relationship, and tag names — it can still break in an extreme case where a single tag name is so long that it exceeds the total width limit. We plan to enhance the UI to handle even such extreme tag names by allowing them to wrap properly, preventing any UI breakage.
+
+**2. Change arguments that requires ID into name** Since NetWise requires users to input the unique IDs of tags and relationships, which can be inconvenient, we plan to enhance the system by allowing users to use names instead of IDs for commands that require id identification. This change aims to improve user experience by making it easier to reference entries without needing to recall specific IDs.
+
+**3. Support name input for colors also:** Currently, NetWise requires users to input colors in hexadecimal format when creating or editing tags, which may not be user-friendly for everyone. We plan to enhance the system by allowing users to input common color names (like "red", "blue", "green") in addition to hexadecimal codes. This change aims to make it easier for users to select colors without needing to know or look up hexadecimal values.
+
+**4. Support when editing a tag, if empty description is input, the UI change to 'No description':** When users edit a tag and provide an empty description, the system currently leaves the description blank. We plan to enhance this behavior so that if an empty description is input during tag editing, the UI will automatically update the description to display 'No Description'. This change aims to provide clearer feedback to users about the state of the tag's description.

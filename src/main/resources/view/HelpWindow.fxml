@@ -19,7 +19,6 @@
   <scene>
     <Scene>
       <stylesheets>
-<!--        <URL value="@DarkTheme.css" />-->
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
