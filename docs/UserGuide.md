@@ -135,35 +135,6 @@ clears all existing tags.
 ![after edit message](images/editMessage.png)
 
 
-### Locating connections by fields : `find`
-
-Finds all connections (persons) whose specified fields contain any of the given keywords.
-Matching is **case-insensitive** and supports **substring** (for most fields) and **word-based** (for tags) matching.
-
-find `[n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_IDS] [MORE KEYWORDS]...`
-
-* At least one field prefix (`n/`, `p/`, `e/`, `a/`, `t/`) must be provided.
-* Each field can take one or more keywords separated by spaces.
-* Matching is partial for name, phone, email, and address (e.g., `n/Ali` matches “Alice”).
-* Matching is exact (ID-based) for tags (e.g., `t/5` only matches tag “5”).
-* The search across different fields uses **AND logic** — a person must match all fields provided. 
-  (e.g. `n/Ali e/gmail` finds persons whose **name contains “Ali”** *and* **email contains “gmail”**.)
-* The search within the same field uses **OR logic** — any one of the field’s keywords will match.
-  (e.g. `a/Clementi a/Bishan` finds persons living in *either* Clementi *or* Bishan.)
-* **Note**: `find` does not support locating connections by *notes*.
-
-Examples:
-* `find n/Ali` → Finds all persons with names containing “Ali”.
-* `find e/gmail a/Clementi` → Finds persons whose email contains “gmail” and address contains “Clementi”.
-* `find n/Ali e/gmail a/Clementi a/Bishan t/2 t/5 t/7` → Finds persons who: 
-  * name contains “Ali”:
-  * email contains “gmail”,
-  *	address contains “Clementi” or “Bishan”, and
-  *	has tag IDs 2, 5, or 7.
-
-![find message](images/findMessage.png)
-
-
 ### Deleting a connection : `delete`
 
 Deletes the specified connection from NetWise.
@@ -172,7 +143,7 @@ Format: `delete ID`
 
 * Deletes the connection with the specified `ID`.
 * The ID refers to the **unique ID** each connection is given when created, can be seen with
-[`list`](#listing-all-tags--listtag).
+[`list`](#listing-all-connections--list).
 * The ID **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -189,19 +160,48 @@ Clears all connection entries from NetWise.
 Format: `clear`
 
 
+### Locating connections by fields : `find`
+
+Finds all connections (persons) whose specified fields contain any of the given keywords.
+Matching is **case-insensitive** and supports **substring** (for most fields) and **word-based** (for tags) matching.
+
+Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_ID] [MORE KEYWORDS]...`
+
+* **At least ONE** field (`n/`, `p/`, `e/`, `a/`, `t/`) must be provided.
+* Each field can take one or more keywords separated by spaces.
+* Matching is partial for name, phone, email, and address (e.g., `n/Ali` matches “Alice”).
+* Matching is exact (ID-based) for tags (e.g., `t/5` only matches tag with ID 5, **not** that contains the character "5").
+* The search across different fields uses **AND logic** — a person must match all fields provided.
+  (e.g. `n/Ali e/gmail` finds persons whose **name contains “Ali”** *and* **email contains “gmail”**.)
+* The search within the same field uses **OR logic** — any one of the field’s keywords will match.
+  (e.g. `a/Clementi a/Bishan` finds persons living in *either* Clementi *or* Bishan.)
+* **Note**: `find` does not support locating connections by *notes*.
+
+Examples:
+* `find n/Ali` → Finds all persons with names containing “Ali”.
+* `find e/gmail a/Clementi` → Finds persons whose email contains “gmail” and address contains “Clementi”.
+* `find n/Ali e/gmail a/Clementi a/Bishan t/2 t/5 t/7` → Finds persons who:
+    * name contains “Ali”:
+    * email contains “gmail”,
+    *	address contains “Clementi” or “Bishan”, and
+    *	has tag IDs 2, 5, or 7.
+
+![find message](images/findMessage.png)
+
+
 ### Adding a tag : `addtag`
 
 Adds a tag to NetWise. A tag is a keyword or label used to categorise and organise your connections.
 
 Format: `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]`
 
+* Add a tag into NetWise, along with an optional description and tag colour.
 * The `RGB_COLOR` describe the colour you want to set for the tag.
 * `RGB_COLOR` field *must* be a HEX colour string of length 6, case-insensitive, ***without***
 the hash ('#') such as 123456, 0F2AAB, abf1cd, …​
 * The default `DESCRIPTION` field is "No Description"
 * The default `RGB_COLOR` is gray (#808080)
-* The created tag will be assigned a **fixed** unique ID
-
+* The created tag will be assigned a **FIXED unique tag ID**, can be seen with the [`listtag`](#listing-all-tags--listtag) command.
 Examples:
 * `addtag n/JC d/JC friends c/23f1cd`
 * `addtag n/coworkers`
@@ -213,8 +213,9 @@ Shows a list of all tags in NetWise.
 
 Format: `listtag`
 
-* Unlike the connection list, the tag list does not show tags in any particular order.
-It shows the tag name along with the associated **unique ID** given when the tag is created.
+* List all tags along
+* The tag list does not show tags in any particular order.
+It shows the tag name along with the associated **unique tag ID** given when the tag is created.
 
 ![listtag message](images/listtagMessage.png)
 
@@ -223,10 +224,10 @@ It shows the tag name along with the associated **unique ID** given when the tag
 
 Edits a tag in NetWise.
 
-Format: `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]`
+Format: `edittag TAG_ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]`
 
-* Edits the tag at the specified `ID`.
-* The ID refers to the **unique ID** each tag is given when created, can be seen with
+* Edits the tag at the specified `TAG_ID`.
+* `TAG_ID` refers to the **unique tag ID** each tag is given when created, can be seen with
 [`listtag`](#listing-all-tags--listtag).
 * The ID **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -245,10 +246,10 @@ value mentioned [above](#adding-a-tag--addtag).
 
 Deletes a tag from NetWise.
 
-Format: `deletetag ID`
+Format: `deletetag TAG_ID`
 
-* Deletes the tag at the specified `ID`.
-* The ID refers to the **unique ID** each tag is given when created, can be seen with
+* Deletes the tag at the specified `TAG_ID`.
+* `TAG_ID` refers to the **unique ID** each tag is given when created, can be seen with
 [`listtag`](#listing-all-tags--listtag).
 * The ID **must be a positive integer** 1, 2, 3, …​
 
@@ -260,7 +261,7 @@ Example:
 
 ### Adding a relationship : `addrel`
 
-Adds a relationship to NetWise. A relationship links any two connections together.
+Adds a relationship to NetWise. A *relationship* links any two connections together.
 
 Format: `addrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION`
 
@@ -280,7 +281,7 @@ that they are childhood friends.
 Shows a list of relationships for each person in the list in NetWise.
 
 Format (one person): `listrel p1/CONNECTION`: show a list of all person related to `CONNECTION` along with the relationship info
-Format (two persons): `listrel p1/CONNECTION_1 p2/CONNECTION_2`: show the relationship between `CONNECTION_1` and `CONNECTION_2` (if exist), along with the relationship info.
+Format (two persons): `listrel p1/CONNECTION_1 p2/CONNECTION_2`: show all relationships between `CONNECTION_1` and `CONNECTION_2` (if exist), along with the relationship infos.
 
 * `CONNECTION`, `CONNECTION_1`, and `CONNECTION_2` refers to the unique IDs of the two connections that this relationship links.
 
@@ -305,7 +306,6 @@ Examples:
 
 * `editrel 3 d/highschool friends`. Edits description of the third relationship in the relationship list.
 
-
 ### Deleting a relationship : `deleterel`
 
 Deletes a relationship from NetWise.
@@ -324,6 +324,14 @@ Examples:
 Exits the program.
 
 Format: `exit`
+
+
+### Navigate through command history using up/down arrow
+
+Using the up/down arrow keys, user can navigate through their command history, displaying the commands on the command line.
+
+* **Up Arrow Key**: Cycle backward through previously executed commands.
+* **Down Arrow Key**: Cycle forward through the command history, moving from older commands to more recent ones that have already been displayed using the up arrow key.
 
 
 ### Saving the data
@@ -364,26 +372,28 @@ by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the
 keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear.
 The remedy is to manually restore the minimized Help Window.
+3. **When editing on the command line**, it is known that every keyboard inputs would bring the text cursor back to line
+end. This will be fixed in the upcoming updates.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action                    | Format, Examples                                                                                                                                                                          |
-|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add connection**        | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [r/NOTE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/1 2 r/owes me lunch`    |
-| **Clear connection list** | `clear`                                                                                                                                                                                   |
-| **Delete connection**     | `delete ID`<br> e.g., `delete 3`                                                                                                                                                          |
-| **Edit connection**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                    |
-| **Find connection**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
-| **List connection**       | `list`                                                                                                                                                                                    |
-| **Add tag**               | `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `addtag n/JC d/JC friends c/23f1cd`                                                                                               |
-| **Delete tag**            | `deletetag ID` <br> e.g. `deletetag 2`                                                                                                                                                    |
-| **Edit tag**              | `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `edittag 1 d/my extended family c/099fca`                                                                                   |
-| **List tag**              | `listtag`                                                                                                                                                                                 |
-| **Add relationship**      | `addrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION` <br> e.g. `addrel p1/1 p2/2 d/friends`                                                                                             |
-| **List relationships**    | `listrel`                                                                                                                                                                                 |
-| **Edit relationship**     | `editrel INDEX [p1/CONNECTION_1] [p2/CONNECTION_2] [d/DESCRIPTION]` <br> e.g. `editrel 1 d/friends`                                                                                       |
-| **Delete relationship**   | `deleterel INDEX` <br> e.g. `deleterel 1`                                                                                                                                                 |
-| **Exit program**          | `exit`                                                                                                                                                                                    |
-| **Help**                  | `help`                                                                                                                                                                                    |
+| Action                    | Format, Examples                                                                                                                                                                  |
+|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add connection**        | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [r/NOTE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/1 2 r/owes me lunch` |
+| **List connection**       | `list`                                                                                                                                                                            |
+| **Edit connection**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
+| **Delete connection**     | `delete ID`<br> e.g., `delete 3`                                                                                                                                                  |
+| **Clear connection list** | `clear`                                                                                                                                                                           |
+| **Find connection**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                        |
+| **Add tag**               | `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `addtag n/JC d/JC friends c/23f1cd`                                                                                       |
+| **List tag**              | `listtag`                                                                                                                                                                         |
+| **Edit tag**              | `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `edittag 1 d/my extended family c/099fca`                                                                           |
+| **Delete tag**            | `deletetag ID` <br> e.g. `deletetag 2`                                                                                                                                            |
+| **Add relationship**      | `addrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION` <br> e.g. `addrel p1/1 p2/2 d/friends`                                                                                     |
+| **List relationships**    | `listrel`                                                                                                                                                                         |
+| **Edit relationship**     | `editrel INDEX [p1/CONNECTION_1] [p2/CONNECTION_2] [d/DESCRIPTION]` <br> e.g. `editrel 1 d/friends`                                                                               |
+| **Delete relationship**   | `deleterel INDEX` <br> e.g. `deleterel 1`                                                                                                                                         |
+| **Help**                  | `help`                                                                                                                                                                            |
+| **Exit program**          | `exit`                                                                                                                                                                            |
