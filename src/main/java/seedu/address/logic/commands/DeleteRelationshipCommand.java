@@ -61,7 +61,7 @@ public class DeleteRelationshipCommand extends Command {
         // Find the existing relationship
         List<Relationship> relationships = model.getFilteredRelationshipList();
         Optional<Relationship> match = relationships.stream()
-                .filter(r -> r.isSameRelationship(new Relationship(part1, part2, new Description(""))))
+                .filter(r -> r.isSameRelationship(new Relationship(part1, part2, new Description("desc"))))
                 .findFirst();
 
         if (match.isEmpty()) {

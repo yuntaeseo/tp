@@ -31,7 +31,6 @@ public class DescriptionTest {
         assertFalse(Description.isValidDescription("   dedededed ")); // both
 
         // valid description
-        assertTrue(Description.isValidDescription("")); // empty string
         assertTrue(Description.isValidDescription("bruhhurb"));
         assertTrue(Description.isValidDescription("i am minh"));
     }

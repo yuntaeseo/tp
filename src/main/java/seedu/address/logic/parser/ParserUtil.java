@@ -132,7 +132,7 @@ public class ParserUtil {
      * Parses a {@code String note} into an {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Note parseNote(String note) {
+    public static Note parseNote(String note) throws ParseException {
         requireNonNull(note);
         String trimmedNote = note.trim();
 
@@ -144,9 +144,12 @@ public class ParserUtil {
      * Parses a {@code String description} into a {@code Description}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Description parseDescription(String description) {
+    public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
         return new Description(trimmedDescription);
     }
 

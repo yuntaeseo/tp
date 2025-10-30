@@ -247,35 +247,41 @@ that they are childhood friends.
 
 ### Listing all relationships : `listrel`
 
-Shows a list of relationships for each filtered person in the list in NetWise.
+Shows a list of relationships and people who are connected to p1. If p2 is stated as well, listrel will
+give a string of connections of how p1 and p2 are related to each other if a connection exists.
 
-Format: `listrel`
+Format: `listrel p1/CONNECTION_1 [p2/CONNECTION_2]`
+
+Examples:
+*  `listrel p1/1`. Shows a list of connections who has a relationship to ID 1 and the description of their relationship.
+*  `listrel p1/1 p2/3`. Shows a list of relationships in order to see how connection 1 may be connected to connection 2
+via a chain of relationships.
 
 ### Editing a relationship : `editrel`
 
-Edits a relationship in NetWise.
+Edits the description of a relationship in NetWise.
 
-Format: `editrel INDEX [p1/CONNECTION_1] [p2/CONNECTION_2] [d/DESCRIPTION]`
+Format: `editrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION`
 
-* Edits the relationship at the specified index `INDEX` in the relationship list from `listrel`.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* Edits the relationship between p1 and p2. `editrel` will edit the description of the relationship between p1 and p2.
+* All fields must be provided.
 
 Examples:
 
-* `editrel 3 d/highschool friends`. Edits description of the third relationship in the relationship list.
+* `editrel p1/1 p2/2 d/highschool friends`. Edits the description of the relationship between connection ID 1 and 
+connection ID 2.
 
 ### Deleting a relationship : `deleterel`
 
 Deletes a relationship from NetWise.
 
-Format: `deleterel INDEX`
+Format: `deleterel p1/CONNECTION_1 p2/CONNECTION_2`
 
-* Deletes the relationships at the specified index `INDEX` in the relationship list from `listrel`.
+* Deletes the relationship between p1 and p2.
 
 Examples:
 
-* `deleterel 1`. Deletes the first relationship in the relationship list.
+* `deleterel p1/1 p2/2`. Deletes the relationship between connection ID 1 and connection ID 2.
 
 ### Exiting the program : `exit`
 
@@ -325,21 +331,21 @@ The remedy is to manually restore the minimized Help Window.
 
 ## Command summary
 
-| Action                    | Format, Examples                                                                                                                                                                          |
-|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add connection**        | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [r/NOTE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/1 2 r/owes me lunch`    |
-| **Clear connection list** | `clear`                                                                                                                                                                                   |
-| **Delete connection**     | `delete ID`<br> e.g., `delete 3`                                                                                                                                                          |
-| **Edit connection**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                    |
-| **Find connection**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
-| **List connection**       | `list`                                                                                                                                                                                    |
-| **Add tag**               | `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `addtag n/JC d/JC friends c/23f1cd`                                                                                               |
-| **Delete tag**            | `deletetag ID` <br> e.g. `deletetag 2`                                                                                                                                                    |
-| **Edit tag**              | `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `edittag 1 d/my extended family c/099fca`                                                                                   |
-| **List tag**              | `listtag`                                                                                                                                                                                 |
-| **Add relationship**      | `addrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION` <br> e.g. `addrel p1/1 p2/2 d/friends`                                                                                             |
-| **List relationships**    | `listrel`                                                                                                                                                                                 |
-| **Edit relationship**     | `editrel INDEX [p1/CONNECTION_1] [p2/CONNECTION_2] [d/DESCRIPTION]` <br> e.g. `editrel 1 d/friends`                                                                                       |
-| **Delete relationship**   | `deleterel INDEX` <br> e.g. `deleterel 1`                                                                                                                                                 |
-| **Exit program**          | `exit`                                                                                                                                                                                    |
-| **Help**                  | `help`                                                                                                                                                                                    |
+| Action                    | Format, Examples                                                                                                                                                                     |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add connection**        | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/1 2 r/owes me lunch` |
+| **Clear connection list** | `clear`                                                                                                                                                                              |
+| **Delete connection**     | `delete ID`<br> e.g., `delete 3`                                                                                                                                                     |
+| **Edit connection**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG_ID]…​ [r/NOTE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
+| **Find connection**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                           |
+| **List connection**       | `list`                                                                                                                                                                               |
+| **Add tag**               | `addtag n/NAME [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `addtag n/JC d/JC friends c/23f1cd`                                                                                          |
+| **Delete tag**            | `deletetag ID` <br> e.g. `deletetag 2`                                                                                                                                               |
+| **Edit tag**              | `edittag ID [n/NAME] [d/DESCRIPTION] [c/RGB_COLOR]` <br> e.g. `edittag 1 d/my extended family c/099fca`                                                                              |
+| **List tag**              | `listtag`                                                                                                                                                                            |
+| **Add relationship**      | `addrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION` <br> e.g. `addrel p1/1 p2/2 d/friends`                                                                                        |
+| **List relationships**    | `listrel p1/CONNECTION_1 [p2/CONNECTION_2]`  <br> e.g. `listrel p1/1 p2/4`                                                                                                           |
+| **Edit relationship**     | `editrel p1/CONNECTION_1 p2/CONNECTION_2 d/DESCRIPTION` <br> e.g. `editrel p1/1 p2/2 d/enemies`                                                                                      |
+| **Delete relationship**   | `deleterel p1/CONNECTION_1 p2/CONNECTION_2` <br> e.g. `deleterel p1/1 p2/2`                                                                                                          |
+| **Exit program**          | `exit`                                                                                                                                                                               |
+| **Help**                  | `help`                                                                                                                                                                               |
