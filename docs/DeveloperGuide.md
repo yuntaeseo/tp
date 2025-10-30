@@ -1324,7 +1324,7 @@ testers are expected to do more *exploratory* testing.
 ### Editing a relationship : `editrel`
 
 1. **Prerequisite:** Ensure at least one relationship exists (create with `addrel` and confirm with `listrel`). p1 and
-   p2 are valid IDs for the relationship being editted.
+   p2 are valid IDs for the relationship being edited.
 
 2. **Test case (change description):**
    `editrel p1/1 p2/3 d/my extended family`
