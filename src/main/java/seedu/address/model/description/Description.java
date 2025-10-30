@@ -7,7 +7,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a description (for anything).
  */
 public class Description {
-    public static final String MESSAGE_CONSTRAINTS = "Description should not have leading or trailing whitespaces";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Description should not be empty and should not have leading or trailing whitespaces";
 
     public final String value;
 
@@ -18,9 +19,8 @@ public class Description {
      */
     public Description(String desc) {
         requireNonNull(desc);
-        String trimmed = desc.trim();
-        checkArgument(isValidDescription(trimmed), MESSAGE_CONSTRAINTS);
-        value = trimmed;
+        checkArgument(isValidDescription(desc), MESSAGE_CONSTRAINTS);
+        value = desc;
     }
 
     /**

@@ -29,7 +29,7 @@ public class AddRelationshipCommandParser implements Parser<AddRelationshipComma
 
         Id part1 = ParserUtil.parseId(argMultimap.getValue(PREFIX_PART_1).get());
         Id part2 = ParserUtil.parseId(argMultimap.getValue(PREFIX_PART_2).get());
-        Description desc = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESC).orElse("Default description"));
+        Description desc = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESC).get());
 
         Relationship relationship = new Relationship(part1, part2, desc);
         return new AddRelationshipCommand(relationship);

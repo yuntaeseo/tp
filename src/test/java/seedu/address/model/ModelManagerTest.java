@@ -220,8 +220,8 @@ public class ModelManagerTest {
         modelManager.addPerson(ALICE);
         modelManager.addPerson(BOB);
         modelManager.addPerson(BENSON);
-        Relationship rel1 = new Relationship(ALICE.getId(), BOB.getId(), new Description(""));
-        Relationship rel2 = new Relationship(ALICE.getId(), BENSON.getId(), new Description(""));
+        Relationship rel1 = new Relationship(ALICE.getId(), BOB.getId(), new Description("ab"));
+        Relationship rel2 = new Relationship(ALICE.getId(), BENSON.getId(), new Description("ab"));
         modelManager.addRelationship(rel1);
         modelManager.addRelationship(rel2);
         modelManager.queryImmediateRelationship(ALICE.getId());
@@ -240,9 +240,9 @@ public class ModelManagerTest {
         modelManager.addPerson(BOB);
         modelManager.addPerson(BENSON);
         modelManager.addPerson(CARL);
-        Relationship rel1 = new Relationship(ALICE.getId(), BOB.getId(), new Description(""));
-        Relationship rel2 = new Relationship(ALICE.getId(), BENSON.getId(), new Description(""));
-        Relationship rel3 = new Relationship(BOB.getId(), BENSON.getId(), new Description(""));
+        Relationship rel1 = new Relationship(ALICE.getId(), BOB.getId(), new Description("ab"));
+        Relationship rel2 = new Relationship(ALICE.getId(), BENSON.getId(), new Description("ab"));
+        Relationship rel3 = new Relationship(BOB.getId(), BENSON.getId(), new Description("bb"));
         modelManager.addRelationship(rel1);
         modelManager.addRelationship(rel2);
         modelManager.addRelationship(rel3);
@@ -256,10 +256,10 @@ public class ModelManagerTest {
         modelManager.addPerson(BOB);
         modelManager.addPerson(BENSON);
         modelManager.addPerson(CARL);
-        Relationship rel1 = new Relationship(ALICE.getId(), BOB.getId(), new Description(""));
-        Relationship rel2 = new Relationship(BOB.getId(), BENSON.getId(), new Description(""));
-        Relationship rel3 = new Relationship(BENSON.getId(), ALICE.getId(), new Description(""));
-        Relationship rel4 = new Relationship(BENSON.getId(), CARL.getId(), new Description(""));
+        Relationship rel1 = new Relationship(ALICE.getId(), BOB.getId(), new Description("ab"));
+        Relationship rel2 = new Relationship(BOB.getId(), BENSON.getId(), new Description("bb"));
+        Relationship rel3 = new Relationship(BENSON.getId(), ALICE.getId(), new Description("ba"));
+        Relationship rel4 = new Relationship(BENSON.getId(), CARL.getId(), new Description("bc"));
         modelManager.addRelationship(rel1);
         modelManager.addRelationship(rel2);
         modelManager.addRelationship(rel3);
