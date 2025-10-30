@@ -22,13 +22,14 @@ public class ListRelationshipCommandParser implements Parser<ListRelationshipCom
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PART_1, PREFIX_PART_2);
 
-        // no arguments: list all
-        if (args.trim().isEmpty()) {
-            return new ListRelationshipCommand();
-        }
-
         Optional<String> part1 = argMultimap.getValue(PREFIX_PART_1);
         Optional<String> part2 = argMultimap.getValue(PREFIX_PART_2);
+
+        // If no ID provided, invalid
+        if (part1.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ListRelationshipCommand.MESSAGE_USAGE));
+        }
 
         // only one ID: queryImmediateRelationship
         if (part1.isPresent() && part2.isEmpty()) {
