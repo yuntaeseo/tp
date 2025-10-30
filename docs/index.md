@@ -15,7 +15,7 @@ If you can type fast, NetWise can get your connection management tasks done fast
 NetWise is best used with minimal screen space, so you can use it easily while doing other work, and it features a comfortable interface and color palette designed to reduce eye strain.
 
 * If you are interested in using NetWise, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested about developing NetWise, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
