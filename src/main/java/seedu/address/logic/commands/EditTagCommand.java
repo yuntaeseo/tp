@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COLOR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,7 +20,10 @@ public class EditTagCommand extends Command {
 
     public static final String COMMAND_WORD = "edittag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a tag identified by its ID.\n"
-            + "Parameters: ID n/NAME [d/DESCRIPTION] [c/COLOR]\n"
+            + "Parameters: ID"
+            + PREFIX_NAME + "NAME ["
+            + PREFIX_DESC + "DESCRIPTION] ["
+            + PREFIX_COLOR + "COLOR]\n"
             + "Example: " + COMMAND_WORD + " 1 n/BestFriends c/RRGGBB";
 
     public static final String MESSAGE_EDIT_SUCCESS = "Edited Tag: %1$s";
