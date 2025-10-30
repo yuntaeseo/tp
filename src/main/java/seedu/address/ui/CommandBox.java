@@ -38,12 +38,14 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode().equals(KeyCode.UP)) {
                 commandTextField.setText(commandTracker.getPreviousCommand());
+                //  Place the caret at the end of the TextField.
+                Platform.runLater(() -> commandTextField.positionCaret(commandTextField.getText().length()));
             }
             if (event.getCode().equals(KeyCode.DOWN)) {
                 commandTextField.setText(commandTracker.getNextCommand());
+                // Place the caret at the end of the TextField.
+                Platform.runLater(() -> commandTextField.positionCaret(commandTextField.getText().length()));
             }
-            // Place the caret at the end of the TextField.
-            Platform.runLater(() -> commandTextField.positionCaret(commandTextField.getText().length()));
         });
     }
 
