@@ -20,6 +20,7 @@ public class RelationshipQueryLinkCard extends UiPart<Region> {
 
     private final Pair<Person, Relationship> entry;
 
+    // NOTE: 'primary person' refers to the person from whom the relationship link starts
     @FXML
     private Label primaryId;
     @FXML
@@ -49,6 +50,9 @@ public class RelationshipQueryLinkCard extends UiPart<Region> {
         renderCard();
     }
 
+    /**
+     * Renders the card with primary person and relationship details.
+     */
     private void renderCard() {
         Person primary = entry.getKey();
         Relationship relationship = entry.getValue();
@@ -60,9 +64,12 @@ public class RelationshipQueryLinkCard extends UiPart<Region> {
             return;
         }
 
-        populateDescription(relationship);
+        populateRelationshipDescription(relationship);
     }
 
+    /**
+     * Populates the primary person's details.
+     */
     private void populatePrimary(Person person) {
         primaryId.setText(person.getId() + ". ");
         primaryName.setText(person.getName().fullName);
@@ -72,11 +79,17 @@ public class RelationshipQueryLinkCard extends UiPart<Region> {
         primaryNote.setText(person.getNote().value);
     }
 
-    private void populateDescription(Relationship relationship) {
+    /**
+     * Populates the relationship description between the primary person and the next person in the link.
+     */
+    private void populateRelationshipDescription(Relationship relationship) {
         String description = relationship.getDescription().value.trim();
         relationshipDescription.setText(description.isEmpty() ? "No description" : description);
     }
 
+    /**
+     * Hides the linking elements, which are arrows and description, when it's the end of the link.
+     */
     private void hideLinkingElements() {
         linkArrow.setVisible(false);
         linkArrow.setManaged(false);

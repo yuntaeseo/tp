@@ -41,11 +41,14 @@ public class RelationshipQueryListCard extends UiPart<Region> {
         this.counterpart = entry.getKey();
         this.relationship = entry.getValue();
 
-        populateCounterpartDetails();
+        populateCounterparts();
         populateRelationshipDescription();
     }
 
-    private void populateCounterpartDetails() {
+    /**
+     * Populates counterparts with immediate relationship with the person.
+     */
+    private void populateCounterparts() {
         counterpartId.setText(counterpart.getId() + ". ");
         counterpartName.setText(counterpart.getName().fullName);
         counterpartPhone.setText(counterpart.getPhone().value);
@@ -54,6 +57,9 @@ public class RelationshipQueryListCard extends UiPart<Region> {
         counterpartNote.setText(counterpart.getNote().value);
     }
 
+    /**
+     * Populates the relationship description between the person and the counterpart.
+     */
     private void populateRelationshipDescription() {
         String description = relationship.getDescription().value.trim();
         relationshipDescription.setText(description.isEmpty() ? "No description" : description);

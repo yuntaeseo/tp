@@ -10,7 +10,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.OverrunStyle;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -83,6 +82,9 @@ public class PersonCard extends UiPart<Region> {
         populateRelationships(relationshipList, allPersons);
     }
 
+    /**
+     * Populate the tags of the person.
+     */
     private void populateTags(ObservableList<Tag> tagList) {
         tags.getChildren().clear();
 
@@ -101,6 +103,9 @@ public class PersonCard extends UiPart<Region> {
         });
     }
 
+    /**
+     * Populate the relationships of the person.
+     */
     private void populateRelationships(ObservableList<Relationship> relationshipList,
                                        ObservableList<Person> allPersons) {
         relationshipItems.getChildren().clear();
@@ -135,11 +140,6 @@ public class PersonCard extends UiPart<Region> {
             VBox chip = new VBox(idLabel, nameLabel);
             chip.setSpacing(2);
             chip.getStyleClass().add("relationship-entry");
-
-            String description = relationship.getDescription().value.trim();
-            if (!description.isEmpty()) {
-                Tooltip.install(chip, new Tooltip(description));
-            }
 
             relationshipItems.getChildren().add(chip);
         });
